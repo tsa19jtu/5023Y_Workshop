@@ -1,0 +1,20 @@
+# Analysis in R
+
+```{}
+library("phyloseq")
+library("vegan")
+library("DESeq2")
+library("ggplot2")
+library("dendextend")
+library("tidyr")
+library("viridis")
+library("reshape")
+
+```
+
+
+
+Make graphs
+
+
+Answer some questions?

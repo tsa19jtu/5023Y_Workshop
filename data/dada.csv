@@ -1,0 +1,9 @@
+﻿Term,What it is
+cutadapt/filterAndTrim(),remove primers and quality trim/filter
+learnErrors(),generate an error model of our data
+derepFastq,dereplicate sequences
+dada(),infer ASVs on both forward and reverse reads independently
+mergePairs(),merge forward and reverse reads to further refine ASVs
+makeSequenceTable(),generate a count table
+removeBimeraDenovo(),screen for and remove chimeras
+IdTaxa(),assign taxonomy

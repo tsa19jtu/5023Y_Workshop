@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Unix | Bioinformatics - A crash course</title>
+  <meta name="description" content="This is very brief introduction to some of the basic skills required to handling sequencing data for Bioinformatics - with one reproducible example analysing microbiome sequencing data" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Unix | Bioinformatics - A crash course" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is very brief introduction to some of the basic skills required to handling sequencing data for Bioinformatics - with one reproducible example analysing microbiome sequencing data" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Unix | Bioinformatics - A crash course" />
+  
+  <meta name="twitter:description" content="This is very brief introduction to some of the basic skills required to handling sequencing data for Bioinformatics - with one reproducible example analysing microbiome sequencing data" />
+  
+
+<meta name="author" content="Philip Leftwich" />
+
+
+<meta name="date" content="2021-04-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="ngs-sequence-analysis.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="Unix.html"><a href="Unix.html"><i class="fa fa-check"></i><b>2</b> Unix</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Unix.html"><a href="Unix.html#what-is-unixlinux"><i class="fa fa-check"></i><b>2.1</b> 1.1 What is Unix/Linux</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="Unix.html"><a href="Unix.html#some-terms"><i class="fa fa-check"></i><b>2.1.1</b> Some terms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="Unix.html"><a href="Unix.html#why-learn-unix"><i class="fa fa-check"></i><b>2.2</b> 1.2 Why Learn Unix?</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="Unix.html"><a href="Unix.html#note-this-series-of-practicals-is-designed-for-you-to-have-a-first-introduction-to-bioinformatics-its-about-exposure-not-memorising-or-mastering-anything.-dont-worry-about-the-details"><i class="fa fa-check"></i><b>2.2.1</b> Note this series of practicals is designed for you to have a first introduction to Bioinformatics, it’s about exposure, not memorising or mastering anything. Don’t worry about the details!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="Unix.html"><a href="Unix.html#getting-started"><i class="fa fa-check"></i><b>2.3</b> 1.3 Getting started</a></li>
+<li class="chapter" data-level="2.4" data-path="Unix.html"><a href="Unix.html#a-few-foundational-rules"><i class="fa fa-check"></i><b>2.4</b> 1.4 A few foundational rules</a></li>
+<li class="chapter" data-level="2.5" data-path="Unix.html"><a href="Unix.html#lets-get-started"><i class="fa fa-check"></i><b>2.5</b> 1.5 Let’s get started</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="Unix.html"><a href="Unix.html#downloading-data"><i class="fa fa-check"></i><b>2.5.1</b> Downloading data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="Unix.html"><a href="Unix.html#unix-file-structure"><i class="fa fa-check"></i><b>2.6</b> 1.6 Unix File Structure</a></li>
+<li class="chapter" data-level="2.7" data-path="Unix.html"><a href="Unix.html#absolute-vs-relative-file-paths"><i class="fa fa-check"></i><b>2.7</b> 1.7 Absolute vs relative file paths</a></li>
+<li class="chapter" data-level="2.8" data-path="Unix.html"><a href="Unix.html#moving-around"><i class="fa fa-check"></i><b>2.8</b> 1.8 Moving around</a></li>
+<li class="chapter" data-level="2.9" data-path="Unix.html"><a href="Unix.html#summary"><i class="fa fa-check"></i><b>2.9</b> 1.9 Summary</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="Unix.html"><a href="Unix.html#terms"><i class="fa fa-check"></i><b>2.9.1</b> Terms</a></li>
+<li class="chapter" data-level="2.9.2" data-path="Unix.html"><a href="Unix.html#commands"><i class="fa fa-check"></i><b>2.9.2</b> Commands</a></li>
+<li class="chapter" data-level="2.9.3" data-path="Unix.html"><a href="Unix.html#special-characters"><i class="fa fa-check"></i><b>2.9.3</b> Special characters</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="Unix.html"><a href="Unix.html#stretch-yourself"><i class="fa fa-check"></i><b>2.10</b> 1.10 Stretch yourself</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html"><i class="fa fa-check"></i><b>3</b> NGS sequence analysis</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#background"><i class="fa fa-check"></i><b>3.1</b> 2.1 Background</a></li>
+<li class="chapter" data-level="3.2" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#the-data"><i class="fa fa-check"></i><b>3.2</b> 2.2 The data</a></li>
+<li class="chapter" data-level="3.3" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#removing-primers"><i class="fa fa-check"></i><b>3.3</b> 2.3 Removing Primers</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#loops"><i class="fa fa-check"></i><b>3.3.1</b> 2.3.1 Loops</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dada2"><i class="fa fa-check"></i><b>3.4</b> 2.4 DADA2</a></li>
+<li class="chapter" data-level="3.5" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#quality-trimmingfiltering"><i class="fa fa-check"></i><b>3.5</b> 2.5 Quality trimming/filtering</a></li>
+<li class="chapter" data-level="3.6" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dereplication"><i class="fa fa-check"></i><b>3.6</b> 2.6 Dereplication</a></li>
+<li class="chapter" data-level="3.7" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#asvs"><i class="fa fa-check"></i><b>3.7</b> 2.7 ASV’s</a></li>
+<li class="chapter" data-level="3.8" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#merging-reads"><i class="fa fa-check"></i><b>3.8</b> 2.8 Merging reads</a></li>
+<li class="chapter" data-level="3.9" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#count-table"><i class="fa fa-check"></i><b>3.9</b> 2.9 Count table</a></li>
+<li class="chapter" data-level="3.10" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#overview"><i class="fa fa-check"></i><b>3.10</b> 2.10 Overview</a></li>
+<li class="chapter" data-level="3.11" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#assign-taxonomy"><i class="fa fa-check"></i><b>3.11</b> 2.11 Assign taxonomy</a></li>
+<li class="chapter" data-level="3.12" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#standard-goods"><i class="fa fa-check"></i><b>3.12</b> 2.12 Standard goods</a></li>
+<li class="chapter" data-level="3.13" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#contaminants"><i class="fa fa-check"></i><b>3.13</b> 2.13 Contaminants</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-in-r.html"><a href="analysis-in-r.html"><i class="fa fa-check"></i><b>4</b> Analysis in R</a></li>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bioinformatics - A crash course</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Unix" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Unix</h1>
+<p>Unix is very likely the most foundational skillset we can develop for bioinformatics (and much more than bioinformatics). Many of the most common and powerful bioinformatics approaches happen in this text-based environment, and having a solid foundation here can make everything we’re trying to learn and do much easier. This is a set of 5 introductory tutorials to help us get from being completely new to Unix up to being great friends with it 🙂</p>
+<div id="what-is-unixlinux" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> 1.1 What is Unix/Linux</h2>
+<div id="some-terms" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Some terms</h3>
+<p>Here are some terms worth knowing, don’t worry about memorising them, it can just be useful to have these to refer to in the future.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;">
+Term
+</th>
+<th style="text-align:left;font-weight: bold;">
+What it is
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+shell
+</td>
+<td style="text-align:left;">
+what we use to talk to the computer; anything where you are pointing and clicking with a mouse is a Graphical User Interface (GUI) shell; something with text only is a Command Line Interface (CLI) shell
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+command line
+</td>
+<td style="text-align:left;">
+a text-based environment capable of taking input and providing output
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Unix
+</td>
+<td style="text-align:left;">
+a family of operating systems (we also use the term “Unix-like” because one of the most popular operating systems derived from Unix is specifically named as not being Unix)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bash
+</td>
+<td style="text-align:left;">
+the most common programming language used at a Unix command-line
+</td>
+</tr>
+</tbody>
+</table>
+<p>You should be very familiar with using a GUI (RStudio), but remember we have spent a lot of time working with files and directories using the the command line (CLI) in R. This is useful practice, because most supercomputers lack a GUI, you must work entirely using the command line.</p>
+</div>
+</div>
+<div id="why-learn-unix" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> 1.2 Why Learn Unix?</h2>
+<p>Most sequencing data files are large, and require a lot of RAM to process. As a result most of the work Bioinformaticians do is not hosted on their own computers, instead they “remote-connect” to high performance supercomputers or cluster computers.</p>
+<p>The Linux Operating System is highly flexible, free, open-source (like R) and uses very little RAM to run (Unlike Windows OS) - as such you find most supercomputers run on Linux.</p>
+<p>You already have some experience with using a Linux OS - every time you log into RStudio Cloud you are connecting to a supercomputer that runs on Linux. Normally we do not interact directly with the OS, instead we use R and RStudio directly.</p>
+<p>But when you click on the RStudio Terminal it provides direct access to a command-line where we can execute commands and functions directly in Linux.</p>
+<p>This allows us to start using programs other than R, and potentially use multiple programs &amp; programming languages to work together.</p>
+<div id="note-this-series-of-practicals-is-designed-for-you-to-have-a-first-introduction-to-bioinformatics-its-about-exposure-not-memorising-or-mastering-anything.-dont-worry-about-the-details" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Note this series of practicals is designed for you to have a first introduction to Bioinformatics, it’s about exposure, not memorising or mastering anything. Don’t worry about the details!</h3>
+</div>
+</div>
+<div id="getting-started" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> 1.3 Getting started</h2>
+<p>Before we get started we need a terminal to work in.</p>
+<ul>
+<li><p>Open the Bioinformatics RStudio Cloud Project in the 5023Y workspace</p></li>
+<li><p>Click on the Terminal tab next to console in the bottom-left pane of the RStudio GUI</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="Unix.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
+<span id="cb2-2"><a href="Unix.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
+<img src="bookdown-demo_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
+<p class="caption">
+Figure 2.1: Here is a nice figure!
+</p>
+</div>
+<ul>
+<li><p>This is our “command line” where we will be typing all of our commands.</p></li>
+<li><p>If you need to, you can exit the Terminal and start a new session easily with options in RStudio</p></li>
+</ul>
+</div>
+<div id="a-few-foundational-rules" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> 1.4 A few foundational rules</h2>
+<ul>
+<li><p>Just like in R spaces are special, spaces break things apart, as a rule it is therefore better to have functions and file names with dashes (-) or underscores (_) - e.g. “draft_v3.txt” is preferred to “draft v3.txt.”</p></li>
+<li><p>The general syntax on the command line is: <code>command</code> <code>argument</code>. Again this is very similar to R except we don’t use brackets e.g. R we are used to <code>command(argument)</code></p></li>
+<li><p>Arguments can be <strong>optional</strong> e.g. if their is a default argument you may not have to write anything. Some functions <em>require</em> that arguments are specified. Again this is just like R.</p></li>
+</ul>
+</div>
+<div id="lets-get-started" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> 1.5 Let’s get started</h2>
+<p>We will perform a very simple function and get a flavour of the similarities and differences to working in `<code>R</code>. date` is a command that prints out the date and time.</p>
+<pre><code>date</code></pre>
+<p><a href="https://www.geeksforgeeks.org/date-command-linux-examples/#" class="uri">https://www.geeksforgeeks.org/date-command-linux-examples/#</a>:~:text=date%20command%20is%20used%20to,linux%20operating%20system%20is%20configured.</p>
+<pre><code>TZ=Europe/London date
+
+TZ=Europe/London date
+
+date --date=&quot;next tue&quot;</code></pre>
+<div id="downloading-data" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Downloading data</h3>
+<ul>
+<li><p>curl is a command line tool for transferring data to and from the server here we will use this to download data from an online repository.</p></li>
+<li><p>tar will <em>unpack</em> the data from a compressed file format</p></li>
+<li><p>cd change the directory so we <em>land</em> in the new folder we have made</p></li>
+</ul>
+<!-- -->
+<pre><code>curl -L -o unix_intro.tar.gz https://ndownloader.figshare.com/files/15573746
+tar -xzvf unix_intro.tar.gz &amp;&amp; rm unix_intro.tar.gz
+cd unix_intro</code></pre>
+<p>Unlike date, most commands require arguments and won’t work without them. head is a command that prints the first lines of a file, so it requires us to provide the file we want it to act on:</p>
+<pre><code>head example.txt</code></pre>
+<p>Here “example.txt” is the required argument, and in this case it is also what’s known as a positional argument. Whether things need to be provided as positional arguments or not depends on how the command or program we are using was written. Sometimes we need to specify the input file by putting something in front of it (e.g. some commands will use the -i flag, but it’s often other things as well).</p>
+<p>There are also optional arguments for the head command. The default for head is to print the first 10 lines of a file. We can change that by specifying the -n flag, followed by how many lines we want:</p>
+<pre><code>head -n 5 example.txt</code></pre>
+<p>How would we know we needed the -n flag for that? There are a few ways to find out. Many standard Unix commands and other programs will have built-in help menus that we can access by providing –help as the only argument:</p>
+<pre><code>head --help</code></pre>
+<p>Again this is very similar to the logic in which R commands are strucutred e.g. <code>??ggplot()</code> The synatx is similar even if the specific icons or arguments are different.</p>
+<p>Remember just like with R, one of your best friends is Google! As you get familiar with any language or OS we might remember a few flags or specific options, but searching for options and details when needed is definitely the norm!</p>
+</div>
+</div>
+<div id="unix-file-structure" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> 1.6 Unix File Structure</h2>
+<p>There are two special locations in all Unix-based systems: the “root” location and the current user’s “home” location. “Root” is where the address system of the computer starts; “home” is where the current user’s location starts.</p>
+<p>IMAGE</p>
+<p>We tell the command line where files and directories are located by providing their address, their “path.” If we use the pwd command (for print working directory), we can find out what the path is for the directory we are sitting in. And if we use the ls command (for list), we can see what directories and files are in the current directory we are sitting in.</p>
+<pre><code>pwd
+ls</code></pre>
+</div>
+<div id="absolute-vs-relative-file-paths" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> 1.7 Absolute vs relative file paths</h2>
+<p>You should be used to these concepts from your work with R projects.</p>
+<p>There are two ways to specify the path (address) of the file we want to do something to:</p>
+<ul>
+<li><p>An <strong>absolute path</strong> is an address that starts from an explicitly specified location: either the “root” <code>/</code> or the “home” <code>~/</code> location. (Side note, because we also may see or hear the term, the “full path,” is the absolute path that starts from the “root” /.)</p></li>
+<li><p>A <strong>relative path</strong> is an address that starts from wherever we are currently sitting. For example, let’s look again at the head command we ran above:</p></li>
+</ul>
+<!-- -->
+<pre><code>head example.txt</code></pre>
+<p>What we are actually doing here is using a relative path to specify where the “example.txt” file is located. This is because the command line <strong>automatically looks</strong> in the current working directory if we don’t specify anything else about its location.</p>
+<p>We can also run the same command on the same file using an <strong>absolute path</strong>:</p>
+<pre><code>head ~/unix_intro/example.txt</code></pre>
+<p>The previous two commands both point to the same file right now. But the first way, head example.txt, will only work if we are entering it while “sitting” in the directory that holds that file, while the second way will work no matter where we happen to be in the computer.</p>
+<p>It is <strong>important to always think about where</strong> we are in the computer when working at the command line. One of the most common errors/easiest mistakes to make is trying to do something to a file that isn’t where we think it is. Let’s run head on the “example.txt” file again, and then let’s try it on another file: “notes.txt”:</p>
+<pre><code>head example.txt
+head notes.txt</code></pre>
+<p>Here the head command works fine on “example.txt,” but we get an error message when we call it on “notes.txt” telling us no such file or directory. If we run the ls command to list the contents of the current working directory, we can see the computer is absolutely right – spoiler alert: it usually is – and there is no file here named “notes.txt.”</p>
+<p>The ls command by default operates on the current working directory if we don’t specify any location, but we can tell it to list the contents of a different directory by providing it as a positional argument:</p>
+<pre><code>ls
+ls experiment</code></pre>
+<p>We can see the file we were looking for is located in the subdirectory called “experiment.” Here is how we can run head on “notes.txt” by specifying an accurate relative path to that file:</p>
+<pre><code>head experiment/notes.txt</code></pre>
+</div>
+<div id="moving-around" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> 1.8 Moving around</h2>
+<p>We can also move into the directory containing the file we want to work with by using the <code>cd</code> command (<strong>c</strong>hange <strong>d</strong>irectory). This command takes a positional argument that is the path (address) of the directory we want to change into. This can be a relative path or an absolute path. Here we’ll use the relative path of the subdirectory, “experiment,” to change into it</p>
+<pre><code>cd experiment/
+pwd
+ls
+head notes.txt</code></pre>
+<p>Great. But now how do we get back “up” to the directory above us? One way would be to provide an absolute path, like <code>cd ~/unix_intro</code>, but there is also a handy shortcut. <code>..</code> are special characters that act as a relative path specifying “up” one level – one directory – from wherever we currently are. So we can provide that as the positional argument to cd to get back to where we started:</p>
+<pre><code>cd ..
+pwd
+ls</code></pre>
+<p>Moving around the computer like this might feel a bit cumbersome and frustrating at first, but after spending a little time with it, you will get used to it, and it starts to feel more natural.</p>
+<p>Get used to using <strong>tab</strong> to perform <strong>tab-completion</strong> often this will auto-complete file names!</p>
+<ul>
+<li>Press tab twice quickly and it will print all possible combinations</li>
+</ul>
+</div>
+<div id="summary" class="section level2" number="2.9">
+<h2><span class="header-section-number">2.9</span> 1.9 Summary</h2>
+<p>While maybe not all that exciting, these things really are the foundation needed to start utilizing the command line – which then gives us the capability to use lots of tools that only work at a command line, manipulate large files rapidly, access and work with remote computers, and more! These are the fundamental tools that every scientist needs to work with <strong>big data</strong>.</p>
+<div id="terms" class="section level3" number="2.9.1">
+<h3><span class="header-section-number">2.9.1</span> Terms</h3>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;">
+Term
+</th>
+<th style="text-align:left;font-weight: bold;">
+What it is
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+path
+</td>
+<td style="text-align:left;">
+the address system the computer uses to keep track of files and directories
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+root
+</td>
+<td style="text-align:left;">
+where the address system of the computer starts, /
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+home
+</td>
+<td style="text-align:left;">
+where the current user’s location starts, ~/
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+absolute path
+</td>
+<td style="text-align:left;">
+an address that starts from a specified location, i.e. root, or home
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+relative path
+</td>
+<td style="text-align:left;">
+an address that starts from wherever we are
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tab-completion
+</td>
+<td style="text-align:left;">
+our best friend
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="commands" class="section level3" number="2.9.2">
+<h3><span class="header-section-number">2.9.2</span> Commands</h3>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;">
+Command
+</th>
+<th style="text-align:left;font-weight: bold;">
+What it is
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+date
+</td>
+<td style="text-align:left;">
+prints out information about the current date and time
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+head
+</td>
+<td style="text-align:left;">
+prints out the first lines of a file
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pwd
+</td>
+<td style="text-align:left;">
+prints out where we are in the computer (print working directory)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ls
+</td>
+<td style="text-align:left;">
+lists contents of a directory (list)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cd
+</td>
+<td style="text-align:left;">
+change directories
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="special-characters" class="section level3" number="2.9.3">
+<h3><span class="header-section-number">2.9.3</span> Special characters</h3>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;">
+Command
+</th>
+<th style="text-align:left;font-weight: bold;">
+What it is
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Characters
+</td>
+<td style="text-align:left;">
+Meaning
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+/
+</td>
+<td style="text-align:left;">
+the computer’s root location
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/
+</td>
+<td style="text-align:left;">
+the user’s home location
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+../
+</td>
+<td style="text-align:left;">
+specifies a directory one level “above” the current working directory
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="stretch-yourself" class="section level2" number="2.10">
+<h2><span class="header-section-number">2.10</span> 1.10 Stretch yourself</h2>
+<p><a href="https://bioinformaticsworkbook.org/Appendix/Unix/unix-basics-1.html#gsc.tab=0" class="uri">https://bioinformaticsworkbook.org/Appendix/Unix/unix-basics-1.html#gsc.tab=0</a></p>
+<p><a href="http://evomics.org/learning/unix-tutorial/" class="uri">http://evomics.org/learning/unix-tutorial/</a></p>
+<p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="Unix.html#fig:nice-fig">2.1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="Unix.html#tab:nice-tab">2.1</a>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="Unix.html#cb17-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb17-2"><a href="Unix.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(iris, <span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
+<span id="cb17-3"><a href="Unix.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-4"><a href="Unix.html#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>
+<span id="tab:nice-tab">Table 2.1: </span>Here is a nice table!
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.7
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.7
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.7
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
+<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="references.html#ref-R-bookdown" role="doc-biblioref">Xie 2020</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="references.html#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ngs-sequence-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+﻿Term,What it is
+Characters,Meaning
+/,the computer’s root location
+~/,the user’s home location
+../,specifies a directory one level “above” the current working directory

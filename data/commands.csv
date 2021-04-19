@@ -1,0 +1,6 @@
+﻿Term,What it is
+date,prints out information about the current date and time
+head,prints out the first lines of a file
+pwd,prints out where we are in the computer (print working directory)
+ls,lists contents of a directory (list)
+cd,change directories

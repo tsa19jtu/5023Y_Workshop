@@ -1,0 +1,7 @@
+﻿Term,What it is
+path,the address system the computer uses to keep track of files and directories
+root,"where the address system of the computer starts, /"
+home,"where the current user’s location starts, ~/"
+absolute path,"an address that starts from a specified location, i.e. root, or home"
+relative path,an address that starts from wherever we are
+tab-completion,our best friend
