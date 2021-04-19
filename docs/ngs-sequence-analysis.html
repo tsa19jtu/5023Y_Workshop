@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 NGS sequence analysis | Bioinformatics - A crash course</title>
+  <meta name="description" content="This is very brief introduction to some of the basic skills required to handling sequencing data for Bioinformatics - with one reproducible example analysing microbiome sequencing data" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 NGS sequence analysis | Bioinformatics - A crash course" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is very brief introduction to some of the basic skills required to handling sequencing data for Bioinformatics - with one reproducible example analysing microbiome sequencing data" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 NGS sequence analysis | Bioinformatics - A crash course" />
+  
+  <meta name="twitter:description" content="This is very brief introduction to some of the basic skills required to handling sequencing data for Bioinformatics - with one reproducible example analysing microbiome sequencing data" />
+  
+
+<meta name="author" content="Philip Leftwich" />
+
+
+<meta name="date" content="2021-04-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="Unix.html"/>
+<link rel="next" href="analysis-in-r.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="Unix.html"><a href="Unix.html"><i class="fa fa-check"></i><b>2</b> Unix</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Unix.html"><a href="Unix.html#what-is-unixlinux"><i class="fa fa-check"></i><b>2.1</b> 1.1 What is Unix/Linux</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="Unix.html"><a href="Unix.html#some-terms"><i class="fa fa-check"></i><b>2.1.1</b> Some terms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="Unix.html"><a href="Unix.html#why-learn-unix"><i class="fa fa-check"></i><b>2.2</b> 1.2 Why Learn Unix?</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="Unix.html"><a href="Unix.html#note-this-series-of-practicals-is-designed-for-you-to-have-a-first-introduction-to-bioinformatics-its-about-exposure-not-memorising-or-mastering-anything.-dont-worry-about-the-details"><i class="fa fa-check"></i><b>2.2.1</b> Note this series of practicals is designed for you to have a first introduction to Bioinformatics, it’s about exposure, not memorising or mastering anything. Don’t worry about the details!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="Unix.html"><a href="Unix.html#getting-started"><i class="fa fa-check"></i><b>2.3</b> 1.3 Getting started</a></li>
+<li class="chapter" data-level="2.4" data-path="Unix.html"><a href="Unix.html#a-few-foundational-rules"><i class="fa fa-check"></i><b>2.4</b> 1.4 A few foundational rules</a></li>
+<li class="chapter" data-level="2.5" data-path="Unix.html"><a href="Unix.html#lets-get-started"><i class="fa fa-check"></i><b>2.5</b> 1.5 Let’s get started</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="Unix.html"><a href="Unix.html#downloading-data"><i class="fa fa-check"></i><b>2.5.1</b> Downloading data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="Unix.html"><a href="Unix.html#unix-file-structure"><i class="fa fa-check"></i><b>2.6</b> 1.6 Unix File Structure</a></li>
+<li class="chapter" data-level="2.7" data-path="Unix.html"><a href="Unix.html#absolute-vs-relative-file-paths"><i class="fa fa-check"></i><b>2.7</b> 1.7 Absolute vs relative file paths</a></li>
+<li class="chapter" data-level="2.8" data-path="Unix.html"><a href="Unix.html#moving-around"><i class="fa fa-check"></i><b>2.8</b> 1.8 Moving around</a></li>
+<li class="chapter" data-level="2.9" data-path="Unix.html"><a href="Unix.html#summary"><i class="fa fa-check"></i><b>2.9</b> 1.9 Summary</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="Unix.html"><a href="Unix.html#terms"><i class="fa fa-check"></i><b>2.9.1</b> Terms</a></li>
+<li class="chapter" data-level="2.9.2" data-path="Unix.html"><a href="Unix.html#commands"><i class="fa fa-check"></i><b>2.9.2</b> Commands</a></li>
+<li class="chapter" data-level="2.9.3" data-path="Unix.html"><a href="Unix.html#special-characters"><i class="fa fa-check"></i><b>2.9.3</b> Special characters</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="Unix.html"><a href="Unix.html#stretch-yourself"><i class="fa fa-check"></i><b>2.10</b> 1.10 Stretch yourself</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html"><i class="fa fa-check"></i><b>3</b> NGS sequence analysis</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#background"><i class="fa fa-check"></i><b>3.1</b> 2.1 Background</a></li>
+<li class="chapter" data-level="3.2" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#the-data"><i class="fa fa-check"></i><b>3.2</b> 2.2 The data</a></li>
+<li class="chapter" data-level="3.3" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#removing-primers"><i class="fa fa-check"></i><b>3.3</b> 2.3 Removing Primers</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#loops"><i class="fa fa-check"></i><b>3.3.1</b> 2.3.1 Loops</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dada2"><i class="fa fa-check"></i><b>3.4</b> 2.4 DADA2</a></li>
+<li class="chapter" data-level="3.5" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#quality-trimmingfiltering"><i class="fa fa-check"></i><b>3.5</b> 2.5 Quality trimming/filtering</a></li>
+<li class="chapter" data-level="3.6" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dereplication"><i class="fa fa-check"></i><b>3.6</b> 2.6 Dereplication</a></li>
+<li class="chapter" data-level="3.7" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#asvs"><i class="fa fa-check"></i><b>3.7</b> 2.7 ASV’s</a></li>
+<li class="chapter" data-level="3.8" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#merging-reads"><i class="fa fa-check"></i><b>3.8</b> 2.8 Merging reads</a></li>
+<li class="chapter" data-level="3.9" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#count-table"><i class="fa fa-check"></i><b>3.9</b> 2.9 Count table</a></li>
+<li class="chapter" data-level="3.10" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#overview"><i class="fa fa-check"></i><b>3.10</b> 2.10 Overview</a></li>
+<li class="chapter" data-level="3.11" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#assign-taxonomy"><i class="fa fa-check"></i><b>3.11</b> 2.11 Assign taxonomy</a></li>
+<li class="chapter" data-level="3.12" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#standard-goods"><i class="fa fa-check"></i><b>3.12</b> 2.12 Standard goods</a></li>
+<li class="chapter" data-level="3.13" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#contaminants"><i class="fa fa-check"></i><b>3.13</b> 2.13 Contaminants</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-in-r.html"><a href="analysis-in-r.html"><i class="fa fa-check"></i><b>4</b> Analysis in R</a></li>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bioinformatics - A crash course</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ngs-sequence-analysis" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> NGS sequence analysis</h1>
+<div id="background" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> 2.1 Background</h2>
+<p>Info on sequencing</p>
+<p>General application</p>
+<p>Don’t have to follow everything!</p>
+</div>
+<div id="the-data" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> 2.2 The data</h2>
+<p>For a quick overview of the example data we’ll be using and where it came from, we are going to work with a subset of the dataset published here. We were exploring an underwater mountain ~3 km down at the bottom of the Pacific Ocean that serves as a low-temperature (~5-10°C) hydrothermal venting site. This amplicon dataset was generated from DNA extracted from crushed basalts collected from across the mountain with the goal being to begin characterizing the microbial communities of these deep-sea rocks. No one had ever been here before, so as is often the purpose of marker-gene sequencing, this was just a broad-level community survey. The sequencing was done on the Illumina MiSeq platform with 2x300 paired-end sequencing using primers targeting the V4 region of the 16S rRNA gene. There are 20 samples total: 4 extraction “blanks” (nothing added to DNA extraction kit), 2 bottom-water samples, 13 rocks, and one biofilm scraped off of a rock. None of these details are important for you to remember, it’s just to give some overview if you care.</p>
+<p>In the following figure, overlain on the map are the rock sample collection locations, and the panes on the right show examples of the 3 distinct types of rocks collected: 1) basalts with highly altered, thick outer rinds (&gt;1 cm); 2) basalts that were smooth, glassy, thin exteriors (~1-2 mm); and 3) one calcified carbonate.</p>
+<p>PICTURE</p>
+<p>Altogether the uncompressed size of the working directory we are downloading here is ~300MB - this is about 10% of the full dataset - we are using a reduced dataset to minimise system requirements and speed up the workflow.</p>
+<p>To get started, be sure you are in the “Terminal” window. We will be working here for the first step of importing the data, and removing the primers from our data. We can import our data using the <code>curl</code> function, we will then remove the primers using a program called <code>cutadapt</code> which is written in Python.</p>
+<p>Make sure when you open the terminal you are in the project directory (and refer to last weeks notes if you need to check how to do this).</p>
+<p>Don’t switch over to R (the “Console” tab in the Binder/RStudio environment) until noted. You can download the required dataset and files by copying and pasting the following commands into your command-line terminal:</p>
+<pre><code>curl -L -o dada2_amplicon_ex_workflow.tar.gz https://ndownloader.figshare.com/files/23066516
+tar -xzvf dada2_amplicon_ex_workflow.tar.gz
+rm dada2_amplicon_ex_workflow.tar.gz
+cd dada2_amplicon_ex_workflow/</code></pre>
+<p>In our working directory there are 20 samples with forward (R1) and reverse (R2) reads with per-base-call quality information, so 40 fastq files (.fq). It is a good idea to have a file with all the sample names to use for various things throughout, so here’s making that file based on how these sample names are formatted.</p>
+<pre><code>ls *_R1.fq | cut -f1 -d &quot;_&quot; &gt; samples</code></pre>
+</div>
+<div id="removing-primers" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> 2.3 Removing Primers</h2>
+<p>To start, we need to remove the primers from all of these (the primers used for this run are in the “primers.fa” file in our working directory), and here we’re going to use cutadapt to do that at the command line (“Terminal” tab). Cutadapt operates on one sample at at time, so we’re going to use a wonderful little bash <em>loop</em> to run it on all of our samples.</p>
+<div id="loops" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> 2.3.1 Loops</h3>
+<p>Loops are extremely powerful way of controlling iteration. We can specify that a line of code is repeated across multiple objects. In this example we use the sample file we made earlier as the list of files across which we want this function of removing primers to loop. These same lines will then repeat until all the specified iterations are complete.</p>
+<p>We won’t break down exactly how this loop works - but they are used across all programming languages (including R) and you can check out the R4DS book for an introduction to building your own loops (and custom functions!) <a href="https://r4ds.had.co.nz/iteration.html">here</a>.</p>
+<p>For now just copy and paste this code exactly into the Terminal.</p>
+<pre><code>for sample in $(cat samples)
+do
+
+    echo &quot;On sample: $sample&quot;
+    
+    cutadapt -a ^GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC \
+    -A ^GGACTACHVGGGTWTCTAAT...TTACCGCGGCKGCTGGCAC \
+    -m 215 -M 285 --discard-untrimmed \
+    -o ${sample}_sub_R1_trimmed.fq.gz -p ${sample}_sub_R2_trimmed.fq.gz \
+    ${sample}_sub_R1.fq ${sample}_sub_R2.fq \
+    &gt;&gt; cutadapt_primer_trimming_stats.txt 2&gt;&amp;1
+
+done</code></pre>
+<p>Here’s a before-and-after of one of our files</p>
+<pre><code>### R1 BEFORE TRIMMING PRIMERS
+head -n 2 B1_sub_R1.fq
+# @M02542:42:000000000-ABVHU:1:1101:8823:2303 1:N:0:3
+# GTGCCAGCAGCCGCGGTAATACGTAGGGTGCGAGCGTTAATCGGAATTACTGGGCGTAAAGCGTGCGCAGGCGGTCTTGT
+# AAGACAGAGGTGAAATCCCTGGGCTCAACCTAGGAATGGCCTTTGTGACTGCAAGGCTGGAGTGCGGCAGAGGGGGATGG
+# AATTCCGCGTGTAGCAGTGAAATGCGTAGATATGCGGAGGAACACCGATGGCGAAGGCAGTCCCCTGGGCCTGCACTGAC
+# GCTCATGCACGAAAGCGTGGGGAGCAAACAGGATTAGATACCCGGGTAGTCC
+
+### R1 AFTER TRIMMING PRIMERS
+head -n 2 B1_sub_R1_trimmed.fq
+# @M02542:42:000000000-ABVHU:1:1101:8823:2303 1:N:0:3
+# TACGTAGGGTGCGAGCGTTAATCGGAATTACTGGGCGTAAAGCGTGCGCAGGCGGTCTTGTAAGACAGAGGTGAAATCCC
+# TGGGCTCAACCTAGGAATGGCCTTTGTGACTGCAAGGCTGGAGTGCGGCAGAGGGGGATGGAATTCCGCGTGTAGCAGTG
+# AAATGCGTAGATATGCGGAGGAACACCGATGGCGAAGGCAGTCCCCTGGGCCTGCACTGACGCTCATGCACGAAAGCGTG
+# GGGAGCAAACAGG</code></pre>
+<p>You can look through the output of the cutadapt stats file we made (“cutadapt_primer_trimming_stats.txt”) to get an idea of how things went. Here’s a little one-liner to look at what fraction of reads were retained in each sample (column 2) and what fraction of bps were retained in each sample (column 3):</p>
+<pre><code>paste samples &lt;(grep &quot;passing&quot; cutadapt_primer_trimming_stats.txt | cut -f3 -d &quot;(&quot; | tr -d &quot;)&quot;) &lt;(grep &quot;filtered&quot; cutadapt_primer_trimming_stats.txt | cut -f3 -d &quot;(&quot; | tr -d &quot;)&quot;)
+
+# B1    96.5%   83.0%
+# B2    96.6%   83.3%
+# B3    95.4%   82.4%
+# B4    96.8%   83.4%
+# BW1   96.4%   83.0%
+# BW2   94.6%   81.6%
+# R10   92.4%   79.8%
+# R11BF 90.6%   78.2%
+# R11   93.3%   80.6%
+# R12   94.3%   81.4%
+# R1A   93.3%   80.5%
+# R1B   94.0%   81.1%
+# R2    94.0%   81.2%
+# R3    93.8%   81.0%
+# R4    95.5%   82.4%
+# R5    93.7%   80.9%
+# R6    92.7%   80.1%
+# R7    94.4%   81.5%
+# R8    93.2%   80.4%
+# R9    92.4%   79.7%</code></pre>
+<p>We would expect to lose around 13-14% of bps just for cutting off the primers, and the remainder of lost bps would be from the relatively low percent of those reads totally removed (~92-97% across the samples).</p>
+<p>With primers removed, we’re now ready to switch R and start using DADA2!</p>
+</div>
+</div>
+<div id="dada2" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> 2.4 DADA2</h2>
+<pre><code>library(dada2)
+
+
+setwd(&quot;~/dada2_amplicon_ex_workflow&quot;)
+
+list.files() # make sure what we think is here is actually here
+
+## first we&#39;re setting a few variables we&#39;re going to use ##
+  # one with all sample names, by scanning our &quot;samples&quot; file we made earlier
+  
+samples &lt;- scan(&quot;samples&quot;, what=&quot;character&quot;)
+
+  # one holding the file names of all the forward reads
+forward_reads &lt;- paste0(samples, &quot;_sub_R1_trimmed.fq.gz&quot;)
+
+  # and one with the reverse
+reverse_reads &lt;- paste0(samples, &quot;_sub_R2_trimmed.fq.gz&quot;)
+
+  # and variables holding file names for the forward and reverse
+  # filtered reads we&#39;re going to generate below
+filtered_forward_reads &lt;- paste0(samples, &quot;_sub_R1_filtered.fq.gz&quot;)
+filtered_reverse_reads &lt;- paste0(samples, &quot;_sub_R2_filtered.fq.gz&quot;)</code></pre>
+</div>
+<div id="quality-trimmingfiltering" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> 2.5 Quality trimming/filtering</h2>
+<p>We did a filtering step above with cutadapt (where we eliminated reads that had imperfect or missing primers and those that were shorter than 215 bps or longer than 285), but in DADA2 we’ll implement a trimming step as well (where we trim reads down based on some quality threshold rather than throwing the read away). Since we’re potentially shortening reads further, we’re again going to include another minimum-length filtering component. We can also take advantage of a handy quality plotting function that DADA2 provides to visualize how you’re reads are doing, plotQualityProfile(). By running that on our variables that hold all of our forward and reverse read filenames, we can easily generate plots for all samples or for a subset of them. So let’s take a peak at that to help decide our trimming lengths: It’s good to try to keep a bird’s-eye view of what’s going on. So here is an overview of the main processing steps we’ll be performing with cutadapt and DADA2. Don’t worry if anything seems unclear right now, we will discuss each at each step.</p>
+<pre><code>plotQualityProfile(forward_reads[17:20])
+
+plotQualityProfile(reverse_reads[17:20])</code></pre>
+<p>All forwards look pretty similar to eachother, and all reverses look pretty similar to eachother, but worse than the forwards, which is common – chemistry gets tired…</p>
+<p>On the plots produced</p>
+<ul>
+<li><p>the x axis is the nucleotide bases starting from the beginning of the read moving to the end</p></li>
+<li><p>the y axis is the average quality score for the base in that position</p></li>
+<li><p>the green line is the median quality score of the base at that position</p></li>
+<li><p>the orange lines are quartiles</p></li>
+</ul>
+<p>TALK ABOUT PHRED SCORES</p>
+<p>Here, I’m going to cut the forward reads at 250 and the reverse reads at 200 – roughly where both sets maintain a median quality of 30 or above – and then see how things look. But we also want to set a minimum length to filter out truncated sequences, so we will set a minimum acceptable read length of 175bp (any reads shorter than this will be discarded).</p>
+<p>In DADA2, this quality-filtering step is done with the <code>filterAndTrim()</code> function:</p>
+<pre><code>filtered_out &lt;- filterAndTrim(forward_reads, filtered_forward_reads,
+                reverse_reads, filtered_reverse_reads, maxEE=c(2,2),
+                rm.phix=TRUE, minLen=175, truncLen=c(250,200))</code></pre>
+<p>This function made a bunch of output files “filtered_forward_reads” and “filtered_reverse_reads” we can see these in our project pane. Or if we were working on a server without a GUI we could use <code>list.files()</code> in R or <code>ls</code> in our Terminal.</p>
+<p>We also generated an R file called filtered_out. This is a simple matrix holding how many reads went <em>in</em> for each file and how many came <em>out</em>.</p>
+<p>Check it in R.</p>
+<pre><code>filtered_out</code></pre>
+<p>We can take a look at the filtered reads visually - we expect to have trimmed off that section where quality drops</p>
+<pre><code>    plotQualityProfile(filtered_reverse_reads[17:20])</code></pre>
+<p>Looking Good!</p>
+</div>
+<div id="dereplication" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> 2.6 Dereplication</h2>
+<p>Dereplication is a common step in many amplicon processing workflows. Instead of keeping 100 identical sequences and doing all downstream processing to all 100 -costing computer processing power and time, you can keep/process just one of them, and just attach the number x100 to it. Now this acts as a representative for 100 identical sequences.</p>
+<pre><code>derep_forward &lt;- derepFastq(filtered_forward_reads, verbose=TRUE)
+names(derep_forward) &lt;- samples # the sample names in these objects are initially the file names of the samples, this sets them to the sample names for the rest of the workflow
+derep_reverse &lt;- derepFastq(filtered_reverse_reads, verbose=TRUE)
+names(derep_reverse) &lt;- samples</code></pre>
+</div>
+<div id="asvs" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> 2.7 ASV’s</h2>
+<p>This is where we start to take our raw sequence data and infer <em>true</em> biological sequences.
+It uses an algorithm to look at the consensus quality score and abundance for each <em>unique</em> sequence. It then determines whether this sequence is more likely to be of biological origin or a spurious sequencing error.</p>
+<pre><code>dada_forward &lt;- dada(derep_forward, err=err_forward_reads, pool=&quot;pseudo&quot;)
+
+dada_reverse &lt;- dada(derep_reverse, err=err_reverse_reads, pool=&quot;pseudo&quot;)
+
+</code></pre>
+</div>
+<div id="merging-reads" class="section level2" number="3.8">
+<h2><span class="header-section-number">3.8</span> 2.8 Merging reads</h2>
+<p>Now DADA2 merges the forward and reverse ASVs to reconstruct our full target amplicon requiring the overlapping region to be identical between the two. By default it requires that at least 12 bps overlap, but in our case the overlap should be much greater. If you remember above we trimmed the forward reads to 250 and the reverse to 200, and our primers were 515f–806r. After cutting off the primers we’re expecting a typical amplicon size of around 260 bases, so our typical overlap should be up around 190. That’s estimated based on E. coli 16S rRNA gene positions and very back-of-the-envelope-esque of course, so to allow for true biological variation and such I’m going ot set the minimum overlap for this dataset for 170. I’m also setting the trimOverhang option to TRUE in case any of our reads go passed their opposite primers (which I wouldn’t expect based on our trimming, but is possible due to the region and sequencing method).</p>
+<pre><code>merged_amplicons &lt;- mergePairs(dada_forward, derep_forward, dada_reverse,
+                    derep_reverse, trimOverhang=TRUE, minOverlap=170)
+
+  # this object holds a lot of information that may be the first place you&#39;d want to look if you want to start poking under the hood
+class(merged_amplicons) # list
+length(merged_amplicons) # 20 elements in this list, one for each of our samples
+names(merged_amplicons) # the names() function gives us the name of each element of the list 
+
+class(merged_amplicons$B1) # each element of the list is a dataframe that can be accessed and manipulated like any ordinary dataframe
+
+names(merged_amplicons$B1) # the names() function on a dataframe gives you the column names
+# &quot;sequence&quot;  &quot;abundance&quot; &quot;forward&quot;   &quot;reverse&quot;   &quot;nmatch&quot;    &quot;nmismatch&quot; &quot;nindel&quot;    &quot;prefer&quot;    &quot;accept&quot;</code></pre>
+</div>
+<div id="count-table" class="section level2" number="3.9">
+<h2><span class="header-section-number">3.9</span> 2.9 Count table</h2>
+<p>Now we can generate a count table with the makeSequenceTable() function. This is one of the main outputs from processing an amplicon dataset. You may have also heard this referred to as a biome table, or an OTU matrix.</p>
+<pre><code>seqtab &lt;- makeSequenceTable(merged_amplicons)
+class(seqtab) # matrix
+dim(seqtab) # 20 2521
+</code></pre>
+</div>
+<div id="overview" class="section level2" number="3.10">
+<h2><span class="header-section-number">3.10</span> 2.10 Overview</h2>
+<p>The developers’ DADA2 tutorial provides an example of a nice, quick way to pull out how many reads were dropped at various points of the pipeline. This can serve as a jumping off point if you’re left with too few sequences at the end to help point you towards where you should start digging into where they are being dropped. Here’s a slightly modified version:</p>
+<pre><code>  # set a little function
+getN &lt;- function(x) sum(getUniques(x))
+
+  # making a little table
+summary_tab &lt;- data.frame(row.names=samples, dada2_input=filtered_out[,1],
+               filtered=filtered_out[,2], dada_f=sapply(dada_forward, getN),
+               dada_r=sapply(dada_reverse, getN), merged=sapply(merged_amplicons, getN),
+               nonchim=rowSums(seqtab.nochim),
+               final_perc_reads_retained=round(rowSums(seqtab.nochim)/filtered_out[,1]*100, 1))
+
+summary_tab
+</code></pre>
+<p>And it might be useful to write this table out of R, saving it as a regular file</p>
+<pre><code>write.table(summary_tab, &quot;read-count-tracking.tsv&quot;, quote=FALSE, sep=&quot;\t&quot;, col.names=NA)</code></pre>
+</div>
+<div id="assign-taxonomy" class="section level2" number="3.11">
+<h2><span class="header-section-number">3.11</span> 2.11 Assign taxonomy</h2>
+<pre><code>## downloading DECIPHER-formatted SILVA v138 reference
+download.file(url=&quot;http://www2.decipher.codes/Classification/TrainingSets/SILVA_SSU_r138_2019.RData&quot;, destfile=&quot;SILVA_SSU_r138_2019.RData&quot;)
+
+## loading reference taxonomy object
+load(&quot;SILVA_SSU_r138_2019.RData&quot;)</code></pre>
+<p>Running the following taxonomy assignment step took ~30 minutes on a 2013 MacBook Pro. So feel free to load the stored R objects with load(“amplicon_dada2_ex.RData”) to skip this step if you’d like.</p>
+<pre><code>## loading DECIPHER
+library(DECIPHER)
+
+## creating DNAStringSet object of our ASVs
+dna &lt;- DNAStringSet(getSequences(seqtab.nochim))
+
+## and classifying
+tax_info &lt;- IdTaxa(test=dna, trainingSet=trainingSet, strand=&quot;both&quot;, processors=NULL)</code></pre>
+</div>
+<div id="standard-goods" class="section level2" number="3.12">
+<h2><span class="header-section-number">3.12</span> 2.12 Standard goods</h2>
+<p>The typical standard outputs from amplicon processing are a fasta file, a count table, and a taxonomy table. So here’s one way we can generate those files from your DADA2 objects in R:</p>
+<pre><code>  # giving our seq headers more manageable names (ASV_1, ASV_2...)
+asv_seqs &lt;- colnames(seqtab.nochim)
+asv_headers &lt;- vector(dim(seqtab.nochim)[2], mode=&quot;character&quot;)
+
+for (i in 1:dim(seqtab.nochim)[2]) {
+  asv_headers[i] &lt;- paste(&quot;&gt;ASV&quot;, i, sep=&quot;_&quot;)
+}
+
+  # making and writing out a fasta of our final ASV seqs:
+asv_fasta &lt;- c(rbind(asv_headers, asv_seqs))
+write(asv_fasta, &quot;ASVs.fa&quot;)
+
+  # count table:
+asv_tab &lt;- t(seqtab.nochim)
+row.names(asv_tab) &lt;- sub(&quot;&gt;&quot;, &quot;&quot;, asv_headers)
+write.table(asv_tab, &quot;ASVs_counts.tsv&quot;, sep=&quot;\t&quot;, quote=F, col.names=NA)
+
+  # tax table:
+  # creating table of taxonomy and setting any that are unclassified as &quot;NA&quot;
+ranks &lt;- c(&quot;domain&quot;, &quot;phylum&quot;, &quot;class&quot;, &quot;order&quot;, &quot;family&quot;, &quot;genus&quot;, &quot;species&quot;)
+asv_tax &lt;- t(sapply(tax_info, function(x) {
+  m &lt;- match(ranks, x$rank)
+  taxa &lt;- x$taxon[m]
+  taxa[startsWith(taxa, &quot;unclassified_&quot;)] &lt;- NA
+  taxa
+}))
+colnames(asv_tax) &lt;- ranks
+rownames(asv_tax) &lt;- gsub(pattern=&quot;&gt;&quot;, replacement=&quot;&quot;, x=asv_headers)
+
+write.table(asv_tax, &quot;ASVs_taxonomy.tsv&quot;, sep = &quot;\t&quot;, quote=F, col.names=NA)
+</code></pre>
+</div>
+<div id="contaminants" class="section level2" number="3.13">
+<h2><span class="header-section-number">3.13</span> 2.13 Contaminants</h2>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;">
+Command
+</th>
+<th style="text-align:left;font-weight: bold;">
+What it is
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+cutadapt/filterAndTrim()
+</td>
+<td style="text-align:left;">
+remove primers and quality trim/filter
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+learnErrors()
+</td>
+<td style="text-align:left;">
+generate an error model of our data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+derepFastq
+</td>
+<td style="text-align:left;">
+dereplicate sequences
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dada()
+</td>
+<td style="text-align:left;">
+infer ASVs on both forward and reverse reads independently
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mergePairs()
+</td>
+<td style="text-align:left;">
+merge forward and reverse reads to further refine ASVs
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+makeSequenceTable()
+</td>
+<td style="text-align:left;">
+generate a count table
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removeBimeraDenovo()
+</td>
+<td style="text-align:left;">
+screen for and remove chimeras
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IdTaxa()
+</td>
+<td style="text-align:left;">
+assign taxonomy
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="Unix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analysis-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-literature.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
