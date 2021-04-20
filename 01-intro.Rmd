@@ -35,7 +35,11 @@ But when you click on the RStudio Terminal it provides direct access to a comman
 
 This allows us to start using programs other than R, and potentially use multiple programs & programming languages to work together.
 
-### Note this series of practicals is designed for you to have a first introduction to Bioinformatics, it's about exposure, not memorising or mastering anything. Don't worry about the details!
+
+> **Note**
+>
+> This series of practicals is designed for you to have a first introduction to Bioinformatics, it's about exposure, not memorising or mastering anything. Don't worry about the details!
+
 
 ## Getting started
 
@@ -238,3 +242,29 @@ knitr::kable(
 ```
 
 You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+
+```{block, type="rmdtip"}
+
+Something
+
+
+```
+
+
+```{block, type="rmdnote"}
+
+Something
+
+
+```
+
+
+```{block, type="rmdwarning"}
+
+Something
+
+
+```
+
+
+

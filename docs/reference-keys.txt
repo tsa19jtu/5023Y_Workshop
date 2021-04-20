@@ -5,7 +5,6 @@ Unix
 what-is-unixlinux
 some-terms
 why-learn-unix
-note-this-series-of-practicals-is-designed-for-you-to-have-a-first-introduction-to-bioinformatics-its-about-exposure-not-memorising-or-mastering-anything.-dont-worry-about-the-details
 getting-started
 a-few-foundational-rules
 lets-get-started

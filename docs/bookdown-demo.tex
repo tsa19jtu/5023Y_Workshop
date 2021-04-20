@@ -111,6 +111,57 @@
 \usepackage{booktabs}
 \usepackage{amsthm}
 \makeatletter
+
+\newenvironment{kframe}{%
+\medskip{}
+\setlength{\fboxsep}{.8em}
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\makeatletter
+\@ifundefined{Shaded}{
+}{\renewenvironment{Shaded}{\begin{kframe}}{\end{kframe}}}
+\makeatother
+
+\newenvironment{block}[1]
+  {
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{images/#1}}
+    }
+  }
+  \setlength{\fboxsep}{1em}
+  \begin{kframe}
+  \item
+  }
+  {
+  \end{kframe}
+  \end{itemize}
+  }
+\newenvironment{rmdnote}
+  {\begin{block}{note}}
+  {\end{block}}
+\newenvironment{rmdtip}
+  {\begin{block}{tip}}
+  {\end{block}}
+\newenvironment{rmdwarning}
+  {\begin{block}{warning}}
+  {\end{block}}
+  
 \def\thm@space@setup{%
   \thm@preskip=8pt plus 2pt minus 4pt
   \thm@postskip=\thm@preskip
@@ -205,8 +256,11 @@ But when you click on the RStudio Terminal it provides direct access to a comman
 
 This allows us to start using programs other than R, and potentially use multiple programs \& programming languages to work together.
 
-\hypertarget{note-this-series-of-practicals-is-designed-for-you-to-have-a-first-introduction-to-bioinformatics-its-about-exposure-not-memorising-or-mastering-anything.-dont-worry-about-the-details}{%
-\subsection{Note this series of practicals is designed for you to have a first introduction to Bioinformatics, it's about exposure, not memorising or mastering anything. Don't worry about the details!}\label{note-this-series-of-practicals-is-designed-for-you-to-have-a-first-introduction-to-bioinformatics-its-about-exposure-not-memorising-or-mastering-anything.-dont-worry-about-the-details}}
+\begin{quote}
+\textbf{Note}
+
+This series of practicals is designed for you to have a first introduction to Bioinformatics, it's about exposure, not memorising or mastering anything. Don't worry about the details!
+\end{quote}
 
 \hypertarget{getting-started}{%
 \section{Getting started}\label{getting-started}}
@@ -543,6 +597,18 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{table}
 
 You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+
+\begin{rmdtip}
+Something
+\end{rmdtip}
+
+\begin{rmdnote}
+Something
+\end{rmdnote}
+
+\begin{rmdwarning}
+Something
+\end{rmdwarning}
 
 \hypertarget{ngs-sequence-analysis}{%
 \chapter{NGS sequence analysis}\label{ngs-sequence-analysis}}

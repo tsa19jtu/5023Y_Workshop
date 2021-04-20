@@ -239,6 +239,7 @@ class(seqtab) # matrix
 dim(seqtab) # 20 2521
 
 ```
+
 ## Overview
 
 The developers’ DADA2 tutorial provides an example of a nice, quick way to pull out how many reads were dropped at various points of the pipeline. This can serve as a jumping off point if you’re left with too few sequences at the end to help point you towards where you should start digging into where they are being dropped. Here’s a slightly modified version:
