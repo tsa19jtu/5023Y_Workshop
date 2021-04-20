@@ -138,7 +138,7 @@
 
 \title{UNDER CONSTRUCTION}
 \author{Philip Leftwich}
-\date{2021-04-19}
+\date{2021-04-20}
 
 \begin{document}
 \maketitle
@@ -172,7 +172,7 @@ To compile this example to PDF, you need XeLaTeX. You are recommended to install
 Unix is very likely the most foundational skillset we can develop for bioinformatics (and much more than bioinformatics). Many of the most common and powerful bioinformatics approaches happen in this text-based environment, and having a solid foundation here can make everything we're trying to learn and do much easier. This is a set of 5 introductory tutorials to help us get from being completely new to Unix up to being great friends with it 🙂
 
 \hypertarget{what-is-unixlinux}{%
-\section{1.1 What is Unix/Linux}\label{what-is-unixlinux}}
+\section{What is Unix/Linux}\label{what-is-unixlinux}}
 
 \hypertarget{some-terms}{%
 \subsection{Some terms}\label{some-terms}}
@@ -193,7 +193,7 @@ bash & the most common programming language used at a Unix command-line\\
 You should be very familiar with using a GUI (RStudio), but remember we have spent a lot of time working with files and directories using the the command line (CLI) in R. This is useful practice, because most supercomputers lack a GUI, you must work entirely using the command line.
 
 \hypertarget{why-learn-unix}{%
-\section{1.2 Why Learn Unix?}\label{why-learn-unix}}
+\section{Why Learn Unix?}\label{why-learn-unix}}
 
 Most sequencing data files are large, and require a lot of RAM to process. As a result most of the work Bioinformaticians do is not hosted on their own computers, instead they ``remote-connect'' to high performance supercomputers or cluster computers.
 
@@ -209,7 +209,7 @@ This allows us to start using programs other than R, and potentially use multipl
 \subsection{Note this series of practicals is designed for you to have a first introduction to Bioinformatics, it's about exposure, not memorising or mastering anything. Don't worry about the details!}\label{note-this-series-of-practicals-is-designed-for-you-to-have-a-first-introduction-to-bioinformatics-its-about-exposure-not-memorising-or-mastering-anything.-dont-worry-about-the-details}}
 
 \hypertarget{getting-started}{%
-\section{1.3 Getting started}\label{getting-started}}
+\section{Getting started}\label{getting-started}}
 
 Before we get started we need a terminal to work in.
 
@@ -260,19 +260,23 @@ Before we get started we need a terminal to work in.
 
 We will perform a very simple function and get a flavour of the similarities and differences to working in `\texttt{R}. date` is a command that prints out the date and time.
 
-\begin{verbatim}
-date
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{date}
+\end{Highlighting}
+\end{Shaded}
 
 \url{https://www.geeksforgeeks.org/date-command-linux-examples/\#}:\textasciitilde:text=date\%20command\%20is\%20used\%20to,linux\%20operating\%20system\%20is\%20configured.
 
-\begin{verbatim}
-TZ=Europe/London date
+\begin{Shaded}
+\begin{Highlighting}[]
+    \VariableTok{TZ=}\NormalTok{Europe/London }\FunctionTok{date}
 
-TZ=Europe/London date
+    \VariableTok{TZ=}\NormalTok{Europe/London }\FunctionTok{date}
 
-date --date="next tue"
-\end{verbatim}
+    \FunctionTok{date} \AttributeTok{{-}{-}date}\OperatorTok{=}\StringTok{"next tue"}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{downloading-data}{%
 \subsection{Downloading data}\label{downloading-data}}
@@ -286,31 +290,39 @@ date --date="next tue"
   cd change the directory so we \emph{land} in the new folder we have made
 \end{itemize}
 
-\begin{verbatim}
-curl -L -o unix_intro.tar.gz https://ndownloader.figshare.com/files/15573746
-tar -xzvf unix_intro.tar.gz && rm unix_intro.tar.gz
-cd unix_intro
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \ExtensionTok{curl} \AttributeTok{{-}L} \AttributeTok{{-}o}\NormalTok{ unix\_intro.tar.gz https://ndownloader.figshare.com/files/15573746}
+    \FunctionTok{tar} \AttributeTok{{-}xzvf}\NormalTok{ unix\_intro.tar.gz }\KeywordTok{\&\&} \FunctionTok{rm}\NormalTok{ unix\_intro.tar.gz}
+    \BuiltInTok{cd}\NormalTok{ unix\_intro}
+\end{Highlighting}
+\end{Shaded}
 
 Unlike date, most commands require arguments and won't work without them. head is a command that prints the first lines of a file, so it requires us to provide the file we want it to act on:
 
-\begin{verbatim}
-head example.txt
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{head}\NormalTok{ example.txt}
+\end{Highlighting}
+\end{Shaded}
 
 Here ``example.txt'' is the required argument, and in this case it is also what's known as a positional argument. Whether things need to be provided as positional arguments or not depends on how the command or program we are using was written. Sometimes we need to specify the input file by putting something in front of it (e.g.~some commands will use the -i flag, but it's often other things as well).
 
 There are also optional arguments for the head command. The default for head is to print the first 10 lines of a file. We can change that by specifying the -n flag, followed by how many lines we want:
 
-\begin{verbatim}
-head -n 5 example.txt
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{head} \AttributeTok{{-}n}\NormalTok{ 5 example.txt}
+\end{Highlighting}
+\end{Shaded}
 
 How would we know we needed the -n flag for that? There are a few ways to find out. Many standard Unix commands and other programs will have built-in help menus that we can access by providing --help as the only argument:
 
-\begin{verbatim}
-head --help
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{head} \AttributeTok{{-}{-}help}
+\end{Highlighting}
+\end{Shaded}
 
 Again this is very similar to the logic in which R commands are strucutred e.g.~\texttt{??ggplot()} The synatx is similar even if the specific icons or arguments are different.
 
@@ -325,10 +337,12 @@ IMAGE
 
 We tell the command line where files and directories are located by providing their address, their ``path''. If we use the pwd command (for print working directory), we can find out what the path is for the directory we are sitting in. And if we use the ls command (for list), we can see what directories and files are in the current directory we are sitting in.
 
-\begin{verbatim}
-pwd
-ls
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \BuiltInTok{pwd}
+    \FunctionTok{ls}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{absolute-vs-relative-file-paths}{%
 \section{1.7 Absolute vs relative file paths}\label{absolute-vs-relative-file-paths}}
@@ -344,61 +358,75 @@ There are two ways to specify the path (address) of the file we want to do somet
   A \textbf{relative path} is an address that starts from wherever we are currently sitting. For example, let's look again at the head command we ran above:
 \end{itemize}
 
-\begin{verbatim}
-head example.txt
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{head}\NormalTok{ example.txt}
+\end{Highlighting}
+\end{Shaded}
 
 What we are actually doing here is using a relative path to specify where the ``example.txt'' file is located. This is because the command line \textbf{automatically looks} in the current working directory if we don't specify anything else about its location.
 
 We can also run the same command on the same file using an \textbf{absolute path}:
 
-\begin{verbatim}
-head ~/unix_intro/example.txt
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{head}\NormalTok{ \textasciitilde{}/unix\_intro/example.txt}
+\end{Highlighting}
+\end{Shaded}
 
 The previous two commands both point to the same file right now. But the first way, head example.txt, will only work if we are entering it while ``sitting'' in the directory that holds that file, while the second way will work no matter where we happen to be in the computer.
 
 It is \textbf{important to always think about where} we are in the computer when working at the command line. One of the most common errors/easiest mistakes to make is trying to do something to a file that isn't where we think it is. Let's run head on the ``example.txt'' file again, and then let's try it on another file: ``notes.txt'':
 
-\begin{verbatim}
-head example.txt
-head notes.txt
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{ example.txt}
+\FunctionTok{head}\NormalTok{ notes.txt}
+\end{Highlighting}
+\end{Shaded}
 
 Here the head command works fine on ``example.txt'', but we get an error message when we call it on ``notes.txt'' telling us no such file or directory. If we run the ls command to list the contents of the current working directory, we can see the computer is absolutely right -- spoiler alert: it usually is -- and there is no file here named ``notes.txt''.
 
 The ls command by default operates on the current working directory if we don't specify any location, but we can tell it to list the contents of a different directory by providing it as a positional argument:
 
-\begin{verbatim}
-ls
-ls experiment
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{ls}
+    \FunctionTok{ls}\NormalTok{ experiment}
+\end{Highlighting}
+\end{Shaded}
 
 We can see the file we were looking for is located in the subdirectory called ``experiment''. Here is how we can run head on ``notes.txt'' by specifying an accurate relative path to that file:
 
-\begin{verbatim}
-head experiment/notes.txt
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{head}\NormalTok{ experiment/notes.txt}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{moving-around}{%
 \section{1.8 Moving around}\label{moving-around}}
 
 We can also move into the directory containing the file we want to work with by using the \texttt{cd} command (\textbf{c}hange \textbf{d}irectory). This command takes a positional argument that is the path (address) of the directory we want to change into. This can be a relative path or an absolute path. Here we'll use the relative path of the subdirectory, ``experiment'', to change into it
 
-\begin{verbatim}
-cd experiment/
-pwd
-ls
-head notes.txt
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \BuiltInTok{cd}\NormalTok{ experiment/}
+    \BuiltInTok{pwd}
+    \FunctionTok{ls}
+    \FunctionTok{head}\NormalTok{ notes.txt}
+\end{Highlighting}
+\end{Shaded}
 
 Great. But now how do we get back ``up'' to the directory above us? One way would be to provide an absolute path, like \texttt{cd\ \textasciitilde{}/unix\_intro}, but there is also a handy shortcut. \texttt{..} are special characters that act as a relative path specifying ``up'' one level -- one directory -- from wherever we currently are. So we can provide that as the positional argument to cd to get back to where we started:
 
-\begin{verbatim}
-cd ..
-pwd
-ls
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \BuiltInTok{cd}\NormalTok{ ..}
+    \BuiltInTok{pwd}
+    \FunctionTok{ls}
+\end{Highlighting}
+\end{Shaded}
 
 Moving around the computer like this might feel a bit cumbersome and frustrating at first, but after spending a little time with it, you will get used to it, and it starts to feel more natural.
 
@@ -520,7 +548,7 @@ You can write citations, too. For example, we are using the \textbf{bookdown} pa
 \chapter{NGS sequence analysis}\label{ngs-sequence-analysis}}
 
 \hypertarget{background}{%
-\section{2.1 Background}\label{background}}
+\section{Background}\label{background}}
 
 Info on sequencing
 
@@ -529,7 +557,7 @@ General application
 Don't have to follow everything!
 
 \hypertarget{the-data}{%
-\section{2.2 The data}\label{the-data}}
+\section{The data}\label{the-data}}
 
 For a quick overview of the example data we'll be using and where it came from, we are going to work with a subset of the dataset published here. We were exploring an underwater mountain \textasciitilde3 km down at the bottom of the Pacific Ocean that serves as a low-temperature (\textasciitilde5-10°C) hydrothermal venting site. This amplicon dataset was generated from DNA extracted from crushed basalts collected from across the mountain with the goal being to begin characterizing the microbial communities of these deep-sea rocks. No one had ever been here before, so as is often the purpose of marker-gene sequencing, this was just a broad-level community survey. The sequencing was done on the Illumina MiSeq platform with 2x300 paired-end sequencing using primers targeting the V4 region of the 16S rRNA gene. There are 20 samples total: 4 extraction ``blanks'' (nothing added to DNA extraction kit), 2 bottom-water samples, 13 rocks, and one biofilm scraped off of a rock. None of these details are important for you to remember, it's just to give some overview if you care.
 
@@ -545,26 +573,30 @@ Make sure when you open the terminal you are in the project directory (and refer
 
 Don't switch over to R (the ``Console'' tab in the Binder/RStudio environment) until noted. You can download the required dataset and files by copying and pasting the following commands into your command-line terminal:
 
-\begin{verbatim}
-curl -L -o dada2_amplicon_ex_workflow.tar.gz https://ndownloader.figshare.com/files/23066516
-tar -xzvf dada2_amplicon_ex_workflow.tar.gz
-rm dada2_amplicon_ex_workflow.tar.gz
-cd dada2_amplicon_ex_workflow/
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \ExtensionTok{curl} \AttributeTok{{-}L} \AttributeTok{{-}o}\NormalTok{ dada2\_amplicon\_ex\_workflow.tar.gz https://ndownloader.figshare.com/files/23066516}
+    \FunctionTok{tar} \AttributeTok{{-}xzvf}\NormalTok{ dada2\_amplicon\_ex\_workflow.tar.gz}
+    \FunctionTok{rm}\NormalTok{ dada2\_amplicon\_ex\_workflow.tar.gz}
+    \BuiltInTok{cd}\NormalTok{ dada2\_amplicon\_ex\_workflow/}
+\end{Highlighting}
+\end{Shaded}
 
 In our working directory there are 20 samples with forward (R1) and reverse (R2) reads with per-base-call quality information, so 40 fastq files (.fq). It is a good idea to have a file with all the sample names to use for various things throughout, so here's making that file based on how these sample names are formatted.
 
-\begin{verbatim}
-ls *_R1.fq | cut -f1 -d "_" > samples
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{ls} \PreprocessorTok{*}\NormalTok{\_R1.fq }\KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f1} \AttributeTok{{-}d} \StringTok{"\_"} \OperatorTok{\textgreater{}}\NormalTok{ samples}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{removing-primers}{%
-\section{2.3 Removing Primers}\label{removing-primers}}
+\section{Removing Primers}\label{removing-primers}}
 
 To start, we need to remove the primers from all of these (the primers used for this run are in the ``primers.fa'' file in our working directory), and here we're going to use cutadapt to do that at the command line (``Terminal'' tab). Cutadapt operates on one sample at at time, so we're going to use a wonderful little bash \emph{loop} to run it on all of our samples.
 
 \hypertarget{loops}{%
-\subsection{2.3.1 Loops}\label{loops}}
+\subsection{Loops}\label{loops}}
 
 Loops are extremely powerful way of controlling iteration. We can specify that a line of code is repeated across multiple objects. In this example we use the sample file we made earlier as the list of files across which we want this function of removing primers to loop. These same lines will then repeat until all the specified iterations are complete.
 
@@ -572,21 +604,23 @@ We won't break down exactly how this loop works - but they are used across all p
 
 For now just copy and paste this code exactly into the Terminal.
 
-\begin{verbatim}
-for sample in $(cat samples)
-do
+\begin{Shaded}
+\begin{Highlighting}[]
+    \ControlFlowTok{for}\NormalTok{ sample }\KeywordTok{in} \VariableTok{$(}\FunctionTok{cat}\NormalTok{ samples}\VariableTok{)}
+    \ControlFlowTok{do}
 
-    echo "On sample: $sample"
-    
-    cutadapt -a ^GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC \
-    -A ^GGACTACHVGGGTWTCTAAT...TTACCGCGGCKGCTGGCAC \
-    -m 215 -M 285 --discard-untrimmed \
-    -o ${sample}_sub_R1_trimmed.fq.gz -p ${sample}_sub_R2_trimmed.fq.gz \
-    ${sample}_sub_R1.fq ${sample}_sub_R2.fq \
-    >> cutadapt_primer_trimming_stats.txt 2>&1
+        \BuiltInTok{echo} \StringTok{"On sample: }\VariableTok{$sample}\StringTok{"}
+        
+        \ExtensionTok{cutadapt} \AttributeTok{{-}a}\NormalTok{ \^{}GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}A}\NormalTok{ \^{}GGACTACHVGGGTWTCTAAT...TTACCGCGGCKGCTGGCAC }\DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}m}\NormalTok{ 215 }\AttributeTok{{-}M}\NormalTok{ 285 }\AttributeTok{{-}{-}discard{-}untrimmed} \DataTypeTok{\textbackslash{}}
+        \AttributeTok{{-}o} \VariableTok{$\{sample\}}\NormalTok{\_sub\_R1\_trimmed.fq.gz }\AttributeTok{{-}p} \VariableTok{$\{sample\}}\NormalTok{\_sub\_R2\_trimmed.fq.gz }\DataTypeTok{\textbackslash{}}
+        \VariableTok{$\{sample\}}\NormalTok{\_sub\_R1.fq }\VariableTok{$\{sample\}}\NormalTok{\_sub\_R2.fq }\DataTypeTok{\textbackslash{}}
+        \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ cutadapt\_primer\_trimming\_stats.txt }\DecValTok{2}\OperatorTok{\textgreater{}\&}\DecValTok{1}
 
-done
-\end{verbatim}
+    \ControlFlowTok{done}
+\end{Highlighting}
+\end{Shaded}
 
 Here's a before-and-after of one of our files
 
@@ -610,9 +644,13 @@ head -n 2 B1_sub_R1_trimmed.fq
 
 You can look through the output of the cutadapt stats file we made (``cutadapt\_primer\_trimming\_stats.txt'') to get an idea of how things went. Here's a little one-liner to look at what fraction of reads were retained in each sample (column 2) and what fraction of bps were retained in each sample (column 3):
 
-\begin{verbatim}
-paste samples <(grep "passing" cutadapt_primer_trimming_stats.txt | cut -f3 -d "(" | tr -d ")") <(grep "filtered" cutadapt_primer_trimming_stats.txt | cut -f3 -d "(" | tr -d ")")
+\begin{Shaded}
+\begin{Highlighting}[]
+    \ExtensionTok{paste}\NormalTok{ samples }\OperatorTok{\textless{}(}\FunctionTok{grep} \StringTok{"passing"}\NormalTok{ cutadapt\_primer\_trimming\_stats.txt }\KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f3} \AttributeTok{{-}d} \StringTok{"("} \KeywordTok{|} \FunctionTok{tr} \AttributeTok{{-}d} \StringTok{")"}\OperatorTok{)} \OperatorTok{\textless{}(}\FunctionTok{grep} \StringTok{"filtered"}\NormalTok{ cutadapt\_primer\_trimming\_stats.txt }\KeywordTok{|} \FunctionTok{cut} \AttributeTok{{-}f3} \AttributeTok{{-}d} \StringTok{"("} \KeywordTok{|} \FunctionTok{tr} \AttributeTok{{-}d} \StringTok{")"}\OperatorTok{)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
 # B1    96.5%   83.0%
 # B2    96.6%   83.3%
 # B3    95.4%   82.4%
@@ -639,44 +677,47 @@ We would expect to lose around 13-14\% of bps just for cutting off the primers, 
 
 With primers removed, we're now ready to switch R and start using DADA2!
 
-\hypertarget{dada2}{%
-\section{2.4 DADA2}\label{dada2}}
+\hypertarget{dada2---switch-to-r-console}{%
+\section{DADA2 - switch to R console}\label{dada2---switch-to-r-console}}
 
-\begin{verbatim}
-library(dada2)
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{library}\NormalTok{(dada2)}
 
+    \FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/dada2\_amplicon\_ex\_workflow"}\NormalTok{)}
 
-setwd("~/dada2_amplicon_ex_workflow")
+    \FunctionTok{list.files}\NormalTok{() }\CommentTok{\# make sure what we think is here is actually here}
 
-list.files() # make sure what we think is here is actually here
+    \DocumentationTok{\#\# first we\textquotesingle{}re setting a few variables we\textquotesingle{}re going to use \#\#}
+      \CommentTok{\# one with all sample names, by scanning our "samples" file we made earlier}
+      
+\NormalTok{    samples }\OtherTok{\textless{}{-}} \FunctionTok{scan}\NormalTok{(}\StringTok{"samples"}\NormalTok{, }\AttributeTok{what=}\StringTok{"character"}\NormalTok{)}
 
-## first we're setting a few variables we're going to use ##
-  # one with all sample names, by scanning our "samples" file we made earlier
-  
-samples <- scan("samples", what="character")
+      \CommentTok{\# one holding the file names of all the forward reads}
+\NormalTok{    forward\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R1\_trimmed.fq.gz"}\NormalTok{)}
 
-  # one holding the file names of all the forward reads
-forward_reads <- paste0(samples, "_sub_R1_trimmed.fq.gz")
+      \CommentTok{\# and one with the reverse}
+\NormalTok{    reverse\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R2\_trimmed.fq.gz"}\NormalTok{)}
 
-  # and one with the reverse
-reverse_reads <- paste0(samples, "_sub_R2_trimmed.fq.gz")
-
-  # and variables holding file names for the forward and reverse
-  # filtered reads we're going to generate below
-filtered_forward_reads <- paste0(samples, "_sub_R1_filtered.fq.gz")
-filtered_reverse_reads <- paste0(samples, "_sub_R2_filtered.fq.gz")
-\end{verbatim}
+      \CommentTok{\# and variables holding file names for the forward and reverse}
+      \CommentTok{\# filtered reads we\textquotesingle{}re going to generate below}
+\NormalTok{    filtered\_forward\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R1\_filtered.fq.gz"}\NormalTok{)}
+\NormalTok{    filtered\_reverse\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R2\_filtered.fq.gz"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{quality-trimmingfiltering}{%
-\section{2.5 Quality trimming/filtering}\label{quality-trimmingfiltering}}
+\section{Quality trimming/filtering}\label{quality-trimmingfiltering}}
 
 We did a filtering step above with cutadapt (where we eliminated reads that had imperfect or missing primers and those that were shorter than 215 bps or longer than 285), but in DADA2 we'll implement a trimming step as well (where we trim reads down based on some quality threshold rather than throwing the read away). Since we're potentially shortening reads further, we're again going to include another minimum-length filtering component. We can also take advantage of a handy quality plotting function that DADA2 provides to visualize how you're reads are doing, plotQualityProfile(). By running that on our variables that hold all of our forward and reverse read filenames, we can easily generate plots for all samples or for a subset of them. So let's take a peak at that to help decide our trimming lengths: It's good to try to keep a bird's-eye view of what's going on. So here is an overview of the main processing steps we'll be performing with cutadapt and DADA2. Don't worry if anything seems unclear right now, we will discuss each at each step.
 
-\begin{verbatim}
-plotQualityProfile(forward_reads[17:20])
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{plotQualityProfile}\NormalTok{(forward\_reads[}\DecValTok{17}\SpecialCharTok{:}\DecValTok{20}\NormalTok{])}
 
-plotQualityProfile(reverse_reads[17:20])
-\end{verbatim}
+    \FunctionTok{plotQualityProfile}\NormalTok{(reverse\_reads[}\DecValTok{17}\SpecialCharTok{:}\DecValTok{20}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
 
 All forwards look pretty similar to eachother, and all reverses look pretty similar to eachother, but worse than the forwards, which is common -- chemistry gets tired\ldots{}
 
@@ -699,11 +740,13 @@ Here, I'm going to cut the forward reads at 250 and the reverse reads at 200 -- 
 
 In DADA2, this quality-filtering step is done with the \texttt{filterAndTrim()} function:
 
-\begin{verbatim}
-filtered_out <- filterAndTrim(forward_reads, filtered_forward_reads,
-                reverse_reads, filtered_reverse_reads, maxEE=c(2,2),
-                rm.phix=TRUE, minLen=175, truncLen=c(250,200))
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{    filtered\_out }\OtherTok{\textless{}{-}} \FunctionTok{filterAndTrim}\NormalTok{(forward\_reads, filtered\_forward\_reads,}
+\NormalTok{                    reverse\_reads, filtered\_reverse\_reads, }\AttributeTok{maxEE=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{),}
+                    \AttributeTok{rm.phix=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{minLen=}\DecValTok{175}\NormalTok{, }\AttributeTok{truncLen=}\FunctionTok{c}\NormalTok{(}\DecValTok{250}\NormalTok{,}\DecValTok{200}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 This function made a bunch of output files ``filtered\_forward\_reads'' and ``filtered\_reverse\_reads'' we can see these in our project pane. Or if we were working on a server without a GUI we could use \texttt{list.files()} in R or \texttt{ls} in our Terminal.
 
@@ -711,163 +754,184 @@ We also generated an R file called filtered\_out. This is a simple matrix holdin
 
 Check it in R.
 
-\begin{verbatim}
-filtered_out
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{    filtered\_out}
+\end{Highlighting}
+\end{Shaded}
 
 We can take a look at the filtered reads visually - we expect to have trimmed off that section where quality drops
 
-\begin{verbatim}
-    plotQualityProfile(filtered_reverse_reads[17:20])
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+    \FunctionTok{plotQualityProfile}\NormalTok{(filtered\_reverse\_reads[}\DecValTok{17}\SpecialCharTok{:}\DecValTok{20}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
 
 Looking Good!
 
 \hypertarget{dereplication}{%
-\section{2.6 Dereplication}\label{dereplication}}
+\section{Dereplication}\label{dereplication}}
 
 Dereplication is a common step in many amplicon processing workflows. Instead of keeping 100 identical sequences and doing all downstream processing to all 100 -costing computer processing power and time, you can keep/process just one of them, and just attach the number x100 to it. Now this acts as a representative for 100 identical sequences.
 
-\begin{verbatim}
-derep_forward <- derepFastq(filtered_forward_reads, verbose=TRUE)
-names(derep_forward) <- samples # the sample names in these objects are initially the file names of the samples, this sets them to the sample names for the rest of the workflow
-derep_reverse <- derepFastq(filtered_reverse_reads, verbose=TRUE)
-names(derep_reverse) <- samples
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{derep\_forward }\OtherTok{\textless{}{-}} \FunctionTok{derepFastq}\NormalTok{(filtered\_forward\_reads, }\AttributeTok{verbose=}\ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(derep\_forward) }\OtherTok{\textless{}{-}}\NormalTok{ samples }\CommentTok{\# the sample names in these objects are initially the file names of the samples, this sets them to the sample names for the rest of the workflow}
+\NormalTok{derep\_reverse }\OtherTok{\textless{}{-}} \FunctionTok{derepFastq}\NormalTok{(filtered\_reverse\_reads, }\AttributeTok{verbose=}\ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(derep\_reverse) }\OtherTok{\textless{}{-}}\NormalTok{ samples}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{asvs}{%
-\section{2.7 ASV's}\label{asvs}}
+\section{ASV's}\label{asvs}}
 
 This is where we start to take our raw sequence data and infer \emph{true} biological sequences.
 It uses an algorithm to look at the consensus quality score and abundance for each \emph{unique} sequence. It then determines whether this sequence is more likely to be of biological origin or a spurious sequencing error.
 
-\begin{verbatim}
-dada_forward <- dada(derep_forward, err=err_forward_reads, pool="pseudo")
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dada\_forward }\OtherTok{\textless{}{-}} \FunctionTok{dada}\NormalTok{(derep\_forward, }\AttributeTok{err=}\NormalTok{err\_forward\_reads, }\AttributeTok{pool=}\StringTok{"pseudo"}\NormalTok{)}
 
-dada_reverse <- dada(derep_reverse, err=err_reverse_reads, pool="pseudo")
-
-\end{verbatim}
+\NormalTok{dada\_reverse }\OtherTok{\textless{}{-}} \FunctionTok{dada}\NormalTok{(derep\_reverse, }\AttributeTok{err=}\NormalTok{err\_reverse\_reads, }\AttributeTok{pool=}\StringTok{"pseudo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{merging-reads}{%
-\section{2.8 Merging reads}\label{merging-reads}}
+\section{Merging reads}\label{merging-reads}}
 
 Now DADA2 merges the forward and reverse ASVs to reconstruct our full target amplicon requiring the overlapping region to be identical between the two. By default it requires that at least 12 bps overlap, but in our case the overlap should be much greater. If you remember above we trimmed the forward reads to 250 and the reverse to 200, and our primers were 515f--806r. After cutting off the primers we're expecting a typical amplicon size of around 260 bases, so our typical overlap should be up around 190. That's estimated based on E. coli 16S rRNA gene positions and very back-of-the-envelope-esque of course, so to allow for true biological variation and such I'm going ot set the minimum overlap for this dataset for 170. I'm also setting the trimOverhang option to TRUE in case any of our reads go passed their opposite primers (which I wouldn't expect based on our trimming, but is possible due to the region and sequencing method).
 
-\begin{verbatim}
-merged_amplicons <- mergePairs(dada_forward, derep_forward, dada_reverse,
-                    derep_reverse, trimOverhang=TRUE, minOverlap=170)
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{merged\_amplicons }\OtherTok{\textless{}{-}} \FunctionTok{mergePairs}\NormalTok{(dada\_forward, derep\_forward, dada\_reverse,}
+\NormalTok{                    derep\_reverse, }\AttributeTok{trimOverhang=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{minOverlap=}\DecValTok{170}\NormalTok{)}
 
-  # this object holds a lot of information that may be the first place you'd want to look if you want to start poking under the hood
-class(merged_amplicons) # list
-length(merged_amplicons) # 20 elements in this list, one for each of our samples
-names(merged_amplicons) # the names() function gives us the name of each element of the list 
+  \CommentTok{\# this object holds a lot of information that may be the first place you\textquotesingle{}d want to look if you want to start poking under the hood}
+\FunctionTok{class}\NormalTok{(merged\_amplicons) }\CommentTok{\# list}
+\FunctionTok{length}\NormalTok{(merged\_amplicons) }\CommentTok{\# 20 elements in this list, one for each of our samples}
+\FunctionTok{names}\NormalTok{(merged\_amplicons) }\CommentTok{\# the names() function gives us the name of each element of the list }
 
-class(merged_amplicons$B1) # each element of the list is a dataframe that can be accessed and manipulated like any ordinary dataframe
+\FunctionTok{class}\NormalTok{(merged\_amplicons}\SpecialCharTok{$}\NormalTok{B1) }\CommentTok{\# each element of the list is a dataframe that can be accessed and manipulated like any ordinary dataframe}
 
-names(merged_amplicons$B1) # the names() function on a dataframe gives you the column names
-# "sequence"  "abundance" "forward"   "reverse"   "nmatch"    "nmismatch" "nindel"    "prefer"    "accept"
-\end{verbatim}
+\FunctionTok{names}\NormalTok{(merged\_amplicons}\SpecialCharTok{$}\NormalTok{B1) }\CommentTok{\# the names() function on a dataframe gives you the column names}
+\CommentTok{\# "sequence"  "abundance" "forward"   "reverse"   "nmatch"    "nmismatch" "nindel"    "prefer"    "accept"}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{count-table}{%
-\section{2.9 Count table}\label{count-table}}
+\section{Count table}\label{count-table}}
 
 Now we can generate a count table with the makeSequenceTable() function. This is one of the main outputs from processing an amplicon dataset. You may have also heard this referred to as a biome table, or an OTU matrix.
 
-\begin{verbatim}
-seqtab <- makeSequenceTable(merged_amplicons)
-class(seqtab) # matrix
-dim(seqtab) # 20 2521
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqtab }\OtherTok{\textless{}{-}} \FunctionTok{makeSequenceTable}\NormalTok{(merged\_amplicons)}
+\FunctionTok{class}\NormalTok{(seqtab) }\CommentTok{\# matrix}
+\FunctionTok{dim}\NormalTok{(seqtab) }\CommentTok{\# 20 2521}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{overview}{%
-\section{2.10 Overview}\label{overview}}
+\section{Overview}\label{overview}}
 
 The developers' DADA2 tutorial provides an example of a nice, quick way to pull out how many reads were dropped at various points of the pipeline. This can serve as a jumping off point if you're left with too few sequences at the end to help point you towards where you should start digging into where they are being dropped. Here's a slightly modified version:
 
-\begin{verbatim}
-  # set a little function
-getN <- function(x) sum(getUniques(x))
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\# set a little function}
+\NormalTok{getN }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{sum}\NormalTok{(}\FunctionTok{getUniques}\NormalTok{(x))}
 
-  # making a little table
-summary_tab <- data.frame(row.names=samples, dada2_input=filtered_out[,1],
-               filtered=filtered_out[,2], dada_f=sapply(dada_forward, getN),
-               dada_r=sapply(dada_reverse, getN), merged=sapply(merged_amplicons, getN),
-               nonchim=rowSums(seqtab.nochim),
-               final_perc_reads_retained=round(rowSums(seqtab.nochim)/filtered_out[,1]*100, 1))
+  \CommentTok{\# making a little table}
+\NormalTok{summary\_tab }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{row.names=}\NormalTok{samples, }\AttributeTok{dada2\_input=}\NormalTok{filtered\_out[,}\DecValTok{1}\NormalTok{],}
+               \AttributeTok{filtered=}\NormalTok{filtered\_out[,}\DecValTok{2}\NormalTok{], }\AttributeTok{dada\_f=}\FunctionTok{sapply}\NormalTok{(dada\_forward, getN),}
+               \AttributeTok{dada\_r=}\FunctionTok{sapply}\NormalTok{(dada\_reverse, getN), }\AttributeTok{merged=}\FunctionTok{sapply}\NormalTok{(merged\_amplicons, getN),}
+               \AttributeTok{nonchim=}\FunctionTok{rowSums}\NormalTok{(seqtab.nochim),}
+               \AttributeTok{final\_perc\_reads\_retained=}\FunctionTok{round}\NormalTok{(}\FunctionTok{rowSums}\NormalTok{(seqtab.nochim)}\SpecialCharTok{/}\NormalTok{filtered\_out[,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{))}
 
-summary_tab
-\end{verbatim}
+\NormalTok{summary\_tab}
+\end{Highlighting}
+\end{Shaded}
 
 And it might be useful to write this table out of R, saving it as a regular file
 
-\begin{verbatim}
-write.table(summary_tab, "read-count-tracking.tsv", quote=FALSE, sep="\t", col.names=NA)
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.table}\NormalTok{(summary\_tab, }\StringTok{"read{-}count{-}tracking.tsv"}\NormalTok{, }\AttributeTok{quote=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{sep=}\StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\AttributeTok{col.names=}\ConstantTok{NA}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{assign-taxonomy}{%
-\section{2.11 Assign taxonomy}\label{assign-taxonomy}}
+\section{Assign taxonomy}\label{assign-taxonomy}}
 
-\begin{verbatim}
-## downloading DECIPHER-formatted SILVA v138 reference
-download.file(url="http://www2.decipher.codes/Classification/TrainingSets/SILVA_SSU_r138_2019.RData", destfile="SILVA_SSU_r138_2019.RData")
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# downloading DECIPHER{-}formatted SILVA v138 reference}
+\FunctionTok{download.file}\NormalTok{(}\AttributeTok{url=}\StringTok{"http://www2.decipher.codes/Classification/TrainingSets/SILVA\_SSU\_r138\_2019.RData"}\NormalTok{, }\AttributeTok{destfile=}\StringTok{"SILVA\_SSU\_r138\_2019.RData"}\NormalTok{)}
 
-## loading reference taxonomy object
-load("SILVA_SSU_r138_2019.RData")
-\end{verbatim}
+\DocumentationTok{\#\# loading reference taxonomy object}
+\FunctionTok{load}\NormalTok{(}\StringTok{"SILVA\_SSU\_r138\_2019.RData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 Running the following taxonomy assignment step took \textasciitilde30 minutes on a 2013 MacBook Pro. So feel free to load the stored R objects with load(``amplicon\_dada2\_ex.RData'') to skip this step if you'd like.
 
-\begin{verbatim}
-## loading DECIPHER
-library(DECIPHER)
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# loading DECIPHER}
+\FunctionTok{library}\NormalTok{(DECIPHER)}
 
-## creating DNAStringSet object of our ASVs
-dna <- DNAStringSet(getSequences(seqtab.nochim))
+\DocumentationTok{\#\# creating DNAStringSet object of our ASVs}
+\NormalTok{dna }\OtherTok{\textless{}{-}} \FunctionTok{DNAStringSet}\NormalTok{(}\FunctionTok{getSequences}\NormalTok{(seqtab.nochim))}
 
-## and classifying
-tax_info <- IdTaxa(test=dna, trainingSet=trainingSet, strand="both", processors=NULL)
-\end{verbatim}
+\DocumentationTok{\#\# and classifying}
+\NormalTok{tax\_info }\OtherTok{\textless{}{-}} \FunctionTok{IdTaxa}\NormalTok{(}\AttributeTok{test=}\NormalTok{dna, }\AttributeTok{trainingSet=}\NormalTok{trainingSet, }\AttributeTok{strand=}\StringTok{"both"}\NormalTok{, }\AttributeTok{processors=}\ConstantTok{NULL}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{standard-goods}{%
-\section{2.12 Standard goods}\label{standard-goods}}
+\section{Standard goods}\label{standard-goods}}
 
 The typical standard outputs from amplicon processing are a fasta file, a count table, and a taxonomy table. So here's one way we can generate those files from your DADA2 objects in R:
 
-\begin{verbatim}
-  # giving our seq headers more manageable names (ASV_1, ASV_2...)
-asv_seqs <- colnames(seqtab.nochim)
-asv_headers <- vector(dim(seqtab.nochim)[2], mode="character")
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\# giving our seq headers more manageable names (ASV\_1, ASV\_2...)}
+\NormalTok{asv\_seqs }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(seqtab.nochim)}
+\NormalTok{asv\_headers }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\FunctionTok{dim}\NormalTok{(seqtab.nochim)[}\DecValTok{2}\NormalTok{], }\AttributeTok{mode=}\StringTok{"character"}\NormalTok{)}
 
-for (i in 1:dim(seqtab.nochim)[2]) {
-  asv_headers[i] <- paste(">ASV", i, sep="_")
-}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{dim}\NormalTok{(seqtab.nochim)[}\DecValTok{2}\NormalTok{]) \{}
+\NormalTok{  asv\_headers[i] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"\textgreater{}ASV"}\NormalTok{, i, }\AttributeTok{sep=}\StringTok{"\_"}\NormalTok{)}
+\NormalTok{\}}
 
-  # making and writing out a fasta of our final ASV seqs:
-asv_fasta <- c(rbind(asv_headers, asv_seqs))
-write(asv_fasta, "ASVs.fa")
+  \CommentTok{\# making and writing out a fasta of our final ASV seqs:}
+\NormalTok{asv\_fasta }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{rbind}\NormalTok{(asv\_headers, asv\_seqs))}
+\FunctionTok{write}\NormalTok{(asv\_fasta, }\StringTok{"ASVs.fa"}\NormalTok{)}
 
-  # count table:
-asv_tab <- t(seqtab.nochim)
-row.names(asv_tab) <- sub(">", "", asv_headers)
-write.table(asv_tab, "ASVs_counts.tsv", sep="\t", quote=F, col.names=NA)
+  \CommentTok{\# count table:}
+\NormalTok{asv\_tab }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(seqtab.nochim)}
+\FunctionTok{row.names}\NormalTok{(asv\_tab) }\OtherTok{\textless{}{-}} \FunctionTok{sub}\NormalTok{(}\StringTok{"\textgreater{}"}\NormalTok{, }\StringTok{""}\NormalTok{, asv\_headers)}
+\FunctionTok{write.table}\NormalTok{(asv\_tab, }\StringTok{"ASVs\_counts.tsv"}\NormalTok{, }\AttributeTok{sep=}\StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\AttributeTok{quote=}\NormalTok{F, }\AttributeTok{col.names=}\ConstantTok{NA}\NormalTok{)}
 
-  # tax table:
-  # creating table of taxonomy and setting any that are unclassified as "NA"
-ranks <- c("domain", "phylum", "class", "order", "family", "genus", "species")
-asv_tax <- t(sapply(tax_info, function(x) {
-  m <- match(ranks, x$rank)
-  taxa <- x$taxon[m]
-  taxa[startsWith(taxa, "unclassified_")] <- NA
-  taxa
-}))
-colnames(asv_tax) <- ranks
-rownames(asv_tax) <- gsub(pattern=">", replacement="", x=asv_headers)
+  \CommentTok{\# tax table:}
+  \CommentTok{\# creating table of taxonomy and setting any that are unclassified as "NA"}
+\NormalTok{ranks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"domain"}\NormalTok{, }\StringTok{"phylum"}\NormalTok{, }\StringTok{"class"}\NormalTok{, }\StringTok{"order"}\NormalTok{, }\StringTok{"family"}\NormalTok{, }\StringTok{"genus"}\NormalTok{, }\StringTok{"species"}\NormalTok{)}
+\NormalTok{asv\_tax }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{sapply}\NormalTok{(tax\_info, }\ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  m }\OtherTok{\textless{}{-}} \FunctionTok{match}\NormalTok{(ranks, x}\SpecialCharTok{$}\NormalTok{rank)}
+\NormalTok{  taxa }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{taxon[m]}
+\NormalTok{  taxa[}\FunctionTok{startsWith}\NormalTok{(taxa, }\StringTok{"unclassified\_"}\NormalTok{)] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\NormalTok{  taxa}
+\NormalTok{\}))}
+\FunctionTok{colnames}\NormalTok{(asv\_tax) }\OtherTok{\textless{}{-}}\NormalTok{ ranks}
+\FunctionTok{rownames}\NormalTok{(asv\_tax) }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\AttributeTok{pattern=}\StringTok{"\textgreater{}"}\NormalTok{, }\AttributeTok{replacement=}\StringTok{""}\NormalTok{, }\AttributeTok{x=}\NormalTok{asv\_headers)}
 
-write.table(asv_tax, "ASVs_taxonomy.tsv", sep = "\t", quote=F, col.names=NA)
-\end{verbatim}
+\FunctionTok{write.table}\NormalTok{(asv\_tax, }\StringTok{"ASVs\_taxonomy.tsv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\AttributeTok{quote=}\NormalTok{F, }\AttributeTok{col.names=}\ConstantTok{NA}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{contaminants}{%
-\section{2.13 Contaminants}\label{contaminants}}
+\section{Contaminants}\label{contaminants}}
 
 \begin{longtable}{ll}
 \toprule
@@ -885,19 +949,27 @@ IdTaxa() & assign taxonomy\\
 \bottomrule
 \end{longtable}
 
+\textbf{Q. Why isn't this data tidy?}
+
+The variable \texttt{year} is split across six columns.
+
+We want to create a single column \textbf{year} that will have the values (2007-2012) in rows. This will make the dataframe much longer as individuals will be repeated six times. At the same time the values in the six columns should be assigned to a new column \textbf{length}.
+
 \hypertarget{analysis-in-r}{%
 \chapter{Analysis in R}\label{analysis-in-r}}
 
-\begin{verbatim}
-library("phyloseq")
-library("vegan")
-library("DESeq2")
-library("ggplot2")
-library("dendextend")
-library("tidyr")
-library("viridis")
-library("reshape")
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"phyloseq"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"vegan"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"DESeq2"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"dendextend"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"viridis"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"reshape"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 Make graphs
 

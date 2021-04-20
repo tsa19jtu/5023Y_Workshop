@@ -1,6 +1,8 @@
 # NGS sequence analysis
-
-## 2.1 Background
+```{r , echo=FALSE, eval=TRUE, include=TRUE}
+klippy::klippy(c('r', 'bash'), position = c('top', 'right'), tooltip_message = 'copy to clipboard', tooltip_success = 'Copied!')
+```
+## Background
 
 Info on sequencing
 
@@ -8,7 +10,7 @@ General application
 
 Don't have to follow everything!
 
-## 2.2 The data
+## The data
 
 For a quick overview of the example data we'll be using and where it came from, we are going to work with a subset of the dataset published here. We were exploring an underwater mountain \~3 km down at the bottom of the Pacific Ocean that serves as a low-temperature (\~5-10°C) hydrothermal venting site. This amplicon dataset was generated from DNA extracted from crushed basalts collected from across the mountain with the goal being to begin characterizing the microbial communities of these deep-sea rocks. No one had ever been here before, so as is often the purpose of marker-gene sequencing, this was just a broad-level community survey. The sequencing was done on the Illumina MiSeq platform with 2x300 paired-end sequencing using primers targeting the V4 region of the 16S rRNA gene. There are 20 samples total: 4 extraction "blanks" (nothing added to DNA extraction kit), 2 bottom-water samples, 13 rocks, and one biofilm scraped off of a rock. None of these details are important for you to remember, it's just to give some overview if you care.
 
@@ -24,27 +26,29 @@ Make sure when you open the terminal you are in the project directory (and refer
 
 Don't switch over to R (the "Console" tab in the Binder/RStudio environment) until noted. You can download the required dataset and files by copying and pasting the following commands into your command-line terminal:
 
+```{bash}
     curl -L -o dada2_amplicon_ex_workflow.tar.gz https://ndownloader.figshare.com/files/23066516
     tar -xzvf dada2_amplicon_ex_workflow.tar.gz
     rm dada2_amplicon_ex_workflow.tar.gz
     cd dada2_amplicon_ex_workflow/
+```
 
 In our working directory there are 20 samples with forward (R1) and reverse (R2) reads with per-base-call quality information, so 40 fastq files (.fq). It is a good idea to have a file with all the sample names to use for various things throughout, so here's making that file based on how these sample names are formatted.
-
+```{bash}
     ls *_R1.fq | cut -f1 -d "_" > samples
-
-## 2.3 Removing Primers
+```
+## Removing Primers
 
 To start, we need to remove the primers from all of these (the primers used for this run are in the "primers.fa" file in our working directory), and here we're going to use cutadapt to do that at the command line ("Terminal" tab). Cutadapt operates on one sample at at time, so we're going to use a wonderful little bash *loop* to run it on all of our samples.
 
-### 2.3.1 Loops
+### Loops
 
 Loops are extremely powerful way of controlling iteration. We can specify that a line of code is repeated across multiple objects. In this example we use the sample file we made earlier as the list of files across which we want this function of removing primers to loop. These same lines will then repeat until all the specified iterations are complete.
 
 We won't break down exactly how this loop works - but they are used across all programming languages (including R) and you can check out the R4DS book for an introduction to building your own loops (and custom functions!) [here](https://r4ds.had.co.nz/iteration.html).
 
 For now just copy and paste this code exactly into the Terminal.
-
+```{bash}
     for sample in $(cat samples)
     do
 
@@ -58,6 +62,7 @@ For now just copy and paste this code exactly into the Terminal.
         >> cutadapt_primer_trimming_stats.txt 2>&1
 
     done
+```
 
 Here's a before-and-after of one of our files
 
@@ -78,8 +83,9 @@ Here's a before-and-after of one of our files
     # GGGAGCAAACAGG
 
 You can look through the output of the cutadapt stats file we made ("cutadapt_primer_trimming_stats.txt") to get an idea of how things went. Here's a little one-liner to look at what fraction of reads were retained in each sample (column 2) and what fraction of bps were retained in each sample (column 3):
-
+```{bash}
     paste samples <(grep "passing" cutadapt_primer_trimming_stats.txt | cut -f3 -d "(" | tr -d ")") <(grep "filtered" cutadapt_primer_trimming_stats.txt | cut -f3 -d "(" | tr -d ")")
+```
 
     # B1    96.5%   83.0%
     # B2    96.6%   83.3%
@@ -106,8 +112,9 @@ We would expect to lose around 13-14% of bps just for cutting off the primers, a
 
 With primers removed, we're now ready to switch R and start using DADA2!
 
-## 2.4 DADA2
+## DADA2 - switch to R console
 
+```{r}
     library(dada2)
 
 
@@ -130,14 +137,17 @@ With primers removed, we're now ready to switch R and start using DADA2!
       # filtered reads we're going to generate below
     filtered_forward_reads <- paste0(samples, "_sub_R1_filtered.fq.gz")
     filtered_reverse_reads <- paste0(samples, "_sub_R2_filtered.fq.gz")
+```
 
-## 2.5 Quality trimming/filtering
+## Quality trimming/filtering
 
 We did a filtering step above with cutadapt (where we eliminated reads that had imperfect or missing primers and those that were shorter than 215 bps or longer than 285), but in DADA2 we'll implement a trimming step as well (where we trim reads down based on some quality threshold rather than throwing the read away). Since we're potentially shortening reads further, we're again going to include another minimum-length filtering component. We can also take advantage of a handy quality plotting function that DADA2 provides to visualize how you're reads are doing, plotQualityProfile(). By running that on our variables that hold all of our forward and reverse read filenames, we can easily generate plots for all samples or for a subset of them. So let's take a peak at that to help decide our trimming lengths: It's good to try to keep a bird's-eye view of what's going on. So here is an overview of the main processing steps we'll be performing with cutadapt and DADA2. Don't worry if anything seems unclear right now, we will discuss each at each step.
 
+```{r}
     plotQualityProfile(forward_reads[17:20])
 
     plotQualityProfile(reverse_reads[17:20])
+```
 
 All forwards look pretty similar to eachother, and all reverses look pretty similar to eachother, but worse than the forwards, which is common -- chemistry gets tired...
 
@@ -156,43 +166,44 @@ TALK ABOUT PHRED SCORES
 Here, I'm going to cut the forward reads at 250 and the reverse reads at 200 -- roughly where both sets maintain a median quality of 30 or above -- and then see how things look. But we also want to set a minimum length to filter out truncated sequences, so we will set a minimum acceptable read length of 175bp (any reads shorter than this will be discarded).
 
 In DADA2, this quality-filtering step is done with the `filterAndTrim()` function:
+```{r}
 
     filtered_out <- filterAndTrim(forward_reads, filtered_forward_reads,
                     reverse_reads, filtered_reverse_reads, maxEE=c(2,2),
                     rm.phix=TRUE, minLen=175, truncLen=c(250,200))
-
+```
 This function made a bunch of output files "filtered_forward_reads" and "filtered_reverse_reads" we can see these in our project pane. Or if we were working on a server without a GUI we could use `list.files()` in R or `ls` in our Terminal.
 
 We also generated an R file called filtered_out. This is a simple matrix holding how many reads went *in* for each file and how many came *out*.
 
 Check it in R.
-
+```{r}
     filtered_out
-
+```
 We can take a look at the filtered reads visually - we expect to have trimmed off that section where quality drops
-```{}
+```{r}
     plotQualityProfile(filtered_reverse_reads[17:20])
 ```
 
 Looking Good!
 
-## 2.6 Dereplication
+## Dereplication
 
 Dereplication is a common step in many amplicon processing workflows. Instead of keeping 100 identical sequences and doing all downstream processing to all 100 -costing computer processing power and time, you can keep/process just one of them, and just attach the number x100 to it. Now this acts as a representative for 100 identical sequences. 
 
-```{}
+```{r}
 derep_forward <- derepFastq(filtered_forward_reads, verbose=TRUE)
 names(derep_forward) <- samples # the sample names in these objects are initially the file names of the samples, this sets them to the sample names for the rest of the workflow
 derep_reverse <- derepFastq(filtered_reverse_reads, verbose=TRUE)
 names(derep_reverse) <- samples
 ```
 
-## 2.7 ASV's
+## ASV's
 
 This is where we start to take our raw sequence data and infer *true* biological sequences. 
 It uses an algorithm to look at the consensus quality score and abundance for each *unique* sequence. It then determines whether this sequence is more likely to be of biological origin or a spurious sequencing error. 
 
-```{}
+```{r}
 dada_forward <- dada(derep_forward, err=err_forward_reads, pool="pseudo")
 
 dada_reverse <- dada(derep_reverse, err=err_reverse_reads, pool="pseudo")
@@ -200,11 +211,11 @@ dada_reverse <- dada(derep_reverse, err=err_reverse_reads, pool="pseudo")
 
 ```
 
-## 2.8 Merging reads
+## Merging reads
 
 Now DADA2 merges the forward and reverse ASVs to reconstruct our full target amplicon requiring the overlapping region to be identical between the two. By default it requires that at least 12 bps overlap, but in our case the overlap should be much greater. If you remember above we trimmed the forward reads to 250 and the reverse to 200, and our primers were 515f–806r. After cutting off the primers we’re expecting a typical amplicon size of around 260 bases, so our typical overlap should be up around 190. That’s estimated based on E. coli 16S rRNA gene positions and very back-of-the-envelope-esque of course, so to allow for true biological variation and such I’m going ot set the minimum overlap for this dataset for 170. I’m also setting the trimOverhang option to TRUE in case any of our reads go passed their opposite primers (which I wouldn’t expect based on our trimming, but is possible due to the region and sequencing method).
 
-```{}
+```{r}
 merged_amplicons <- mergePairs(dada_forward, derep_forward, dada_reverse,
                     derep_reverse, trimOverhang=TRUE, minOverlap=170)
 
@@ -219,20 +230,20 @@ names(merged_amplicons$B1) # the names() function on a dataframe gives you the c
 # "sequence"  "abundance" "forward"   "reverse"   "nmatch"    "nmismatch" "nindel"    "prefer"    "accept"
 ```
 
-## 2.9 Count table
+## Count table
 Now we can generate a count table with the makeSequenceTable() function. This is one of the main outputs from processing an amplicon dataset. You may have also heard this referred to as a biome table, or an OTU matrix.
 
-```{}
+```{r}
 seqtab <- makeSequenceTable(merged_amplicons)
 class(seqtab) # matrix
 dim(seqtab) # 20 2521
 
 ```
-## 2.10 Overview
+## Overview
 
 The developers’ DADA2 tutorial provides an example of a nice, quick way to pull out how many reads were dropped at various points of the pipeline. This can serve as a jumping off point if you’re left with too few sequences at the end to help point you towards where you should start digging into where they are being dropped. Here’s a slightly modified version:
 
-```{}
+```{r}
   # set a little function
 getN <- function(x) sum(getUniques(x))
 
@@ -249,13 +260,13 @@ summary_tab
 
 And it might be useful to write this table out of R, saving it as a regular file
 
-```{}
+```{r}
 write.table(summary_tab, "read-count-tracking.tsv", quote=FALSE, sep="\t", col.names=NA)
 ```
 
-## 2.11 Assign taxonomy
+## Assign taxonomy
 
-```{}
+```{r}
 ## downloading DECIPHER-formatted SILVA v138 reference
 download.file(url="http://www2.decipher.codes/Classification/TrainingSets/SILVA_SSU_r138_2019.RData", destfile="SILVA_SSU_r138_2019.RData")
 
@@ -266,7 +277,7 @@ load("SILVA_SSU_r138_2019.RData")
 
 Running the following taxonomy assignment step took ~30 minutes on a 2013 MacBook Pro. So feel free to load the stored R objects with load("amplicon_dada2_ex.RData") to skip this step if you’d like.
 
-```{}
+```{r}
 ## loading DECIPHER
 library(DECIPHER)
 
@@ -277,12 +288,12 @@ dna <- DNAStringSet(getSequences(seqtab.nochim))
 tax_info <- IdTaxa(test=dna, trainingSet=trainingSet, strand="both", processors=NULL)
 ```
 
-## 2.12 Standard goods
+## Standard goods
 
 The typical standard outputs from amplicon processing are a fasta file, a count table, and a taxonomy table. So here’s one way we can generate those files from your DADA2 objects in R:
 
 
-```{}
+```{r}
   # giving our seq headers more manageable names (ASV_1, ASV_2...)
 asv_seqs <- colnames(seqtab.nochim)
 asv_headers <- vector(dim(seqtab.nochim)[2], mode="character")
@@ -316,9 +327,9 @@ write.table(asv_tax, "ASVs_taxonomy.tsv", sep = "\t", quote=F, col.names=NA)
 
 ```
 
-## 2.13 Contaminants
+## Contaminants
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 terms <- read_csv("data/dada.csv", skip_empty_rows = TRUE) 
 
 knitr::kable(terms, booktabs = TRUE,
@@ -327,3 +338,13 @@ knitr::kable(terms, booktabs = TRUE,
   kableExtra::row_spec(0, bold = TRUE) %>%
   kableExtra::kable_styling()
 ```
+
+
+
+<details><summary>**Q. Why isn't this data tidy?**</summary>
+The variable `year` is split across six columns. 
+
+We want to create a single column **year** that will have the values (2007-2012) in rows. This will make the dataframe much longer as individuals will be repeated six times. At the same time the values in the six columns should be assigned to a new column **length**.
+</details>
+
+<p>

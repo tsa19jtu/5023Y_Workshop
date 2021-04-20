@@ -1,14 +1,17 @@
-# Unix {#Unix}
 
+# Unix {#Unix}
+```{r , echo=FALSE, eval=TRUE, include=TRUE}
+klippy::klippy(c('r', 'bash'), position = c('top', 'right'), tooltip_message = 'copy to clipboard', tooltip_success = 'Copied!')
+```
 Unix is very likely the most foundational skillset we can develop for bioinformatics (and much more than bioinformatics). Many of the most common and powerful bioinformatics approaches happen in this text-based environment, and having a solid foundation here can make everything we're trying to learn and do much easier. This is a set of 5 introductory tutorials to help us get from being completely new to Unix up to being great friends with it 🙂
 
-## 1.1 What is Unix/Linux
+## What is Unix/Linux
 
 ### Some terms
 
 Here are some terms worth knowing, don't worry about memorising them, it can just be useful to have these to refer to in the future.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 terms <- read_csv("data/terms-1.csv", skip_empty_rows = TRUE) 
 
 knitr::kable(terms, booktabs = TRUE,
@@ -20,7 +23,7 @@ knitr::kable(terms, booktabs = TRUE,
 
 You should be very familiar with using a GUI (RStudio), but remember we have spent a lot of time working with files and directories using the the command line (CLI) in R. This is useful practice, because most supercomputers lack a GUI, you must work entirely using the command line.
 
-## 1.2 Why Learn Unix?
+## Why Learn Unix?
 
 Most sequencing data files are large, and require a lot of RAM to process. As a result most of the work Bioinformaticians do is not hosted on their own computers, instead they "remote-connect" to high performance supercomputers or cluster computers.
 
@@ -34,7 +37,7 @@ This allows us to start using programs other than R, and potentially use multipl
 
 ### Note this series of practicals is designed for you to have a first introduction to Bioinformatics, it's about exposure, not memorising or mastering anything. Don't worry about the details!
 
-## 1.3 Getting started
+## Getting started
 
 Before we get started we need a terminal to work in.
 
@@ -42,7 +45,7 @@ Before we get started we need a terminal to work in.
 
 -   Click on the Terminal tab next to console in the bottom-left pane of the RStudio GUI
 
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
+```{r, eval=TRUE,  nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
 par(mar = c(4, 4, .1, .1))
 plot(pressure, type = 'b', pch = 19)
 ```
@@ -62,16 +65,19 @@ plot(pressure, type = 'b', pch = 19)
 ## 1.5 Let's get started
 
 We will perform a very simple function and get a flavour of the similarities and differences to working in \``R`. date\` is a command that prints out the date and time.
-
+```{bash}
     date
+```
 
 <https://www.geeksforgeeks.org/date-command-linux-examples/#>:\~:text=date%20command%20is%20used%20to,linux%20operating%20system%20is%20configured.
 
+```{bash}
     TZ=Europe/London date
 
     TZ=Europe/London date
 
     date --date="next tue"
+```
 
 ### Downloading data
 
@@ -81,27 +87,26 @@ We will perform a very simple function and get a flavour of the similarities and
 
 -   cd change the directory so we *land* in the new folder we have made
 
-```{=html}
-<!-- -->
-```
+```{bash}
     curl -L -o unix_intro.tar.gz https://ndownloader.figshare.com/files/15573746
     tar -xzvf unix_intro.tar.gz && rm unix_intro.tar.gz
     cd unix_intro
+```
 
 Unlike date, most commands require arguments and won't work without them. head is a command that prints the first lines of a file, so it requires us to provide the file we want it to act on:
-
+```{bash}
     head example.txt
-
+```
 Here "example.txt" is the required argument, and in this case it is also what's known as a positional argument. Whether things need to be provided as positional arguments or not depends on how the command or program we are using was written. Sometimes we need to specify the input file by putting something in front of it (e.g. some commands will use the -i flag, but it's often other things as well).
 
 There are also optional arguments for the head command. The default for head is to print the first 10 lines of a file. We can change that by specifying the -n flag, followed by how many lines we want:
-
+```{bash}
     head -n 5 example.txt
-
+```
 How would we know we needed the -n flag for that? There are a few ways to find out. Many standard Unix commands and other programs will have built-in help menus that we can access by providing --help as the only argument:
-
+```{bash}
     head --help
-
+```
 Again this is very similar to the logic in which R commands are strucutred e.g. `??ggplot()` The synatx is similar even if the specific icons or arguments are different.
 
 Remember just like with R, one of your best friends is Google! As you get familiar with any language or OS we might remember a few flags or specific options, but searching for options and details when needed is definitely the norm!
@@ -113,10 +118,10 @@ There are two special locations in all Unix-based systems: the "root" location a
 IMAGE
 
 We tell the command line where files and directories are located by providing their address, their "path". If we use the pwd command (for print working directory), we can find out what the path is for the directory we are sitting in. And if we use the ls command (for list), we can see what directories and files are in the current directory we are sitting in.
-
+```{bash}
     pwd
     ls
-
+```
 ## 1.7 Absolute vs relative file paths
 
 You should be used to these concepts from your work with R projects.
@@ -127,22 +132,20 @@ There are two ways to specify the path (address) of the file we want to do somet
 
 -   A **relative path** is an address that starts from wherever we are currently sitting. For example, let's look again at the head command we ran above:
 
-```{=html}
-<!-- -->
-```
+```{bash}
     head example.txt
-
+```
 What we are actually doing here is using a relative path to specify where the "example.txt" file is located. This is because the command line **automatically looks** in the current working directory if we don't specify anything else about its location.
 
 We can also run the same command on the same file using an **absolute path**:
-
+```{bash}
     head ~/unix_intro/example.txt
-
+```
 The previous two commands both point to the same file right now. But the first way, head example.txt, will only work if we are entering it while "sitting" in the directory that holds that file, while the second way will work no matter where we happen to be in the computer.
 
 It is **important to always think about where** we are in the computer when working at the command line. One of the most common errors/easiest mistakes to make is trying to do something to a file that isn't where we think it is. Let's run head on the "example.txt" file again, and then let's try it on another file: "notes.txt":
 
-``` {}
+``` {bash}
 head example.txt
 head notes.txt
 ```
@@ -150,29 +153,29 @@ head notes.txt
 Here the head command works fine on "example.txt", but we get an error message when we call it on "notes.txt" telling us no such file or directory. If we run the ls command to list the contents of the current working directory, we can see the computer is absolutely right -- spoiler alert: it usually is -- and there is no file here named "notes.txt".
 
 The ls command by default operates on the current working directory if we don't specify any location, but we can tell it to list the contents of a different directory by providing it as a positional argument:
-
+```{bash}
     ls
     ls experiment
-
+```
 We can see the file we were looking for is located in the subdirectory called "experiment". Here is how we can run head on "notes.txt" by specifying an accurate relative path to that file:
-
+```{bash}
     head experiment/notes.txt
-
+```
 ## 1.8 Moving around
 
 We can also move into the directory containing the file we want to work with by using the `cd` command (**c**hange **d**irectory). This command takes a positional argument that is the path (address) of the directory we want to change into. This can be a relative path or an absolute path. Here we'll use the relative path of the subdirectory, "experiment", to change into it
-
+```{bash}
     cd experiment/
     pwd
     ls
     head notes.txt
-
+```
 Great. But now how do we get back "up" to the directory above us? One way would be to provide an absolute path, like `cd ~/unix_intro`, but there is also a handy shortcut. `..` are special characters that act as a relative path specifying "up" one level -- one directory -- from wherever we currently are. So we can provide that as the positional argument to cd to get back to where we started:
-
+```{bash}
     cd ..
     pwd
     ls
-
+```
 Moving around the computer like this might feel a bit cumbersome and frustrating at first, but after spending a little time with it, you will get used to it, and it starts to feel more natural.
 
 Get used to using **tab** to perform **tab-completion** often this will auto-complete file names!
@@ -185,7 +188,7 @@ While maybe not all that exciting, these things really are the foundation needed
 
 ### Terms
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 terms <- read_csv("data/terms.csv", skip_empty_rows = TRUE) 
 
 knitr::kable(terms, booktabs = TRUE,
@@ -197,7 +200,7 @@ knitr::kable(terms, booktabs = TRUE,
 
 ### Commands
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 terms <- read_csv("data/commands.csv", skip_empty_rows = TRUE) 
 
 knitr::kable(terms, booktabs = TRUE,
@@ -209,7 +212,7 @@ knitr::kable(terms, booktabs = TRUE,
 
 ### Special characters
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 terms <- read_csv("data/characters.csv", skip_empty_rows = TRUE) 
 
 knitr::kable(terms, booktabs = TRUE,
@@ -227,7 +230,7 @@ knitr::kable(terms, booktabs = TRUE,
 
 Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
 
-```{r nice-tab, tidy=FALSE}
+```{r nice-tab, tidy=FALSE, eval=TRUE}
 knitr::kable(
   head(iris, 20), caption = 'Here is a nice table!',
   booktabs = TRUE

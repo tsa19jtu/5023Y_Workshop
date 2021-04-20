@@ -24,7 +24,7 @@
 <meta name="author" content="Philip Leftwich" />
 
 
-<meta name="date" content="2021-04-19" />
+<meta name="date" content="2021-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,10 @@
 
 
 
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
@@ -141,15 +145,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="Unix.html"><a href="Unix.html"><i class="fa fa-check"></i><b>2</b> Unix</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="Unix.html"><a href="Unix.html#what-is-unixlinux"><i class="fa fa-check"></i><b>2.1</b> 1.1 What is Unix/Linux</a>
+<li class="chapter" data-level="2.1" data-path="Unix.html"><a href="Unix.html#what-is-unixlinux"><i class="fa fa-check"></i><b>2.1</b> What is Unix/Linux</a>
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="Unix.html"><a href="Unix.html#some-terms"><i class="fa fa-check"></i><b>2.1.1</b> Some terms</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="Unix.html"><a href="Unix.html#why-learn-unix"><i class="fa fa-check"></i><b>2.2</b> 1.2 Why Learn Unix?</a>
+<li class="chapter" data-level="2.2" data-path="Unix.html"><a href="Unix.html#why-learn-unix"><i class="fa fa-check"></i><b>2.2</b> Why Learn Unix?</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="Unix.html"><a href="Unix.html#note-this-series-of-practicals-is-designed-for-you-to-have-a-first-introduction-to-bioinformatics-its-about-exposure-not-memorising-or-mastering-anything.-dont-worry-about-the-details"><i class="fa fa-check"></i><b>2.2.1</b> Note this series of practicals is designed for you to have a first introduction to Bioinformatics, it’s about exposure, not memorising or mastering anything. Don’t worry about the details!</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="Unix.html"><a href="Unix.html#getting-started"><i class="fa fa-check"></i><b>2.3</b> 1.3 Getting started</a></li>
+<li class="chapter" data-level="2.3" data-path="Unix.html"><a href="Unix.html#getting-started"><i class="fa fa-check"></i><b>2.3</b> Getting started</a></li>
 <li class="chapter" data-level="2.4" data-path="Unix.html"><a href="Unix.html#a-few-foundational-rules"><i class="fa fa-check"></i><b>2.4</b> 1.4 A few foundational rules</a></li>
 <li class="chapter" data-level="2.5" data-path="Unix.html"><a href="Unix.html#lets-get-started"><i class="fa fa-check"></i><b>2.5</b> 1.5 Let’s get started</a>
 <ul>
@@ -168,22 +172,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html"><i class="fa fa-check"></i><b>3</b> NGS sequence analysis</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#background"><i class="fa fa-check"></i><b>3.1</b> 2.1 Background</a></li>
-<li class="chapter" data-level="3.2" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#the-data"><i class="fa fa-check"></i><b>3.2</b> 2.2 The data</a></li>
-<li class="chapter" data-level="3.3" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#removing-primers"><i class="fa fa-check"></i><b>3.3</b> 2.3 Removing Primers</a>
+<li class="chapter" data-level="3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#background"><i class="fa fa-check"></i><b>3.1</b> Background</a></li>
+<li class="chapter" data-level="3.2" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#the-data"><i class="fa fa-check"></i><b>3.2</b> The data</a></li>
+<li class="chapter" data-level="3.3" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#removing-primers"><i class="fa fa-check"></i><b>3.3</b> Removing Primers</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#loops"><i class="fa fa-check"></i><b>3.3.1</b> 2.3.1 Loops</a></li>
+<li class="chapter" data-level="3.3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#loops"><i class="fa fa-check"></i><b>3.3.1</b> Loops</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dada2"><i class="fa fa-check"></i><b>3.4</b> 2.4 DADA2</a></li>
-<li class="chapter" data-level="3.5" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#quality-trimmingfiltering"><i class="fa fa-check"></i><b>3.5</b> 2.5 Quality trimming/filtering</a></li>
-<li class="chapter" data-level="3.6" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dereplication"><i class="fa fa-check"></i><b>3.6</b> 2.6 Dereplication</a></li>
-<li class="chapter" data-level="3.7" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#asvs"><i class="fa fa-check"></i><b>3.7</b> 2.7 ASV’s</a></li>
-<li class="chapter" data-level="3.8" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#merging-reads"><i class="fa fa-check"></i><b>3.8</b> 2.8 Merging reads</a></li>
-<li class="chapter" data-level="3.9" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#count-table"><i class="fa fa-check"></i><b>3.9</b> 2.9 Count table</a></li>
-<li class="chapter" data-level="3.10" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#overview"><i class="fa fa-check"></i><b>3.10</b> 2.10 Overview</a></li>
-<li class="chapter" data-level="3.11" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#assign-taxonomy"><i class="fa fa-check"></i><b>3.11</b> 2.11 Assign taxonomy</a></li>
-<li class="chapter" data-level="3.12" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#standard-goods"><i class="fa fa-check"></i><b>3.12</b> 2.12 Standard goods</a></li>
-<li class="chapter" data-level="3.13" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#contaminants"><i class="fa fa-check"></i><b>3.13</b> 2.13 Contaminants</a></li>
+<li class="chapter" data-level="3.4" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dada2---switch-to-r-console"><i class="fa fa-check"></i><b>3.4</b> DADA2 - switch to R console</a></li>
+<li class="chapter" data-level="3.5" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#quality-trimmingfiltering"><i class="fa fa-check"></i><b>3.5</b> Quality trimming/filtering</a></li>
+<li class="chapter" data-level="3.6" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dereplication"><i class="fa fa-check"></i><b>3.6</b> Dereplication</a></li>
+<li class="chapter" data-level="3.7" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#asvs"><i class="fa fa-check"></i><b>3.7</b> ASV’s</a></li>
+<li class="chapter" data-level="3.8" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#merging-reads"><i class="fa fa-check"></i><b>3.8</b> Merging reads</a></li>
+<li class="chapter" data-level="3.9" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#count-table"><i class="fa fa-check"></i><b>3.9</b> Count table</a></li>
+<li class="chapter" data-level="3.10" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#overview"><i class="fa fa-check"></i><b>3.10</b> Overview</a></li>
+<li class="chapter" data-level="3.11" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#assign-taxonomy"><i class="fa fa-check"></i><b>3.11</b> Assign taxonomy</a></li>
+<li class="chapter" data-level="3.12" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#standard-goods"><i class="fa fa-check"></i><b>3.12</b> Standard goods</a></li>
+<li class="chapter" data-level="3.13" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#contaminants"><i class="fa fa-check"></i><b>3.13</b> Contaminants</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="analysis-in-r.html"><a href="analysis-in-r.html"><i class="fa fa-check"></i><b>4</b> Analysis in R</a></li>
 <li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
@@ -215,14 +219,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ngs-sequence-analysis" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> NGS sequence analysis</h1>
+<script>
+  addClassKlippyTo("pre.r, pre.bash");
+  addKlippy('right', 'top', 'auto', '1', 'copy to clipboard', 'Copied');
+</script>
 <div id="background" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> 2.1 Background</h2>
+<h2><span class="header-section-number">3.1</span> Background</h2>
 <p>Info on sequencing</p>
 <p>General application</p>
 <p>Don’t have to follow everything!</p>
 </div>
 <div id="the-data" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> 2.2 The data</h2>
+<h2><span class="header-section-number">3.2</span> The data</h2>
 <p>For a quick overview of the example data we’ll be using and where it came from, we are going to work with a subset of the dataset published here. We were exploring an underwater mountain ~3 km down at the bottom of the Pacific Ocean that serves as a low-temperature (~5-10°C) hydrothermal venting site. This amplicon dataset was generated from DNA extracted from crushed basalts collected from across the mountain with the goal being to begin characterizing the microbial communities of these deep-sea rocks. No one had ever been here before, so as is often the purpose of marker-gene sequencing, this was just a broad-level community survey. The sequencing was done on the Illumina MiSeq platform with 2x300 paired-end sequencing using primers targeting the V4 region of the 16S rRNA gene. There are 20 samples total: 4 extraction “blanks” (nothing added to DNA extraction kit), 2 bottom-water samples, 13 rocks, and one biofilm scraped off of a rock. None of these details are important for you to remember, it’s just to give some overview if you care.</p>
 <p>In the following figure, overlain on the map are the rock sample collection locations, and the panes on the right show examples of the 3 distinct types of rocks collected: 1) basalts with highly altered, thick outer rinds (&gt;1 cm); 2) basalts that were smooth, glassy, thin exteriors (~1-2 mm); and 3) one calcified carbonate.</p>
 <p>PICTURE</p>
@@ -230,34 +238,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To get started, be sure you are in the “Terminal” window. We will be working here for the first step of importing the data, and removing the primers from our data. We can import our data using the <code>curl</code> function, we will then remove the primers using a program called <code>cutadapt</code> which is written in Python.</p>
 <p>Make sure when you open the terminal you are in the project directory (and refer to last weeks notes if you need to check how to do this).</p>
 <p>Don’t switch over to R (the “Console” tab in the Binder/RStudio environment) until noted. You can download the required dataset and files by copying and pasting the following commands into your command-line terminal:</p>
-<pre><code>curl -L -o dada2_amplicon_ex_workflow.tar.gz https://ndownloader.figshare.com/files/23066516
-tar -xzvf dada2_amplicon_ex_workflow.tar.gz
-rm dada2_amplicon_ex_workflow.tar.gz
-cd dada2_amplicon_ex_workflow/</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="ngs-sequence-analysis.html#cb18-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">curl</span> <span class="at">-L</span> <span class="at">-o</span> dada2_amplicon_ex_workflow.tar.gz https://ndownloader.figshare.com/files/23066516</span>
+<span id="cb18-2"><a href="ngs-sequence-analysis.html#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tar</span> <span class="at">-xzvf</span> dada2_amplicon_ex_workflow.tar.gz</span>
+<span id="cb18-3"><a href="ngs-sequence-analysis.html#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span> dada2_amplicon_ex_workflow.tar.gz</span>
+<span id="cb18-4"><a href="ngs-sequence-analysis.html#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cd</span> dada2_amplicon_ex_workflow/</span></code></pre></div>
 <p>In our working directory there are 20 samples with forward (R1) and reverse (R2) reads with per-base-call quality information, so 40 fastq files (.fq). It is a good idea to have a file with all the sample names to use for various things throughout, so here’s making that file based on how these sample names are formatted.</p>
-<pre><code>ls *_R1.fq | cut -f1 -d &quot;_&quot; &gt; samples</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="ngs-sequence-analysis.html#cb19-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span> <span class="pp">*</span>_R1.fq <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1</span> <span class="at">-d</span> <span class="st">&quot;_&quot;</span> <span class="op">&gt;</span> samples</span></code></pre></div>
 </div>
 <div id="removing-primers" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> 2.3 Removing Primers</h2>
+<h2><span class="header-section-number">3.3</span> Removing Primers</h2>
 <p>To start, we need to remove the primers from all of these (the primers used for this run are in the “primers.fa” file in our working directory), and here we’re going to use cutadapt to do that at the command line (“Terminal” tab). Cutadapt operates on one sample at at time, so we’re going to use a wonderful little bash <em>loop</em> to run it on all of our samples.</p>
 <div id="loops" class="section level3" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> 2.3.1 Loops</h3>
+<h3><span class="header-section-number">3.3.1</span> Loops</h3>
 <p>Loops are extremely powerful way of controlling iteration. We can specify that a line of code is repeated across multiple objects. In this example we use the sample file we made earlier as the list of files across which we want this function of removing primers to loop. These same lines will then repeat until all the specified iterations are complete.</p>
 <p>We won’t break down exactly how this loop works - but they are used across all programming languages (including R) and you can check out the R4DS book for an introduction to building your own loops (and custom functions!) <a href="https://r4ds.had.co.nz/iteration.html">here</a>.</p>
 <p>For now just copy and paste this code exactly into the Terminal.</p>
-<pre><code>for sample in $(cat samples)
-do
-
-    echo &quot;On sample: $sample&quot;
-    
-    cutadapt -a ^GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC \
-    -A ^GGACTACHVGGGTWTCTAAT...TTACCGCGGCKGCTGGCAC \
-    -m 215 -M 285 --discard-untrimmed \
-    -o ${sample}_sub_R1_trimmed.fq.gz -p ${sample}_sub_R2_trimmed.fq.gz \
-    ${sample}_sub_R1.fq ${sample}_sub_R2.fq \
-    &gt;&gt; cutadapt_primer_trimming_stats.txt 2&gt;&amp;1
-
-done</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="ngs-sequence-analysis.html#cb20-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$(</span><span class="fu">cat</span> samples<span class="va">)</span></span>
+<span id="cb20-2"><a href="ngs-sequence-analysis.html#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span></span>
+<span id="cb20-3"><a href="ngs-sequence-analysis.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="ngs-sequence-analysis.html#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;On sample: </span><span class="va">$sample</span><span class="st">&quot;</span></span>
+<span id="cb20-5"><a href="ngs-sequence-analysis.html#cb20-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb20-6"><a href="ngs-sequence-analysis.html#cb20-6" aria-hidden="true" tabindex="-1"></a>        <span class="ex">cutadapt</span> <span class="at">-a</span> ^GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC <span class="dt">\</span></span>
+<span id="cb20-7"><a href="ngs-sequence-analysis.html#cb20-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">-A</span> ^GGACTACHVGGGTWTCTAAT...TTACCGCGGCKGCTGGCAC <span class="dt">\</span></span>
+<span id="cb20-8"><a href="ngs-sequence-analysis.html#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">-m</span> 215 <span class="at">-M</span> 285 <span class="at">--discard-untrimmed</span> <span class="dt">\</span></span>
+<span id="cb20-9"><a href="ngs-sequence-analysis.html#cb20-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">-o</span> <span class="va">${sample}</span>_sub_R1_trimmed.fq.gz <span class="at">-p</span> <span class="va">${sample}</span>_sub_R2_trimmed.fq.gz <span class="dt">\</span></span>
+<span id="cb20-10"><a href="ngs-sequence-analysis.html#cb20-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">${sample}</span>_sub_R1.fq <span class="va">${sample}</span>_sub_R2.fq <span class="dt">\</span></span>
+<span id="cb20-11"><a href="ngs-sequence-analysis.html#cb20-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;&gt;</span> cutadapt_primer_trimming_stats.txt <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb20-12"><a href="ngs-sequence-analysis.html#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="ngs-sequence-analysis.html#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span></code></pre></div>
 <p>Here’s a before-and-after of one of our files</p>
 <pre><code>### R1 BEFORE TRIMMING PRIMERS
 head -n 2 B1_sub_R1.fq
@@ -275,9 +283,8 @@ head -n 2 B1_sub_R1_trimmed.fq
 # AAATGCGTAGATATGCGGAGGAACACCGATGGCGAAGGCAGTCCCCTGGGCCTGCACTGACGCTCATGCACGAAAGCGTG
 # GGGAGCAAACAGG</code></pre>
 <p>You can look through the output of the cutadapt stats file we made (“cutadapt_primer_trimming_stats.txt”) to get an idea of how things went. Here’s a little one-liner to look at what fraction of reads were retained in each sample (column 2) and what fraction of bps were retained in each sample (column 3):</p>
-<pre><code>paste samples &lt;(grep &quot;passing&quot; cutadapt_primer_trimming_stats.txt | cut -f3 -d &quot;(&quot; | tr -d &quot;)&quot;) &lt;(grep &quot;filtered&quot; cutadapt_primer_trimming_stats.txt | cut -f3 -d &quot;(&quot; | tr -d &quot;)&quot;)
-
-# B1    96.5%   83.0%
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="ngs-sequence-analysis.html#cb22-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">paste</span> samples <span class="op">&lt;(</span><span class="fu">grep</span> <span class="st">&quot;passing&quot;</span> cutadapt_primer_trimming_stats.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">&quot;(&quot;</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">&quot;)&quot;</span><span class="op">)</span> <span class="op">&lt;(</span><span class="fu">grep</span> <span class="st">&quot;filtered&quot;</span> cutadapt_primer_trimming_stats.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f3</span> <span class="at">-d</span> <span class="st">&quot;(&quot;</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">&quot;)&quot;</span><span class="op">)</span></span></code></pre></div>
+<pre><code># B1    96.5%   83.0%
 # B2    96.6%   83.3%
 # B3    95.4%   82.4%
 # B4    96.8%   83.4%
@@ -301,37 +308,36 @@ head -n 2 B1_sub_R1_trimmed.fq
 <p>With primers removed, we’re now ready to switch R and start using DADA2!</p>
 </div>
 </div>
-<div id="dada2" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> 2.4 DADA2</h2>
-<pre><code>library(dada2)
-
-
-setwd(&quot;~/dada2_amplicon_ex_workflow&quot;)
-
-list.files() # make sure what we think is here is actually here
-
-## first we&#39;re setting a few variables we&#39;re going to use ##
-  # one with all sample names, by scanning our &quot;samples&quot; file we made earlier
-  
-samples &lt;- scan(&quot;samples&quot;, what=&quot;character&quot;)
-
-  # one holding the file names of all the forward reads
-forward_reads &lt;- paste0(samples, &quot;_sub_R1_trimmed.fq.gz&quot;)
-
-  # and one with the reverse
-reverse_reads &lt;- paste0(samples, &quot;_sub_R2_trimmed.fq.gz&quot;)
-
-  # and variables holding file names for the forward and reverse
-  # filtered reads we&#39;re going to generate below
-filtered_forward_reads &lt;- paste0(samples, &quot;_sub_R1_filtered.fq.gz&quot;)
-filtered_reverse_reads &lt;- paste0(samples, &quot;_sub_R2_filtered.fq.gz&quot;)</code></pre>
+<div id="dada2---switch-to-r-console" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> DADA2 - switch to R console</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="ngs-sequence-analysis.html#cb24-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(dada2)</span>
+<span id="cb24-2"><a href="ngs-sequence-analysis.html#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="ngs-sequence-analysis.html#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setwd</span>(<span class="st">&quot;~/dada2_amplicon_ex_workflow&quot;</span>)</span>
+<span id="cb24-4"><a href="ngs-sequence-analysis.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="ngs-sequence-analysis.html#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list.files</span>() <span class="co"># make sure what we think is here is actually here</span></span>
+<span id="cb24-6"><a href="ngs-sequence-analysis.html#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="ngs-sequence-analysis.html#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="do">## first we&#39;re setting a few variables we&#39;re going to use ##</span></span>
+<span id="cb24-8"><a href="ngs-sequence-analysis.html#cb24-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># one with all sample names, by scanning our &quot;samples&quot; file we made earlier</span></span>
+<span id="cb24-9"><a href="ngs-sequence-analysis.html#cb24-9" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb24-10"><a href="ngs-sequence-analysis.html#cb24-10" aria-hidden="true" tabindex="-1"></a>    samples <span class="ot">&lt;-</span> <span class="fu">scan</span>(<span class="st">&quot;samples&quot;</span>, <span class="at">what=</span><span class="st">&quot;character&quot;</span>)</span>
+<span id="cb24-11"><a href="ngs-sequence-analysis.html#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="ngs-sequence-analysis.html#cb24-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># one holding the file names of all the forward reads</span></span>
+<span id="cb24-13"><a href="ngs-sequence-analysis.html#cb24-13" aria-hidden="true" tabindex="-1"></a>    forward_reads <span class="ot">&lt;-</span> <span class="fu">paste0</span>(samples, <span class="st">&quot;_sub_R1_trimmed.fq.gz&quot;</span>)</span>
+<span id="cb24-14"><a href="ngs-sequence-analysis.html#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="ngs-sequence-analysis.html#cb24-15" aria-hidden="true" tabindex="-1"></a>      <span class="co"># and one with the reverse</span></span>
+<span id="cb24-16"><a href="ngs-sequence-analysis.html#cb24-16" aria-hidden="true" tabindex="-1"></a>    reverse_reads <span class="ot">&lt;-</span> <span class="fu">paste0</span>(samples, <span class="st">&quot;_sub_R2_trimmed.fq.gz&quot;</span>)</span>
+<span id="cb24-17"><a href="ngs-sequence-analysis.html#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="ngs-sequence-analysis.html#cb24-18" aria-hidden="true" tabindex="-1"></a>      <span class="co"># and variables holding file names for the forward and reverse</span></span>
+<span id="cb24-19"><a href="ngs-sequence-analysis.html#cb24-19" aria-hidden="true" tabindex="-1"></a>      <span class="co"># filtered reads we&#39;re going to generate below</span></span>
+<span id="cb24-20"><a href="ngs-sequence-analysis.html#cb24-20" aria-hidden="true" tabindex="-1"></a>    filtered_forward_reads <span class="ot">&lt;-</span> <span class="fu">paste0</span>(samples, <span class="st">&quot;_sub_R1_filtered.fq.gz&quot;</span>)</span>
+<span id="cb24-21"><a href="ngs-sequence-analysis.html#cb24-21" aria-hidden="true" tabindex="-1"></a>    filtered_reverse_reads <span class="ot">&lt;-</span> <span class="fu">paste0</span>(samples, <span class="st">&quot;_sub_R2_filtered.fq.gz&quot;</span>)</span></code></pre></div>
 </div>
 <div id="quality-trimmingfiltering" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> 2.5 Quality trimming/filtering</h2>
+<h2><span class="header-section-number">3.5</span> Quality trimming/filtering</h2>
 <p>We did a filtering step above with cutadapt (where we eliminated reads that had imperfect or missing primers and those that were shorter than 215 bps or longer than 285), but in DADA2 we’ll implement a trimming step as well (where we trim reads down based on some quality threshold rather than throwing the read away). Since we’re potentially shortening reads further, we’re again going to include another minimum-length filtering component. We can also take advantage of a handy quality plotting function that DADA2 provides to visualize how you’re reads are doing, plotQualityProfile(). By running that on our variables that hold all of our forward and reverse read filenames, we can easily generate plots for all samples or for a subset of them. So let’s take a peak at that to help decide our trimming lengths: It’s good to try to keep a bird’s-eye view of what’s going on. So here is an overview of the main processing steps we’ll be performing with cutadapt and DADA2. Don’t worry if anything seems unclear right now, we will discuss each at each step.</p>
-<pre><code>plotQualityProfile(forward_reads[17:20])
-
-plotQualityProfile(reverse_reads[17:20])</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="ngs-sequence-analysis.html#cb25-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotQualityProfile</span>(forward_reads[<span class="dv">17</span><span class="sc">:</span><span class="dv">20</span>])</span>
+<span id="cb25-2"><a href="ngs-sequence-analysis.html#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="ngs-sequence-analysis.html#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotQualityProfile</span>(reverse_reads[<span class="dv">17</span><span class="sc">:</span><span class="dv">20</span>])</span></code></pre></div>
 <p>All forwards look pretty similar to eachother, and all reverses look pretty similar to eachother, but worse than the forwards, which is common – chemistry gets tired…</p>
 <p>On the plots produced</p>
 <ul>
@@ -343,131 +349,126 @@ plotQualityProfile(reverse_reads[17:20])</code></pre>
 <p>TALK ABOUT PHRED SCORES</p>
 <p>Here, I’m going to cut the forward reads at 250 and the reverse reads at 200 – roughly where both sets maintain a median quality of 30 or above – and then see how things look. But we also want to set a minimum length to filter out truncated sequences, so we will set a minimum acceptable read length of 175bp (any reads shorter than this will be discarded).</p>
 <p>In DADA2, this quality-filtering step is done with the <code>filterAndTrim()</code> function:</p>
-<pre><code>filtered_out &lt;- filterAndTrim(forward_reads, filtered_forward_reads,
-                reverse_reads, filtered_reverse_reads, maxEE=c(2,2),
-                rm.phix=TRUE, minLen=175, truncLen=c(250,200))</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="ngs-sequence-analysis.html#cb26-1" aria-hidden="true" tabindex="-1"></a>    filtered_out <span class="ot">&lt;-</span> <span class="fu">filterAndTrim</span>(forward_reads, filtered_forward_reads,</span>
+<span id="cb26-2"><a href="ngs-sequence-analysis.html#cb26-2" aria-hidden="true" tabindex="-1"></a>                    reverse_reads, filtered_reverse_reads, <span class="at">maxEE=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),</span>
+<span id="cb26-3"><a href="ngs-sequence-analysis.html#cb26-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rm.phix=</span><span class="cn">TRUE</span>, <span class="at">minLen=</span><span class="dv">175</span>, <span class="at">truncLen=</span><span class="fu">c</span>(<span class="dv">250</span>,<span class="dv">200</span>))</span></code></pre></div>
 <p>This function made a bunch of output files “filtered_forward_reads” and “filtered_reverse_reads” we can see these in our project pane. Or if we were working on a server without a GUI we could use <code>list.files()</code> in R or <code>ls</code> in our Terminal.</p>
 <p>We also generated an R file called filtered_out. This is a simple matrix holding how many reads went <em>in</em> for each file and how many came <em>out</em>.</p>
 <p>Check it in R.</p>
-<pre><code>filtered_out</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="ngs-sequence-analysis.html#cb27-1" aria-hidden="true" tabindex="-1"></a>    filtered_out</span></code></pre></div>
 <p>We can take a look at the filtered reads visually - we expect to have trimmed off that section where quality drops</p>
-<pre><code>    plotQualityProfile(filtered_reverse_reads[17:20])</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="ngs-sequence-analysis.html#cb28-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotQualityProfile</span>(filtered_reverse_reads[<span class="dv">17</span><span class="sc">:</span><span class="dv">20</span>])</span></code></pre></div>
 <p>Looking Good!</p>
 </div>
 <div id="dereplication" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> 2.6 Dereplication</h2>
+<h2><span class="header-section-number">3.6</span> Dereplication</h2>
 <p>Dereplication is a common step in many amplicon processing workflows. Instead of keeping 100 identical sequences and doing all downstream processing to all 100 -costing computer processing power and time, you can keep/process just one of them, and just attach the number x100 to it. Now this acts as a representative for 100 identical sequences.</p>
-<pre><code>derep_forward &lt;- derepFastq(filtered_forward_reads, verbose=TRUE)
-names(derep_forward) &lt;- samples # the sample names in these objects are initially the file names of the samples, this sets them to the sample names for the rest of the workflow
-derep_reverse &lt;- derepFastq(filtered_reverse_reads, verbose=TRUE)
-names(derep_reverse) &lt;- samples</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="ngs-sequence-analysis.html#cb29-1" aria-hidden="true" tabindex="-1"></a>derep_forward <span class="ot">&lt;-</span> <span class="fu">derepFastq</span>(filtered_forward_reads, <span class="at">verbose=</span><span class="cn">TRUE</span>)</span>
+<span id="cb29-2"><a href="ngs-sequence-analysis.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(derep_forward) <span class="ot">&lt;-</span> samples <span class="co"># the sample names in these objects are initially the file names of the samples, this sets them to the sample names for the rest of the workflow</span></span>
+<span id="cb29-3"><a href="ngs-sequence-analysis.html#cb29-3" aria-hidden="true" tabindex="-1"></a>derep_reverse <span class="ot">&lt;-</span> <span class="fu">derepFastq</span>(filtered_reverse_reads, <span class="at">verbose=</span><span class="cn">TRUE</span>)</span>
+<span id="cb29-4"><a href="ngs-sequence-analysis.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(derep_reverse) <span class="ot">&lt;-</span> samples</span></code></pre></div>
 </div>
 <div id="asvs" class="section level2" number="3.7">
-<h2><span class="header-section-number">3.7</span> 2.7 ASV’s</h2>
+<h2><span class="header-section-number">3.7</span> ASV’s</h2>
 <p>This is where we start to take our raw sequence data and infer <em>true</em> biological sequences.
 It uses an algorithm to look at the consensus quality score and abundance for each <em>unique</em> sequence. It then determines whether this sequence is more likely to be of biological origin or a spurious sequencing error.</p>
-<pre><code>dada_forward &lt;- dada(derep_forward, err=err_forward_reads, pool=&quot;pseudo&quot;)
-
-dada_reverse &lt;- dada(derep_reverse, err=err_reverse_reads, pool=&quot;pseudo&quot;)
-
-</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="ngs-sequence-analysis.html#cb30-1" aria-hidden="true" tabindex="-1"></a>dada_forward <span class="ot">&lt;-</span> <span class="fu">dada</span>(derep_forward, <span class="at">err=</span>err_forward_reads, <span class="at">pool=</span><span class="st">&quot;pseudo&quot;</span>)</span>
+<span id="cb30-2"><a href="ngs-sequence-analysis.html#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="ngs-sequence-analysis.html#cb30-3" aria-hidden="true" tabindex="-1"></a>dada_reverse <span class="ot">&lt;-</span> <span class="fu">dada</span>(derep_reverse, <span class="at">err=</span>err_reverse_reads, <span class="at">pool=</span><span class="st">&quot;pseudo&quot;</span>)</span></code></pre></div>
 </div>
 <div id="merging-reads" class="section level2" number="3.8">
-<h2><span class="header-section-number">3.8</span> 2.8 Merging reads</h2>
+<h2><span class="header-section-number">3.8</span> Merging reads</h2>
 <p>Now DADA2 merges the forward and reverse ASVs to reconstruct our full target amplicon requiring the overlapping region to be identical between the two. By default it requires that at least 12 bps overlap, but in our case the overlap should be much greater. If you remember above we trimmed the forward reads to 250 and the reverse to 200, and our primers were 515f–806r. After cutting off the primers we’re expecting a typical amplicon size of around 260 bases, so our typical overlap should be up around 190. That’s estimated based on E. coli 16S rRNA gene positions and very back-of-the-envelope-esque of course, so to allow for true biological variation and such I’m going ot set the minimum overlap for this dataset for 170. I’m also setting the trimOverhang option to TRUE in case any of our reads go passed their opposite primers (which I wouldn’t expect based on our trimming, but is possible due to the region and sequencing method).</p>
-<pre><code>merged_amplicons &lt;- mergePairs(dada_forward, derep_forward, dada_reverse,
-                    derep_reverse, trimOverhang=TRUE, minOverlap=170)
-
-  # this object holds a lot of information that may be the first place you&#39;d want to look if you want to start poking under the hood
-class(merged_amplicons) # list
-length(merged_amplicons) # 20 elements in this list, one for each of our samples
-names(merged_amplicons) # the names() function gives us the name of each element of the list 
-
-class(merged_amplicons$B1) # each element of the list is a dataframe that can be accessed and manipulated like any ordinary dataframe
-
-names(merged_amplicons$B1) # the names() function on a dataframe gives you the column names
-# &quot;sequence&quot;  &quot;abundance&quot; &quot;forward&quot;   &quot;reverse&quot;   &quot;nmatch&quot;    &quot;nmismatch&quot; &quot;nindel&quot;    &quot;prefer&quot;    &quot;accept&quot;</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="ngs-sequence-analysis.html#cb31-1" aria-hidden="true" tabindex="-1"></a>merged_amplicons <span class="ot">&lt;-</span> <span class="fu">mergePairs</span>(dada_forward, derep_forward, dada_reverse,</span>
+<span id="cb31-2"><a href="ngs-sequence-analysis.html#cb31-2" aria-hidden="true" tabindex="-1"></a>                    derep_reverse, <span class="at">trimOverhang=</span><span class="cn">TRUE</span>, <span class="at">minOverlap=</span><span class="dv">170</span>)</span>
+<span id="cb31-3"><a href="ngs-sequence-analysis.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="ngs-sequence-analysis.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this object holds a lot of information that may be the first place you&#39;d want to look if you want to start poking under the hood</span></span>
+<span id="cb31-5"><a href="ngs-sequence-analysis.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(merged_amplicons) <span class="co"># list</span></span>
+<span id="cb31-6"><a href="ngs-sequence-analysis.html#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(merged_amplicons) <span class="co"># 20 elements in this list, one for each of our samples</span></span>
+<span id="cb31-7"><a href="ngs-sequence-analysis.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(merged_amplicons) <span class="co"># the names() function gives us the name of each element of the list </span></span>
+<span id="cb31-8"><a href="ngs-sequence-analysis.html#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="ngs-sequence-analysis.html#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(merged_amplicons<span class="sc">$</span>B1) <span class="co"># each element of the list is a dataframe that can be accessed and manipulated like any ordinary dataframe</span></span>
+<span id="cb31-10"><a href="ngs-sequence-analysis.html#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="ngs-sequence-analysis.html#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(merged_amplicons<span class="sc">$</span>B1) <span class="co"># the names() function on a dataframe gives you the column names</span></span>
+<span id="cb31-12"><a href="ngs-sequence-analysis.html#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;sequence&quot;  &quot;abundance&quot; &quot;forward&quot;   &quot;reverse&quot;   &quot;nmatch&quot;    &quot;nmismatch&quot; &quot;nindel&quot;    &quot;prefer&quot;    &quot;accept&quot;</span></span></code></pre></div>
 </div>
 <div id="count-table" class="section level2" number="3.9">
-<h2><span class="header-section-number">3.9</span> 2.9 Count table</h2>
+<h2><span class="header-section-number">3.9</span> Count table</h2>
 <p>Now we can generate a count table with the makeSequenceTable() function. This is one of the main outputs from processing an amplicon dataset. You may have also heard this referred to as a biome table, or an OTU matrix.</p>
-<pre><code>seqtab &lt;- makeSequenceTable(merged_amplicons)
-class(seqtab) # matrix
-dim(seqtab) # 20 2521
-</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="ngs-sequence-analysis.html#cb32-1" aria-hidden="true" tabindex="-1"></a>seqtab <span class="ot">&lt;-</span> <span class="fu">makeSequenceTable</span>(merged_amplicons)</span>
+<span id="cb32-2"><a href="ngs-sequence-analysis.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(seqtab) <span class="co"># matrix</span></span>
+<span id="cb32-3"><a href="ngs-sequence-analysis.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(seqtab) <span class="co"># 20 2521</span></span></code></pre></div>
 </div>
 <div id="overview" class="section level2" number="3.10">
-<h2><span class="header-section-number">3.10</span> 2.10 Overview</h2>
+<h2><span class="header-section-number">3.10</span> Overview</h2>
 <p>The developers’ DADA2 tutorial provides an example of a nice, quick way to pull out how many reads were dropped at various points of the pipeline. This can serve as a jumping off point if you’re left with too few sequences at the end to help point you towards where you should start digging into where they are being dropped. Here’s a slightly modified version:</p>
-<pre><code>  # set a little function
-getN &lt;- function(x) sum(getUniques(x))
-
-  # making a little table
-summary_tab &lt;- data.frame(row.names=samples, dada2_input=filtered_out[,1],
-               filtered=filtered_out[,2], dada_f=sapply(dada_forward, getN),
-               dada_r=sapply(dada_reverse, getN), merged=sapply(merged_amplicons, getN),
-               nonchim=rowSums(seqtab.nochim),
-               final_perc_reads_retained=round(rowSums(seqtab.nochim)/filtered_out[,1]*100, 1))
-
-summary_tab
-</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="ngs-sequence-analysis.html#cb33-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set a little function</span></span>
+<span id="cb33-2"><a href="ngs-sequence-analysis.html#cb33-2" aria-hidden="true" tabindex="-1"></a>getN <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">getUniques</span>(x))</span>
+<span id="cb33-3"><a href="ngs-sequence-analysis.html#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="ngs-sequence-analysis.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># making a little table</span></span>
+<span id="cb33-5"><a href="ngs-sequence-analysis.html#cb33-5" aria-hidden="true" tabindex="-1"></a>summary_tab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">row.names=</span>samples, <span class="at">dada2_input=</span>filtered_out[,<span class="dv">1</span>],</span>
+<span id="cb33-6"><a href="ngs-sequence-analysis.html#cb33-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">filtered=</span>filtered_out[,<span class="dv">2</span>], <span class="at">dada_f=</span><span class="fu">sapply</span>(dada_forward, getN),</span>
+<span id="cb33-7"><a href="ngs-sequence-analysis.html#cb33-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">dada_r=</span><span class="fu">sapply</span>(dada_reverse, getN), <span class="at">merged=</span><span class="fu">sapply</span>(merged_amplicons, getN),</span>
+<span id="cb33-8"><a href="ngs-sequence-analysis.html#cb33-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">nonchim=</span><span class="fu">rowSums</span>(seqtab.nochim),</span>
+<span id="cb33-9"><a href="ngs-sequence-analysis.html#cb33-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">final_perc_reads_retained=</span><span class="fu">round</span>(<span class="fu">rowSums</span>(seqtab.nochim)<span class="sc">/</span>filtered_out[,<span class="dv">1</span>]<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>))</span>
+<span id="cb33-10"><a href="ngs-sequence-analysis.html#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="ngs-sequence-analysis.html#cb33-11" aria-hidden="true" tabindex="-1"></a>summary_tab</span></code></pre></div>
 <p>And it might be useful to write this table out of R, saving it as a regular file</p>
-<pre><code>write.table(summary_tab, &quot;read-count-tracking.tsv&quot;, quote=FALSE, sep=&quot;\t&quot;, col.names=NA)</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="ngs-sequence-analysis.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(summary_tab, <span class="st">&quot;read-count-tracking.tsv&quot;</span>, <span class="at">quote=</span><span class="cn">FALSE</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">col.names=</span><span class="cn">NA</span>)</span></code></pre></div>
 </div>
 <div id="assign-taxonomy" class="section level2" number="3.11">
-<h2><span class="header-section-number">3.11</span> 2.11 Assign taxonomy</h2>
-<pre><code>## downloading DECIPHER-formatted SILVA v138 reference
-download.file(url=&quot;http://www2.decipher.codes/Classification/TrainingSets/SILVA_SSU_r138_2019.RData&quot;, destfile=&quot;SILVA_SSU_r138_2019.RData&quot;)
-
-## loading reference taxonomy object
-load(&quot;SILVA_SSU_r138_2019.RData&quot;)</code></pre>
+<h2><span class="header-section-number">3.11</span> Assign taxonomy</h2>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="ngs-sequence-analysis.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## downloading DECIPHER-formatted SILVA v138 reference</span></span>
+<span id="cb35-2"><a href="ngs-sequence-analysis.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url=</span><span class="st">&quot;http://www2.decipher.codes/Classification/TrainingSets/SILVA_SSU_r138_2019.RData&quot;</span>, <span class="at">destfile=</span><span class="st">&quot;SILVA_SSU_r138_2019.RData&quot;</span>)</span>
+<span id="cb35-3"><a href="ngs-sequence-analysis.html#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="ngs-sequence-analysis.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="do">## loading reference taxonomy object</span></span>
+<span id="cb35-5"><a href="ngs-sequence-analysis.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;SILVA_SSU_r138_2019.RData&quot;</span>)</span></code></pre></div>
 <p>Running the following taxonomy assignment step took ~30 minutes on a 2013 MacBook Pro. So feel free to load the stored R objects with load(“amplicon_dada2_ex.RData”) to skip this step if you’d like.</p>
-<pre><code>## loading DECIPHER
-library(DECIPHER)
-
-## creating DNAStringSet object of our ASVs
-dna &lt;- DNAStringSet(getSequences(seqtab.nochim))
-
-## and classifying
-tax_info &lt;- IdTaxa(test=dna, trainingSet=trainingSet, strand=&quot;both&quot;, processors=NULL)</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="ngs-sequence-analysis.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## loading DECIPHER</span></span>
+<span id="cb36-2"><a href="ngs-sequence-analysis.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DECIPHER)</span>
+<span id="cb36-3"><a href="ngs-sequence-analysis.html#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="ngs-sequence-analysis.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="do">## creating DNAStringSet object of our ASVs</span></span>
+<span id="cb36-5"><a href="ngs-sequence-analysis.html#cb36-5" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> <span class="fu">DNAStringSet</span>(<span class="fu">getSequences</span>(seqtab.nochim))</span>
+<span id="cb36-6"><a href="ngs-sequence-analysis.html#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="ngs-sequence-analysis.html#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="do">## and classifying</span></span>
+<span id="cb36-8"><a href="ngs-sequence-analysis.html#cb36-8" aria-hidden="true" tabindex="-1"></a>tax_info <span class="ot">&lt;-</span> <span class="fu">IdTaxa</span>(<span class="at">test=</span>dna, <span class="at">trainingSet=</span>trainingSet, <span class="at">strand=</span><span class="st">&quot;both&quot;</span>, <span class="at">processors=</span><span class="cn">NULL</span>)</span></code></pre></div>
 </div>
 <div id="standard-goods" class="section level2" number="3.12">
-<h2><span class="header-section-number">3.12</span> 2.12 Standard goods</h2>
+<h2><span class="header-section-number">3.12</span> Standard goods</h2>
 <p>The typical standard outputs from amplicon processing are a fasta file, a count table, and a taxonomy table. So here’s one way we can generate those files from your DADA2 objects in R:</p>
-<pre><code>  # giving our seq headers more manageable names (ASV_1, ASV_2...)
-asv_seqs &lt;- colnames(seqtab.nochim)
-asv_headers &lt;- vector(dim(seqtab.nochim)[2], mode=&quot;character&quot;)
-
-for (i in 1:dim(seqtab.nochim)[2]) {
-  asv_headers[i] &lt;- paste(&quot;&gt;ASV&quot;, i, sep=&quot;_&quot;)
-}
-
-  # making and writing out a fasta of our final ASV seqs:
-asv_fasta &lt;- c(rbind(asv_headers, asv_seqs))
-write(asv_fasta, &quot;ASVs.fa&quot;)
-
-  # count table:
-asv_tab &lt;- t(seqtab.nochim)
-row.names(asv_tab) &lt;- sub(&quot;&gt;&quot;, &quot;&quot;, asv_headers)
-write.table(asv_tab, &quot;ASVs_counts.tsv&quot;, sep=&quot;\t&quot;, quote=F, col.names=NA)
-
-  # tax table:
-  # creating table of taxonomy and setting any that are unclassified as &quot;NA&quot;
-ranks &lt;- c(&quot;domain&quot;, &quot;phylum&quot;, &quot;class&quot;, &quot;order&quot;, &quot;family&quot;, &quot;genus&quot;, &quot;species&quot;)
-asv_tax &lt;- t(sapply(tax_info, function(x) {
-  m &lt;- match(ranks, x$rank)
-  taxa &lt;- x$taxon[m]
-  taxa[startsWith(taxa, &quot;unclassified_&quot;)] &lt;- NA
-  taxa
-}))
-colnames(asv_tax) &lt;- ranks
-rownames(asv_tax) &lt;- gsub(pattern=&quot;&gt;&quot;, replacement=&quot;&quot;, x=asv_headers)
-
-write.table(asv_tax, &quot;ASVs_taxonomy.tsv&quot;, sep = &quot;\t&quot;, quote=F, col.names=NA)
-</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="ngs-sequence-analysis.html#cb37-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># giving our seq headers more manageable names (ASV_1, ASV_2...)</span></span>
+<span id="cb37-2"><a href="ngs-sequence-analysis.html#cb37-2" aria-hidden="true" tabindex="-1"></a>asv_seqs <span class="ot">&lt;-</span> <span class="fu">colnames</span>(seqtab.nochim)</span>
+<span id="cb37-3"><a href="ngs-sequence-analysis.html#cb37-3" aria-hidden="true" tabindex="-1"></a>asv_headers <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="fu">dim</span>(seqtab.nochim)[<span class="dv">2</span>], <span class="at">mode=</span><span class="st">&quot;character&quot;</span>)</span>
+<span id="cb37-4"><a href="ngs-sequence-analysis.html#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="ngs-sequence-analysis.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(seqtab.nochim)[<span class="dv">2</span>]) {</span>
+<span id="cb37-6"><a href="ngs-sequence-analysis.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  asv_headers[i] <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;&gt;ASV&quot;</span>, i, <span class="at">sep=</span><span class="st">&quot;_&quot;</span>)</span>
+<span id="cb37-7"><a href="ngs-sequence-analysis.html#cb37-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-8"><a href="ngs-sequence-analysis.html#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="ngs-sequence-analysis.html#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># making and writing out a fasta of our final ASV seqs:</span></span>
+<span id="cb37-10"><a href="ngs-sequence-analysis.html#cb37-10" aria-hidden="true" tabindex="-1"></a>asv_fasta <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rbind</span>(asv_headers, asv_seqs))</span>
+<span id="cb37-11"><a href="ngs-sequence-analysis.html#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write</span>(asv_fasta, <span class="st">&quot;ASVs.fa&quot;</span>)</span>
+<span id="cb37-12"><a href="ngs-sequence-analysis.html#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="ngs-sequence-analysis.html#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count table:</span></span>
+<span id="cb37-14"><a href="ngs-sequence-analysis.html#cb37-14" aria-hidden="true" tabindex="-1"></a>asv_tab <span class="ot">&lt;-</span> <span class="fu">t</span>(seqtab.nochim)</span>
+<span id="cb37-15"><a href="ngs-sequence-analysis.html#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(asv_tab) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;&gt;&quot;</span>, <span class="st">&quot;&quot;</span>, asv_headers)</span>
+<span id="cb37-16"><a href="ngs-sequence-analysis.html#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(asv_tab, <span class="st">&quot;ASVs_counts.tsv&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote=</span>F, <span class="at">col.names=</span><span class="cn">NA</span>)</span>
+<span id="cb37-17"><a href="ngs-sequence-analysis.html#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-18"><a href="ngs-sequence-analysis.html#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tax table:</span></span>
+<span id="cb37-19"><a href="ngs-sequence-analysis.html#cb37-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># creating table of taxonomy and setting any that are unclassified as &quot;NA&quot;</span></span>
+<span id="cb37-20"><a href="ngs-sequence-analysis.html#cb37-20" aria-hidden="true" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;domain&quot;</span>, <span class="st">&quot;phylum&quot;</span>, <span class="st">&quot;class&quot;</span>, <span class="st">&quot;order&quot;</span>, <span class="st">&quot;family&quot;</span>, <span class="st">&quot;genus&quot;</span>, <span class="st">&quot;species&quot;</span>)</span>
+<span id="cb37-21"><a href="ngs-sequence-analysis.html#cb37-21" aria-hidden="true" tabindex="-1"></a>asv_tax <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(tax_info, <span class="cf">function</span>(x) {</span>
+<span id="cb37-22"><a href="ngs-sequence-analysis.html#cb37-22" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">match</span>(ranks, x<span class="sc">$</span>rank)</span>
+<span id="cb37-23"><a href="ngs-sequence-analysis.html#cb37-23" aria-hidden="true" tabindex="-1"></a>  taxa <span class="ot">&lt;-</span> x<span class="sc">$</span>taxon[m]</span>
+<span id="cb37-24"><a href="ngs-sequence-analysis.html#cb37-24" aria-hidden="true" tabindex="-1"></a>  taxa[<span class="fu">startsWith</span>(taxa, <span class="st">&quot;unclassified_&quot;</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb37-25"><a href="ngs-sequence-analysis.html#cb37-25" aria-hidden="true" tabindex="-1"></a>  taxa</span>
+<span id="cb37-26"><a href="ngs-sequence-analysis.html#cb37-26" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb37-27"><a href="ngs-sequence-analysis.html#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(asv_tax) <span class="ot">&lt;-</span> ranks</span>
+<span id="cb37-28"><a href="ngs-sequence-analysis.html#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(asv_tax) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern=</span><span class="st">&quot;&gt;&quot;</span>, <span class="at">replacement=</span><span class="st">&quot;&quot;</span>, <span class="at">x=</span>asv_headers)</span>
+<span id="cb37-29"><a href="ngs-sequence-analysis.html#cb37-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-30"><a href="ngs-sequence-analysis.html#cb37-30" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(asv_tax, <span class="st">&quot;ASVs_taxonomy.tsv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote=</span>F, <span class="at">col.names=</span><span class="cn">NA</span>)</span></code></pre></div>
 </div>
 <div id="contaminants" class="section level2" number="3.13">
-<h2><span class="header-section-number">3.13</span> 2.13 Contaminants</h2>
+<h2><span class="header-section-number">3.13</span> Contaminants</h2>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -546,6 +547,14 @@ assign taxonomy
 </tr>
 </tbody>
 </table>
+<details>
+<summary>
+<strong>Q. Why isn’t this data tidy?</strong>
+</summary>
+<p>The variable <code>year</code> is split across six columns.</p>
+We want to create a single column <strong>year</strong> that will have the values (2007-2012) in rows. This will make the dataframe much longer as individuals will be repeated six times. At the same time the values in the six columns should be assigned to a new column <strong>length</strong>.
+</details>
+<p>
 
 </div>
 </div>
