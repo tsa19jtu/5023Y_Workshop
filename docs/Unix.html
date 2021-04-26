@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Unix | UNDER CONSTRUCTION</title>
+  <title>Chapter 2 Unix | Introduction to Bioinformatics - 5023Y</title>
   <meta name="description" content="This is very brief introduction to some of the basic skills required to handling sequencing data for Bioinformatics - with one reproducible example analysing microbiome sequencing data" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Unix | UNDER CONSTRUCTION" />
+  <meta property="og:title" content="Chapter 2 Unix | Introduction to Bioinformatics - 5023Y" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Unix | UNDER CONSTRUCTION" />
+  <meta name="twitter:title" content="Chapter 2 Unix | Introduction to Bioinformatics - 5023Y" />
   
   <meta name="twitter:description" content="This is very brief introduction to some of the basic skills required to handling sequencing data for Bioinformatics - with one reproducible example analysing microbiome sequencing data" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Philip Leftwich" />
 
 
-<meta name="date" content="2021-04-20" />
+<meta name="date" content="2021-04-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -146,48 +146,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="Unix.html"><a href="Unix.html"><i class="fa fa-check"></i><b>2</b> Unix</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="Unix.html"><a href="Unix.html#what-is-unixlinux"><i class="fa fa-check"></i><b>2.1</b> What is Unix/Linux</a>
+<li class="chapter" data-level="2.1" data-path="Unix.html"><a href="Unix.html#what-is-unixlinux"><i class="fa fa-check"></i><b>2.1</b> What is Unix/Linux?</a>
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="Unix.html"><a href="Unix.html#some-terms"><i class="fa fa-check"></i><b>2.1.1</b> Some terms</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="Unix.html"><a href="Unix.html#why-learn-unix"><i class="fa fa-check"></i><b>2.2</b> Why Learn Unix?</a></li>
 <li class="chapter" data-level="2.3" data-path="Unix.html"><a href="Unix.html#getting-started"><i class="fa fa-check"></i><b>2.3</b> Getting started</a></li>
-<li class="chapter" data-level="2.4" data-path="Unix.html"><a href="Unix.html#a-few-foundational-rules"><i class="fa fa-check"></i><b>2.4</b> 1.4 A few foundational rules</a></li>
-<li class="chapter" data-level="2.5" data-path="Unix.html"><a href="Unix.html#lets-get-started"><i class="fa fa-check"></i><b>2.5</b> 1.5 Let’s get started</a>
+<li class="chapter" data-level="2.4" data-path="Unix.html"><a href="Unix.html#a-few-foundational-rules"><i class="fa fa-check"></i><b>2.4</b> A few foundational rules</a></li>
+<li class="chapter" data-level="2.5" data-path="Unix.html"><a href="Unix.html#lets-get-started"><i class="fa fa-check"></i><b>2.5</b> Let’s get started</a>
 <ul>
 <li class="chapter" data-level="2.5.1" data-path="Unix.html"><a href="Unix.html#downloading-data"><i class="fa fa-check"></i><b>2.5.1</b> Downloading data</a></li>
+<li class="chapter" data-level="2.5.2" data-path="Unix.html"><a href="Unix.html#more-functions"><i class="fa fa-check"></i><b>2.5.2</b> More functions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="Unix.html"><a href="Unix.html#unix-file-structure"><i class="fa fa-check"></i><b>2.6</b> 1.6 Unix File Structure</a></li>
-<li class="chapter" data-level="2.7" data-path="Unix.html"><a href="Unix.html#absolute-vs-relative-file-paths"><i class="fa fa-check"></i><b>2.7</b> 1.7 Absolute vs relative file paths</a></li>
-<li class="chapter" data-level="2.8" data-path="Unix.html"><a href="Unix.html#moving-around"><i class="fa fa-check"></i><b>2.8</b> 1.8 Moving around</a></li>
-<li class="chapter" data-level="2.9" data-path="Unix.html"><a href="Unix.html#summary"><i class="fa fa-check"></i><b>2.9</b> 1.9 Summary</a>
+<li class="chapter" data-level="2.6" data-path="Unix.html"><a href="Unix.html#unix-file-structure"><i class="fa fa-check"></i><b>2.6</b> Unix File Structure</a></li>
+<li class="chapter" data-level="2.7" data-path="Unix.html"><a href="Unix.html#absolute-vs-relative-file-paths"><i class="fa fa-check"></i><b>2.7</b> Absolute vs relative file paths</a></li>
+<li class="chapter" data-level="2.8" data-path="Unix.html"><a href="Unix.html#moving-around"><i class="fa fa-check"></i><b>2.8</b> Moving around</a></li>
+<li class="chapter" data-level="2.9" data-path="Unix.html"><a href="Unix.html#summary"><i class="fa fa-check"></i><b>2.9</b> Summary</a>
 <ul>
 <li class="chapter" data-level="2.9.1" data-path="Unix.html"><a href="Unix.html#terms"><i class="fa fa-check"></i><b>2.9.1</b> Terms</a></li>
 <li class="chapter" data-level="2.9.2" data-path="Unix.html"><a href="Unix.html#commands"><i class="fa fa-check"></i><b>2.9.2</b> Commands</a></li>
 <li class="chapter" data-level="2.9.3" data-path="Unix.html"><a href="Unix.html#special-characters"><i class="fa fa-check"></i><b>2.9.3</b> Special characters</a></li>
 </ul></li>
-<li class="chapter" data-level="2.10" data-path="Unix.html"><a href="Unix.html#stretch-yourself"><i class="fa fa-check"></i><b>2.10</b> 1.10 Stretch yourself</a></li>
+<li class="chapter" data-level="2.10" data-path="Unix.html"><a href="Unix.html#summary-1"><i class="fa fa-check"></i><b>2.10</b> Summary</a></li>
+<li class="chapter" data-level="2.11" data-path="Unix.html"><a href="Unix.html#stretch-yourself---optional-extras-to-try-a-couple-of-other-skills"><i class="fa fa-check"></i><b>2.11</b> Stretch yourself - optional extras to try a couple of other skills</a>
+<ul>
+<li class="chapter" data-level="2.11.1" data-path="Unix.html"><a href="Unix.html#creation"><i class="fa fa-check"></i><b>2.11.1</b> Creation</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html"><i class="fa fa-check"></i><b>3</b> NGS sequence analysis</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#background"><i class="fa fa-check"></i><b>3.1</b> Background</a></li>
-<li class="chapter" data-level="3.2" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#the-data"><i class="fa fa-check"></i><b>3.2</b> The data</a></li>
-<li class="chapter" data-level="3.3" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#removing-primers"><i class="fa fa-check"></i><b>3.3</b> Removing Primers</a>
+<li class="chapter" data-level="3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#background-on-high-throughput-sequencing"><i class="fa fa-check"></i><b>3.1</b> Background on high throughput sequencing</a></li>
+<li class="chapter" data-level="3.2" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#some-terms-1"><i class="fa fa-check"></i><b>3.2</b> Some terms</a></li>
+<li class="chapter" data-level="3.3" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#the-data"><i class="fa fa-check"></i><b>3.3</b> The data</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#loops"><i class="fa fa-check"></i><b>3.3.1</b> Loops</a></li>
+<li class="chapter" data-level="3.3.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#fastq"><i class="fa fa-check"></i><b>3.3.1</b> FASTQ?</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dada2---switch-to-r-console"><i class="fa fa-check"></i><b>3.4</b> DADA2 - switch to R console</a></li>
-<li class="chapter" data-level="3.5" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#quality-trimmingfiltering"><i class="fa fa-check"></i><b>3.5</b> Quality trimming/filtering</a></li>
-<li class="chapter" data-level="3.6" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dereplication"><i class="fa fa-check"></i><b>3.6</b> Dereplication</a></li>
-<li class="chapter" data-level="3.7" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#asvs"><i class="fa fa-check"></i><b>3.7</b> ASV’s</a></li>
-<li class="chapter" data-level="3.8" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#merging-reads"><i class="fa fa-check"></i><b>3.8</b> Merging reads</a></li>
-<li class="chapter" data-level="3.9" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#count-table"><i class="fa fa-check"></i><b>3.9</b> Count table</a></li>
-<li class="chapter" data-level="3.10" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#overview"><i class="fa fa-check"></i><b>3.10</b> Overview</a></li>
-<li class="chapter" data-level="3.11" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#assign-taxonomy"><i class="fa fa-check"></i><b>3.11</b> Assign taxonomy</a></li>
-<li class="chapter" data-level="3.12" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#standard-goods"><i class="fa fa-check"></i><b>3.12</b> Standard goods</a></li>
-<li class="chapter" data-level="3.13" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#contaminants"><i class="fa fa-check"></i><b>3.13</b> Contaminants</a></li>
+<li class="chapter" data-level="3.4" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#the-pipeline"><i class="fa fa-check"></i><b>3.4</b> The Pipeline</a></li>
+<li class="chapter" data-level="3.5" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#removing-primers"><i class="fa fa-check"></i><b>3.5</b> Removing Primers</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#loops"><i class="fa fa-check"></i><b>3.5.1</b> Loops</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="analysis-in-r.html"><a href="analysis-in-r.html"><i class="fa fa-check"></i><b>4</b> Analysis in R</a></li>
+<li class="chapter" data-level="3.6" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dada2"><i class="fa fa-check"></i><b>3.6</b> DADA2</a></li>
+<li class="chapter" data-level="3.7" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#quality-trimmingfiltering"><i class="fa fa-check"></i><b>3.7</b> Quality trimming/filtering</a></li>
+<li class="chapter" data-level="3.8" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#dereplication"><i class="fa fa-check"></i><b>3.8</b> Dereplication</a></li>
+<li class="chapter" data-level="3.9" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#asvs"><i class="fa fa-check"></i><b>3.9</b> ASV’s</a></li>
+<li class="chapter" data-level="3.10" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#merging-reads"><i class="fa fa-check"></i><b>3.10</b> Merging reads</a></li>
+<li class="chapter" data-level="3.11" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#count-table"><i class="fa fa-check"></i><b>3.11</b> Count table</a></li>
+<li class="chapter" data-level="3.12" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#overview"><i class="fa fa-check"></i><b>3.12</b> Overview</a></li>
+<li class="chapter" data-level="3.13" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#assign-taxonomy"><i class="fa fa-check"></i><b>3.13</b> Assign taxonomy</a></li>
+<li class="chapter" data-level="3.14" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#standard-goods"><i class="fa fa-check"></i><b>3.14</b> Standard goods</a></li>
+<li class="chapter" data-level="3.15" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#functions-list"><i class="fa fa-check"></i><b>3.15</b> Functions list</a></li>
+<li class="chapter" data-level="3.16" data-path="ngs-sequence-analysis.html"><a href="ngs-sequence-analysis.html#summary-2"><i class="fa fa-check"></i><b>3.16</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-in-r-under-construction.html"><a href="analysis-in-r-under-construction.html"><i class="fa fa-check"></i><b>4</b> Analysis in R - UNDER CONSTRUCTION</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-in-r-under-construction.html"><a href="analysis-in-r-under-construction.html#important-files"><i class="fa fa-check"></i><b>4.1</b> Important files</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-in-r-under-construction.html"><a href="analysis-in-r-under-construction.html#summary-3"><i class="fa fa-check"></i><b>4.2</b> Summary</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
@@ -207,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">UNDER CONSTRUCTION</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Bioinformatics - 5023Y</a>
           </h1>
         </div>
 
@@ -221,9 +236,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   addClassKlippyTo("pre.r, pre.bash");
   addKlippy('right', 'top', 'auto', '1', 'copy to clipboard', 'Copied!');
 </script>
-<p>Unix is very likely the most foundational skillset we can develop for bioinformatics (and much more than bioinformatics). Many of the most common and powerful bioinformatics approaches happen in this text-based environment, and having a solid foundation here can make everything we’re trying to learn and do much easier. This is a set of 5 introductory tutorials to help us get from being completely new to Unix up to being great friends with it 🙂</p>
+<p>Unix is very likely the most fundamental skillset we can develop for bioinformatics (and much more than bioinformatics). Many of the most common and powerful bioinformatics approaches happen in this text-based environment, and having a solid foundation here can make everything we’re trying to learn and do much easier. This is a short introductory tutorial to help us get from being completely new to Unix up to being friendly with it 🙂</p>
 <div id="what-is-unixlinux" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> What is Unix/Linux</h2>
+<h2><span class="header-section-number">2.1</span> What is Unix/Linux?</h2>
+<p>UNIX is a computer operating system. It was first developed in 1969 at Bell Labs. Unix is written in the programming language <code>C</code>.</p>
+<p>Unix is proprietary software, whereas Linux is <em>basically</em> free and open-source Unix.</p>
+<p>The Linux Operating System is highly flexible, free, open-source (like R) and uses very little RAM to run (Unlike Windows OS) - as such you find most supercomputers run on Linux. Operationally Linux is almost identical to Unix, and so we often refer to it under the umbrella term of “unix-Like” systems.</p>
 <div id="some-terms" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Some terms</h3>
 <p>Here are some terms worth knowing, don’t worry about memorising them, it can just be useful to have these to refer to in the future.</p>
@@ -257,10 +275,26 @@ a text-based environment capable of taking input and providing output
 </tr>
 <tr>
 <td style="text-align:left;">
+Terminal
+</td>
+<td style="text-align:left;">
+A program that runs a shell
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Unix
 </td>
 <td style="text-align:left;">
 a family of operating systems (we also use the term “Unix-like” because one of the most popular operating systems derived from Unix is specifically named as not being Unix)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Linux
+</td>
+<td style="text-align:left;">
+a “Unix-like” OS
 </td>
 </tr>
 <tr>
@@ -271,15 +305,26 @@ bash
 the most common programming language used at a Unix command-line
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+flag
+</td>
+<td style="text-align:left;">
+a way to set options for a function, a specific type of argument usually preceded by a -
+</td>
+</tr>
 </tbody>
 </table>
+<blockquote>
+<p><strong>Note</strong></p>
 <p>You should be very familiar with using a GUI (RStudio), but remember we have spent a lot of time working with files and directories using the the command line (CLI) in R. This is useful practice, because most supercomputers lack a GUI, you must work entirely using the command line.</p>
+</blockquote>
 </div>
 </div>
 <div id="why-learn-unix" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Why Learn Unix?</h2>
-<p>Most sequencing data files are large, and require a lot of RAM to process. As a result most of the work Bioinformaticians do is not hosted on their own computers, instead they “remote-connect” to high performance supercomputers or cluster computers.</p>
-<p>The Linux Operating System is highly flexible, free, open-source (like R) and uses very little RAM to run (Unlike Windows OS) - as such you find most supercomputers run on Linux.</p>
+<p>Most sequencing data files are large, and require a lot of RAM to process. As a result most of the work Bioinformaticians do is not hosted on their own computers, instead they “remote-connect” to high performance supercomputers or cluster computers. Almost all of these high performance computers use “Unix-like” operatings systems, the most common of which is Linux.</p>
+<p>As stated above Linux is free (so no expensive licenses), open-source so lots of developers, its also well known for being stable, secure, reliable and efficient.</p>
 <p>You already have some experience with using a Linux OS - every time you log into RStudio Cloud you are connecting to a supercomputer that runs on Linux. Normally we do not interact directly with the OS, instead we use R and RStudio directly.</p>
 <p>But when you click on the RStudio Terminal it provides direct access to a command-line where we can execute commands and functions directly in Linux.</p>
 <p>This allows us to start using programs other than R, and potentially use multiple programs &amp; programming languages to work together.</p>
@@ -293,110 +338,134 @@ the most common programming language used at a Unix command-line
 <p>Before we get started we need a terminal to work in.</p>
 <ul>
 <li><p>Open the Bioinformatics RStudio Cloud Project in the 5023Y workspace</p></li>
-<li><p>Click on the Terminal tab next to console in the bottom-left pane of the RStudio GUI</p></li>
+<li><p>Click on the <code>Terminal</code> tab next to <code>Console</code> in the bottom-left pane of the RStudio GUI, this opens a command-line <em>Shell</em></p></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="Unix.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
-<span id="cb2-2"><a href="Unix.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
-<img src="bookdown-demo_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="images/terminal.png" alt="Here is an example of the Terminal tab, right next to the R console" width="80%" />
 <p class="caption">
-Figure 2.1: Here is a nice figure!
+Figure 2.1: Here is an example of the Terminal tab, right next to the R console
 </p>
 </div>
 <ul>
-<li><p>This is our “command line” where we will be typing all of our commands.</p></li>
+<li><p>This is our “command line” where we will be typing all of our commands. We type our commands in <code>bash</code></p></li>
+<li><p>The $ is where you start typing from, left of this it tells you what folder you are currently in (<code>working directory</code>)</p></li>
 <li><p>If you need to, you can exit the Terminal and start a new session easily with options in RStudio</p></li>
 </ul>
 </div>
 <div id="a-few-foundational-rules" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> 1.4 A few foundational rules</h2>
+<h2><span class="header-section-number">2.4</span> A few foundational rules</h2>
 <ul>
 <li><p>Just like in R spaces are special, spaces break things apart, as a rule it is therefore better to have functions and file names with dashes (-) or underscores (_) - e.g. “draft_v3.txt” is preferred to “draft v3.txt.”</p></li>
-<li><p>The general syntax on the command line is: <code>command</code> <code>argument</code>. Again this is very similar to R except we don’t use brackets e.g. R we are used to <code>command(argument)</code></p></li>
+<li><p>The general syntax on the command line is: <code>command argument</code>. Again this is very similar to R except we don’t use brackets e.g. in R we are used to <code>command(argument)</code></p></li>
 <li><p>Arguments can be <strong>optional</strong> e.g. if their is a default argument you may not have to write anything. Some functions <em>require</em> that arguments are specified. Again this is just like R.</p></li>
 </ul>
 </div>
 <div id="lets-get-started" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> 1.5 Let’s get started</h2>
-<p>We will perform a very simple function and get a flavour of the similarities and differences to working in `<code>R</code>. date` is a command that prints out the date and time.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="Unix.html#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">date</span></span></code></pre></div>
-<p><a href="https://www.geeksforgeeks.org/date-command-linux-examples/#" class="uri">https://www.geeksforgeeks.org/date-command-linux-examples/#</a>:~:text=date%20command%20is%20used%20to,linux%20operating%20system%20is%20configured.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="Unix.html#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="va">TZ=</span>Europe/London <span class="fu">date</span></span>
-<span id="cb4-2"><a href="Unix.html#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="Unix.html#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">TZ=</span>Europe/London <span class="fu">date</span></span>
-<span id="cb4-4"><a href="Unix.html#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="Unix.html#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">date</span> <span class="at">--date</span><span class="op">=</span><span class="st">&quot;next tue&quot;</span></span></code></pre></div>
+<h2><span class="header-section-number">2.5</span> Let’s get started</h2>
+<p>We will perform a very simple function and get a flavour of the similarities and differences to working in <code>R</code>.</p>
+<p><code>date</code> is a command that prints out the date and time. Copy and paste this command into your terminal</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="Unix.html#cb1-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">date</span></span></code></pre></div>
+<p>This prints out the date/time in UTC</p>
+<p>More information on using the date function (here)[<a href="https://www.geeksforgeeks.org/date-command-linux-examples/" class="uri">https://www.geeksforgeeks.org/date-command-linux-examples/</a>]</p>
+<p>We can also ask for the output for a particular timezone using the <code>TZ</code> function and <code>date</code></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="Unix.html#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="va">TZ=</span>Europe/London <span class="fu">date</span></span></code></pre></div>
+<p>Or we can ask the computer what the date will be next Tuesday…</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="Unix.html#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">date</span> <span class="at">--date</span><span class="op">=</span><span class="st">&quot;next tue&quot;</span></span></code></pre></div>
 <div id="downloading-data" class="section level3" number="2.5.1">
 <h3><span class="header-section-number">2.5.1</span> Downloading data</h3>
+<p>We will start by typing in an instruction to download data from an online data repository, unpack the contents and inspect it:</p>
 <ul>
 <li><p>curl is a command line tool for transferring data to and from the server here we will use this to download data from an online repository.</p></li>
 <li><p>tar will <em>unpack</em> the data from a compressed file format</p></li>
 <li><p>cd change the directory so we <em>land</em> in the new folder we have made</p></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="Unix.html#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">curl</span> <span class="at">-L</span> <span class="at">-o</span> unix_intro.tar.gz https://ndownloader.figshare.com/files/15573746</span>
-<span id="cb5-2"><a href="Unix.html#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tar</span> <span class="at">-xzvf</span> unix_intro.tar.gz <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> unix_intro.tar.gz</span>
-<span id="cb5-3"><a href="Unix.html#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cd</span> unix_intro</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="Unix.html#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">curl</span> <span class="at">-L</span> <span class="at">-o</span> unix_intro.tar.gz https://ndownloader.figshare.com/files/15573746</span>
+<span id="cb4-2"><a href="Unix.html#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tar</span> <span class="at">-xzvf</span> unix_intro.tar.gz <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> unix_intro.tar.gz</span>
+<span id="cb4-3"><a href="Unix.html#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cd</span> unix_intro</span></code></pre></div>
+<div class="rmdwarning">
+<p>
+Check each command line has run, in the example above you might find that the first two lines run, to download and unpack data, while the last line to change directory doesn’t run until you hit enter
+</p>
+</div>
+</div>
+<div id="more-functions" class="section level3" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> More functions</h3>
 <p>Unlike date, most commands require arguments and won’t work without them. head is a command that prints the first lines of a file, so it requires us to provide the file we want it to act on:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="Unix.html#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> example.txt</span></code></pre></div>
-<p>Here “example.txt” is the required argument, and in this case it is also what’s known as a positional argument. Whether things need to be provided as positional arguments or not depends on how the command or program we are using was written. Sometimes we need to specify the input file by putting something in front of it (e.g. some commands will use the -i flag, but it’s often other things as well).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="Unix.html#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> example.txt</span></code></pre></div>
+<p>Here “example.txt” is the required argument, and in this case it is also what’s known as a positional argument. Whether things need to be provided as positional arguments or not depends on how the command or program we are using was written.</p>
+<p>Sometimes we need to specify the input file by putting something in front of it (e.g. some commands will use the -i flag, but it’s often other things as well).</p>
+<details>
+<summary>
+<strong>Q. What’s in the text file? - Click here for Answer</strong>
+</summary>
+<p><em>Pretty boring, each line contains the text “This is line” followed by the line number e.g.</em></p>
+<p><em>- This is line 1</em></p>
+<p><em>- This is line 2</em></p>
+<em>etc.</em>
+</details>
 <p>There are also optional arguments for the head command. The default for head is to print the first 10 lines of a file. We can change that by specifying the -n flag, followed by how many lines we want:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="Unix.html#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> <span class="at">-n</span> 5 example.txt</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="Unix.html#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> <span class="at">-n</span> 5 example.txt</span></code></pre></div>
 <p>How would we know we needed the -n flag for that? There are a few ways to find out. Many standard Unix commands and other programs will have built-in help menus that we can access by providing –help as the only argument:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="Unix.html#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> <span class="at">--help</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="Unix.html#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> <span class="at">--help</span></span></code></pre></div>
 <p>Again this is very similar to the logic in which R commands are strucutred e.g. <code>??ggplot()</code> The synatx is similar even if the specific icons or arguments are different.</p>
 <p>Remember just like with R, one of your best friends is Google! As you get familiar with any language or OS we might remember a few flags or specific options, but searching for options and details when needed is definitely the norm!</p>
 </div>
 </div>
 <div id="unix-file-structure" class="section level2" number="2.6">
-<h2><span class="header-section-number">2.6</span> 1.6 Unix File Structure</h2>
-<p>There are two special locations in all Unix-based systems: the “root” location and the current user’s “home” location. “Root” is where the address system of the computer starts; “home” is where the current user’s location starts.</p>
-<p>IMAGE</p>
-<p>We tell the command line where files and directories are located by providing their address, their “path.” If we use the pwd command (for print working directory), we can find out what the path is for the directory we are sitting in. And if we use the ls command (for list), we can see what directories and files are in the current directory we are sitting in.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="Unix.html#cb9-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pwd</span></span>
-<span id="cb9-2"><a href="Unix.html#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span></span></code></pre></div>
+<h2><span class="header-section-number">2.6</span> Unix File Structure</h2>
+<p>There are two special locations in all Unix-based systems: the “root” location and the current user’s “home” location. “Root” is where the address system of the computer starts; “home” is usally where the current user’s location starts.</p>
+<p>Just to be awkward RStudio Cloud actually has us working in a different location “Cloud,” which is underneath Root but separate to home which would be in the “Users” folder.</p>
+<p><img src="images/file_system_structure.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We tell the command line where files and directories are located by providing their address, their “path.” If we use the pwd command (for print working directory), we can find out what the path is for the directory we are sitting in.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="Unix.html#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pwd</span></span></code></pre></div>
+<p>And if we use the ls command (for list), we can see what directories and files are in the current directory we are sitting in.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="Unix.html#cb9-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span></span></code></pre></div>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>Why is it important to know this? Usually when you are working on a Unix-like environment there is no GUI (nice-click and point interface), all commands have to be submitted through the terminal. So you would have to get used to navigating directories with typed commands, and it’s useful to know what the standard hierarchy is.</p>
+</blockquote>
 </div>
 <div id="absolute-vs-relative-file-paths" class="section level2" number="2.7">
-<h2><span class="header-section-number">2.7</span> 1.7 Absolute vs relative file paths</h2>
+<h2><span class="header-section-number">2.7</span> Absolute vs relative file paths</h2>
 <p>You should be used to these concepts from your work with R projects.</p>
 <p>There are two ways to specify the path (address) of the file we want to do something to:</p>
 <ul>
-<li><p>An <strong>absolute path</strong> is an address that starts from an explicitly specified location: either the “root” <code>/</code> or the “home” <code>~/</code> location. (Side note, because we also may see or hear the term, the “full path,” is the absolute path that starts from the “root” /.)</p></li>
-<li><p>A <strong>relative path</strong> is an address that starts from wherever we are currently sitting. For example, let’s look again at the head command we ran above:</p></li>
+<li><p>An <strong>absolute path</strong> is an address that starts from an explicitly specified location: usually the “root” <code>/</code> or the “home” <code>~/</code> location. (Side note, because we also may see or hear the term, the “full path,” is usually the absolute path that starts from the “root” /.)</p></li>
+<li><p>A <strong>relative path</strong> is an address that starts from wherever we are currently sitting (the working directory). For example, let’s look again at the head command we ran above:</p></li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="Unix.html#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> example.txt</span></code></pre></div>
 <p>What we are actually doing here is using a relative path to specify where the “example.txt” file is located. This is because the command line <strong>automatically looks</strong> in the current working directory if we don’t specify anything else about its location.</p>
-<p>We can also run the same command on the same file using an <strong>absolute path</strong>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="Unix.html#cb11-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> ~/unix_intro/example.txt</span></code></pre></div>
+<p>We can also run the same command on the same file using an <strong>absolute path</strong> - note Rstudio cloud has a slightly unique set-up in that we start from a folder designated cloud:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="Unix.html#cb11-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> /cloud/project/unix_intro/example.txt</span></code></pre></div>
 <p>The previous two commands both point to the same file right now. But the first way, head example.txt, will only work if we are entering it while “sitting” in the directory that holds that file, while the second way will work no matter where we happen to be in the computer.</p>
 <p>It is <strong>important to always think about where</strong> we are in the computer when working at the command line. One of the most common errors/easiest mistakes to make is trying to do something to a file that isn’t where we think it is. Let’s run head on the “example.txt” file again, and then let’s try it on another file: “notes.txt”:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="Unix.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> example.txt</span>
-<span id="cb12-2"><a href="Unix.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> notes.txt</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="Unix.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> example.txt</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="Unix.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> notes.txt</span></code></pre></div>
 <p>Here the head command works fine on “example.txt,” but we get an error message when we call it on “notes.txt” telling us no such file or directory. If we run the ls command to list the contents of the current working directory, we can see the computer is absolutely right – spoiler alert: it usually is – and there is no file here named “notes.txt.”</p>
 <p>The ls command by default operates on the current working directory if we don’t specify any location, but we can tell it to list the contents of a different directory by providing it as a positional argument:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="Unix.html#cb13-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span></span>
-<span id="cb13-2"><a href="Unix.html#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span> experiment</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="Unix.html#cb14-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="Unix.html#cb15-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span> experiment</span></code></pre></div>
 <p>We can see the file we were looking for is located in the subdirectory called “experiment.” Here is how we can run head on “notes.txt” by specifying an accurate relative path to that file:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="Unix.html#cb14-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> experiment/notes.txt</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="Unix.html#cb16-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> experiment/notes.txt</span></code></pre></div>
 </div>
 <div id="moving-around" class="section level2" number="2.8">
-<h2><span class="header-section-number">2.8</span> 1.8 Moving around</h2>
+<h2><span class="header-section-number">2.8</span> Moving around</h2>
 <p>We can also move into the directory containing the file we want to work with by using the <code>cd</code> command (<strong>c</strong>hange <strong>d</strong>irectory). This command takes a positional argument that is the path (address) of the directory we want to change into. This can be a relative path or an absolute path. Here we’ll use the relative path of the subdirectory, “experiment,” to change into it</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="Unix.html#cb15-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cd</span> experiment/</span>
-<span id="cb15-2"><a href="Unix.html#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pwd</span></span>
-<span id="cb15-3"><a href="Unix.html#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span></span>
-<span id="cb15-4"><a href="Unix.html#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> notes.txt</span></code></pre></div>
-<p>Great. But now how do we get back “up” to the directory above us? One way would be to provide an absolute path, like <code>cd ~/unix_intro</code>, but there is also a handy shortcut. <code>..</code> are special characters that act as a relative path specifying “up” one level – one directory – from wherever we currently are. So we can provide that as the positional argument to cd to get back to where we started:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="Unix.html#cb16-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cd</span> ..</span>
-<span id="cb16-2"><a href="Unix.html#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pwd</span></span>
-<span id="cb16-3"><a href="Unix.html#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="Unix.html#cb17-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cd</span> experiment/</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="Unix.html#cb18-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pwd</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="Unix.html#cb19-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ls</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="Unix.html#cb20-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span> notes.txt</span></code></pre></div>
+<p>Great. But now how do we get <strong>back “up”</strong> to the directory above us? One way would be to provide an absolute path, like <code>cd /cloud/project/unix_intro</code>, but there is also a handy shortcut. <code>..</code> which are special characters that act as a relative path specifying “up” one level – one directory – from wherever we currently are.</p>
+<p>So we can provide that as the positional argument to cd to get back to where we started:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="Unix.html#cb21-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cd</span> ..</span></code></pre></div>
 <p>Moving around the computer like this might feel a bit cumbersome and frustrating at first, but after spending a little time with it, you will get used to it, and it starts to feel more natural.</p>
-<p>Get used to using <strong>tab</strong> to perform <strong>tab-completion</strong> often this will auto-complete file names!</p>
-<ul>
-<li>Press tab twice quickly and it will print all possible combinations</li>
-</ul>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>One way to speed things up is to start using <strong>tab</strong> to perform <strong>tab-completion</strong> often this will auto-complete file names! Press tab twice quickly and it will print all possible combinations.</p>
+</blockquote>
 </div>
 <div id="summary" class="section level2" number="2.9">
-<h2><span class="header-section-number">2.9</span> 1.9 Summary</h2>
+<h2><span class="header-section-number">2.9</span> Summary</h2>
 <p>While maybe not all that exciting, these things really are the foundation needed to start utilizing the command line – which then gives us the capability to use lots of tools that only work at a command line, manipulate large files rapidly, access and work with remote computers, and more! These are the fundamental tools that every scientist needs to work with <strong>big data</strong>.</p>
 <div id="terms" class="section level3" number="2.9.1">
 <h3><span class="header-section-number">2.9.1</span> Terms</h3>
@@ -570,398 +639,49 @@ specifies a directory one level “above” the current working directory
 </table>
 </div>
 </div>
-<div id="stretch-yourself" class="section level2" number="2.10">
-<h2><span class="header-section-number">2.10</span> 1.10 Stretch yourself</h2>
-<p><a href="https://bioinformaticsworkbook.org/Appendix/Unix/unix-basics-1.html#gsc.tab=0" class="uri">https://bioinformaticsworkbook.org/Appendix/Unix/unix-basics-1.html#gsc.tab=0</a></p>
-<p><a href="http://evomics.org/learning/unix-tutorial/" class="uri">http://evomics.org/learning/unix-tutorial/</a></p>
-<p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="Unix.html#fig:nice-fig">2.1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="Unix.html#tab:nice-tab">2.1</a>.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="Unix.html#cb17-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb17-2"><a href="Unix.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(iris, <span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
-<span id="cb17-3"><a href="Unix.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
-<span id="cb17-4"><a href="Unix.html#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<table>
-<caption>
-<span id="tab:nice-tab">Table 2.1: </span>Here is a nice table!
-</caption>
-<thead>
-<tr>
-<th style="text-align:right;">
-Sepal.Length
-</th>
-<th style="text-align:right;">
-Sepal.Width
-</th>
-<th style="text-align:right;">
-Petal.Length
-</th>
-<th style="text-align:right;">
-Petal.Width
-</th>
-<th style="text-align:left;">
-Species
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-3.5
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.9
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.7
-</td>
-<td style="text-align:right;">
-3.2
-</td>
-<td style="text-align:right;">
-1.3
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.6
-</td>
-<td style="text-align:right;">
-3.1
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.0
-</td>
-<td style="text-align:right;">
-3.6
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.4
-</td>
-<td style="text-align:right;">
-3.9
-</td>
-<td style="text-align:right;">
-1.7
-</td>
-<td style="text-align:right;">
-0.4
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.6
-</td>
-<td style="text-align:right;">
-3.4
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.0
-</td>
-<td style="text-align:right;">
-3.4
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.4
-</td>
-<td style="text-align:right;">
-2.9
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.9
-</td>
-<td style="text-align:right;">
-3.1
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.1
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.4
-</td>
-<td style="text-align:right;">
-3.7
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.8
-</td>
-<td style="text-align:right;">
-3.4
-</td>
-<td style="text-align:right;">
-1.6
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.8
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.1
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.3
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-1.1
-</td>
-<td style="text-align:right;">
-0.1
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.8
-</td>
-<td style="text-align:right;">
-4.0
-</td>
-<td style="text-align:right;">
-1.2
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.7
-</td>
-<td style="text-align:right;">
-4.4
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.4
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.4
-</td>
-<td style="text-align:right;">
-3.9
-</td>
-<td style="text-align:right;">
-1.3
-</td>
-<td style="text-align:right;">
-0.4
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-3.5
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.7
-</td>
-<td style="text-align:right;">
-3.8
-</td>
-<td style="text-align:right;">
-1.7
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-3.8
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:left;">
-setosa
-</td>
-</tr>
-</tbody>
-</table>
-<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="references.html#ref-R-bookdown" role="doc-biblioref">Xie 2020</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="references.html#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span>.</p>
-<div class="rmdtip">
-<p>
-Something
-</p>
+<div id="summary-1" class="section level2" number="2.10">
+<h2><span class="header-section-number">2.10</span> Summary</h2>
+<p>You won’t get used to operating in bash, or moving around directories using just the command line in a single session. So if you think you are interested in developing your bioinformatic skills, spend some time practising.</p>
+<p>Here is a link to a couple of extended tutorials you can bookmark if you want to explore this further:</p>
+<p><a href="https://datacarpentry.org/shell-genomics/01-introduction/index.html" class="uri">https://datacarpentry.org/shell-genomics/01-introduction/index.html</a></p>
 </div>
-<div class="rmdnote">
-<p>
-Something
-</p>
-</div>
-<div class="rmdwarning">
-<p>
-Something
-</p>
-</div>
+<div id="stretch-yourself---optional-extras-to-try-a-couple-of-other-skills" class="section level2" number="2.11">
+<h2><span class="header-section-number">2.11</span> Stretch yourself - optional extras to try a couple of other skills</h2>
+<div id="creation" class="section level3" number="2.11.1">
+<h3><span class="header-section-number">2.11.1</span> Creation</h3>
+<p>I want to create a new directory to store some code files I’m going to write later, so I’ll use <code>mkdir</code> to create a new directory called Code:</p>
+<details>
+<summary>
+<strong>Check you are in the <code>unix_intro</code> folder - Click here for Answer</strong>
+</summary>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="Unix.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div>
+</details>
+<details>
+<summary>
+<strong>Make a new directory called Code - Click here for Answer</strong>
+</summary>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="Unix.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> Code</span></code></pre></div>
+</details>
+<details>
+<summary>
+<strong>Check this folder has been created using a list function</strong>
+</summary>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="Unix.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+</details>
+<p>Note that I used a relative file path to create the Code directory - but I could have also specified an absolute filepath to generate that folder in whatever location I want.</p>
+<p>There are a few ways to make new files on the command line. The simplest is to generate a blank file with the <code>touch</code> command followed by the path (relative or absolute) to the file you want to create</p>
+<details>
+<summary>
+<strong>Make a new file called data-science-class.txt - Click here for Answer</strong>
+</summary>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="Unix.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> data-science-class.txt</span>
+<span id="cb25-2"><a href="Unix.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code></pre></div>
+<p><em>Note here I could just use ls to list all files and folders in a directory, but if i set the flag <code>-l</code> then it will produce a <strong>l</strong>ong list of files.</em></p>
+<p><em>If the entry in the first column is a <code>d</code>, then the row in the table corresponds to a directory, otherwise the information in the row corresponds to a file.</em></p>
+<p><em>The string of characters following the <code>d</code> in the case of a directory or following the first <code>-</code> in the case of a file represent the permissions for that file or directory - I won’t cover that here - but some of the links I provide go into more detail.</em></p>
+</details>
 
+</div>
 </div>
 </div>
             </section>
@@ -1020,20 +740,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

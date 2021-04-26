@@ -1,14 +1,13 @@
 
-# Analysis in R
+# Analysis in R - UNDER CONSTRUCTION
 
 ```{r}
-library("phyloseq")
-library("vegan")
-library("DESeq2")
-library("ggplot2")
-library("dendextend")
-library("tidyr")
-library("viridis")
+library(phyloseq)
+library(vegan)
+library(DESeq2)
+library(tidyverse)
+library(dendextend)
+library(viridis)
 library("reshape")
 
 ```
@@ -17,7 +16,94 @@ library("reshape")
 klippy::klippy(c('r', 'bash'), position = c('top', 'right'), tooltip_message = 'copy to clipboard', tooltip_success = 'Copied')
 ```
 
+## Important files
+
+We're mostly going to be working with just 3 files now.
+
+- A count table: the number of reads for each unique sequence
+
+- A taxonomy table: the assigned taxonomy for each sequence according to the SILVA database
+
+- A sample file: this is the "metadata" it contains any information *we* have provided about the different samples
+
+```{r, include=FALSE}
+rm(list= ls()[!(ls() %in% c('asv_tab_no_contam','asv_tax_no_contam'))])
+
+```
+
+> **Note**
+>
+> Since we’ve already used decontam to remove likely contaminants, we’re dropping the “blank” samples from our count table which in the table we’re reading in are the first 4 columns. That’s what’s being done by the [ , -c(1:4)] part at the end there.
+
+```{r}
+sample_info_tab <- read.table("sample_info.tsv", header=T, row.names=1,
+                   check.names=F, sep="\t")
+
+```
+
+
+```{r}
+ps <- phyloseq(otu_table(asv_tab_no_contam, taxa_are_rows=T), 
+               sample_data(sample_info_tab), 
+               tax_table(asv_tax_no_contam))
+
+```
+
 Make graphs
+
+```{r}
+ ps %>% 
+  tax_glom(taxrank="class") %>%  
+  transform_sample_counts(function(x){x/sum(x)})%>% 
+  psmelt() %>% 
+  filter(Abundance >0.05)
+```
+
+
+```{r}
+ ps %>% 
+  tax_glom(taxrank="class") %>%  
+  transform_sample_counts(function(x){x/sum(x)})%>% 
+  psmelt() %>% 
+  filter(Abundance >0.05)%>% 
+  ggplot(aes(x=Sample, y=Abundance, colour=class))+
+  geom_bar(stat="identity")
+```
+
+sample_info_tab$Sample <- rownames(sample_info_tab)
+
+ps_richness$Sample <- rownames(ps_richness)
+
+richness -> ps %>% 
+estimate_richness() 
+
+left_join(sample_info_tab, ps_richness, "Sample")%>% ggplot(aes(x=char, y=Simpson))+geom_boxplot
+
+
+
+
+Heatmap
+
+ps_rare_top20 <- prune_taxa(names(sort(taxa_sums(ps),TRUE)[1:20]), ps)
+
+plot_heatmap(ps_rare_top20,"NMDS",distance = "bray",sample.label="char")
+
+
+
+Ordination
+
+ord1<-plot_ordination(ps, ord.nmds.bray, color="char", title="Bray NMDS")
+> 
+> #Plot with Ellipses assuming normal distribution  
+> ord1 + stat_ellipse(type="norm") + theme_bw()
 
 
 Answer some questions?
+
+1) alpha diversity differs between 'Early' and 'Late' sampled mouse gut microbiomes  
+
+
+2) beta diversity differs between 'Early' and 'Late' sampled mouse gut microbiomes  
+
+
+## Summary

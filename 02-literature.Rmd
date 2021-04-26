@@ -2,21 +2,58 @@
 ```{r , echo=FALSE, eval=TRUE, include=TRUE}
 klippy::klippy(c('r', 'bash'), position = c('top', 'right'), tooltip_message = 'copy to clipboard', tooltip_success = 'Copied!')
 ```
-## Background
+## Background on high throughput sequencing
 
-Info on sequencing
+High-throughput sequencing, also known as massively parallel sequencing or next-generation sequencing (NGS), is a collection of methods and technologies that can sequence DNA thousands/millions of fragments at a time. The market leader on NGS is Illumina, and an overview of their technology is in the video below.
 
-General application
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fCd6B5HRaZ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Don't have to follow everything!
+There are many uses for high throughput sequencing including:
+
+- Whole genome sequencing
+
+- Amplicon sequencing - PCR of a targeted gene(s) is step one
+    - environmental DNA
+    - 16S Bacterial community analysis
+    - Targeted gene panels
+    
+- RNA sequencing
+
+- ChIP sequencing: Protein-DNA interaction analysis
+
+Importantly a **lot** of the basic bioinformatics is the same across these technologies, because the data that is produced from the sequencing run is basically the same as well. The *big* data generated here are all massive *FASTQ* files, processing these follows basically the same initial pipeline for all applications. 
+
+## Some terms
+```{r,  echo=FALSE, eval=TRUE}
+terms <- read_csv("data/sequencing.csv", skip_empty_rows = TRUE) 
+
+knitr::kable(terms, booktabs = TRUE,
+             col.names = c("Term", "What it is"),
+             longtable=TRUE) %>%
+  kableExtra::row_spec(0, bold = TRUE) %>%
+  kableExtra::kable_styling()
+```
 
 ## The data
 
-For a quick overview of the example data we'll be using and where it came from, we are going to work with a subset of the dataset published here. We were exploring an underwater mountain \~3 km down at the bottom of the Pacific Ocean that serves as a low-temperature (\~5-10°C) hydrothermal venting site. This amplicon dataset was generated from DNA extracted from crushed basalts collected from across the mountain with the goal being to begin characterizing the microbial communities of these deep-sea rocks. No one had ever been here before, so as is often the purpose of marker-gene sequencing, this was just a broad-level community survey. The sequencing was done on the Illumina MiSeq platform with 2x300 paired-end sequencing using primers targeting the V4 region of the 16S rRNA gene. There are 20 samples total: 4 extraction "blanks" (nothing added to DNA extraction kit), 2 bottom-water samples, 13 rocks, and one biofilm scraped off of a rock. None of these details are important for you to remember, it's just to give some overview if you care.
+This data comes from exploring an underwater mountain \~3 km down at the bottom of the Pacific Ocean that serves as a low-temperature (\~5-10°C) hydrothermal venting site. 
+
+This amplicon dataset was generated from DNA extracted from crushed basalts collected from across the mountain with the goal being to begin characterizing the microbial communities of these deep-sea rocks. No one had ever been here before, so this was a broad-level community survey. The sequencing was done on the Illumina MiSeq platform with 2x300 paired-end sequencing using primers targeting the V4 region of the 16S rRNA gene. 
+
+There are 20 samples total: 4 extraction "blanks" (nothing added to DNA extraction kit), 2 bottom-water samples, 13 rocks, and one biofilm scraped off of a rock. None of these details are important for you to remember, it's just to give some overview if you care.
+
+<details><summary>**Q. Why would we include "blank" samples in our sequencing run? - Click here for Answer**</summary>
+
+*This sort of "environmental data" is very at risk of contamination, although the DNA extractions, and PCRs have to be run under sterile conditions or they will pick up bacteria from the lab and not the sample. Despite our best efforts we can still get minor contamination, these "blank" runs can be useful as anything in these samples* **cannot** *have come from our deep-sea rocks, and therefore we could choose to "remove" sequences that match these in our other samples and label them as contamination.*
+
+</details>
 
 In the following figure, overlain on the map are the rock sample collection locations, and the panes on the right show examples of the 3 distinct types of rocks collected: 1) basalts with highly altered, thick outer rinds (\>1 cm); 2) basalts that were smooth, glassy, thin exteriors (\~1-2 mm); and 3) one calcified carbonate.
 
-PICTURE
+```{r, eval=TRUE,echo=FALSE,  nice-fig, fig.cap='Map of collection sites and examples of the rocks collected', out.width='80%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("images/samples.png")
+```
+
 
 Altogether the uncompressed size of the working directory we are downloading here is \~300MB - this is about 10% of the full dataset - we are using a reduced dataset to minimise system requirements and speed up the workflow.
 
@@ -33,17 +70,110 @@ Don't switch over to R (the "Console" tab in the Binder/RStudio environment) unt
     cd dada2_amplicon_ex_workflow/
 ```
 
-In our working directory there are 20 samples with forward (R1) and reverse (R2) reads with per-base-call quality information, so 40 fastq files (.fq). It is a good idea to have a file with all the sample names to use for various things throughout, so here's making that file based on how these sample names are formatted.
+<details><summary>**Q. Can you work out what each of these lines of code might be doing? - Click here for Answer**</summary>
+
+*In brief these commmands:*
+
+*- download/curl some external data*
+*- uncompress into a folder*
+*- remove the compressed file*
+*- change the working directory to the newly created folder*
+
+</details>
+
+
+In our working directory there are now 20 samples with one forward (R1) and one reverse (R2) read each, each file has DNA sequences with per-base-call quality information, for a total of 40 fastq files (.fq). It is a good idea to have a file with all the sample names to use for various things throughout, so here's making that file based on how these sample names are formatted.
+
 ```{bash}
     ls *_R1.fq | cut -f1 -d "_" > samples
 ```
+
+### FASTQ?
+
+FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. As each nucleotide in a *read* is sequenced, it is assigned a *Phred quality score*. This score is the assigned *probability* of the sequencer having made an incorrect base call
+
+```{r,  echo=FALSE, eval=TRUE}
+terms <- read_csv("data/phred.csv", skip_empty_rows = TRUE) 
+
+knitr::kable(terms, booktabs = TRUE,
+             col.names = c("Phred Quality Score", "Probability of incorrect base call", "Base call accuracy"),
+             longtable=TRUE) %>%
+  kableExtra::row_spec(0, bold = TRUE) %>%
+  kableExtra::kable_styling()
+```
+
+These quality scores are stored within the FASTQ files as ASCII characters
+
+
+```{r, eval=TRUE,echo=FALSE, , fig.cap='Phred quality scores as ASCII characters', out.width='80%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("images/ascii.png")
+```
+
+This is all stored together as four simple lines of repeating text so that a FASTQ file containing a single sequence might look like this:
+
+```{}
+@SEQ_ID
+GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
++
+!''*((((***+))%%%++)(%%%%).1***-+*''))**55CCF>>>>>>CCCCCCC65
+
+```
+
+
+A single FASTQ file may contain millions of sequencing reads. Let's look at the first 40 lines of *one* of our FASTQ files. And check it looks like a standard format. 
+
+```{bash}
+head -40 B1_sub_F1.fq
+```
+
+<details><summary>**Q. By eye, can you tell whether these few lines look to be of good quality? - Click here for Answer**</summary>
+
+*The ASCII characters are repeated every fourth line, most of these reads appear to be G letters or close to this - indicating greater than 99.9% accuracy - pretty good. Very observant students might have noticed that the end of the reads appear to be of lower quality. More on this later*
+
+</details>
+
+## The Pipeline
+
+This is a very simple overview of the pipeline we will run, some of these steps (especially early ones - are applicable to lots of NGS applications), later on they become more specific to *our* data.
+
+- Import the FASTQ files and demultiplex (this step was done for us)
+
+- Remove adapters and primers (these may be included with our reads, but they are not part of the *natural* DNA sequence)
+
+- Check FASTQ data quality and trim/filter reads accordingly
+
+- Dereplicate (collapse identical sequences and choose a representative)
+
+- Assign ASVs - decide if (non-identical) sequences are similar enough to be considered as from the same species
+
+- Join forward and reverse reads together
+
+- Assign ASVs to Taxonomies
+
+- Count the abundance of different ASVs
+
+- Export taxonomy file, ASV fasta sequence file and count file to R for analysis
+
+
 ## Removing Primers
 
-To start, we need to remove the primers from all of these (the primers used for this run are in the "primers.fa" file in our working directory), and here we're going to use cutadapt to do that at the command line ("Terminal" tab). Cutadapt operates on one sample at at time, so we're going to use a wonderful little bash *loop* to run it on all of our samples.
+To start, we need to remove the primers from all of these (the primers used for this run are in the "primers.fa" file in our working directory), and here we're going to use `cutadapt` to do that at the command line ("Terminal" tab).
+
+First we need to install `cutadapt`
+
+```{bash}
+python3 -m pip install --user --upgrade cutadapt
+```
+
+>**Note**
+>
+>You will probably get a warning message about PATH. You can ignore this, what it means is that CUTADAPT has been installed in your home directory, in order to use it we need to specify the absolute path TO cutadapt when we call it. This is done for you in the next code box below. 
+
+Cutadapt operates on one sample at at time, so we're going to use a wonderful little bash *loop* to run it on all of our samples.
 
 ### Loops
 
-Loops are extremely powerful way of controlling iteration. We can specify that a line of code is repeated across multiple objects. In this example we use the sample file we made earlier as the list of files across which we want this function of removing primers to loop. These same lines will then repeat until all the specified iterations are complete.
+Loops are extremely powerful way of controlling iteration. We can specify that a line of code is repeated across multiple objects. In this example we use the `samples` file we made earlier as the list of files across which we want this function of removing primers to loop. These same lines will then repeat until all the specified iterations are complete.
 
 We won't break down exactly how this loop works - but they are used across all programming languages (including R) and you can check out the R4DS book for an introduction to building your own loops (and custom functions!) [here](https://r4ds.had.co.nz/iteration.html).
 
@@ -54,7 +184,7 @@ For now just copy and paste this code exactly into the Terminal.
 
         echo "On sample: $sample"
         
-        cutadapt -a ^GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC \
+        ~/.local/bin/cutadapt -a ^GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC \
         -A ^GGACTACHVGGGTWTCTAAT...TTACCGCGGCKGCTGGCAC \
         -m 215 -M 285 --discard-untrimmed \
         -o ${sample}_sub_R1_trimmed.fq.gz -p ${sample}_sub_R2_trimmed.fq.gz \
@@ -64,7 +194,7 @@ For now just copy and paste this code exactly into the Terminal.
     done
 ```
 
-Here's a before-and-after of one of our files
+Here's a before-and-after of one of our files - if you look at the sequences supplied: GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC these indicate the forward primer and the reverse primer (our amplicon is everything inbetween). If you look at our before and after you should see these were at the start and end of the sequence but have now been trimmed off. 
 
     ### R1 BEFORE TRIMMING PRIMERS
     head -n 2 B1_sub_R1.fq
@@ -82,7 +212,11 @@ Here's a before-and-after of one of our files
     # AAATGCGTAGATATGCGGAGGAACACCGATGGCGAAGGCAGTCCCCTGGGCCTGCACTGACGCTCATGCACGAAAGCGTG
     # GGGAGCAAACAGG
 
-You can look through the output of the cutadapt stats file we made ("cutadapt_primer_trimming_stats.txt") to get an idea of how things went. Here's a little one-liner to look at what fraction of reads were retained in each sample (column 2) and what fraction of bps were retained in each sample (column 3):
+
+
+You can look through the output of the cutadapt stats file we made ("cutadapt_primer_trimming_stats.txt") to get an idea of how things went. 
+
+Here's a little one-liner to look at what fraction of reads were retained in each sample (column 2) and what fraction of bps were retained in each sample (column 3):
 ```{bash}
     paste samples <(grep "passing" cutadapt_primer_trimming_stats.txt | cut -f3 -d "(" | tr -d ")") <(grep "filtered" cutadapt_primer_trimming_stats.txt | cut -f3 -d "(" | tr -d ")")
 ```
@@ -108,40 +242,55 @@ You can look through the output of the cutadapt stats file we made ("cutadapt_pr
     # R8    93.2%   80.4%
     # R9    92.4%   79.7%
 
-We would expect to lose around 13-14% of bps just for cutting off the primers, and the remainder of lost bps would be from the relatively low percent of those reads totally removed (\~92-97% across the samples).
+This looks like it worked pretty well! 
+Some reads were discarded entirely `-m 215 -M 285 --discard-untrimmed \` anything <215bp or >285bp was discarded. Looks like c. 6-8%
+We lost a greater proportion of bp overall, but this is the program working as it should, making most of our reads a little shorter as it cuts off the primers. Overall it looks like we lost c.20% of bp.
+
+Importantly all of our files have behaved *roughly* the same. 
 
 With primers removed, we're now ready to switch R and start using DADA2!
 
-## DADA2 - switch to R console
+## DADA2
+
+```{block, type="rmdwarning"}
+
+Switch from the Terminal to Console now.
+We are working in R for the rest of this workflow
+
+```
 
 ```{r}
     library(dada2)
 
 
-    setwd("~/dada2_amplicon_ex_workflow")
+    setwd("dada2_amplicon_ex_workflow")
 
     list.files() # make sure what we think is here is actually here
 
-    ## first we're setting a few variables we're going to use ##
+    ## first we're setting a few R objects we're going to use ##
       # one with all sample names, by scanning our "samples" file we made earlier
-      
-    samples <- scan("samples", what="character")
+  samples <- scan("samples", what="character")
 
       # one holding the file names of all the forward reads
-    forward_reads <- paste0(samples, "_sub_R1_trimmed.fq.gz")
+  forward_reads <- paste0(samples, "_sub_R1_trimmed.fq.gz")
 
       # and one with the reverse
-    reverse_reads <- paste0(samples, "_sub_R2_trimmed.fq.gz")
+  reverse_reads <- paste0(samples, "_sub_R2_trimmed.fq.gz")
 
       # and variables holding file names for the forward and reverse
       # filtered reads we're going to generate below
-    filtered_forward_reads <- paste0(samples, "_sub_R1_filtered.fq.gz")
-    filtered_reverse_reads <- paste0(samples, "_sub_R2_filtered.fq.gz")
+  filtered_forward_reads <- paste0(samples, "_sub_R1_filtered.fq.gz")
+  filtered_reverse_reads <- paste0(samples, "_sub_R2_filtered.fq.gz")
+  
 ```
 
 ## Quality trimming/filtering
 
-We did a filtering step above with cutadapt (where we eliminated reads that had imperfect or missing primers and those that were shorter than 215 bps or longer than 285), but in DADA2 we'll implement a trimming step as well (where we trim reads down based on some quality threshold rather than throwing the read away). Since we're potentially shortening reads further, we're again going to include another minimum-length filtering component. We can also take advantage of a handy quality plotting function that DADA2 provides to visualize how you're reads are doing, plotQualityProfile(). By running that on our variables that hold all of our forward and reverse read filenames, we can easily generate plots for all samples or for a subset of them. So let's take a peak at that to help decide our trimming lengths: It's good to try to keep a bird's-eye view of what's going on. So here is an overview of the main processing steps we'll be performing with cutadapt and DADA2. Don't worry if anything seems unclear right now, we will discuss each at each step.
+We did a filtering step above with cutadapt (where we eliminated reads that had imperfect or missing primers and those that were shorter than 215 bps or longer than 285), but in DADA2 we'll implement a trimming step as well (where we trim reads down based on some quality threshold rather than throwing the read away). 
+
+Since we're potentially shortening reads further, we're again going to include another minimum-length filtering component. We can also take advantage of a handy quality plotting function that DADA2 provides to visualize how you're reads are doing, plotQualityProfile(). 
+
+By running that on our variables that hold all of our forward and reverse read filenames, we can easily generate plots for all samples or for a subset of them. So let's take a peak at that to help decide our trimming lengths: It's good to try to keep a bird's-eye view of what's going on. So here is an overview of the main processing steps we'll be performing with cutadapt and DADA2. Don't worry if anything seems unclear right now, we will discuss each at each step.
 
 ```{r}
     plotQualityProfile(forward_reads[17:20])
@@ -149,7 +298,8 @@ We did a filtering step above with cutadapt (where we eliminated reads that had 
     plotQualityProfile(reverse_reads[17:20])
 ```
 
-All forwards look pretty similar to eachother, and all reverses look pretty similar to eachother, but worse than the forwards, which is common -- chemistry gets tired...
+All forwards look pretty similar to each other, and all reverses look pretty similar to each other, but worse than the forwards, which is common --
+the Illumina sequencer reads all of the molecules in the forward orientation *first*, then the clusters are flipped and read in reverse. But this means a lot of the chemical reagents start to get used up or degraded, so it is usual to get lower quality reverse reads. 
 
 On the plots produced
 
@@ -161,7 +311,7 @@ On the plots produced
 
 -   the orange lines are quartiles
 
-TALK ABOUT PHRED SCORES
+These quality profiles are based entirely on taking the *average* PHRED scores for sequences at that position in the sample
 
 Here, I'm going to cut the forward reads at 250 and the reverse reads at 200 -- roughly where both sets maintain a median quality of 30 or above -- and then see how things look. But we also want to set a minimum length to filter out truncated sequences, so we will set a minimum acceptable read length of 175bp (any reads shorter than this will be discarded).
 
@@ -203,7 +353,14 @@ names(derep_reverse) <- samples
 This is where we start to take our raw sequence data and infer *true* biological sequences. 
 It uses an algorithm to look at the consensus quality score and abundance for each *unique* sequence. It then determines whether this sequence is more likely to be of biological origin or a spurious sequencing error. 
 
+>**Note**
+>
+>This step may take a few minutes to run, so be patient! 
+
+
 ```{r}
+load("amplicon_dada2_ex.RData")
+
 dada_forward <- dada(derep_forward, err=err_forward_reads, pool="pseudo")
 
 dada_reverse <- dada(derep_reverse, err=err_reverse_reads, pool="pseudo")
@@ -267,18 +424,29 @@ write.table(summary_tab, "read-count-tracking.tsv", quote=FALSE, sep="\t", col.n
 
 ## Assign taxonomy
 
+```{block, type="rmdwarning"}
+
+Running the Taxonomy assignment step below can take anywhere from 30 minutes to a few hours depending on how much RAM we provide.
+So for this example run - we will skip this step and load an R.data file which has this information in it already
+
+```
+
 ```{r}
+load("amplicon_dada2_ex.RData")
+```
+
+<details><summary>**Example code for running taxonomy assignment - Click here**</summary>
+
+*So we won't run this code in this example, but here it is for reference.* 
+
+
+```{}
 ## downloading DECIPHER-formatted SILVA v138 reference
 download.file(url="http://www2.decipher.codes/Classification/TrainingSets/SILVA_SSU_r138_2019.RData", destfile="SILVA_SSU_r138_2019.RData")
 
 ## loading reference taxonomy object
 load("SILVA_SSU_r138_2019.RData")
-```
 
-
-Running the following taxonomy assignment step took ~30 minutes on a 2013 MacBook Pro. So feel free to load the stored R objects with load("amplicon_dada2_ex.RData") to skip this step if you’d like.
-
-```{r}
 ## loading DECIPHER
 library(DECIPHER)
 
@@ -289,12 +457,27 @@ dna <- DNAStringSet(getSequences(seqtab.nochim))
 tax_info <- IdTaxa(test=dna, trainingSet=trainingSet, strand="both", processors=NULL)
 ```
 
+</details>
+
 ## Standard goods
 
-The typical standard outputs from amplicon processing are a fasta file, a count table, and a taxonomy table. So here’s one way we can generate those files from your DADA2 objects in R:
+The typical standard outputs from amplicon processing are 
+
+- a fasta file: each ASV represented by a sequence `asv_fasta_no_contam`
+
+- a count table: how many sequences of each ASV in each sample `asv_tab_no_contam`
+
+- a taxonomy file: the closest biological species to the fasta sequence `asv_tax_no_contam`
+
+These objects from DADA2 can then be analysed to start to understand the different bacterial communities from our deep-sea study:
+
+>**Note**
+>
+>* These three files are relatively small simply lists now, you can type them into the R console and inspect these outputs if you wish. Do they make sense to you? 
 
 
-```{r}
+
+```{r, include=FALSE}
   # giving our seq headers more manageable names (ASV_1, ASV_2...)
 asv_seqs <- colnames(seqtab.nochim)
 asv_headers <- vector(dim(seqtab.nochim)[2], mode="character")
@@ -328,7 +511,7 @@ write.table(asv_tax, "ASVs_taxonomy.tsv", sep = "\t", quote=F, col.names=NA)
 
 ```
 
-## Contaminants
+## Functions list
 
 ```{r, echo=FALSE, eval=TRUE}
 terms <- read_csv("data/dada.csv", skip_empty_rows = TRUE) 
@@ -341,11 +524,6 @@ knitr::kable(terms, booktabs = TRUE,
 ```
 
 
+## Summary
 
-<details><summary>**Q. Why isn't this data tidy?**</summary>
-The variable `year` is split across six columns. 
-
-We want to create a single column **year** that will have the values (2007-2012) in rows. This will make the dataframe much longer as individuals will be repeated six times. At the same time the values in the six columns should be assigned to a new column **length**.
-</details>
-
-<p>
+We have imported FASTQ data from an Illumina sequencing run, processed the files to remove poor quality reads and trim primers. We have then put this through a microbiome specific bioinformatics pipeline to assign millions of individual reads to more manageable representative sequences. We have assigned taxonomies to these sequences and tallied them, so that **next time** we can actually inspect our data and start to make visuals that describe our microbial communities. 

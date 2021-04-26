@@ -36,7 +36,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={UNDER CONSTRUCTION},
+  pdftitle={Introduction to Bioinformatics - 5023Y},
   pdfauthor={Philip Leftwich},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
@@ -187,9 +187,9 @@
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
-\title{UNDER CONSTRUCTION}
+\title{Introduction to Bioinformatics - 5023Y}
 \author{Philip Leftwich}
-\date{2021-04-20}
+\date{2021-04-26}
 
 \begin{document}
 \maketitle
@@ -201,29 +201,31 @@
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
 
-This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports, e.g., a math equation \(a^2 + b^2 = c^2\).
+This is a very short introduction to some of the processes and tools we use when working in bioinformatics.
 
-The \textbf{bookdown} package can be installed from CRAN or Github:
+This is not meant to be anywhere near comprehensive, you will be shown a few of the fundamentals, and one walkthrough of a single bioinformatics `pipeline'.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{\# or the development version}
-\CommentTok{\# devtools::install\_github("rstudio/bookdown")}
-\end{Highlighting}
-\end{Shaded}
+The \emph{main} difference between Bioinformatics and the data analysis you have done before is the \textbf{size} of the data. Bioinformatics usually deals with sequencing data, and this data has large file sizes.
 
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading \texttt{\#}.
+Handling \textbf{big data} means you need to know how to operate on a supercomputer so we will be learning a little bit of Linux, processing \textbf{big} data into \textbf{small} data and then exporting into R to make some more amazing data visuals and interpret our findings!
 
-To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.name/tinytex/}.
+\textbf{DON'T} worry if you don't understand everything
+
+\textbf{DO} ask lots of questions!
 
 \hypertarget{Unix}{%
 \chapter{Unix}\label{Unix}}
 
-Unix is very likely the most foundational skillset we can develop for bioinformatics (and much more than bioinformatics). Many of the most common and powerful bioinformatics approaches happen in this text-based environment, and having a solid foundation here can make everything we're trying to learn and do much easier. This is a set of 5 introductory tutorials to help us get from being completely new to Unix up to being great friends with it 🙂
+Unix is very likely the most fundamental skillset we can develop for bioinformatics (and much more than bioinformatics). Many of the most common and powerful bioinformatics approaches happen in this text-based environment, and having a solid foundation here can make everything we're trying to learn and do much easier. This is a short introductory tutorial to help us get from being completely new to Unix up to being friendly with it 🙂
 
 \hypertarget{what-is-unixlinux}{%
-\section{What is Unix/Linux}\label{what-is-unixlinux}}
+\section{What is Unix/Linux?}\label{what-is-unixlinux}}
+
+UNIX is a computer operating system. It was first developed in 1969 at Bell Labs. Unix is written in the programming language \texttt{C}.
+
+Unix is proprietary software, whereas Linux is \emph{basically} free and open-source Unix.
+
+The Linux Operating System is highly flexible, free, open-source (like R) and uses very little RAM to run (Unlike Windows OS) - as such you find most supercomputers run on Linux. Operationally Linux is almost identical to Unix, and so we often refer to it under the umbrella term of ``unix-Like'' systems.
 
 \hypertarget{some-terms}{%
 \subsection{Some terms}\label{some-terms}}
@@ -236,19 +238,27 @@ Here are some terms worth knowing, don't worry about memorising them, it can jus
 \midrule
 shell & what we use to talk to the computer; anything where you are pointing and clicking with a mouse is a Graphical User Interface (GUI) shell; something with text only is a Command Line Interface (CLI) shell\\
 command line & a text-based environment capable of taking input and providing output\\
+Terminal & A program that runs a shell\\
 Unix & a family of operating systems (we also use the term “Unix-like” because one of the most popular operating systems derived from Unix is specifically named as not being Unix)\\
+Linux & a "Unix-like" OS\\
+\addlinespace
 bash & the most common programming language used at a Unix command-line\\
+flag & a way to set options for a function, a specific type of argument usually preceded by a -\\
 \bottomrule
 \end{longtable}
 
+\begin{quote}
+\textbf{Note}
+
 You should be very familiar with using a GUI (RStudio), but remember we have spent a lot of time working with files and directories using the the command line (CLI) in R. This is useful practice, because most supercomputers lack a GUI, you must work entirely using the command line.
+\end{quote}
 
 \hypertarget{why-learn-unix}{%
 \section{Why Learn Unix?}\label{why-learn-unix}}
 
-Most sequencing data files are large, and require a lot of RAM to process. As a result most of the work Bioinformaticians do is not hosted on their own computers, instead they ``remote-connect'' to high performance supercomputers or cluster computers.
+Most sequencing data files are large, and require a lot of RAM to process. As a result most of the work Bioinformaticians do is not hosted on their own computers, instead they ``remote-connect'' to high performance supercomputers or cluster computers. Almost all of these high performance computers use ``Unix-like'' operatings systems, the most common of which is Linux.
 
-The Linux Operating System is highly flexible, free, open-source (like R) and uses very little RAM to run (Unlike Windows OS) - as such you find most supercomputers run on Linux.
+As stated above Linux is free (so no expensive licenses), open-source so lots of developers, its also well known for being stable, secure, reliable and efficient.
 
 You already have some experience with using a Linux OS - every time you log into RStudio Cloud you are connecting to a supercomputer that runs on Linux. Normally we do not interact directly with the OS, instead we use R and RStudio directly.
 
@@ -271,48 +281,45 @@ Before we get started we need a terminal to work in.
 \item
   Open the Bioinformatics RStudio Cloud Project in the 5023Y workspace
 \item
-  Click on the Terminal tab next to console in the bottom-left pane of the RStudio GUI
+  Click on the \texttt{Terminal} tab next to \texttt{Console} in the bottom-left pane of the RStudio GUI, this opens a command-line \emph{Shell}
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/nice-fig-1} 
+{\centering \includegraphics[width=0.8\linewidth]{images/terminal} 
 
 }
 
-\caption{Here is a nice figure!}\label{fig:nice-fig}
+\caption{Here is an example of the Terminal tab, right next to the R console}\label{fig:unnamed-chunk-4}
 \end{figure}
 
 \begin{itemize}
 \item
-  This is our ``command line'' where we will be typing all of our commands.
+  This is our ``command line'' where we will be typing all of our commands. We type our commands in \texttt{bash}
+\item
+  The \$ is where you start typing from, left of this it tells you what folder you are currently in (\texttt{working\ directory})
 \item
   If you need to, you can exit the Terminal and start a new session easily with options in RStudio
 \end{itemize}
 
 \hypertarget{a-few-foundational-rules}{%
-\section{1.4 A few foundational rules}\label{a-few-foundational-rules}}
+\section{A few foundational rules}\label{a-few-foundational-rules}}
 
 \begin{itemize}
 \item
   Just like in R spaces are special, spaces break things apart, as a rule it is therefore better to have functions and file names with dashes (-) or underscores (\_) - e.g.~``draft\_v3.txt'' is preferred to ``draft v3.txt''.
 \item
-  The general syntax on the command line is: \texttt{command} \texttt{argument}. Again this is very similar to R except we don't use brackets e.g.~R we are used to \texttt{command(argument)}
+  The general syntax on the command line is: \texttt{command\ argument}. Again this is very similar to R except we don't use brackets e.g.~in R we are used to \texttt{command(argument)}
 \item
   Arguments can be \textbf{optional} e.g.~if their is a default argument you may not have to write anything. Some functions \emph{require} that arguments are specified. Again this is just like R.
 \end{itemize}
 
 \hypertarget{lets-get-started}{%
-\section{1.5 Let's get started}\label{lets-get-started}}
+\section{Let's get started}\label{lets-get-started}}
 
-We will perform a very simple function and get a flavour of the similarities and differences to working in `\texttt{R}. date` is a command that prints out the date and time.
+We will perform a very simple function and get a flavour of the similarities and differences to working in \texttt{R}.
+
+\texttt{date} is a command that prints out the date and time. Copy and paste this command into your terminal
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -320,20 +327,30 @@ We will perform a very simple function and get a flavour of the similarities and
 \end{Highlighting}
 \end{Shaded}
 
-\url{https://www.geeksforgeeks.org/date-command-linux-examples/\#}:\textasciitilde:text=date\%20command\%20is\%20used\%20to,linux\%20operating\%20system\%20is\%20configured.
+This prints out the date/time in UTC
+
+More information on using the date function (here){[}\url{https://www.geeksforgeeks.org/date-command-linux-examples/}{]}
+
+We can also ask for the output for a particular timezone using the \texttt{TZ} function and \texttt{date}
 
 \begin{Shaded}
 \begin{Highlighting}[]
     \VariableTok{TZ=}\NormalTok{Europe/London }\FunctionTok{date}
+\end{Highlighting}
+\end{Shaded}
 
-    \VariableTok{TZ=}\NormalTok{Europe/London }\FunctionTok{date}
+Or we can ask the computer what the date will be next Tuesday\ldots{}
 
+\begin{Shaded}
+\begin{Highlighting}[]
     \FunctionTok{date} \AttributeTok{{-}{-}date}\OperatorTok{=}\StringTok{"next tue"}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{downloading-data}{%
 \subsection{Downloading data}\label{downloading-data}}
+
+We will start by typing in an instruction to download data from an online data repository, unpack the contents and inspect it:
 
 \begin{itemize}
 \item
@@ -352,6 +369,15 @@ We will perform a very simple function and get a flavour of the similarities and
 \end{Highlighting}
 \end{Shaded}
 
+\begin{rmdwarning}
+Check each command line has run, in the example above you might find
+that the first two lines run, to download and unpack data, while the
+last line to change directory doesn't run until you hit enter
+\end{rmdwarning}
+
+\hypertarget{more-functions}{%
+\subsection{More functions}\label{more-functions}}
+
 Unlike date, most commands require arguments and won't work without them. head is a command that prints the first lines of a file, so it requires us to provide the file we want it to act on:
 
 \begin{Shaded}
@@ -360,7 +386,19 @@ Unlike date, most commands require arguments and won't work without them. head i
 \end{Highlighting}
 \end{Shaded}
 
-Here ``example.txt'' is the required argument, and in this case it is also what's known as a positional argument. Whether things need to be provided as positional arguments or not depends on how the command or program we are using was written. Sometimes we need to specify the input file by putting something in front of it (e.g.~some commands will use the -i flag, but it's often other things as well).
+Here ``example.txt'' is the required argument, and in this case it is also what's known as a positional argument. Whether things need to be provided as positional arguments or not depends on how the command or program we are using was written.
+
+Sometimes we need to specify the input file by putting something in front of it (e.g.~some commands will use the -i flag, but it's often other things as well).
+
+\textbf{Q. What's in the text file? - Click here for Answer}
+
+\emph{Pretty boring, each line contains the text ``This is line'' followed by the line number e.g.}
+
+\emph{- This is line 1}
+
+\emph{- This is line 2}
+
+\emph{etc.}
 
 There are also optional arguments for the head command. The default for head is to print the first 10 lines of a file. We can change that by specifying the -n flag, followed by how many lines we want:
 
@@ -383,23 +421,38 @@ Again this is very similar to the logic in which R commands are strucutred e.g.~
 Remember just like with R, one of your best friends is Google! As you get familiar with any language or OS we might remember a few flags or specific options, but searching for options and details when needed is definitely the norm!
 
 \hypertarget{unix-file-structure}{%
-\section{1.6 Unix File Structure}\label{unix-file-structure}}
+\section{Unix File Structure}\label{unix-file-structure}}
 
-There are two special locations in all Unix-based systems: the ``root'' location and the current user's ``home'' location. ``Root'' is where the address system of the computer starts; ``home'' is where the current user's location starts.
+There are two special locations in all Unix-based systems: the ``root'' location and the current user's ``home'' location. ``Root'' is where the address system of the computer starts; ``home'' is usally where the current user's location starts.
 
-IMAGE
+Just to be awkward RStudio Cloud actually has us working in a different location ``Cloud'', which is underneath Root but separate to home which would be in the ``Users'' folder.
 
-We tell the command line where files and directories are located by providing their address, their ``path''. If we use the pwd command (for print working directory), we can find out what the path is for the directory we are sitting in. And if we use the ls command (for list), we can see what directories and files are in the current directory we are sitting in.
+\begin{center}\includegraphics[width=0.8\linewidth]{images/file_system_structure} \end{center}
+
+We tell the command line where files and directories are located by providing their address, their ``path''. If we use the pwd command (for print working directory), we can find out what the path is for the directory we are sitting in.
 
 \begin{Shaded}
 \begin{Highlighting}[]
     \BuiltInTok{pwd}
+\end{Highlighting}
+\end{Shaded}
+
+And if we use the ls command (for list), we can see what directories and files are in the current directory we are sitting in.
+
+\begin{Shaded}
+\begin{Highlighting}[]
     \FunctionTok{ls}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{quote}
+\textbf{Note}
+
+Why is it important to know this? Usually when you are working on a Unix-like environment there is no GUI (nice-click and point interface), all commands have to be submitted through the terminal. So you would have to get used to navigating directories with typed commands, and it's useful to know what the standard hierarchy is.
+\end{quote}
+
 \hypertarget{absolute-vs-relative-file-paths}{%
-\section{1.7 Absolute vs relative file paths}\label{absolute-vs-relative-file-paths}}
+\section{Absolute vs relative file paths}\label{absolute-vs-relative-file-paths}}
 
 You should be used to these concepts from your work with R projects.
 
@@ -407,9 +460,9 @@ There are two ways to specify the path (address) of the file we want to do somet
 
 \begin{itemize}
 \item
-  An \textbf{absolute path} is an address that starts from an explicitly specified location: either the ``root'' \texttt{/} or the ``home'' \texttt{\textasciitilde{}/} location. (Side note, because we also may see or hear the term, the ``full path'', is the absolute path that starts from the ``root'' /.)
+  An \textbf{absolute path} is an address that starts from an explicitly specified location: usually the ``root'' \texttt{/} or the ``home'' \texttt{\textasciitilde{}/} location. (Side note, because we also may see or hear the term, the ``full path'', is usually the absolute path that starts from the ``root'' /.)
 \item
-  A \textbf{relative path} is an address that starts from wherever we are currently sitting. For example, let's look again at the head command we ran above:
+  A \textbf{relative path} is an address that starts from wherever we are currently sitting (the working directory). For example, let's look again at the head command we ran above:
 \end{itemize}
 
 \begin{Shaded}
@@ -420,11 +473,11 @@ There are two ways to specify the path (address) of the file we want to do somet
 
 What we are actually doing here is using a relative path to specify where the ``example.txt'' file is located. This is because the command line \textbf{automatically looks} in the current working directory if we don't specify anything else about its location.
 
-We can also run the same command on the same file using an \textbf{absolute path}:
+We can also run the same command on the same file using an \textbf{absolute path} - note Rstudio cloud has a slightly unique set-up in that we start from a folder designated cloud:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-    \FunctionTok{head}\NormalTok{ \textasciitilde{}/unix\_intro/example.txt}
+    \FunctionTok{head}\NormalTok{ /cloud/project/unix\_intro/example.txt}
 \end{Highlighting}
 \end{Shaded}
 
@@ -435,6 +488,11 @@ It is \textbf{important to always think about where} we are in the computer when
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{head}\NormalTok{ example.txt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{head}\NormalTok{ notes.txt}
 \end{Highlighting}
 \end{Shaded}
@@ -446,6 +504,11 @@ The ls command by default operates on the current working directory if we don't 
 \begin{Shaded}
 \begin{Highlighting}[]
     \FunctionTok{ls}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
     \FunctionTok{ls}\NormalTok{ experiment}
 \end{Highlighting}
 \end{Shaded}
@@ -459,41 +522,54 @@ We can see the file we were looking for is located in the subdirectory called ``
 \end{Shaded}
 
 \hypertarget{moving-around}{%
-\section{1.8 Moving around}\label{moving-around}}
+\section{Moving around}\label{moving-around}}
 
 We can also move into the directory containing the file we want to work with by using the \texttt{cd} command (\textbf{c}hange \textbf{d}irectory). This command takes a positional argument that is the path (address) of the directory we want to change into. This can be a relative path or an absolute path. Here we'll use the relative path of the subdirectory, ``experiment'', to change into it
 
 \begin{Shaded}
 \begin{Highlighting}[]
     \BuiltInTok{cd}\NormalTok{ experiment/}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
     \BuiltInTok{pwd}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
     \FunctionTok{ls}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
     \FunctionTok{head}\NormalTok{ notes.txt}
 \end{Highlighting}
 \end{Shaded}
 
-Great. But now how do we get back ``up'' to the directory above us? One way would be to provide an absolute path, like \texttt{cd\ \textasciitilde{}/unix\_intro}, but there is also a handy shortcut. \texttt{..} are special characters that act as a relative path specifying ``up'' one level -- one directory -- from wherever we currently are. So we can provide that as the positional argument to cd to get back to where we started:
+Great. But now how do we get \textbf{back ``up''} to the directory above us? One way would be to provide an absolute path, like \texttt{cd\ /cloud/project/unix\_intro}, but there is also a handy shortcut. \texttt{..} which are special characters that act as a relative path specifying ``up'' one level -- one directory -- from wherever we currently are.
+
+So we can provide that as the positional argument to cd to get back to where we started:
 
 \begin{Shaded}
 \begin{Highlighting}[]
     \BuiltInTok{cd}\NormalTok{ ..}
-    \BuiltInTok{pwd}
-    \FunctionTok{ls}
 \end{Highlighting}
 \end{Shaded}
 
 Moving around the computer like this might feel a bit cumbersome and frustrating at first, but after spending a little time with it, you will get used to it, and it starts to feel more natural.
 
-Get used to using \textbf{tab} to perform \textbf{tab-completion} often this will auto-complete file names!
+\begin{quote}
+\textbf{Note}
 
-\begin{itemize}
-\tightlist
-\item
-  Press tab twice quickly and it will print all possible combinations
-\end{itemize}
+One way to speed things up is to start using \textbf{tab} to perform \textbf{tab-completion} often this will auto-complete file names! Press tab twice quickly and it will print all possible combinations.
+\end{quote}
 
 \hypertarget{summary}{%
-\section{1.9 Summary}\label{summary}}
+\section{Summary}\label{summary}}
 
 While maybe not all that exciting, these things really are the foundation needed to start utilizing the command line -- which then gives us the capability to use lots of tools that only work at a command line, manipulate large files rapidly, access and work with remote computers, and more! These are the fundamental tools that every scientist needs to work with \textbf{big data}.
 
@@ -543,93 +619,141 @@ Characters & Meaning\\
 \bottomrule
 \end{longtable}
 
-\hypertarget{stretch-yourself}{%
-\section{1.10 Stretch yourself}\label{stretch-yourself}}
+\hypertarget{summary-1}{%
+\section{Summary}\label{summary-1}}
 
-\url{https://bioinformaticsworkbook.org/Appendix/Unix/unix-basics-1.html\#gsc.tab=0}
+You won't get used to operating in bash, or moving around directories using just the command line in a single session. So if you think you are interested in developing your bioinformatic skills, spend some time practising.
 
-\url{http://evomics.org/learning/unix-tutorial/}
+Here is a link to a couple of extended tutorials you can bookmark if you want to explore this further:
 
-Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
+\url{https://datacarpentry.org/shell-genomics/01-introduction/index.html}
+
+\hypertarget{stretch-yourself---optional-extras-to-try-a-couple-of-other-skills}{%
+\section{Stretch yourself - optional extras to try a couple of other skills}\label{stretch-yourself---optional-extras-to-try-a-couple-of-other-skills}}
+
+\hypertarget{creation}{%
+\subsection{Creation}\label{creation}}
+
+I want to create a new directory to store some code files I'm going to write later, so I'll use \texttt{mkdir} to create a new directory called Code:
+
+\textbf{Check you are in the \texttt{unix\_intro} folder - Click here for Answer}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
+\BuiltInTok{pwd}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\textbf{Make a new directory called Code - Click here for Answer}
 
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rrrrl}
-\toprule
-Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
-\midrule
-5.1 & 3.5 & 1.4 & 0.2 & setosa\\
-4.9 & 3.0 & 1.4 & 0.2 & setosa\\
-4.7 & 3.2 & 1.3 & 0.2 & setosa\\
-4.6 & 3.1 & 1.5 & 0.2 & setosa\\
-5.0 & 3.6 & 1.4 & 0.2 & setosa\\
-\addlinespace
-5.4 & 3.9 & 1.7 & 0.4 & setosa\\
-4.6 & 3.4 & 1.4 & 0.3 & setosa\\
-5.0 & 3.4 & 1.5 & 0.2 & setosa\\
-4.4 & 2.9 & 1.4 & 0.2 & setosa\\
-4.9 & 3.1 & 1.5 & 0.1 & setosa\\
-\addlinespace
-5.4 & 3.7 & 1.5 & 0.2 & setosa\\
-4.8 & 3.4 & 1.6 & 0.2 & setosa\\
-4.8 & 3.0 & 1.4 & 0.1 & setosa\\
-4.3 & 3.0 & 1.1 & 0.1 & setosa\\
-5.8 & 4.0 & 1.2 & 0.2 & setosa\\
-\addlinespace
-5.7 & 4.4 & 1.5 & 0.4 & setosa\\
-5.4 & 3.9 & 1.3 & 0.4 & setosa\\
-5.1 & 3.5 & 1.4 & 0.3 & setosa\\
-5.7 & 3.8 & 1.7 & 0.3 & setosa\\
-5.1 & 3.8 & 1.5 & 0.3 & setosa\\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mkdir}\NormalTok{ Code}
+\end{Highlighting}
+\end{Shaded}
 
-You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+\textbf{Check this folder has been created using a list function}
 
-\begin{rmdtip}
-Something
-\end{rmdtip}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}
+\end{Highlighting}
+\end{Shaded}
 
-\begin{rmdnote}
-Something
-\end{rmdnote}
+Note that I used a relative file path to create the Code directory - but I could have also specified an absolute filepath to generate that folder in whatever location I want.
 
-\begin{rmdwarning}
-Something
-\end{rmdwarning}
+There are a few ways to make new files on the command line. The simplest is to generate a blank file with the \texttt{touch} command followed by the path (relative or absolute) to the file you want to create
+
+\textbf{Make a new file called data-science-class.txt - Click here for Answer}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{touch}\NormalTok{ data{-}science{-}class.txt}
+\FunctionTok{ls} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Note here I could just use ls to list all files and folders in a directory, but if i set the flag \texttt{-l} then it will produce a \textbf{l}ong list of files.}
+
+\emph{If the entry in the first column is a \texttt{d}, then the row in the table corresponds to a directory, otherwise the information in the row corresponds to a file.}
+
+\emph{The string of characters following the \texttt{d} in the case of a directory or following the first \texttt{-} in the case of a file represent the permissions for that file or directory - I won't cover that here - but some of the links I provide go into more detail.}
 
 \hypertarget{ngs-sequence-analysis}{%
 \chapter{NGS sequence analysis}\label{ngs-sequence-analysis}}
 
-\hypertarget{background}{%
-\section{Background}\label{background}}
+\hypertarget{background-on-high-throughput-sequencing}{%
+\section{Background on high throughput sequencing}\label{background-on-high-throughput-sequencing}}
 
-Info on sequencing
+High-throughput sequencing, also known as massively parallel sequencing or next-generation sequencing (NGS), is a collection of methods and technologies that can sequence DNA thousands/millions of fragments at a time. The market leader on NGS is Illumina, and an overview of their technology is in the video below.
 
-General application
+There are many uses for high throughput sequencing including:
 
-Don't have to follow everything!
+\begin{itemize}
+\item
+  Whole genome sequencing
+\item
+  Amplicon sequencing - PCR of a targeted gene(s) is step one
+
+  \begin{itemize}
+  \tightlist
+  \item
+    environmental DNA
+  \item
+    16S Bacterial community analysis
+  \item
+    Targeted gene panels
+  \end{itemize}
+\item
+  RNA sequencing
+\item
+  ChIP sequencing: Protein-DNA interaction analysis
+\end{itemize}
+
+Importantly a \textbf{lot} of the basic bioinformatics is the same across these technologies, because the data that is produced from the sequencing run is basically the same as well. The \emph{big} data generated here are all massive \emph{FASTQ} files, processing these follows basically the same initial pipeline for all applications.
+
+\hypertarget{some-terms-1}{%
+\section{Some terms}\label{some-terms-1}}
+
+\begin{longtable}{ll}
+\toprule
+\textbf{Term} & \textbf{What it is}\\
+\midrule
+Insert & the DNA fragment that is being used for sequencing\\
+Read & The part of the insert that is sequenced\\
+Single read & A procedure in which the insert is sequenced once\\
+Paired end & A procedure in which the insert is sequenced twice, once from each end\\
+Flowcell & A small glass chip on which the DNA fragments are attached and then sequenced. The flowcell is covered in probes that allow hybridisation of DNA adpaters that were ligated onto the inserts\\
+\addlinespace
+Lane & The flowcell has 8 physically separate lanes. Sequencing occurs in parallel on all lanes\\
+Multiplexing/Demultiplexing & Sequencing multiple independent biological samples on the same lane is called multiplexing. After sequencing separating the data from from samples that were multiplexed is performed computationally and is called demultiplexing. This is done by a script that identifies unique sequences on the adapters that were attached to reads\\
+Pipeline & The series of computational processes used to go from FASTQ data files to results and biological inferences\\
+\bottomrule
+\end{longtable}
 
 \hypertarget{the-data}{%
 \section{The data}\label{the-data}}
 
-For a quick overview of the example data we'll be using and where it came from, we are going to work with a subset of the dataset published here. We were exploring an underwater mountain \textasciitilde3 km down at the bottom of the Pacific Ocean that serves as a low-temperature (\textasciitilde5-10°C) hydrothermal venting site. This amplicon dataset was generated from DNA extracted from crushed basalts collected from across the mountain with the goal being to begin characterizing the microbial communities of these deep-sea rocks. No one had ever been here before, so as is often the purpose of marker-gene sequencing, this was just a broad-level community survey. The sequencing was done on the Illumina MiSeq platform with 2x300 paired-end sequencing using primers targeting the V4 region of the 16S rRNA gene. There are 20 samples total: 4 extraction ``blanks'' (nothing added to DNA extraction kit), 2 bottom-water samples, 13 rocks, and one biofilm scraped off of a rock. None of these details are important for you to remember, it's just to give some overview if you care.
+This data comes from exploring an underwater mountain \textasciitilde3 km down at the bottom of the Pacific Ocean that serves as a low-temperature (\textasciitilde5-10°C) hydrothermal venting site.
+
+This amplicon dataset was generated from DNA extracted from crushed basalts collected from across the mountain with the goal being to begin characterizing the microbial communities of these deep-sea rocks. No one had ever been here before, so this was a broad-level community survey. The sequencing was done on the Illumina MiSeq platform with 2x300 paired-end sequencing using primers targeting the V4 region of the 16S rRNA gene.
+
+There are 20 samples total: 4 extraction ``blanks'' (nothing added to DNA extraction kit), 2 bottom-water samples, 13 rocks, and one biofilm scraped off of a rock. None of these details are important for you to remember, it's just to give some overview if you care.
+
+\textbf{Q. Why would we include ``blank'' samples in our sequencing run? - Click here for Answer}
+
+\emph{This sort of ``environmental data'' is very at risk of contamination, although the DNA extractions, and PCRs have to be run under sterile conditions or they will pick up bacteria from the lab and not the sample. Despite our best efforts we can still get minor contamination, these ``blank'' runs can be useful as anything in these samples} \textbf{cannot} \emph{have come from our deep-sea rocks, and therefore we could choose to ``remove'' sequences that match these in our other samples and label them as contamination.}
 
 In the following figure, overlain on the map are the rock sample collection locations, and the panes on the right show examples of the 3 distinct types of rocks collected: 1) basalts with highly altered, thick outer rinds (\textgreater1 cm); 2) basalts that were smooth, glassy, thin exteriors (\textasciitilde1-2 mm); and 3) one calcified carbonate.
 
-PICTURE
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{images/samples} 
+
+}
+
+\caption{Map of collection sites and examples of the rocks collected}\label{fig:nice-fig}
+\end{figure}
 
 Altogether the uncompressed size of the working directory we are downloading here is \textasciitilde300MB - this is about 10\% of the full dataset - we are using a reduced dataset to minimise system requirements and speed up the workflow.
 
@@ -648,7 +772,16 @@ Don't switch over to R (the ``Console'' tab in the Binder/RStudio environment) u
 \end{Highlighting}
 \end{Shaded}
 
-In our working directory there are 20 samples with forward (R1) and reverse (R2) reads with per-base-call quality information, so 40 fastq files (.fq). It is a good idea to have a file with all the sample names to use for various things throughout, so here's making that file based on how these sample names are formatted.
+\textbf{Q. Can you work out what each of these lines of code might be doing? - Click here for Answer}
+
+\emph{In brief these commmands:}
+
+\emph{- download/curl some external data}
+\emph{- uncompress into a folder}
+\emph{- remove the compressed file}
+\emph{- change the working directory to the newly created folder}
+
+In our working directory there are now 20 samples with one forward (R1) and one reverse (R2) read each, each file has DNA sequences with per-base-call quality information, for a total of 40 fastq files (.fq). It is a good idea to have a file with all the sample names to use for various things throughout, so here's making that file based on how these sample names are formatted.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -656,15 +789,108 @@ In our working directory there are 20 samples with forward (R1) and reverse (R2)
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{fastq}{%
+\subsection{FASTQ?}\label{fastq}}
+
+FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. As each nucleotide in a \emph{read} is sequenced, it is assigned a \emph{Phred quality score}. This score is the assigned \emph{probability} of the sequencer having made an incorrect base call
+
+\begin{longtable}{rll}
+\toprule
+\textbf{Phred Quality Score} & \textbf{Probability of incorrect base call} & \textbf{Base call accuracy}\\
+\midrule
+10 & 1 in 10 & 90\%\\
+20 & 1 in 100 & 99\%\\
+30 & 1 in 1000 & 99.90\%\\
+40 & 1 in 10,000 & 99.99\%\\
+50 & 1 in 100,000 & 100.00\%\\
+\addlinespace
+60 & 1 in 1,000,000 & 100.00\%\\
+\bottomrule
+\end{longtable}
+
+These quality scores are stored within the FASTQ files as ASCII characters
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{images/ascii} 
+
+}
+
+\caption{Phred quality scores as ASCII characters}\label{fig:unnamed-chunk-40}
+\end{figure}
+
+This is all stored together as four simple lines of repeating text so that a FASTQ file containing a single sequence might look like this:
+
+\begin{verbatim}
+@SEQ_ID
+GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
++
+!''*((((***+))%%%++)(%%%%).1***-+*''))**55CCF>>>>>>CCCCCCC65
+\end{verbatim}
+
+A single FASTQ file may contain millions of sequencing reads. Let's look at the first 40 lines of \emph{one} of our FASTQ files. And check it looks like a standard format.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head} \AttributeTok{{-}40}\NormalTok{ B1\_sub\_F1.fq}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Q. By eye, can you tell whether these few lines look to be of good quality? - Click here for Answer}
+
+\emph{The ASCII characters are repeated every fourth line, most of these reads appear to be G letters or close to this - indicating greater than 99.9\% accuracy - pretty good. Very observant students might have noticed that the end of the reads appear to be of lower quality. More on this later}
+
+\hypertarget{the-pipeline}{%
+\section{The Pipeline}\label{the-pipeline}}
+
+This is a very simple overview of the pipeline we will run, some of these steps (especially early ones - are applicable to lots of NGS applications), later on they become more specific to \emph{our} data.
+
+\begin{itemize}
+\item
+  Import the FASTQ files and demultiplex (this step was done for us)
+\item
+  Remove adapters and primers (these may be included with our reads, but they are not part of the \emph{natural} DNA sequence)
+\item
+  Check FASTQ data quality and trim/filter reads accordingly
+\item
+  Dereplicate (collapse identical sequences and choose a representative)
+\item
+  Assign ASVs - decide if (non-identical) sequences are similar enough to be considered as from the same species
+\item
+  Join forward and reverse reads together
+\item
+  Assign ASVs to Taxonomies
+\item
+  Count the abundance of different ASVs
+\item
+  Export taxonomy file, ASV fasta sequence file and count file to R for analysis
+\end{itemize}
+
 \hypertarget{removing-primers}{%
 \section{Removing Primers}\label{removing-primers}}
 
-To start, we need to remove the primers from all of these (the primers used for this run are in the ``primers.fa'' file in our working directory), and here we're going to use cutadapt to do that at the command line (``Terminal'' tab). Cutadapt operates on one sample at at time, so we're going to use a wonderful little bash \emph{loop} to run it on all of our samples.
+To start, we need to remove the primers from all of these (the primers used for this run are in the ``primers.fa'' file in our working directory), and here we're going to use \texttt{cutadapt} to do that at the command line (``Terminal'' tab).
+
+First we need to install \texttt{cutadapt}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{python3} \AttributeTok{{-}m}\NormalTok{ pip install }\AttributeTok{{-}{-}user} \AttributeTok{{-}{-}upgrade}\NormalTok{ cutadapt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\textbf{Note}
+
+You will probably get a warning message about PATH. You can ignore this, what it means is that CUTADAPT has been installed in your home directory, in order to use it we need to specify the absolute path TO cutadapt when we call it. This is done for you in the next code box below.
+\end{quote}
+
+Cutadapt operates on one sample at at time, so we're going to use a wonderful little bash \emph{loop} to run it on all of our samples.
 
 \hypertarget{loops}{%
 \subsection{Loops}\label{loops}}
 
-Loops are extremely powerful way of controlling iteration. We can specify that a line of code is repeated across multiple objects. In this example we use the sample file we made earlier as the list of files across which we want this function of removing primers to loop. These same lines will then repeat until all the specified iterations are complete.
+Loops are extremely powerful way of controlling iteration. We can specify that a line of code is repeated across multiple objects. In this example we use the \texttt{samples} file we made earlier as the list of files across which we want this function of removing primers to loop. These same lines will then repeat until all the specified iterations are complete.
 
 We won't break down exactly how this loop works - but they are used across all programming languages (including R) and you can check out the R4DS book for an introduction to building your own loops (and custom functions!) \href{https://r4ds.had.co.nz/iteration.html}{here}.
 
@@ -677,7 +903,7 @@ For now just copy and paste this code exactly into the Terminal.
 
         \BuiltInTok{echo} \StringTok{"On sample: }\VariableTok{$sample}\StringTok{"}
         
-        \ExtensionTok{cutadapt} \AttributeTok{{-}a}\NormalTok{ \^{}GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC }\DataTypeTok{\textbackslash{}}
+        \ExtensionTok{\textasciitilde{}/.local/bin/cutadapt} \AttributeTok{{-}a}\NormalTok{ \^{}GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC }\DataTypeTok{\textbackslash{}}
         \AttributeTok{{-}A}\NormalTok{ \^{}GGACTACHVGGGTWTCTAAT...TTACCGCGGCKGCTGGCAC }\DataTypeTok{\textbackslash{}}
         \AttributeTok{{-}m}\NormalTok{ 215 }\AttributeTok{{-}M}\NormalTok{ 285 }\AttributeTok{{-}{-}discard{-}untrimmed} \DataTypeTok{\textbackslash{}}
         \AttributeTok{{-}o} \VariableTok{$\{sample\}}\NormalTok{\_sub\_R1\_trimmed.fq.gz }\AttributeTok{{-}p} \VariableTok{$\{sample\}}\NormalTok{\_sub\_R2\_trimmed.fq.gz }\DataTypeTok{\textbackslash{}}
@@ -688,7 +914,7 @@ For now just copy and paste this code exactly into the Terminal.
 \end{Highlighting}
 \end{Shaded}
 
-Here's a before-and-after of one of our files
+Here's a before-and-after of one of our files - if you look at the sequences supplied: GTGCCAGCMGCCGCGGTAA\ldots ATTAGAWACCCBDGTAGTCC these indicate the forward primer and the reverse primer (our amplicon is everything inbetween). If you look at our before and after you should see these were at the start and end of the sequence but have now been trimmed off.
 
 \begin{verbatim}
 ### R1 BEFORE TRIMMING PRIMERS
@@ -708,7 +934,9 @@ head -n 2 B1_sub_R1_trimmed.fq
 # GGGAGCAAACAGG
 \end{verbatim}
 
-You can look through the output of the cutadapt stats file we made (``cutadapt\_primer\_trimming\_stats.txt'') to get an idea of how things went. Here's a little one-liner to look at what fraction of reads were retained in each sample (column 2) and what fraction of bps were retained in each sample (column 3):
+You can look through the output of the cutadapt stats file we made (``cutadapt\_primer\_trimming\_stats.txt'') to get an idea of how things went.
+
+Here's a little one-liner to look at what fraction of reads were retained in each sample (column 2) and what fraction of bps were retained in each sample (column 3):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -739,43 +967,55 @@ You can look through the output of the cutadapt stats file we made (``cutadapt\_
 # R9    92.4%   79.7%
 \end{verbatim}
 
-We would expect to lose around 13-14\% of bps just for cutting off the primers, and the remainder of lost bps would be from the relatively low percent of those reads totally removed (\textasciitilde92-97\% across the samples).
+This looks like it worked pretty well!
+Some reads were discarded entirely \texttt{-m\ 215\ -M\ 285\ -\/-discard-untrimmed\ \textbackslash{}} anything \textless215bp or \textgreater285bp was discarded. Looks like c.~6-8\%
+We lost a greater proportion of bp overall, but this is the program working as it should, making most of our reads a little shorter as it cuts off the primers. Overall it looks like we lost c.20\% of bp.
+
+Importantly all of our files have behaved \emph{roughly} the same.
 
 With primers removed, we're now ready to switch R and start using DADA2!
 
-\hypertarget{dada2---switch-to-r-console}{%
-\section{DADA2 - switch to R console}\label{dada2---switch-to-r-console}}
+\hypertarget{dada2}{%
+\section{DADA2}\label{dada2}}
+
+\begin{rmdwarning}
+Switch from the Terminal to Console now. We are working in R for the
+rest of this workflow
+\end{rmdwarning}
 
 \begin{Shaded}
 \begin{Highlighting}[]
     \FunctionTok{library}\NormalTok{(dada2)}
 
-    \FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/dada2\_amplicon\_ex\_workflow"}\NormalTok{)}
+    \FunctionTok{setwd}\NormalTok{(}\StringTok{"dada2\_amplicon\_ex\_workflow"}\NormalTok{)}
 
     \FunctionTok{list.files}\NormalTok{() }\CommentTok{\# make sure what we think is here is actually here}
 
-    \DocumentationTok{\#\# first we\textquotesingle{}re setting a few variables we\textquotesingle{}re going to use \#\#}
+    \DocumentationTok{\#\# first we\textquotesingle{}re setting a few R objects we\textquotesingle{}re going to use \#\#}
       \CommentTok{\# one with all sample names, by scanning our "samples" file we made earlier}
-      
-\NormalTok{    samples }\OtherTok{\textless{}{-}} \FunctionTok{scan}\NormalTok{(}\StringTok{"samples"}\NormalTok{, }\AttributeTok{what=}\StringTok{"character"}\NormalTok{)}
+\NormalTok{  samples }\OtherTok{\textless{}{-}} \FunctionTok{scan}\NormalTok{(}\StringTok{"samples"}\NormalTok{, }\AttributeTok{what=}\StringTok{"character"}\NormalTok{)}
 
       \CommentTok{\# one holding the file names of all the forward reads}
-\NormalTok{    forward\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R1\_trimmed.fq.gz"}\NormalTok{)}
+\NormalTok{  forward\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R1\_trimmed.fq.gz"}\NormalTok{)}
 
       \CommentTok{\# and one with the reverse}
-\NormalTok{    reverse\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R2\_trimmed.fq.gz"}\NormalTok{)}
+\NormalTok{  reverse\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R2\_trimmed.fq.gz"}\NormalTok{)}
 
       \CommentTok{\# and variables holding file names for the forward and reverse}
       \CommentTok{\# filtered reads we\textquotesingle{}re going to generate below}
-\NormalTok{    filtered\_forward\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R1\_filtered.fq.gz"}\NormalTok{)}
-\NormalTok{    filtered\_reverse\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R2\_filtered.fq.gz"}\NormalTok{)}
+\NormalTok{  filtered\_forward\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R1\_filtered.fq.gz"}\NormalTok{)}
+\NormalTok{  filtered\_reverse\_reads }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(samples, }\StringTok{"\_sub\_R2\_filtered.fq.gz"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{quality-trimmingfiltering}{%
 \section{Quality trimming/filtering}\label{quality-trimmingfiltering}}
 
-We did a filtering step above with cutadapt (where we eliminated reads that had imperfect or missing primers and those that were shorter than 215 bps or longer than 285), but in DADA2 we'll implement a trimming step as well (where we trim reads down based on some quality threshold rather than throwing the read away). Since we're potentially shortening reads further, we're again going to include another minimum-length filtering component. We can also take advantage of a handy quality plotting function that DADA2 provides to visualize how you're reads are doing, plotQualityProfile(). By running that on our variables that hold all of our forward and reverse read filenames, we can easily generate plots for all samples or for a subset of them. So let's take a peak at that to help decide our trimming lengths: It's good to try to keep a bird's-eye view of what's going on. So here is an overview of the main processing steps we'll be performing with cutadapt and DADA2. Don't worry if anything seems unclear right now, we will discuss each at each step.
+We did a filtering step above with cutadapt (where we eliminated reads that had imperfect or missing primers and those that were shorter than 215 bps or longer than 285), but in DADA2 we'll implement a trimming step as well (where we trim reads down based on some quality threshold rather than throwing the read away).
+
+Since we're potentially shortening reads further, we're again going to include another minimum-length filtering component. We can also take advantage of a handy quality plotting function that DADA2 provides to visualize how you're reads are doing, plotQualityProfile().
+
+By running that on our variables that hold all of our forward and reverse read filenames, we can easily generate plots for all samples or for a subset of them. So let's take a peak at that to help decide our trimming lengths: It's good to try to keep a bird's-eye view of what's going on. So here is an overview of the main processing steps we'll be performing with cutadapt and DADA2. Don't worry if anything seems unclear right now, we will discuss each at each step.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -785,7 +1025,8 @@ We did a filtering step above with cutadapt (where we eliminated reads that had 
 \end{Highlighting}
 \end{Shaded}
 
-All forwards look pretty similar to eachother, and all reverses look pretty similar to eachother, but worse than the forwards, which is common -- chemistry gets tired\ldots{}
+All forwards look pretty similar to each other, and all reverses look pretty similar to each other, but worse than the forwards, which is common --
+the Illumina sequencer reads all of the molecules in the forward orientation \emph{first}, then the clusters are flipped and read in reverse. But this means a lot of the chemical reagents start to get used up or degraded, so it is usual to get lower quality reverse reads.
 
 On the plots produced
 
@@ -800,7 +1041,7 @@ On the plots produced
   the orange lines are quartiles
 \end{itemize}
 
-TALK ABOUT PHRED SCORES
+These quality profiles are based entirely on taking the \emph{average} PHRED scores for sequences at that position in the sample
 
 Here, I'm going to cut the forward reads at 250 and the reverse reads at 200 -- roughly where both sets maintain a median quality of 30 or above -- and then see how things look. But we also want to set a minimum length to filter out truncated sequences, so we will set a minimum acceptable read length of 175bp (any reads shorter than this will be discarded).
 
@@ -856,8 +1097,16 @@ Dereplication is a common step in many amplicon processing workflows. Instead of
 This is where we start to take our raw sequence data and infer \emph{true} biological sequences.
 It uses an algorithm to look at the consensus quality score and abundance for each \emph{unique} sequence. It then determines whether this sequence is more likely to be of biological origin or a spurious sequencing error.
 
+\begin{quote}
+\textbf{Note}
+
+This step may take a few minutes to run, so be patient!
+\end{quote}
+
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{load}\NormalTok{(}\StringTok{"amplicon\_dada2\_ex.RData"}\NormalTok{)}
+
 \NormalTok{dada\_forward }\OtherTok{\textless{}{-}} \FunctionTok{dada}\NormalTok{(derep\_forward, }\AttributeTok{err=}\NormalTok{err\_forward\_reads, }\AttributeTok{pool=}\StringTok{"pseudo"}\NormalTok{)}
 
 \NormalTok{dada\_reverse }\OtherTok{\textless{}{-}} \FunctionTok{dada}\NormalTok{(derep\_reverse, }\AttributeTok{err=}\NormalTok{err\_reverse\_reads, }\AttributeTok{pool=}\StringTok{"pseudo"}\NormalTok{)}
@@ -931,73 +1180,68 @@ And it might be useful to write this table out of R, saving it as a regular file
 \hypertarget{assign-taxonomy}{%
 \section{Assign taxonomy}\label{assign-taxonomy}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\# downloading DECIPHER{-}formatted SILVA v138 reference}
-\FunctionTok{download.file}\NormalTok{(}\AttributeTok{url=}\StringTok{"http://www2.decipher.codes/Classification/TrainingSets/SILVA\_SSU\_r138\_2019.RData"}\NormalTok{, }\AttributeTok{destfile=}\StringTok{"SILVA\_SSU\_r138\_2019.RData"}\NormalTok{)}
-
-\DocumentationTok{\#\# loading reference taxonomy object}
-\FunctionTok{load}\NormalTok{(}\StringTok{"SILVA\_SSU\_r138\_2019.RData"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Running the following taxonomy assignment step took \textasciitilde30 minutes on a 2013 MacBook Pro. So feel free to load the stored R objects with load(``amplicon\_dada2\_ex.RData'') to skip this step if you'd like.
+\begin{rmdwarning}
+Running the Taxonomy assignment step below can take anywhere from 30
+minutes to a few hours depending on how much RAM we provide. So for this
+example run - we will skip this step and load an R.data file which has
+this information in it already
+\end{rmdwarning}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# loading DECIPHER}
-\FunctionTok{library}\NormalTok{(DECIPHER)}
-
-\DocumentationTok{\#\# creating DNAStringSet object of our ASVs}
-\NormalTok{dna }\OtherTok{\textless{}{-}} \FunctionTok{DNAStringSet}\NormalTok{(}\FunctionTok{getSequences}\NormalTok{(seqtab.nochim))}
-
-\DocumentationTok{\#\# and classifying}
-\NormalTok{tax\_info }\OtherTok{\textless{}{-}} \FunctionTok{IdTaxa}\NormalTok{(}\AttributeTok{test=}\NormalTok{dna, }\AttributeTok{trainingSet=}\NormalTok{trainingSet, }\AttributeTok{strand=}\StringTok{"both"}\NormalTok{, }\AttributeTok{processors=}\ConstantTok{NULL}\NormalTok{)}
+\FunctionTok{load}\NormalTok{(}\StringTok{"amplicon\_dada2\_ex.RData"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\textbf{Example code for running taxonomy assignment - Click here}
+
+\emph{So we won't run this code in this example, but here it is for reference.}
+
+\begin{verbatim}
+## downloading DECIPHER-formatted SILVA v138 reference
+download.file(url="http://www2.decipher.codes/Classification/TrainingSets/SILVA_SSU_r138_2019.RData", destfile="SILVA_SSU_r138_2019.RData")
+
+## loading reference taxonomy object
+load("SILVA_SSU_r138_2019.RData")
+
+## loading DECIPHER
+library(DECIPHER)
+
+## creating DNAStringSet object of our ASVs
+dna <- DNAStringSet(getSequences(seqtab.nochim))
+
+## and classifying
+tax_info <- IdTaxa(test=dna, trainingSet=trainingSet, strand="both", processors=NULL)
+\end{verbatim}
 
 \hypertarget{standard-goods}{%
 \section{Standard goods}\label{standard-goods}}
 
-The typical standard outputs from amplicon processing are a fasta file, a count table, and a taxonomy table. So here's one way we can generate those files from your DADA2 objects in R:
+The typical standard outputs from amplicon processing are
 
-\begin{Shaded}
-\begin{Highlighting}[]
-  \CommentTok{\# giving our seq headers more manageable names (ASV\_1, ASV\_2...)}
-\NormalTok{asv\_seqs }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(seqtab.nochim)}
-\NormalTok{asv\_headers }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\FunctionTok{dim}\NormalTok{(seqtab.nochim)[}\DecValTok{2}\NormalTok{], }\AttributeTok{mode=}\StringTok{"character"}\NormalTok{)}
+\begin{itemize}
+\item
+  a fasta file: each ASV represented by a sequence \texttt{asv\_fasta\_no\_contam}
+\item
+  a count table: how many sequences of each ASV in each sample \texttt{asv\_tab\_no\_contam}
+\item
+  a taxonomy file: the closest biological species to the fasta sequence \texttt{asv\_tax\_no\_contam}
+\end{itemize}
 
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{dim}\NormalTok{(seqtab.nochim)[}\DecValTok{2}\NormalTok{]) \{}
-\NormalTok{  asv\_headers[i] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"\textgreater{}ASV"}\NormalTok{, i, }\AttributeTok{sep=}\StringTok{"\_"}\NormalTok{)}
-\NormalTok{\}}
+These objects from DADA2 can then be analysed to start to understand the different bacterial communities from our deep-sea study:
 
-  \CommentTok{\# making and writing out a fasta of our final ASV seqs:}
-\NormalTok{asv\_fasta }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{rbind}\NormalTok{(asv\_headers, asv\_seqs))}
-\FunctionTok{write}\NormalTok{(asv\_fasta, }\StringTok{"ASVs.fa"}\NormalTok{)}
+\begin{quote}
+\textbf{Note}
 
-  \CommentTok{\# count table:}
-\NormalTok{asv\_tab }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(seqtab.nochim)}
-\FunctionTok{row.names}\NormalTok{(asv\_tab) }\OtherTok{\textless{}{-}} \FunctionTok{sub}\NormalTok{(}\StringTok{"\textgreater{}"}\NormalTok{, }\StringTok{""}\NormalTok{, asv\_headers)}
-\FunctionTok{write.table}\NormalTok{(asv\_tab, }\StringTok{"ASVs\_counts.tsv"}\NormalTok{, }\AttributeTok{sep=}\StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\AttributeTok{quote=}\NormalTok{F, }\AttributeTok{col.names=}\ConstantTok{NA}\NormalTok{)}
+\begin{itemize}
+\tightlist
+\item
+  These three files are relatively small simply lists now, you can type them into the R console and inspect these outputs if you wish. Do they make sense to you?
+\end{itemize}
+\end{quote}
 
-  \CommentTok{\# tax table:}
-  \CommentTok{\# creating table of taxonomy and setting any that are unclassified as "NA"}
-\NormalTok{ranks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"domain"}\NormalTok{, }\StringTok{"phylum"}\NormalTok{, }\StringTok{"class"}\NormalTok{, }\StringTok{"order"}\NormalTok{, }\StringTok{"family"}\NormalTok{, }\StringTok{"genus"}\NormalTok{, }\StringTok{"species"}\NormalTok{)}
-\NormalTok{asv\_tax }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{sapply}\NormalTok{(tax\_info, }\ControlFlowTok{function}\NormalTok{(x) \{}
-\NormalTok{  m }\OtherTok{\textless{}{-}} \FunctionTok{match}\NormalTok{(ranks, x}\SpecialCharTok{$}\NormalTok{rank)}
-\NormalTok{  taxa }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{taxon[m]}
-\NormalTok{  taxa[}\FunctionTok{startsWith}\NormalTok{(taxa, }\StringTok{"unclassified\_"}\NormalTok{)] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
-\NormalTok{  taxa}
-\NormalTok{\}))}
-\FunctionTok{colnames}\NormalTok{(asv\_tax) }\OtherTok{\textless{}{-}}\NormalTok{ ranks}
-\FunctionTok{rownames}\NormalTok{(asv\_tax) }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\AttributeTok{pattern=}\StringTok{"\textgreater{}"}\NormalTok{, }\AttributeTok{replacement=}\StringTok{""}\NormalTok{, }\AttributeTok{x=}\NormalTok{asv\_headers)}
-
-\FunctionTok{write.table}\NormalTok{(asv\_tax, }\StringTok{"ASVs\_taxonomy.tsv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\AttributeTok{quote=}\NormalTok{F, }\AttributeTok{col.names=}\ConstantTok{NA}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{contaminants}{%
-\section{Contaminants}\label{contaminants}}
+\hypertarget{functions-list}{%
+\section{Functions list}\label{functions-list}}
 
 \begin{longtable}{ll}
 \toprule
@@ -1015,31 +1259,119 @@ IdTaxa() & assign taxonomy\\
 \bottomrule
 \end{longtable}
 
-\textbf{Q. Why isn't this data tidy?}
+\hypertarget{summary-2}{%
+\section{Summary}\label{summary-2}}
 
-The variable \texttt{year} is split across six columns.
+We have imported FASTQ data from an Illumina sequencing run, processed the files to remove poor quality reads and trim primers. We have then put this through a microbiome specific bioinformatics pipeline to assign millions of individual reads to more manageable representative sequences. We have assigned taxonomies to these sequences and tallied them, so that \textbf{next time} we can actually inspect our data and start to make visuals that describe our microbial communities.
 
-We want to create a single column \textbf{year} that will have the values (2007-2012) in rows. This will make the dataframe much longer as individuals will be repeated six times. At the same time the values in the six columns should be assigned to a new column \textbf{length}.
-
-\hypertarget{analysis-in-r}{%
-\chapter{Analysis in R}\label{analysis-in-r}}
+\hypertarget{analysis-in-r---under-construction}{%
+\chapter{Analysis in R - UNDER CONSTRUCTION}\label{analysis-in-r---under-construction}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(}\StringTok{"phyloseq"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(}\StringTok{"vegan"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(}\StringTok{"DESeq2"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(}\StringTok{"dendextend"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(}\StringTok{"viridis"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(phyloseq)}
+\FunctionTok{library}\NormalTok{(vegan)}
+\FunctionTok{library}\NormalTok{(DESeq2)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(dendextend)}
+\FunctionTok{library}\NormalTok{(viridis)}
 \FunctionTok{library}\NormalTok{(}\StringTok{"reshape"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{important-files}{%
+\section{Important files}\label{important-files}}
+
+We're mostly going to be working with just 3 files now.
+
+\begin{itemize}
+\item
+  A count table: the number of reads for each unique sequence
+\item
+  A taxonomy table: the assigned taxonomy for each sequence according to the SILVA database
+\item
+  A sample file: this is the ``metadata'' it contains any information \emph{we} have provided about the different samples
+\end{itemize}
+
+\begin{quote}
+\textbf{Note}
+
+Since we've already used decontam to remove likely contaminants, we're dropping the ``blank'' samples from our count table which in the table we're reading in are the first 4 columns. That's what's being done by the {[} , -c(1:4){]} part at the end there.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sample\_info\_tab }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\StringTok{"sample\_info.tsv"}\NormalTok{, }\AttributeTok{header=}\NormalTok{T, }\AttributeTok{row.names=}\DecValTok{1}\NormalTok{,}
+                   \AttributeTok{check.names=}\NormalTok{F, }\AttributeTok{sep=}\StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ps }\OtherTok{\textless{}{-}} \FunctionTok{phyloseq}\NormalTok{(}\FunctionTok{otu\_table}\NormalTok{(asv\_tab\_no\_contam, }\AttributeTok{taxa\_are\_rows=}\NormalTok{T), }
+               \FunctionTok{sample\_data}\NormalTok{(sample\_info\_tab), }
+               \FunctionTok{tax\_table}\NormalTok{(asv\_tax\_no\_contam))}
 \end{Highlighting}
 \end{Shaded}
 
 Make graphs
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ ps }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{tax\_glom}\NormalTok{(}\AttributeTok{taxrank=}\StringTok{"class"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}  
+  \FunctionTok{transform\_sample\_counts}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x)\{x}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(x)\})}\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{psmelt}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(Abundance }\SpecialCharTok{\textgreater{}}\FloatTok{0.05}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ ps }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{tax\_glom}\NormalTok{(}\AttributeTok{taxrank=}\StringTok{"class"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}  
+  \FunctionTok{transform\_sample\_counts}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x)\{x}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(x)\})}\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{psmelt}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(Abundance }\SpecialCharTok{\textgreater{}}\FloatTok{0.05}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Sample, }\AttributeTok{y=}\NormalTok{Abundance, }\AttributeTok{colour=}\NormalTok{class))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+sample\_info\_tab\$Sample \textless- rownames(sample\_info\_tab)
+
+ps\_richness\$Sample \textless- rownames(ps\_richness)
+
+richness -\textgreater{} ps \%\textgreater\%
+estimate\_richness()
+
+left\_join(sample\_info\_tab, ps\_richness, ``Sample'')\%\textgreater\% ggplot(aes(x=char, y=Simpson))+geom\_boxplot
+
+Heatmap
+
+ps\_rare\_top20 \textless- prune\_taxa(names(sort(taxa\_sums(ps),TRUE){[}1:20{]}), ps)
+
+plot\_heatmap(ps\_rare\_top20,``NMDS'',distance = ``bray'',sample.label=``char'')
+
+Ordination
+
+ord1\textless-plot\_ordination(ps, ord.nmds.bray, color=``char'', title=``Bray NMDS'')
+\textgreater{}
+\textgreater{} \#Plot with Ellipses assuming normal distribution\\
+\textgreater{} ord1 + stat\_ellipse(type=``norm'') + theme\_bw()
+
 Answer some questions?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  alpha diversity differs between `Early' and `Late' sampled mouse gut microbiomes
+\item
+  beta diversity differs between `Early' and `Late' sampled mouse gut microbiomes
+\end{enumerate}
+
+\hypertarget{summary-3}{%
+\section{Summary}\label{summary-3}}
 
 \hypertarget{applications}{%
 \chapter{Applications}\label{applications}}

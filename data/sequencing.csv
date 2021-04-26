@@ -1,0 +1,9 @@
+﻿Term,What it is
+Insert,the DNA fragment that is being used for sequencing
+Read,The part of the insert that is sequenced
+Single read,A procedure in which the insert is sequenced once
+Paired end,"A procedure in which the insert is sequenced twice, once from each end"
+Flowcell,A small glass chip on which the DNA fragments are attached and then sequenced. The flowcell is covered in probes that allow hybridisation of DNA adpaters that were ligated onto the inserts
+Lane,The flowcell has 8 physically separate lanes. Sequencing occurs in parallel on all lanes
+Multiplexing/Demultiplexing,Sequencing multiple independent biological samples on the same lane is called multiplexing. After sequencing separating the data from from samples that were multiplexed is performed computationally and is called demultiplexing. This is done by a script that identifies unique sequences on the adapters that were attached to reads
+Pipeline,The series of computational processes used to go from FASTQ data files to results and biological inferences

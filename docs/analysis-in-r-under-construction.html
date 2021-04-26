@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Applications | Introduction to Bioinformatics - 5023Y</title>
+  <title>Chapter 4 Analysis in R - UNDER CONSTRUCTION | Introduction to Bioinformatics - 5023Y</title>
   <meta name="description" content="This is very brief introduction to some of the basic skills required to handling sequencing data for Bioinformatics - with one reproducible example analysing microbiome sequencing data" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Applications | Introduction to Bioinformatics - 5023Y" />
+  <meta property="og:title" content="Chapter 4 Analysis in R - UNDER CONSTRUCTION | Introduction to Bioinformatics - 5023Y" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Applications | Introduction to Bioinformatics - 5023Y" />
+  <meta name="twitter:title" content="Chapter 4 Analysis in R - UNDER CONSTRUCTION | Introduction to Bioinformatics - 5023Y" />
   
   <meta name="twitter:description" content="This is very brief introduction to some of the basic skills required to handling sequencing data for Bioinformatics - with one reproducible example analysing microbiome sequencing data" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="analysis-in-r-under-construction.html"/>
-<link rel="next" href="final-words.html"/>
+<link rel="prev" href="ngs-sequence-analysis.html"/>
+<link rel="next" href="applications.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -230,14 +230,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="applications" class="section level1" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Applications</h1>
-<p>Some <em>significant</em> applications are demonstrated in this chapter.</p>
-<div id="example-one" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Example one</h2>
+<div id="analysis-in-r---under-construction" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Analysis in R - UNDER CONSTRUCTION</h1>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="analysis-in-r-under-construction.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
+<span id="cb48-2"><a href="analysis-in-r-under-construction.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb48-3"><a href="analysis-in-r-under-construction.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb48-4"><a href="analysis-in-r-under-construction.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb48-5"><a href="analysis-in-r-under-construction.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dendextend)</span>
+<span id="cb48-6"><a href="analysis-in-r-under-construction.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb48-7"><a href="analysis-in-r-under-construction.html#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;reshape&quot;</span>)</span></code></pre></div>
+<script>
+  addClassKlippyTo("pre.r, pre.bash");
+  addKlippy('right', 'top', 'auto', '1', 'copy to clipboard', 'Copied');
+</script>
+<div id="important-files" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Important files</h2>
+<p>We’re mostly going to be working with just 3 files now.</p>
+<ul>
+<li><p>A count table: the number of reads for each unique sequence</p></li>
+<li><p>A taxonomy table: the assigned taxonomy for each sequence according to the SILVA database</p></li>
+<li><p>A sample file: this is the “metadata” it contains any information <em>we</em> have provided about the different samples</p></li>
+</ul>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>Since we’ve already used decontam to remove likely contaminants, we’re dropping the “blank” samples from our count table which in the table we’re reading in are the first 4 columns. That’s what’s being done by the [ , -c(1:4)] part at the end there.</p>
+</blockquote>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="analysis-in-r-under-construction.html#cb49-1" aria-hidden="true" tabindex="-1"></a>sample_info_tab <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;sample_info.tsv&quot;</span>, <span class="at">header=</span>T, <span class="at">row.names=</span><span class="dv">1</span>,</span>
+<span id="cb49-2"><a href="analysis-in-r-under-construction.html#cb49-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">check.names=</span>F, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="analysis-in-r-under-construction.html#cb50-1" aria-hidden="true" tabindex="-1"></a>ps <span class="ot">&lt;-</span> <span class="fu">phyloseq</span>(<span class="fu">otu_table</span>(asv_tab_no_contam, <span class="at">taxa_are_rows=</span>T), </span>
+<span id="cb50-2"><a href="analysis-in-r-under-construction.html#cb50-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">sample_data</span>(sample_info_tab), </span>
+<span id="cb50-3"><a href="analysis-in-r-under-construction.html#cb50-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tax_table</span>(asv_tax_no_contam))</span></code></pre></div>
+<p>Make graphs</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="analysis-in-r-under-construction.html#cb51-1" aria-hidden="true" tabindex="-1"></a> ps <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="analysis-in-r-under-construction.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tax_glom</span>(<span class="at">taxrank=</span><span class="st">&quot;class&quot;</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb51-3"><a href="analysis-in-r-under-construction.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform_sample_counts</span>(<span class="cf">function</span>(x){x<span class="sc">/</span><span class="fu">sum</span>(x)})<span class="sc">%&gt;%</span> </span>
+<span id="cb51-4"><a href="analysis-in-r-under-construction.html#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">psmelt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb51-5"><a href="analysis-in-r-under-construction.html#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Abundance <span class="sc">&gt;</span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="analysis-in-r-under-construction.html#cb52-1" aria-hidden="true" tabindex="-1"></a> ps <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href="analysis-in-r-under-construction.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tax_glom</span>(<span class="at">taxrank=</span><span class="st">&quot;class&quot;</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb52-3"><a href="analysis-in-r-under-construction.html#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform_sample_counts</span>(<span class="cf">function</span>(x){x<span class="sc">/</span><span class="fu">sum</span>(x)})<span class="sc">%&gt;%</span> </span>
+<span id="cb52-4"><a href="analysis-in-r-under-construction.html#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">psmelt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb52-5"><a href="analysis-in-r-under-construction.html#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Abundance <span class="sc">&gt;</span><span class="fl">0.05</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb52-6"><a href="analysis-in-r-under-construction.html#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Sample, <span class="at">y=</span>Abundance, <span class="at">colour=</span>class))<span class="sc">+</span></span>
+<span id="cb52-7"><a href="analysis-in-r-under-construction.html#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p>sample_info_tab$Sample &lt;- rownames(sample_info_tab)</p>
+<p>ps_richness$Sample &lt;- rownames(ps_richness)</p>
+<p>richness -&gt; ps %&gt;%
+estimate_richness()</p>
+<p>left_join(sample_info_tab, ps_richness, “Sample”)%&gt;% ggplot(aes(x=char, y=Simpson))+geom_boxplot</p>
+<p>Heatmap</p>
+<p>ps_rare_top20 &lt;- prune_taxa(names(sort(taxa_sums(ps),TRUE)[1:20]), ps)</p>
+<p>plot_heatmap(ps_rare_top20,“NMDS,”distance = “bray,”sample.label=“char”)</p>
+<p>Ordination</p>
+<p>ord1&lt;-plot_ordination(ps, ord.nmds.bray, color=“char,” title=“Bray NMDS”)
+&gt;
+&gt; #Plot with Ellipses assuming normal distribution<br />
+&gt; ord1 + stat_ellipse(type=“norm”) + theme_bw()</p>
+<p>Answer some questions?</p>
+<ol style="list-style-type: decimal">
+<li><p>alpha diversity differs between ‘Early’ and ‘Late’ sampled mouse gut microbiomes</p></li>
+<li><p>beta diversity differs between ‘Early’ and ‘Late’ sampled mouse gut microbiomes</p></li>
+</ol>
 </div>
-<div id="example-two" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Example two</h2>
+<div id="summary-3" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Summary</h2>
 
 </div>
 </div>
@@ -246,8 +302,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="analysis-in-r-under-construction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="final-words.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ngs-sequence-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -278,7 +334,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-application.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-method.Rmd",
 "text": "Edit"
 },
 "history": {
