@@ -40,8 +40,16 @@ assign-taxonomy
 standard-goods
 functions-list
 summary-2
-analysis-in-r---under-construction
+introduction-to-statistical-analysis-of-the-microbiome-data
 important-files
+phyloseq
+relative-abundance-of-bacteria-by-taxonomic-class
+alpha-diversity---community-richness
+analyse-and-plot
+beta-diversity
+heatmaps
+multidimensional-analysis
+question
 summary-3
 applications
 example-one
