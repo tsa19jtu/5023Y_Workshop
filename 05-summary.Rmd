@@ -1,6 +1,10 @@
 # Final Words
 
-We have finished a nice book.
-```{r , echo=FALSE, eval=TRUE, include=TRUE}
-klippy::klippy(c('r', 'bash'), position = c('top', 'right'), tooltip_message = 'copy to clipboard', tooltip_success = 'Copied!')
+
+
+
+
+
+```{r miniUI, fig.cap='A Shiny app created via the miniUI package; you can see a live version at https://yihui.shinyapps.io/miniUI/.', screenshot.opts=list(delay=20,zoom=2), dev='png', cache=TRUE, fig.align='center', fig.width=8, fig.height=6, eval=TRUE}
+knitr::include_app('https://yihui.shinyapps.io/miniUI/', height = '600px')
 ```

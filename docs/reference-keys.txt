@@ -1,6 +1,7 @@
 fig:unnamed-chunk-4
 fig:nice-fig
 fig:unnamed-chunk-40
+fig:miniUI
 introduction
 Unix
 what-is-unixlinux
