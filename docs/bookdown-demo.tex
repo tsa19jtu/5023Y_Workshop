@@ -167,20 +167,6 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
 \ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -218,12 +204,962 @@ Top tips for the course:
 
 \textbf{DO} ask lots of questions!
 
-\citet{R-bookdown}
+\hypertarget{teaching}{%
+\section{Teaching}\label{teaching}}
 
-\hypertarget{Unix}{%
-\chapter{Unix}\label{Unix}}
+\hypertarget{lectures}{%
+\subsection{Lectures}\label{lectures}}
 
-Unix is very likely the most fundamental skillset we can develop for bioinformatics (and much more than bioinformatics). Many of the most common and powerful bioinformatics approaches happen in this text-based environment, and having a solid foundation here can make everything we're trying to learn and do much easier. This is a short introductory tutorial to help us get from being completely new to Unix up to being friendly with it 🙂
+\hypertarget{workshops}{%
+\subsection{Workshops}\label{workshops}}
+
+\hypertarget{introduction-to-r}{%
+\section{Introduction to R}\label{introduction-to-r}}
+
+\href{https://www.r-project.org/}{R} is the name of the programming language itself and \href{img/rstudio-ide.pdf}{RStudio} is a convenient interface.{]}, which we will be using throughout the course in order to learn how to organise data, produce accurate data analyses \& data visualisations.
+
+Eventually we will also add extra tools like \href{https://www.youtube.com/watch?v=w3jLJU7DT5E}{GitHub} and \href{https://rmarkdown.rstudio.com/}{RMarkdown} for data reproducibility and collaborative programming, check out this short (and very cheesy) intro video.{]}, which are collaboration and version control systems that we will be using throughout the course. More on this in future weeks.
+
+By the end of this module I hope you will have the tools to confidently analyze real data, make informative and beautiful data visuals, and be able to analyse lots of different types of data.
+
+The taught content this autumn will be given to you in several \textbf{worksheets}, these will be added to this dynamic webpage each week.
+
+\hypertarget{getting-around-on-rstudio}{%
+\section{Getting around on RStudio}\label{getting-around-on-rstudio}}
+
+\hypertarget{error}{%
+\section{Error!}\label{error}}
+
+\hypertarget{week-one}{%
+\chapter{Week One}\label{week-one}}
+
+Go to RStudio Cloud and enter the Project labelled \texttt{Week\ One} - this will clone the project and provide you with your own workspace.
+
+Follow the instructions below to get used to the R command line, and how R works as a language.
+
+\hypertarget{your-first-r-command}{%
+\section{Your first R command}\label{your-first-r-command}}
+
+In the RStudio pane, navigate to the console (bottom left) and \texttt{type\ or\ copy} the below it should appear at the \textgreater{}
+
+Hit Enter on your keyboard.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10} \SpecialCharTok{+} \DecValTok{20}
+\end{Highlighting}
+\end{Shaded}
+
+You should now be looking at the below:
+
+\begin{verbatim}
+> 10 + 20
+[1] 30
+\end{verbatim}
+
+The first line shows the request you made to R, the next line is R's response
+
+You didn't type the \texttt{\textgreater{}} symbol: that's just the R command prompt and isn't part of the actual command.
+
+It's important to understand how the output is formatted. Obviously, the correct answer to the sum \texttt{10\ +\ 20} is \texttt{30}, and not surprisingly R has printed that out as part of its response. But it's also printed out this \texttt{{[}1{]}} part, which probably doesn't make a lot of sense to you right now. You're going to see that a lot. You can think of \texttt{{[}1{]}\ 30} as if R were saying ``the answer to the 1st question you asked is 30''.
+
+\hypertarget{typos}{%
+\subsection{Typos}\label{typos}}
+
+Before we go on to talk about other types of calculations that we can do with R, there's a few other things I want to point out. The first thing is that, while R is good software, it's still software. It's pretty stupid, and because it's stupid it can't handle typos. It takes it on faith that you meant to type \emph{exactly} what you did type. For example, suppose that you forgot to hit the shift key when trying to type \texttt{+}, and as a result your command ended up being \texttt{10\ =\ 20} rather than \texttt{10\ +\ 20}. Try it for yourself and replicate this error message:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10} \OtherTok{=} \DecValTok{20}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in 10 = 20: invalid (do_set) left-hand side to assignment
+\end{verbatim}
+
+What's happened here is that R has attempted to interpret \texttt{10\ =\ 20} as a command, and spits out an error message because the command doesn't make any sense to it. When a \emph{human} looks at this, and then looks down at his or her keyboard and sees that \texttt{+} and \texttt{=} are on the same key, it's pretty obvious that the command was a typo. But R doesn't know this, so it gets upset. And, if you look at it from its perspective, this makes sense. All that R ``knows'' is that \texttt{10} is a legitimate number, \texttt{20} is a legitimate number, and \texttt{=} is a legitimate part of the language too. In other words, from its perspective this really does look like the user meant to type \texttt{10\ =\ 20}, since all the individual parts of that statement are legitimate and it's too stupid to realise that this is probably a typo. Therefore, R takes it on faith that this is exactly what you meant\ldots{} it only ``discovers'' that the command is nonsense when it tries to follow your instructions, typo and all. And then it whinges, and spits out an error.
+
+Even more subtle is the fact that some typos won't produce errors at all, because they happen to correspond to ``well-formed'' R commands. For instance, suppose that not only did I forget to hit the shift key when trying to type \texttt{10\ +\ 20}, I also managed to press the key next to one I meant do. The resulting typo would produce the command \texttt{10\ -\ 20}. Clearly, R has no way of knowing that you meant to \emph{add} 20 to 10, not \emph{subtract} 20 from 10, so what happens this time is this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10} \SpecialCharTok{{-}} \DecValTok{20}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -10
+\end{verbatim}
+
+In this case, R produces the right answer, but to the the wrong question.
+
+\hypertarget{more-simple-arithmetic}{%
+\subsection{More simple arithmetic}\label{more-simple-arithmetic}}
+
+One of the best ways to get to know R is to play with it, it's pretty difficult to break it so don't worry too much. Type whatever you want into to the console and see what happens.
+
+If the last line of your console looks like this
+
+\begin{verbatim}
+> 10+
++ 
+\end{verbatim}
+
+and there's a blinking cursor next to the plus sign. This means is that R is still waiting for you to finish. It ``thinks'' you're still typing your command, so it hasn't tried to execute it yet. In other words, this plus sign is actually another command prompt. It's different from the usual one (i.e., the \texttt{\textgreater{}} symbol) to remind you that R is going to ``add'' whatever you type now to what you typed last time. For example, type \texttt{20} and hit enter, then it finishes the command:
+
+\begin{verbatim}
+> 10 +
++ 20
+[1] 30
+\end{verbatim}
+
+\emph{Alternatively} hit escape, and R will forget what you were trying to do and return to a blank line.
+
+\hypertarget{try-some-maths}{%
+\subsection{Try some maths}\label{try-some-maths}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\SpecialCharTok{+}\DecValTok{7}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{13{-}10}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{4}\SpecialCharTok{*}\DecValTok{6}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{12}\SpecialCharTok{/}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+Raise a number to the power of another
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{5}\SpecialCharTok{\^{}}\DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+As I'm sure everyone will probably remember the moment they read this, the act of multiplying a number \(x\) by itself \(n\) times is called ``raising \(x\) to the \(n\)-th power''. Mathematically, this is written as \(x^n\). Some values of \(n\) have special names: in particular \(x^2\) is called \(x\)-squared, and \(x^3\) is called \(x\)-cubed. So, the 4th power of 5 is calculated like this:
+\[
+5^4 = 5 \times 5 \times 5 \times 5 
+\]
+
+\hypertarget{perform-some-combos}{%
+\subsection{Perform some combos}\label{perform-some-combos}}
+
+Perform some mathematical combos, noting that the order in which R performs calculations is the standard one.
+
+That is, first calculate things inside \textbf{B}rackets \texttt{()}, then calculate \textbf{O}rders of (exponents) \texttt{\^{}}, then \textbf{D}ivision \texttt{/} and \textbf{M}ultiplication \texttt{*}, then \textbf{A}ddition \texttt{+} and \textbf{S}ubtraction \texttt{-}.
+
+Notice the different outputs of these two commands.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3}\SpecialCharTok{\^{}}\DecValTok{2{-}5}\SpecialCharTok{/}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{3}\SpecialCharTok{\^{}}\DecValTok{2{-}5}\NormalTok{)}\SpecialCharTok{/}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Similarly if we want to raise a number to a fraction, we need to surround the fraction with parentheses ()
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{16}\SpecialCharTok{\^{}}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{16}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The first one calculates 16 raised to the power of 1, then divided this answer by two. The second one raises 16 to the power of a half. A big difference in the output.
+
+\begin{quote}
+**Note - While the cursor is in the console, you can press the up arrow to see all your previous commands.
+You can run them again, or edit them. Later on we will look at scripts, as an essential way to re-use, store and edit commands.
+\end{quote}
+
+\hypertarget{storing-outputs}{%
+\section{Storing outputs}\label{storing-outputs}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10}    \SpecialCharTok{+} \DecValTok{20}
+\end{Highlighting}
+\end{Shaded}
+
+or this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10}\SpecialCharTok{+}\DecValTok{20}
+\end{Highlighting}
+\end{Shaded}
+
+and I would get exactly the same answer \textbf{try it for yourself}. However, that doesn't mean that you can insert spaces in any old place. For example you can type \texttt{citation()} to get some information about how to cite R. \textbf{Try it}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{citation}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\ldots{} it tells you to cite R when you have used it for data analysis. What happens when the spacing is changed? If you insert spaces in between the word and the parentheses, or inside the parentheses themselves, then all is well. That is, either of these two commands
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{citation}\NormalTok{ ()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{citation}\NormalTok{(  )}
+\end{Highlighting}
+\end{Shaded}
+
+will produce exactly the same response. However, what I can't do is insert spaces in the middle of the word. If I try to do this, R gets upset - try it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{citat }\FunctionTok{ion}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{r-can-sometimes-tell-that-youre-not-finished-yet-but-not-often}{%
+\subsection{R can sometimes tell that you're not finished yet (but not often)}\label{r-can-sometimes-tell-that-youre-not-finished-yet-but-not-often}}
+
+One more thing I should point out. If you hit enter in a situation where it's ``obvious'' to R that you haven't actually finished typing the command, R is just smart enough to keep waiting. For example, if you type \texttt{10\ +} and then press enter, even R is smart enough to realise that you probably wanted to type in another number. So what happens? :
+
+\begin{verbatim}
+> 10+
++ 
+\end{verbatim}
+
+and there's a blinking cursor next to the plus sign. What this means is that R is still waiting for you to finish. It ``thinks'' you're still typing your command, so it hasn't tried to execute it yet. In other words, this plus sign is actually another command prompt. It's different from the usual one (i.e., the \texttt{\textgreater{}} symbol) to remind you that R is going to ``add'' whatever you type now to what you typed last time. For example, type \texttt{3} and hit enter, then it finishes the command:
+
+\begin{verbatim}
+> 10 +
++ 20
+[1] 30
+\end{verbatim}
+
+And as far as R is concerned, this is \emph{exactly} the same as if you had typed \texttt{10\ +\ 20}. Using the \texttt{+} sign is a big part of stringing together commands when we start to build complex plots, so you are likely to stumble over using \texttt{+} quite a lot. Similarly, consider the \texttt{citation()} command that we talked about in the previous section. Suppose you hit enter after typing \texttt{citation(}. Once again, R is smart enough to realise that there must be more coming -- since you need to add the \texttt{)} character -- so it waits. I can even hit enter several times and it will keep waiting. If you want to get out of this situation, just hit the `escape' key:
+
+\begin{verbatim}
+> citation(
++ 
++ 
++ )
+\end{verbatim}
+
+What about if I typed \texttt{citation} and hit enter? In this case we get something very odd, something that we definitely \emph{don't} want, at least at this stage. Here's what happens:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{citation}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+citation
+## function (package = "base", lib.loc = NULL, auto = NULL) 
+## {
+##     dir <- system.file(package = package, lib.loc = lib.loc)
+##     if (dir == "") 
+##         stop(gettextf("package '%s' not found", package), domain = NA)
+BLAH BLAH BLAH
+\end{verbatim}
+
+where the \texttt{BLAH\ BLAH\ BLAH} goes on for rather a long time, and you don't know enough R yet to understand what all this gibberish actually means (of course, it doesn't actually say BLAH BLAH BLAH - it says some other things we don't understand or need to know that I've edited for length) This incomprehensible output can be quite intimidating to novice users, and unfortunately it's very easy to forget to type the parentheses; so almost certainly you'll do this by accident. Do not panic when this happens. \emph{Simply ignore the gibberish} and hit Escape if needed
+
+\hypertarget{doing-simple-calculations-with-r}{%
+\section{Doing simple calculations with R}\label{doing-simple-calculations-with-r}}
+
+Okay, now that we've discussed some of the tedious details associated with typing R commands, let's get back to learning how to use the most powerful piece of statistical software in the world as a \$2 calculator. So far, all we know how to do is addition. Clearly, a calculator that only did addition would be a bit stupid, so I should tell you about how to perform other simple calculations using R. But first, some more terminology. Addition is an example of an ``operation'' that you can perform (specifically, an arithmetic operation), and the \textbf{\emph{operator}} that performs it is \texttt{+}. To people with a programming or mathematics background, this terminology probably feels pretty natural, but to other people it might feel like I'm trying to make something very simple (addition) sound more complicated than it is (by calling it an arithmetic operation). To some extent, that's true: if addition was the only operation that we were interested in, it'd be a bit silly to introduce all this extra terminology. However, as we go along, we'll start using more and more different kinds of operations, so it's probably a good idea to get the language straight now, while we're still talking about very familiar concepts like addition!
+
+\hypertarget{adding-subtracting-multiplying-and-dividing}{%
+\subsection{Adding, subtracting, multiplying and dividing}\label{adding-subtracting-multiplying-and-dividing}}
+
+So, now that we have the terminology, let's learn how to perform some arithmetic operations in R.These \texttt{operators} correspond to the basic arithmetic we learned in primary school: addition, subtraction, multiplication and division.
+
+As you can see, R uses fairly standard symbols to denote each of the different operations you might want to perform: addition is done using the \texttt{+} operator, subtraction is performed by the \texttt{-} operator, and so on. So if you wanted to find out what 57 times 61 is (and who wouldn't?), you can use R instead of a calculator, like so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{57} \SpecialCharTok{*} \DecValTok{61}
+\end{Highlighting}
+\end{Shaded}
+
+So that's handy. \emph{By the way what was the answer?}
+
+\hypertarget{taking-powers}{%
+\subsection{Taking powers}\label{taking-powers}}
+
+The first four operations listed in the Table above are things we all learned in primary school, but they aren't the only arithmetic operations built into R.
+
+As I'm sure everyone will probably remember the moment they read this, the act of multiplying a number \(x\) by itself \(n\) times is called ``raising \(x\) to the \(n\)-th power''. Mathematically, this is written as \(x^n\). Some values of \(n\) have special names: in particular \(x^2\) is called \(x\)-squared, and \(x^3\) is called \(x\)-cubed. So, the 4th power of 5 is calculated like this:
+\[
+5^4 = 5 \times 5 \times 5 \times 5 
+\]
+
+One way that we could calculate \(5^4\) in R would be to type in the complete multiplication as it is shown in the equation above. That is, we could do this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{5} \SpecialCharTok{*} \DecValTok{5} \SpecialCharTok{*} \DecValTok{5} \SpecialCharTok{*} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+but it does seem a bit tedious. It would be very annoying indeed if you wanted to calculate \(5^{15}\), since the command would end up being quite long. Therefore, to make our lives easier, we use the power operator instead. When we do that, our command to calculate \(5^4\) goes like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{5} \SpecialCharTok{\^{}} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+Much easier.
+
+\hypertarget{bodmas}{%
+\subsection{Doing calculations in the right order}\label{bodmas}}
+
+Okay. At this point, you know how to take one of the most powerful pieces of statistical software in the world, and use it as a Casio calculator. And as a bonus, you've learned a few very basic programming concepts. In order to use R more effectively, we need to introduce more programming concepts.
+
+In most situations where you would want to use a calculator, you might want to do multiple calculations. R lets you do this, just by typing in longer commands.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{*} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+Clearly, this isn't a problem for R either. However, it's worth stopping for a second, and thinking about what R just did. Clearly, since it gave us an answer of \texttt{9} it must have multiplied \texttt{2\ *\ 4} (to get an interim answer of 8) and then added 1 to that. But, suppose it had decided to just go from left to right: if R had decided instead to add \texttt{1+2} (to get an interim answer of 3) and then multiplied by 4, it would have come up with an answer of \texttt{12}.
+
+To answer this, you need to know the \textbf{\emph{order of operations}} that R uses. It's actually the same order that you got taught when you were at school: the ``\textbf{\emph{BODMAS}}'' order.
+That is, first calculate things inside \textbf{B}rackets \texttt{()}, then calculate \textbf{O}rders of (exponents) \texttt{\^{}}, then \textbf{D}ivision \texttt{/} and \textbf{M}ultiplication \texttt{*}, then \textbf{A}ddition \texttt{+} and \textbf{S}ubtraction \texttt{-}. So, to continue the example above, if we want to force R to calculate the \texttt{1+2} part before the multiplication, all we would have to do is enclose it in brackets:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{1} \SpecialCharTok{+} \DecValTok{2}\NormalTok{) }\SpecialCharTok{*} \DecValTok{4} 
+\end{Highlighting}
+\end{Shaded}
+
+This is a fairly useful thing to be able to do. The only other thing I should point out about order of operations is what to expect when you have two operations that have the same priority: that is, how does R resolve ties? For instance, multiplication and division are actually the same priority, but what should we expect when we give R a problem like \texttt{4\ /\ 2\ *\ 3} to solve? If it evaluates the multiplication first and then the division, it would calculate a value of two-thirds. But if it evaluates the division first it calculates a value of 6. The answer, in this case, is that R goes from \emph{left to right}, so in this case the division step would come first:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{4} \SpecialCharTok{/} \DecValTok{2} \SpecialCharTok{*} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+All of the above being said, it's helpful to remember that \emph{brackets always come first}. So, if you're ever unsure about what order R will do things in, an easy solution is to enclose the thing \emph{you} want it to do first in brackets. There's nothing stopping you from typing \texttt{(4\ /\ 2)\ *\ 3}. By enclosing the division in brackets we make it clear which thing is supposed to happen first.
+
+\hypertarget{assign}{%
+\section{Storing a number as a variable}\label{assign}}
+
+One of the most important things to be able to do in R (or any programming language, for that matter) is to store information in \textbf{\emph{variables}}. At a conceptual level you can think of a variable as \emph{label} for a certain piece of information, or even several different pieces of information. When doing statistical analysis in R all of your data (the variables you measured in your study) will be stored as variables in R, let's look at the very basics for how we create variables and work with them.
+
+\hypertarget{variable-assignment-using--}{%
+\subsection{\texorpdfstring{Variable assignment using \texttt{\textless{}-}}{Variable assignment using \textless-}}\label{variable-assignment-using--}}
+
+Since we've been working with numbers so far, let's start by creating variables to store our numbers. And since most people like concrete examples, let's invent one. Suppose I'm trying to calculate how many apples I have (hard hitting issues only here).
+What I want to do is assign a \textbf{\emph{value}} to my variable \texttt{apples}, and that value should be \texttt{5}. We do this by using the \textbf{\emph{assignment operator}}, which is \texttt{\textless{}-}. Here's how we do it copy this code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{apples }\OtherTok{\textless{}{-}} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+then try this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{apples}
+\end{Highlighting}
+\end{Shaded}
+
+So I have 5 apples, that's nice to know. Anytime you can't remember what R has got stored in a particular variable, you can just type the name of the variable and hit enter.
+
+\hypertarget{doing-calculations-using-variables}{%
+\subsection{Doing calculations using variables}\label{doing-calculations-using-variables}}
+
+Okay, let's get back to my original story. In my quest to up my Vitamin C intake, I also want to know how many oranges I have
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{apples }\OtherTok{\textless{}{-}} \DecValTok{5}
+\NormalTok{oranges }\OtherTok{\textless{}{-}} \DecValTok{7}
+\end{Highlighting}
+\end{Shaded}
+
+The nice thing about variables (in fact, the whole point of having variables) is that we can do anything with a variable that we ought to be able to do with the information that it stores. That is, since R allows me to add \texttt{5} and \texttt{7}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{5} \SpecialCharTok{+} \DecValTok{7}
+\end{Highlighting}
+\end{Shaded}
+
+it also allows me to add apples and oranges
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{apples }\SpecialCharTok{+}\NormalTok{ oranges}
+\end{Highlighting}
+\end{Shaded}
+
+As far as R is concerned, the command is the same. Not surprisingly, I can assign the output of this calculation to a new variable, which I'll call \texttt{fruit}. And when we do this, the new variable gets the value \texttt{12}, try running this command and then typing \texttt{fruit}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fruit }\OtherTok{\textless{}{-}}\NormalTok{ apples}\SpecialCharTok{+}\NormalTok{oranges}
+\end{Highlighting}
+\end{Shaded}
+
+That's fairly straightforward. A slightly more subtle thing we can do is reassign the value of my variable, based on its current value. For instance, suppose that each one of my students decides to bribe me by giving me more fruit!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fruit }\OtherTok{\textless{}{-}}\NormalTok{ fruit }\SpecialCharTok{+} \DecValTok{41}
+\NormalTok{fruit}
+\end{Highlighting}
+\end{Shaded}
+
+In this calculation, R has taken the old value of \texttt{fruit} and added 41 to that value, producing a value of 53. This new value is assigned to the \texttt{fruit} variable, \textbf{overwriting its previous value}.
+
+\hypertarget{rules-and-conventions-for-naming-variables}{%
+\subsection{Rules and conventions for naming variables}\label{rules-and-conventions-for-naming-variables}}
+
+\begin{itemize}
+\tightlist
+\item
+  Variable names cannot include spaces: therefore \texttt{my\ fruit} is not a valid name, but \texttt{my\_fruit} is.
+\item
+  Variable names are case sensitive: that is, \texttt{Fruit} and \texttt{fruit} are \emph{different} variable names.
+\item
+  Variable names cannot be one of the reserved keywords. These are special names that R needs to keep ``safe'' from us mere users, so you can't use them as the names of variables. The keywords are: \texttt{if}, \texttt{else}, \texttt{repeat}, \texttt{while}, \texttt{function}, \texttt{for}, \texttt{in}, \texttt{next}, \texttt{break}, \texttt{TRUE}, \texttt{FALSE}, \texttt{NULL}, \texttt{Inf}, \texttt{NaN}, \texttt{NA}, \texttt{NA\_integer\_}, \texttt{NA\_real\_}, \texttt{NA\_complex\_}, and finally, \texttt{NA\_character\_}. Don't feel like you have to remember these: if you make a mistake and try to use one of the keywords as a variable name, R will complain about it like the whiny little automaton it is.
+\end{itemize}
+
+In addition to those rules that R enforces, there are some informal conventions that people tend to follow when naming variables. One of them you've already seen: i.e., don't use variables that start with a period. But there are several others. You aren't obliged to follow these conventions, and there are many situations in which it's advisable to ignore them, but it's generally a good idea to follow them when you can:
+
+\begin{itemize}
+\item
+  Use informative variable names. As a general rule, using meaningful names like \texttt{orange} and \texttt{apple} is preferred over arbitrary ones like \texttt{variable1} and \texttt{variable2}. Otherwise it's very hard to remember what the contents of different variables actually are.
+\item
+  Use short variable names. Typing is a pain and no-one likes doing it. So we much prefer to use a name like \texttt{apple} over a name like \texttt{pink\_lady\_apple}.
+\item
+  Use one of the conventional naming styles for multi-word variable names. Suppose I want to name a variable that stores ``my new salary''. Obviously I can't include spaces in the variable name, so how should I do this? There are three different conventions that you sometimes see R users employing. Firstly, you can separate the words using periods or dashes, which would give you \texttt{my-new-salary} as the variable name. Alternatively, you could separate words using underscores, as in \texttt{my\_new\_salary} or if you are feeling shouty \texttt{MY\_NEW\_SALARY}. Finally, you could use capital letters at the beginning of each word (except the first one), which gives you \texttt{myNewSalary} as the variable name. There's no very strong reason to prefer one over the other, but we are going to being learning \texttt{tidyverse} style R, which for consistency uses \textbf{`snake\_case'}
+\end{itemize}
+
+\hypertarget{using-functions}{%
+\section{Using functions}\label{using-functions}}
+
+The symbols \texttt{+}, \texttt{-}, \texttt{*} and so on are examples of \texttt{operators}. As we've seen, you can do quite a lot of calculations just by using these operators. However, in order to do more advanced calculations (and later on, to do actual statistics), you're going to need to start using \texttt{functions}.
+To get started, suppose I wanted to take the square root of 225. The square root, in case your high school maths is a bit rusty, is just the opposite of squaring a number. So, for instance, since ``5 squared is 25'' I can say that ``5 is the square root of 25''. The usual notation for this is
+
+\[
+\sqrt{25} = 5
+\]
+To calculate the square root of 25, I can do it in my head pretty easily, since I memorised my multiplication tables when I was a kid. It gets harder when the numbers get bigger, and pretty much impossible if they're not whole numbers. This is where something like R comes in very handy.
+
+Let's say I wanted to calculate \(\sqrt{225}\), the square root of 225. There's two ways I could do this using R.
+
+Firstly, \(\sqrt{x}\) is always the same as \({x}^{0.5}\) so I could use the power operator \texttt{\^{}}, just like we did earlier:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{225} \SpecialCharTok{\^{}} \FloatTok{0.5}
+\end{Highlighting}
+\end{Shaded}
+
+However, there's a second way that we can do this, since R also provides a \textbf{\emph{square root function}}, \texttt{sqrt()}. To calculate the square root of 255 using this function, what I do is insert the number \texttt{225} in the parentheses. That is, the command I type is this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(}\DecValTok{225}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+and as you might expect from our previous discussion, the spaces in between the parentheses are purely cosmetic. I could have typed \texttt{sqrt(225)} or \texttt{sqrt(\ 225\ \ \ )} and gotten the same result. When we use a function to do something, we generally refer to this as \textbf{\emph{calling}} the function, and the values that we type into the function (there can be more than one) are referred to as the \textbf{\emph{arguments}} of that function.
+
+Obviously, the \texttt{sqrt()} function doesn't really give us any new functionality, since we could have performed the square root calculations by using the power operator \texttt{\^{}}. However, there are lots of other functions in R: in fact, almost everything of interest is an R function of some kind.
+
+\hypertarget{functionarguments}{%
+\subsection{Function arguments, their names and their defaults}\label{functionarguments}}
+
+There's two more fairly important things that you need to understand about how functions work in R, and that's the use of ``named'' arguments, and default values" for arguments.
+To understand what these two concepts are all about, I'll introduce another function. The \texttt{round()} function can be used to round some value to the nearest whole number. For example, I could type this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FloatTok{3.1415}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Pretty straightforward, really. What's happening is that this function contains an \texttt{argument} that the number needs to be rounded (i.e., \texttt{3.1415})
+
+However, suppose I only wanted to round it to two decimal places: that is, I want to get \texttt{3.14} as the output. The \texttt{round()} function supports this, by allowing you to input a \emph{second} argument to the function that specifies the number of decimal places that you want to round the number to. In other words, I could do this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FloatTok{3.14165}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+What's happening here is that I've specified \emph{two} arguments: the first argument is the number that needs to be rounded (i.e., \texttt{3.1415}), the second argument is the number of decimal places that it should be rounded to (i.e., \texttt{2}), and the two arguments are separated by a comma.
+Functions often contain multiple arguments, allowing you to carry out complex tasks.
+
+In this simple example, it's quite easy to remember which argument comes first and which one comes second, but for more complicated functions this is not easy. Fortunately, most R functions make use of \textbf{\emph{argument names}}. For the \texttt{round()} function, for example the number that needs to be rounded is specified using the \texttt{x} argument, and the number of decimal points that you want it rounded to is specified using the \texttt{digits} argument. Because we have these names available to us, we can specify the arguments to the function by name. We do so like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\AttributeTok{x =} \FloatTok{3.1415}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that this is kind of similar in spirit to variable assignment, except that I used \texttt{=} here, rather than \texttt{\textless{}-}. In both cases we're specifying specific values to be associated with a label. However, there are some differences between what I was doing earlier on when creating variables, and what I'm doing here when specifying arguments, and so as a consequence it's important that you use \texttt{=} in this context.
+
+As you can see, specifying the arguments by name involves a lot more typing, but it's also a lot easier to read, and it will be a lot easier for \emph{you} or anyone reading your code to know what a particular function might be doing. This is much better for data reproducibility
+The writers of R functions will try to use conventional names for this reason making everyone's life easier. Or at least that's the theory\ldots{}
+
+One important thing to note is that when specifying the arguments using their names, it doesn't matter what order you type them in. But if you don't use the argument names, then you have to input the arguments in the correct order. In other words, these three commands all produce the same output\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FloatTok{3.14165}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\FunctionTok{round}\NormalTok{(}\AttributeTok{x =} \FloatTok{3.1415}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{round}\NormalTok{(}\AttributeTok{digits =} \DecValTok{2}\NormalTok{, }\AttributeTok{x =} \FloatTok{3.1415}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+but this one does not\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\DecValTok{2}\NormalTok{, }\FloatTok{3.14165}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+How do you find out what the correct order is? There's a few different ways, but the easiest one is to look at the help documentation for the function\footnote{ simply type \texttt{help(round)} or \texttt{help("round)}and read more (here){[}\url{https://www.r-project.org/help.html}{]}}.
+
+Okay, so that's the first thing I said you'd need to know: argument names. The second thing you need to know about is default values. Notice that the first time I called the \texttt{round()} function I didn't actually specify the \texttt{digits} argument at all, and yet R somehow knew that this meant it should round to the nearest whole number. How did that happen? The answer is that the \texttt{digits} argument has a \textbf{\emph{default value}} of \texttt{0}, meaning that if you decide not to specify a value for \texttt{digits} then R will act as if you had typed \texttt{digits\ =\ 0}. This is quite handy: the vast majority of the time when you want to round a number you want to round it to the nearest whole number, and it would be pretty annoying to have to specify the \texttt{digits} argument every single time. On the other hand, sometimes you actually do want to round to something other than the nearest whole number, and it would be even more annoying if R didn't allow this! Thus, by having \texttt{digits\ =\ 0} as the default value, we get the best of both worlds.
+
+\hypertarget{vectors}{%
+\subsection{Storing many numbers as a vector}\label{vectors}}
+
+At this point we've covered functions in enough detail, so let's return to our discussion of variables. When I introduced variables I showed you how we can use variables to store a single number. In this section, we'll extend this idea and look at how to store multiple numbers within the one variable. In R, the name for a variable that can store multiple values is a \textbf{\emph{vector}}. So let's create one.
+
+\hypertarget{creating-a-vector}{%
+\subsection{Creating a vector}\label{creating-a-vector}}
+
+Let's look at student numbers by module for 2020/21. Suppose I have three modules that I teach on \texttt{Data\ Science}, \texttt{Genetics} \& \texttt{Field\ Ecology} and I have module enrolment numbers: \texttt{41}, \texttt{124} \& \texttt{0}(not running this year - Coronavirus\ldots) respectively.
+
+What I would like to do is have a variable -- let's call it \texttt{students\_by\_module} -- that stores all this data. The first number stored should be. The simplest way to do this in R is to use the \textbf{\emph{combine}} function, \texttt{c()}. To do so, all we have to do is type all the numbers you want to store in a comma separated list, like this:\footnote{Notice that I didn't specify any argument names here. The \texttt{c()} function is one of those cases where we don't use names. We just type all the numbers, and R just dumps them all in a single variable.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{students\_by\_module }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{41}\NormalTok{,}\DecValTok{124}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{students\_by\_module}
+\end{Highlighting}
+\end{Shaded}
+
+To use the correct terminology here, we have a single variable here called \texttt{students\_by\_module}: this variable is a vector that consists of 3 \textbf{\emph{elements}}.
+
+\hypertarget{vectorsubset}{%
+\subsection{Getting information out of vectors}\label{vectorsubset}}
+
+Let's consider the problem of how to get information out of a vector. At this point, you might have a sneaking suspicion that the answer has something to do with the \texttt{{[}1{]}} that R has been printing out. And of course you are correct. Suppose I want to pull out the numbers for the second module in the list.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{students\_by\_module[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Yep, that's the enrolment numbers for Genetics.
+This behaviour makes more sense when you realise that we can use this trick to create new variables. For example, I could create a \texttt{february.sales} variable like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{genetics\_student\_numbers }\OtherTok{\textless{}{-}}\NormalTok{ students\_by\_module[}\DecValTok{2}\NormalTok{]}
+\NormalTok{genetics\_student\_numbers}
+\end{Highlighting}
+\end{Shaded}
+
+Obviously, the new variable \texttt{genetics\_student\_numbers} should only have one element and so when I print it out this new variable, the R output begins with a \texttt{{[}1{]}} because \texttt{124} is the value of the first (and only) element. The fact that this also happens to be the value of the second element of \texttt{students\_by\_module} is irrelevant.
+
+\hypertarget{text}{%
+\subsection{Storing text data}\label{text}}
+
+A lot of the time your data will be numeric in nature, but not always. Sometimes your data really needs to be described using text, not using numbers. To address this, we need to consider the situation where our variables store text. To create a variable that stores the word ``hello'', we can type this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{greeting }\OtherTok{\textless{}{-}} \StringTok{"hello"}
+\NormalTok{greeting}
+\end{Highlighting}
+\end{Shaded}
+
+When interpreting this, it's important to recognise that the quote marks here \emph{aren't} part of the string itself. They're just something that we use to make sure that R \emph{knows} to treat the characters that they enclose as a piece of text data, known as a \textbf{\emph{character string}}. In other words, R treats \texttt{"hello"} as a string containing the word ``hello''; but if I had typed \texttt{hello} instead, R would go looking for a variable by that name! You can also use \texttt{\textquotesingle{}hello\textquotesingle{}} to specify a character string.
+
+Okay, so that's how we store the text. Next, it's important to recognise that when we do this, R stores the entire word \texttt{"hello"} as a \emph{single} element: our \texttt{greeting} variable is \emph{not} a vector of five different letters. Rather, it has only the one element, and that element corresponds to the entire character string \texttt{"hello"}. To illustrate this, if I actually ask R to find the first element of \texttt{greeting}, it prints the whole string:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{greeting[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Of course, there's no reason why I can't create a vector of character strings. For instance, if we were to continue with the example of my attempts to look at the student numbers by module, one variable I might want would include the names of all the \texttt{modules}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{module\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Data Science"}\NormalTok{, }\StringTok{"Genetics"}\NormalTok{, }\StringTok{"Field Ecology"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This is a \textbf{\emph{character vector}} containing 3 elements, each of which is the name of a month. So if I wanted R to tell me the name of the third module, all I would do is this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modules\_names[}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{looking-at-the-type-of-data-in-a-vector}{%
+\subsection{Looking at the type of data in a vector}\label{looking-at-the-type-of-data-in-a-vector}}
+
+So now we have looked at vectors that contain two different types of data \texttt{numeric} and \texttt{character}.
+
+For now let's look at how you check the data class of your vectors
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(module\_names)}
+\FunctionTok{class}\NormalTok{(students\_by\_module)}
+\end{Highlighting}
+\end{Shaded}
+
+You can see that R will tell you what type of data each vector contains. This is really useful, and something we will come back to in the future, because R is stupid and while it tells you what class your data \texttt{is} it doesn't always know what class your data \texttt{needs} to be, so you have to check and correct it. For now these are both fine, so let's continue:
+
+\hypertarget{naming-the-elements-of-a-vector}{%
+\subsection{Naming the elements of a vector}\label{naming-the-elements-of-a-vector}}
+
+You have seen how the elements of a vector are referred to by their position, and that if you take an element and assign it to a new vector its position will change. One very powerful feature of R is the ability to give names to the elements of a vector
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(students\_by\_module) }\OtherTok{\textless{}{-}}\NormalTok{ module\_names}
+\NormalTok{students\_by\_module}
+\end{Highlighting}
+\end{Shaded}
+
+Now when you call the vector students\_by\_module you can see that each element has been given the corresponding module name. Using the names function we set an argument that the vector students\_by\_module requires names for each element. We then used \textless- to set provide a character vector of the same length \textless- module\_names. Now you can call elements of the vector by position \emph{or} name.
+
+\hypertarget{altering-the-elements-of-a-vector}{%
+\subsection{Altering the elements of a vector}\label{altering-the-elements-of-a-vector}}
+
+Sometimes you'll want to change the values stored in a vector. This could be done per element. So I just found out 30 extra students want to join this module because it's so amazing!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{students\_by\_module[}\StringTok{"Data Science"}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{71}
+\NormalTok{students\_by\_module}
+\end{Highlighting}
+\end{Shaded}
+
+Secondly, you often want to alter all of the elements of a vector at once. For instance, suppose I found out that student intake has doubled for next year and we expect each module to go up proportionately
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{students\_by\_module }\SpecialCharTok{*} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Of course maybe I want to keep a separate vector for next year's estimated numbers
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{students\_by\_module }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{41}\NormalTok{,}\DecValTok{124}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(students\_by\_module) }\OtherTok{\textless{}{-}}\NormalTok{ module\_names}
+\NormalTok{next\_year }\OtherTok{\textless{}{-}}\NormalTok{ students\_by\_module }\SpecialCharTok{*} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{logicals}{%
+\subsection{Storing ``true or false'' data}\label{logicals}}
+
+Time to move onto a third kind of data. A key concept in that a lot of R relies on is the idea of a \textbf{\emph{logical value}}. A logical value is an assertion about whether something is true or false. This is implemented in R in a pretty straightforward way. There are two logical values, namely \texttt{TRUE} and \texttt{FALSE}. Despite the simplicity, a logical values are very useful things. Let's see how they work.
+
+\hypertarget{assessing-mathematical-truths}{%
+\subsection{Assessing mathematical truths}\label{assessing-mathematical-truths}}
+
+In George Orwell's classic book \emph{1984}, one of the slogans used by the totalitarian Party was ``two plus two equals five'', the idea being that the political domination of human freedom becomes complete when it is possible to subvert even the most basic of truths.
+
+But they didn't have R. R will not be subverted. It has rather firm opinions on the topic of what is and isn't true, at least as regards basic mathematics. If I ask it to calculate \texttt{2\ +\ 2}, it always gives the same answer, and it's not bloody 5:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Of course, so far R is just doing the calculations. I haven't asked it to explicitly assert that \(2+2 = 4\) is a true statement. If I want R to make an explicit judgement, I can use a command like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{==} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+What I've done here is use the \textbf{\emph{equality operator}}, \texttt{==}, to force R to make a ``true or false'' judgement.\footnote{Note that this is a very different operator to the assignment operator \texttt{=} you saw previously. A common typo that people make when trying to write logical commands in R (or other languages, since the ``\texttt{=} versus \texttt{==}'' distinction is important in most programming languages) is to accidentally type \texttt{=} when you really mean \texttt{==}.} Okay, let's see what R thinks of the Party slogan:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2}\SpecialCharTok{+}\DecValTok{2} \SpecialCharTok{==} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+Take that Big Brother! Anyway, it's worth having a look at what happens if I try to \emph{force} R to believe that two plus two is five by making an assignment statement like \texttt{2\ +\ 2\ =\ 5} or \texttt{2\ +\ 2\ \textless{}-\ 5}. When I do this, here's what happens:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2} \OtherTok{=} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+R doesn't like this very much. It recognises that \texttt{2\ +\ 2} is \emph{not} a variable (that's what the ``non-language object'' part is saying), and it won't let you try to ``reassign'' it. While R is pretty flexible, and actually does let you do some quite remarkable things to redefine parts of R itself, there are just some basic, primitive truths that it refuses to give up. It won't change the laws of addition, and it won't change the definition of the number \texttt{2}.
+
+That's probably for the best.
+
+\hypertarget{logical-operations}{%
+\subsection{Logical operations}\label{logical-operations}}
+
+So now we've seen logical operations at work, but so far we've only seen the simplest possible example. You probably won't be surprised to discover that we can combine logical operations with other operations and functions in a more complicated way, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3}\SpecialCharTok{*}\DecValTok{3} \SpecialCharTok{+} \DecValTok{4}\SpecialCharTok{*}\DecValTok{4} \SpecialCharTok{==} \DecValTok{5}\SpecialCharTok{*}\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+or this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(}\DecValTok{25}\NormalTok{) }\SpecialCharTok{==} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+Not only that, but as this Table illustrates, there are several other logical operators that you can use, corresponding to some basic mathematical concepts.
+
+Hopefully these are all pretty self-explanatory: for example, the \textbf{\emph{less than}} operator \texttt{\textless{}} checks to see if the number on the left is less than the number on the right. If it's less, then R returns an answer of \texttt{TRUE}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{99} \SpecialCharTok{\textless{}} \DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+but if the two numbers are equal, or if the one on the right is larger, then R returns an answer of \texttt{FALSE}, as the following two examples illustrate:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{100} \SpecialCharTok{\textless{}} \DecValTok{100}
+\DecValTok{100} \SpecialCharTok{\textless{}} \DecValTok{99}
+\end{Highlighting}
+\end{Shaded}
+
+In contrast, the \textbf{\emph{less than or equal to}} operator \texttt{\textless{}=} will do exactly what it says. It returns a value of \texttt{TRUE} if the number of the left hand side is less than or equal to the number on the right hand side. So if we repeat the previous two examples using \texttt{\textless{}=}, here's what we get:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{100} \SpecialCharTok{\textless{}=} \DecValTok{100}
+\DecValTok{100} \SpecialCharTok{\textless{}=} \DecValTok{99}
+\end{Highlighting}
+\end{Shaded}
+
+And at this point I hope it's pretty obvious what the \textbf{\emph{greater than}} operator \texttt{\textgreater{}} and the \textbf{\emph{greater than or equal to}} operator \texttt{\textgreater{}=} do! Next on the list of logical operators is the \textbf{\emph{not equal to}} operator \texttt{!=} which -- as with all the others -- does what it says it does. It returns a value of \texttt{TRUE} when things on either side are \textbf{NOT} identical to each other. Therefore, since \(2+2\) isn't equal to \(5\), we get:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{!=} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+We're not quite done yet. There are three more logical operations that are worth knowing about.
+
+These are the \textbf{\emph{not}} operator \texttt{!}, the \textbf{\emph{and}} operator \texttt{\&}, and the \textbf{\emph{or}} operator \texttt{\textbar{}}. Like the other logical operators, their behaviour is more or less exactly what you'd expect given their names. For instance, if I ask you to assess the claim that ``either \(2+2 = 4\) \emph{or} \(2+2 = 5\)'' you'd say that it's true. Since it's an ``either-or'' statement, all we need is for one of the two parts to be true. That's what the \texttt{\textbar{}} operator does:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{2}\SpecialCharTok{+}\DecValTok{2} \SpecialCharTok{==} \DecValTok{4}\NormalTok{) }\SpecialCharTok{|}\NormalTok{ (}\DecValTok{2}\SpecialCharTok{+}\DecValTok{2} \SpecialCharTok{==} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+On the other hand, if I ask you to assess the claim that ``both \(2+2 = 4\) \emph{and} \(2+2 = 5\)'' you'd say that it's false. Since this is an \emph{and} statement we need both parts to be true. And that's what the \texttt{\&} operator does:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{2}\SpecialCharTok{+}\DecValTok{2} \SpecialCharTok{==} \DecValTok{4}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ (}\DecValTok{2}\SpecialCharTok{+}\DecValTok{2} \SpecialCharTok{==} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Finally, there's the \emph{not} operator, which is simple but annoying to describe in English. If I ask you to assess my claim that ``it is not true that \(2+2 = 5\)'' then you would say that my claim is true; because my claim is that ``\(2+2 = 5\) is false''. And I'm right. If we write this as an R command we get this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{!}\NormalTok{ (}\DecValTok{2}\SpecialCharTok{+}\DecValTok{2} \SpecialCharTok{==} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+In other words, since \texttt{2+2\ ==\ 5} is a \texttt{FALSE} statement, it must be the case that \texttt{!(2+2\ ==\ 5)} is a \texttt{TRUE} one. Essentially, what we've really done is claim that ``not false'' is the same thing as ``true''. Obviously, this isn't really quite right in real life. But R lives in a much more black or white world: for R everything is either true or false. No shades of gray are allowed. We can actually see this much more explicitly, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{!} \ConstantTok{FALSE}
+\end{Highlighting}
+\end{Shaded}
+
+Of course, in our \(2+2 = 5\) example, we didn't really need to use ``not'' \texttt{!} and ``equals to'' \texttt{==} as two separate operators. We could have just used the ``not equals to'' operator \texttt{!=} like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2}\SpecialCharTok{+}\DecValTok{2} \SpecialCharTok{!=} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+But there are many situations where you really do need to use the \texttt{!} operator. We'll being using this a lot later on
+
+\hypertarget{storing-and-using-logical-data}{%
+\subsection{Storing and using logical data}\label{storing-and-using-logical-data}}
+
+Up to this point, I've introduced \emph{numeric data} (in Sections \ref{assign} and \ref{vectors}) and \emph{character data} (in Section \ref{text}). So you might not be surprised to discover that these \texttt{TRUE} and \texttt{FALSE} values that R has been producing are actually a third kind of data, called \emph{logical data}. That is, when I asked R if \texttt{2\ +\ 2\ ==\ 5} and it said \texttt{{[}1{]}\ FALSE} in reply, it was actually producing information that we can store in variables. For instance, I could create a variable called \texttt{is.the.Party.correct}, which would store R's opinion:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{is.the.Party.correct }\OtherTok{\textless{}{-}} \DecValTok{2} \SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{==} \DecValTok{5}
+\NormalTok{is.the.Party.correct}
+\end{Highlighting}
+\end{Shaded}
+
+Alternatively, you can assign the value directly, by typing \texttt{TRUE} or \texttt{FALSE} in your command. Like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{is.the.Party.correct }\OtherTok{\textless{}{-}} \ConstantTok{FALSE}
+\NormalTok{is.the.Party.correct}
+\end{Highlighting}
+\end{Shaded}
+
+Better yet, because it's kind of tedious to type \texttt{TRUE} or \texttt{FALSE} over and over again, R provides you with a shortcut: you can use \texttt{T} and \texttt{F} instead (but it's case sensitive: \texttt{t} and \texttt{f} won't work).\footnote{Warning! \texttt{TRUE} and \texttt{FALSE} are reserved keywords in R, so you can trust that they always mean what they say they do. Unfortunately, the shortcut versions \texttt{T} and \texttt{F} do not have this property. It's even possible to create variables that set up the reverse meanings, by typing commands like \texttt{T\ \textless{}-\ FALSE} and \texttt{F\ \textless{}-\ TRUE}. This is kind of insane, and something that is generally thought to be a design flaw in R. Anyway, the long and short of it is that it's safer to use \texttt{TRUE} and \texttt{FALSE}.} So this works:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{is.the.Party.correct }\OtherTok{\textless{}{-}}\NormalTok{ F}
+\NormalTok{is.the.Party.correct}
+\end{Highlighting}
+\end{Shaded}
+
+but this doesn't:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{is.the.Party.correct }\OtherTok{\textless{}{-}}\NormalTok{ f}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{vectors-of-logicals}{%
+\subsection{Vectors of logicals}\label{vectors-of-logicals}}
+
+The next thing to mention is that you can store vectors of logical values in exactly the same way that you can store vectors of numbers (Section \ref{vectors}) and vectors of text data (Section \ref{text}). Again, we can define them directly via the \texttt{c()} function, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+or you can produce a vector of logicals by applying a logical operator to a vector. This might not make a lot of sense to you, so let's unpack it slowly. First, let's suppose we have a vector of numbers (i.e., a ``non-logical vector''). For instance, we could use the \texttt{students\_by\_module} vector. Suppose I wanted R to tell me, for each module whether I actually have students to teach. I can do that by typing this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{students\_by\_module }\SpecialCharTok{\textgreater{}} \DecValTok{0}
+\end{Highlighting}
+\end{Shaded}
+
+and again, I can store this in a vector if I want, as the example below illustrates:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{any\_students }\OtherTok{\textless{}{-}}\NormalTok{ students\_by\_module }\SpecialCharTok{\textgreater{}} \DecValTok{0}
+\NormalTok{any\_students}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{logictext}{%
+\subsection{Applying logical operation to text}\label{logictext}}
+
+You can also apply logical operations to text as well. It's just that we need to be a bit more careful in understanding how R interprets the different operations. In this section I'll talk about how the equal to operator \texttt{==} applies to text, since this is the most important one. Obviously, the not equal to operator \texttt{!=} gives the exact opposite answers to \texttt{==}
+
+Okay, let's see how it works. In one sense, it's very simple. For instance, I can ask R if the word \texttt{"cat"} is the same as the word \texttt{"dog"}, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"cat"} \SpecialCharTok{==} \StringTok{"dog"}
+\end{Highlighting}
+\end{Shaded}
+
+That's pretty obvious, and it's good to know that even R can figure that out. Similarly, R does recognise that a \texttt{"cat"} is a \texttt{"cat"}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"cat"} \SpecialCharTok{==} \StringTok{"cat"}
+\end{Highlighting}
+\end{Shaded}
+
+Again, that's exactly what we'd expect. However, what you need to keep in mind is that R is not at all tolerant when it comes to grammar and spacing. If two strings differ in any way whatsoever, R will say that they're not equal to each other, as the following examples indicate:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{" cat"} \SpecialCharTok{==} \StringTok{"cat"}
+\StringTok{"cat"} \SpecialCharTok{==} \StringTok{"CAT"}
+\StringTok{"cat"} \SpecialCharTok{==} \StringTok{"c a t"}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{quitting-r}{%
+\subsection{Quitting R}\label{quitting-r}}
+
+There's one last thing I should cover in this chapter: how to quit R. When I say this, I'm not trying to imply that R is some kind of pathological addition and that you need to call the R QuitLine or wear patches to control the cravings (although you certainly might argue that there's something seriously pathological about being addicted to R). I just mean how to exit the program. Assuming you're running R in the usual way (i.e., through RStudio or the CLoud), then you can just shut down the application in the normal way by clicking the close windown button. However, R also has a function, called \texttt{q()} that you can use to quit, which is pretty handy if you're running R in a terminal window e.g.~when using servers - we will cover some of this later in the course.
+
+Regardless of what method you use to quit R, when you do so for the first time R will probably ask you if you want to save the ``workspace image''. I talked about this in one of my videos, it's annoying and occasionally introduces complications, so if prompted it is usually better to click \texttt{NO} (but don't worry if you hit the wrong button).
+
+What does this actually \emph{mean}? What's going on is that R wants to know if you want to save \textbf{all} those variables that you've been creating, so that you can use them later. This sounds like a great idea, so it's really tempting to type \texttt{y} or click the ``Save'' button. To be honest though, I very rarely do this, and it kind of annoys me a little bit\ldots{} what R is \emph{really} asking is if you want it to store these variables in a ``default'' data file (R.data), which it will automatically reload for you next time you open R. But as we will learn to work with scripts, this is unnecessary.
+
+In fact, every time I install R on a new machine one of the first things I do is change the settings so that it never asks me again. You can do this in RStudio really easily: use the menu system to find the RStudio option; the dialog box that comes up will give you an option to tell R never to whine about this again.
 
 \hypertarget{what-is-unixlinux}{%
 \section{What is Unix/Linux?}\label{what-is-unixlinux}}
@@ -238,21 +1174,6 @@ The Linux Operating System is highly flexible, free, open-source (like R) and us
 \subsection{Some terms}\label{some-terms}}
 
 Here are some terms worth knowing, don't worry about memorising them, it can just be useful to have these to refer to in the future.
-
-\begin{longtable}{ll}
-\toprule
-\textbf{Term} & \textbf{What it is}\\
-\midrule
-shell & what we use to talk to the computer; anything where you are pointing and clicking with a mouse is a Graphical User Interface (GUI) shell; something with text only is a Command Line Interface (CLI) shell\\
-command line & a text-based environment capable of taking input and providing output\\
-Terminal & A program that runs a shell\\
-Unix & a family of operating systems (we also use the term “Unix-like” because one of the most popular operating systems derived from Unix is specifically named as not being Unix)\\
-Linux & a "Unix-like" OS\\
-\addlinespace
-bash & the most common programming language used at a Unix command-line\\
-flag & a way to set options for a function, a specific type of argument usually preceded by a -\\
-\bottomrule
-\end{longtable}
 
 \begin{quote}
 \textbf{Note}
@@ -297,7 +1218,7 @@ Before we get started we need a terminal to work in.
 
 }
 
-\caption{Here is an example of the Terminal tab, right next to the R console}\label{fig:unnamed-chunk-4}
+\caption{Here is an example of the Terminal tab, right next to the R console}\label{fig:unnamed-chunk-81}
 \end{figure}
 
 \begin{itemize}
@@ -579,52 +1500,6 @@ One way to speed things up is to start using \textbf{tab} to perform \textbf{tab
 \section{Summary}\label{summary}}
 
 While maybe not all that exciting, these things really are the foundation needed to start utilizing the command line -- which then gives us the capability to use lots of tools that only work at a command line, manipulate large files rapidly, access and work with remote computers, and more! These are the fundamental tools that every scientist needs to work with \textbf{big data}.
-
-\hypertarget{terms}{%
-\subsection{Terms}\label{terms}}
-
-\begin{longtable}{ll}
-\toprule
-\textbf{Term} & \textbf{What it is}\\
-\midrule
-path & the address system the computer uses to keep track of files and directories\\
-root & where the address system of the computer starts, /\\
-home & where the current user’s location starts, \textasciitilde{}/\\
-absolute path & an address that starts from a specified location, i.e. root, or home\\
-relative path & an address that starts from wherever we are\\
-\addlinespace
-tab-completion & our best friend\\
-\bottomrule
-\end{longtable}
-
-\hypertarget{commands}{%
-\subsection{Commands}\label{commands}}
-
-\begin{longtable}{ll}
-\toprule
-\textbf{Command} & \textbf{What it is}\\
-\midrule
-date & prints out information about the current date and time\\
-head & prints out the first lines of a file\\
-pwd & prints out where we are in the computer (print working directory)\\
-ls & lists contents of a directory (list)\\
-cd & change directories\\
-\bottomrule
-\end{longtable}
-
-\hypertarget{special-characters}{%
-\subsection{Special characters}\label{special-characters}}
-
-\begin{longtable}{ll}
-\toprule
-\textbf{Command} & \textbf{What it is}\\
-\midrule
-Characters & Meaning\\
-/ & the computer’s root location\\
-\textasciitilde{}/ & the user’s home location\\
-../ & specifies a directory one level “above” the current working directory\\
-\bottomrule
-\end{longtable}
 
 \hypertarget{summary-1}{%
 \section{Summary}\label{summary-1}}

@@ -47,9 +47,25 @@ Top tips for the course:
 
 **DO** ask lots of questions! 
 
-@R-bookdown
+
+## Teaching
+
+### Lectures
+
+### Workshops
 
 
+## Introduction to R
+
+[R](https://www.r-project.org/) is the name of the programming language itself and [RStudio](img/rstudio-ide.pdf) is a convenient interface.], which we will be using throughout the course in order to learn how to organise data, produce accurate data analyses & data visualisations.
+
+Eventually we will also add extra tools like [GitHub](https://www.youtube.com/watch?v=w3jLJU7DT5E) and [RMarkdown](https://rmarkdown.rstudio.com/)  for data reproducibility and collaborative programming, check out this short (and very cheesy) intro video.], which are collaboration and version control systems that we will be using throughout the course. More on this in future weeks.
+
+By the end of this module I hope you will have the tools to confidently analyze real data, make informative and beautiful data visuals, and be able to analyse lots of different types of data.
+
+The taught content this autumn will be given to you in several **worksheets**, these will be added to this dynamic webpage each week.
+
+## Getting around on RStudio
 
 
-
+## Error! 
