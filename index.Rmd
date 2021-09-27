@@ -50,9 +50,25 @@ Top tips for the course:
 
 ## Teaching
 
-### Lectures
+We have: 
+
+* one lecture per week
+* one workshop per week
+
+These are both timetabled in-person sessions, and you should check [Timetabler](https://timetabler.uea.ac.uk/Timetable) for up to-date information on scheduling. However, all lessons can be accessed remotely through Collaborate, and **everything** you need to complete workshops will be available on this site. 
+
+If you feel unwell, or cannot attend a session in-person because you need to self-isolate then don't worry you can access everything, and follow along in real time, or work at your own pace. 
+
+Questions/issues/errors can all be posted on our [Yammer](https://web.yammer.com/main/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiI3OTAyMTk1NzEyMCJ9/all) page.
+
 
 ### Workshops
+
+The workshops are the best way to learn, they teach you the practical skills you need to become an R wizard
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "R wizards", fig.cap="courtesy of Allison Horst"}
+knitr::include_graphics("images/wizard.png")
+```
 
 
 ## Introduction to R
@@ -67,5 +83,38 @@ The taught content this autumn will be given to you in several **worksheets**, t
 
 ## Getting around on RStudio
 
+### An intro to RStudio
 
-## Error! 
+<div style="position:relative;height:0;padding-bottom:40%"><iframe width="560" height="315" src="https://www.youtube.com/embed/8mWPwPBnAsY?VQ=HD720" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+<p>
+
+RStudio
+
+> Note - people often mix up R and RStudio. R is the programming language (the engine), RStudio is a handy interface/wrapper that makes things a bit easier to use.
+
+### Using R Studio Cloud
+
+RStudio Cloud works in exactly the same way as RStudio, but means you don't have to download any software. You can access the hosted cloud server and your projects through any browser connection (Chrome works best), from any computer.
+
+<div style="position:relative;height:0;padding-bottom:40%"><iframe width="560" height="315" src="https://www.youtube.com/embed/qoAKiru4_R8?VQ=HD720" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+
+
+## Get Help! 
+
+There are a **lot** of sources of information about using R out there. 
+Here are a few helpful places to get help when you have an issue, or just to learn more
+
+* The R help system itself - we cover this in \@ref(Getting to know R - Week One)
+
+* Vignettes - type `browseVignettes()` into the console and hit Enter, a list of available vignettes for all the packages we have will be displayed
+
+* [Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/) - available at RStudio.com. Most common packages have an associate cheat sheet covering the basics of how to use them. Download/bookmark ones we will use commonly such as `ggplot2`, `Data transformation with dplyr`, `Data tidying with tidyr` & `Data import`.
+
+* Google - I use Google constantly, because I continually forget how to do even basic tasks. If I want to remind myself how to round a number, I might type something like `R round number` - if I am using a particular package I should include that in the search term as well
+
+* Ask for help - If you are stuck, getting an error message, can't think what to do next, then ask someone. It could be me, it could be a classmate. When you do this it is very important that you **show the code**, include the **error message**. "This doesn't work" is not helpful. "Here is my code, this is the data I am using, I want it to do X, and here's the problem I get". 
+
+
+> Note - It may be daunting to send your code to someone for help. It is natural and common to feel apprehensive, or to think that your code is really bad. I still feel the same! But we learn when we share our mistakes, and eventually you will find it funny when you look back on your early mistakes, or laugh about the mistakes you still occasionally make! 
