@@ -22,7 +22,7 @@ always_allow_html: true
 library(tidyverse)
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'palmerpenguins'
 ), 'packages.bib')
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, eval=FALSE)
@@ -83,6 +83,19 @@ The taught content this autumn will be given to you in several **worksheets**, t
 
 ## Getting around on RStudio
 
+All of our sessions will run on cloud-based software. All you have to do is make a free account, and join our Workspace `BIO-5023Y` the sharing link is [here](https://rstudio.cloud/spaces/84058/join?access_code=6c3uEkEUsNhbzUrttMcRq3SoSkQ4vKw%2FeYBoyBRu).
+
+Once you are signed up - you will see that there are two `Spaces`
+
+* Your workspace
+
+* BIO-5023Y
+
+Make sure you are working in the class workspace - there is a limit to the hours/month on your workspace, so all assigments and project work should take place in the `BIO-5023Y space`. 
+
+Watch these short explainer videos to get used to navigating the environment.
+
+
 ### An intro to RStudio
 
 <div style="position:relative;height:0;padding-bottom:40%"><iframe width="560" height="315" src="https://www.youtube.com/embed/8mWPwPBnAsY?VQ=HD720" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
@@ -99,14 +112,18 @@ RStudio Cloud works in exactly the same way as RStudio, but means you don't have
 
 <div style="position:relative;height:0;padding-bottom:40%"><iframe width="560" height="315" src="https://www.youtube.com/embed/qoAKiru4_R8?VQ=HD720" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
+## Reading
 
+There are lots of useful books and online resources to help develop and improve your R knowledge. Throughout this webpage I will be adding useful resources for you. 
+
+The core textbook you might want to bookmark is R for Data Science [@R4DS] but we will add others throughout the course, and their is a bibliography at the end which collects everything together! 
 
 ## Get Help! 
 
 There are a **lot** of sources of information about using R out there. 
 Here are a few helpful places to get help when you have an issue, or just to learn more
 
-* The R help system itself - we cover this in \@ref(Getting to know R - Week One)
+* The R help system itself - we cover this in Week one [Error]
 
 * Vignettes - type `browseVignettes()` into the console and hit Enter, a list of available vignettes for all the packages we have will be displayed
 
@@ -114,7 +131,7 @@ Here are a few helpful places to get help when you have an issue, or just to lea
 
 * Google - I use Google constantly, because I continually forget how to do even basic tasks. If I want to remind myself how to round a number, I might type something like `R round number` - if I am using a particular package I should include that in the search term as well
 
-* Ask for help - If you are stuck, getting an error message, can't think what to do next, then ask someone. It could be me, it could be a classmate. When you do this it is very important that you **show the code**, include the **error message**. "This doesn't work" is not helpful. "Here is my code, this is the data I am using, I want it to do X, and here's the problem I get". 
+* [Ask for help](https://web.yammer.com/main/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiI3OTAyMTk1NzEyMCJ9/all) - If you are stuck, getting an error message, can't think what to do next, then ask someone. It could be me, it could be a classmate. When you do this it is very important that you **show the code**, include the **error message**. "This doesn't work" is not helpful. "Here is my code, this is the data I am using, I want it to do X, and here's the problem I get". 
 
 
 > Note - It may be daunting to send your code to someone for help. It is natural and common to feel apprehensive, or to think that your code is really bad. I still feel the same! But we learn when we share our mistakes, and eventually you will find it funny when you look back on your early mistakes, or laugh about the mistakes you still occasionally make! 

@@ -1,4 +1,5 @@
 fig:unnamed-chunk-2
+fig:unnamed-chunk-24
 introduction
 approach-and-style
 teaching
@@ -7,6 +8,7 @@ introduction-to-r
 getting-around-on-rstudio
 an-intro-to-rstudio
 using-r-studio-cloud
+reading
 get-help
 getting-to-know-r---week-one
 your-first-r-command
@@ -15,4 +17,15 @@ more-simple-arithmetic
 try-some-maths
 perform-some-combos
 storing-outputs
-quitting-r
+choosing-names
+writing-scripts
+commenting-on-scripts
+running-your-script
+saving-your-script
+error
+functions
+storing-the-output-of-functions
+more-fun-with-functions
+packages
+my-first-data-visualisation
+quitting
