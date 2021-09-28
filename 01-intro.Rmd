@@ -163,7 +163,11 @@ Of course, so far R is just doing the calculations. I haven't asked it to explic
 ```{r}
 2 + 2 == 4
 ```
-What I've done here is use the **_equality operator_**, `==`, to force R to make a "true or false" judgement.^[Note that this is a very different operator to the assignment operator `=` you saw previously. A common typo that people make when trying to write logical commands in R (or other languages, since the "`=` versus `==`" distinction is important in most programming languages) is to accidentally type `=` when you really mean `==`.] Okay, let's see what R thinks of the Party slogan:
+What I've done here is use the **_equality operator_**, `==`, to force R to make a "true or false" judgement.
+
+> Note that this is a very different operator to the assignment operator `=` you saw previously. A common typo that people make when trying to write logical commands in R (or other languages, since the "`=` versus `==`" distinction is important in most programming languages) is to accidentally type `=` when you really mean `==`.
+
+Okay, let's see what R thinks of the Party slogan:
 ```{r}
 2+2 == 5
 ```
