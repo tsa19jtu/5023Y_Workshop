@@ -175,7 +175,7 @@
 
 \title{Data Science for Biologists - 5023Y}
 \author{Philip Leftwich}
-\date{2021-09-27}
+\date{2021-09-28}
 
 \begin{document}
 \maketitle
@@ -473,8 +473,54 @@ The first one calculates 16 raised to the power of 1, then divided this answer b
 You can run them again, or edit them. Later on we will look at scripts, as an essential way to re-use, store and edit commands.
 \end{quote}
 
+\hypertarget{true-or-false-data}{%
+\section{``true or false'' data}\label{true-or-false-data}}
+
+Time to make a sidebar onto another kind of data. A key concept in that a lot of R relies on is the idea of a \textbf{\emph{logical value}}. A logical value is an assertion about whether something is true or false. This is implemented in R in a pretty straightforward way. There are two logical values, namely \texttt{TRUE} and \texttt{FALSE}. Despite the simplicity, a logical values are very useful things. Let's see how they work.
+
+\hypertarget{assessing-mathematical-truths}{%
+\subsection{Assessing mathematical truths}\label{assessing-mathematical-truths}}
+
+In George Orwell's classic book \emph{1984}, one of the slogans used by the totalitarian Party was ``two plus two equals five'', the idea being that the political domination of human freedom becomes complete when it is possible to subvert even the most basic of truths.
+
+But they didn't have R. R will not be subverted. It has rather firm opinions on the topic of what is and isn't true, at least as regards basic mathematics. If I ask it to calculate \texttt{2\ +\ 2}, it always gives the same answer, and it's not bloody 5:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Of course, so far R is just doing the calculations. I haven't asked it to explicitly assert that \(2+2 = 4\) is a true statement. If I want R to make an explicit judgement, I can use a command like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{==} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+What I've done here is use the \textbf{\emph{equality operator}}, \texttt{==}, to force R to make a ``true or false'' judgement.\footnote{Note that this is a very different operator to the assignment operator \texttt{=} you saw previously. A common typo that people make when trying to write logical commands in R (or other languages, since the ``\texttt{=} versus \texttt{==}'' distinction is important in most programming languages) is to accidentally type \texttt{=} when you really mean \texttt{==}.} Okay, let's see what R thinks of the Party slogan:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2}\SpecialCharTok{+}\DecValTok{2} \SpecialCharTok{==} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+Take that Big Brother! Anyway, it's worth having a look at what happens if I try to \emph{force} R to believe that two plus two is five by making an assignment statement like \texttt{2\ +\ 2\ =\ 5} or \texttt{2\ +\ 2\ \textless{}-\ 5}. When I do this, here's what happens:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2} \OtherTok{=} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+R doesn't like this very much. It recognises that \texttt{2\ +\ 2} is \emph{not} a variable (that's what the ``non-language object'' part is saying), and it won't let you try to ``reassign'' it. While R is pretty flexible, and actually does let you do some quite remarkable things to redefine parts of R itself, there are just some basic, primitive truths that it refuses to give up. It won't change the laws of addition, and it won't change the definition of the number \texttt{2}.
+
+That's probably for the best.
+
 \hypertarget{storing-outputs}{%
-\subsection{Storing outputs}\label{storing-outputs}}
+\section{Storing outputs}\label{storing-outputs}}
 
 With simple questions like the ones above we are happy to just see the answer, but our quesitons are often more complex than this. If we need to take multiple steps, we benefit from being able to store our answers and recall them for use in later steps. This is very simple to do we can \emph{assign} outputs to a name:
 
@@ -645,7 +691,7 @@ There's nothing wrong with making \emph{lots} of errors. The trick is not to pan
 \ldots{} and sometimes we need to walk away and come back later!
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{images/Error} \caption{courtesy of Allison Horst}\label{fig:unnamed-chunk-24}
+\includegraphics[width=0.8\linewidth]{images/Error} \caption{courtesy of Allison Horst}\label{fig:unnamed-chunk-28}
 \end{figure}
 
 \hypertarget{functions}{%

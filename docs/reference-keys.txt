@@ -1,5 +1,5 @@
 fig:unnamed-chunk-2
-fig:unnamed-chunk-24
+fig:unnamed-chunk-28
 introduction
 approach-and-style
 teaching
@@ -16,6 +16,8 @@ typos
 more-simple-arithmetic
 try-some-maths
 perform-some-combos
+true-or-false-data
+assessing-mathematical-truths
 storing-outputs
 choosing-names
 writing-scripts
