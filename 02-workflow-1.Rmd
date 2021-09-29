@@ -1,0 +1,101 @@
+
+# Workflow Part One - Week Two
+
+```{r , echo=FALSE, eval=TRUE, include=TRUE}
+klippy::klippy(c('r', 'bash'), position = c('top', 'right'), tooltip_message = 'copy to clipboard', tooltip_success = 'Copied!')
+```
+
+```{r include=FALSE}
+knitr::opts_chunk$set(eval=FALSE)
+```
+
+Last week we got acquainted with some of the core skills associated with using R and RStudio.
+
+In this workshop we work through the journey of importing and tidying data. Once we have a curated and cleaned dataset we can work on generating insights from the data. 
+
+We are going to be working as though we are in the latter stages of a research project, where data has been collected, possibly over several years, to test against our hypotheses. 
+
+We have chosen to continue working with a dataset you have been introduced to already - the Palmer Penguins dataset. Previously we loaded a cleaned dataset, very quickly using an R package. Today we will be working in a more realistic scenario - uploading out dataset to our R workspace. 
+
+## Meet the Penguins
+
+This data, taken from the `palmerpenguins` (@R-palmerpenguins) package was originally published by @Antarctic. 
+
+The palmerpenguins data contains size measurements, clutch observations, and blood isotope ratios for three penguin species observed on three islands in the Palmer Archipelago, Antarctica over a study period of three years.
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "Photo of three penguin species, Chinstrap, Gentoo, Adelie"}
+knitr::include_graphics("images/gorman-penguins.jpg")
+```
+These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network. The data were imported directly from the Environmental Data Initiative (EDI) Data Portal, and are available for use by CC0 license (“No Rights Reserved”) in accordance with the Palmer Station Data Policy. We gratefully acknowledge Palmer Station LTER and the US LTER Network. Special thanks to Marty Downs (Director, LTER Network Office) for help regarding the data license & use. Here is our intrepid package co-author, Dr. Gorman, in action collecting some penguin data:
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "Photo of Dr Gorman in the middle of a flock of penguins"}
+knitr::include_graphics("images/penguin-expedition.jpg")
+```
+
+Here is a map of the study site
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "Antarctic Peninsula and the Palmer Field Station"}
+knitr::include_graphics("images/antarctica-map.png")
+```
+
+### Insights from data
+
+This dataset is relatively simple, as there aren't too many variables to consider. But there are a reasonably large number of datapoints (individual penguins) making it possible to generate insights. 
+
+However, there are some specific and rather common problems in this data. Problems that we need to work through *before* we can start to make any visuals or try to draw any conclusions. There are some problems with the variable names, there are some problems with some of the values. There are problems that one of the response variables isn't actually encoded on the dataset (we have to make it). 
+
+Today we are going to 
+
+* Formulate clear research questions
+
+* Import our dataset
+
+* Learn how to prepare our RStudio Project workspace
+
+* Learn how to clean, tidy and manipulate our data to allow tables, graphs and analyses to be run
+
+Don't worry if you don't understand exactly what each function does at the moment, or struggle to remember every concept we are introduced to. We will cover these again, in lots more detail as we progress. The main point is to get familiar with our process for handling data and organising our projects.
+
+## The Question?
+
+Imagine that you are a Penguin biologist. Chilly. And that you recently came across a study in the differences in the diets of penguin species. Different penguin species are known to eat different things, perhaps this has an effect on the morphology of their bills? Do male and female penguins have different bill morphologies? 
+
+With simple measuring techniques and identification skills we can sex the penguins, identify their species and take simple non-invasive measurements of features such as body size, flipper length and bill dimensions. 
+
+### The Hypothesis
+
+* There will be a difference between the bill lengths of different penguin species
+
+### Study design
+
+## Preparing the data
+
+Imagine we have completed our practical study and have our data. The data is probably distributed in lots of places, originally notes collected in the field were probably on paper & notebooks. Then someone will have taken time to transcribe those into a spreadsheet. This will almost certainly have been done by typing all the data in by hand. 
+
+It is very important for us to know how we would like our data to be organised at the end. We are going to learn how to organise data using the *tidy* format^[(http://vita.had.co.nz/papers/tidy-data.pdf)]. This is because we are going to use the `tidyverse` packages by @tidyverse2019. This is an opinionated, but highly effective method for generating reproducible analyses with a wide-range of data manipulation tools. Tidy data is an easy format for computers to read. 
+
+### Tidy data
+
+Here 'tidy' refers to a specific structure that lets us manipulate and visualise data with ease. In a tidy dataset each *variable* is in one column and each row contains one *observation*. Each cell of the table/spreadsheet contains the *values*. Obe observation you might make about tidy data is it is quite long - it generates a lot of rows of data. 
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "tidy data overview"}
+knitr::include_graphics("images/tidy-1.png")
+```
+
+Typing data in, using any spreadsheet program (e.g. Excel, Google sheets), if we type in the penguin data, we would make each row contain one observation about one penguin. If we made a second observation about a penguin (say in the next year of the study) it would get a new row in the dataset. You are probably thinking this is a lot of typing and a lot of repetition - and you are right! But this format allows the computer to easily make summaries at any level. 
+
+If the data we input to R is "untidy" then we have to spend a little bit of time tidying, we will explore this more later.
+
+Once data has been typed up into a spreadsheet and double/triple-checked against the original paper records, then they are saved as a 'comma-separated values (CSV)' file-type. These files are the simplest form of database, no coloured cells, no formulae, no text formatting. Each row is a row of the data, each value of a row (previously separate columns) is separated by a comma. 
+
+It is convenient to use something like Excel to type in our data - its much more usefully friendly than trying to tpye something in csv format. But we don't save files in the Excel format because they have a nasty habit of formatting or even losing data when the file gets large enough ^[https://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england]. 
+If you need to add data to a csv file, you can always open it in an Excel-like program and add more information. 
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "excel view, csv view", fig.cap = "Top image: Penguins data viewed in Excel, Bottom image: Penguins data in native csv format"}
+knitr::include_graphics("images/excel_csv.png")
+```
+
+It is possible to import data into R in an Excel format, but I recommend sticking with csv formats. Any spreadsheet can be easily converted with the *Save As..* command. 
+
+### The dataset
+

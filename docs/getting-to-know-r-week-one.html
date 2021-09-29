@@ -24,7 +24,7 @@
 <meta name="author" content="Philip Leftwich" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="workflow-part-one-week-two.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -187,6 +187,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#packages"><i class="fa fa-check"></i><b>2.7</b> Packages</a></li>
 <li class="chapter" data-level="2.8" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#my-first-data-visualisation"><i class="fa fa-check"></i><b>2.8</b> My first data visualisation</a></li>
 <li class="chapter" data-level="2.9" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#quitting"><i class="fa fa-check"></i><b>2.9</b> Quitting</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html"><i class="fa fa-check"></i><b>3</b> Workflow Part One - Week Two</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#meet-the-penguins"><i class="fa fa-check"></i><b>3.1</b> Meet the Penguins</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#insights-from-data"><i class="fa fa-check"></i><b>3.1.1</b> Insights from data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#the-question"><i class="fa fa-check"></i><b>3.2</b> The Question?</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#the-hypothesis"><i class="fa fa-check"></i><b>3.2.1</b> The Hypothesis</a></li>
+<li class="chapter" data-level="3.2.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#study-design"><i class="fa fa-check"></i><b>3.2.2</b> Study design</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#preparing-the-data"><i class="fa fa-check"></i><b>3.3</b> Preparing the data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#tidy-data"><i class="fa fa-check"></i><b>3.3.1</b> Tidy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#the-dataset"><i class="fa fa-check"></i><b>3.3.2</b> The dataset</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -415,8 +432,8 @@ Figure 2.1: courtesy of Allison Horst
 <p>Can you work out what is going on here? If so copy this into your R script and a #comment next to each line.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="getting-to-know-r-week-one.html#cb33-1" aria-hidden="true" tabindex="-1"></a>number_of_digits <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb33-2"><a href="getting-to-know-r-week-one.html#cb33-2" aria-hidden="true" tabindex="-1"></a>my_number <span class="ot">&lt;-</span> <span class="fl">2.4326782647</span></span>
-<span id="cb33-3"><a href="getting-to-know-r-week-one.html#cb33-3" aria-hidden="true" tabindex="-1"></a>rounded_number <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="at">x  =</span> <span class="fl">2.4326782647</span>, </span>
-<span id="cb33-4"><a href="getting-to-know-r-week-one.html#cb33-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb33-3"><a href="getting-to-know-r-week-one.html#cb33-3" aria-hidden="true" tabindex="-1"></a>rounded_number <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="at">x  =</span> my_number, </span>
+<span id="cb33-4"><a href="getting-to-know-r-week-one.html#cb33-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">digits =</span> number_of_digits)</span></code></pre></div>
 </div>
 <div id="more-fun-with-functions" class="section level3" number="2.6.2">
 <h3><span class="header-section-number">2.6.2</span> More fun with functions</h3>
@@ -453,6 +470,9 @@ Figure 2.1: courtesy of Allison Horst
 <p>Using these functions we can write a simple line of code to produce a figure. We specify the data source, the variables to be used for the x and y axis and then the type of visual object to produce, colouring them by the species.</p>
 <p>Copy this into your console and hit Enter.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="getting-to-know-r-week-one.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>species)) </span></code></pre></div>
+<blockquote>
+<p>Note - you may have noticed R gave you a warning. Not the same as a big scary error, but R wants you to be aware of something. In this case that two of the observations had missing data in them (either bill length or bill depth), so couldn’t be plotted.</p>
+</blockquote>
 <p>The above command can also be written as below, its in a longer style with each new line for each argument in the function. This style can be easier to read, and makes it easier to write comments with #. Copy this longer command into your <code>script</code> then run it by either highlighting the entire command or placing the cursor in the first line and then hit Run or Ctrl+Enter.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="getting-to-know-r-week-one.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="co"># calls ggplot function, data is penguins</span></span>
 <span id="cb41-2"><a href="getting-to-know-r-week-one.html#cb41-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="co"># sets x axis as bill length</span></span>
@@ -477,7 +497,7 @@ Figure 2.1: courtesy of Allison Horst
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="workflow-part-one-week-two.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

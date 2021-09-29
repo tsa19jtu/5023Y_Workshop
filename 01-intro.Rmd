@@ -358,8 +358,8 @@ Can you work out what is going on here? If so copy this into your R script and a
 ```{r}
 number_of_digits <- 2
 my_number <- 2.4326782647
-rounded_number <- round(x  = 2.4326782647, 
-                        digits = 2)
+rounded_number <- round(x  = my_number, 
+                        digits = number_of_digits)
 
 ```
 
@@ -439,6 +439,7 @@ Copy this into your console and hit Enter.
 ggplot(data = penguins,aes(x = bill_length_mm, y = bill_depth_mm)) + geom_point(aes(colour=species)) 
 ```
 
+> Note - you may have noticed R gave you a warning. Not the same as a big scary error, but R wants you to be aware of something. In this case that two of the observations had missing data in them (either bill length or bill depth), so couldn't be plotted. 
 
 The above command can also be written as below, its in a longer style with each new line for each argument in the function. This style can be easier to read, and makes it easier to write comments with #. Copy this longer command into your `script` then run it by either highlighting the entire command or placing the cursor in the first line and then hit Run or Ctrl+Enter. 
 

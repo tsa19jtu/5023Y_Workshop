@@ -1,8 +1,0 @@
-﻿Term,What it is
-shell,what we use to talk to the computer; anything where you are pointing and clicking with a mouse is a Graphical User Interface (GUI) shell; something with text only is a Command Line Interface (CLI) shell
-command line,a text-based environment capable of taking input and providing output
-Terminal,A program that runs a shell
-Unix,a family of operating systems (we also use the term “Unix-like” because one of the most popular operating systems derived from Unix is specifically named as not being Unix)
-Linux,"a ""Unix-like"" OS"
-bash,the most common programming language used at a Unix command-line
-flag,"a way to set options for a function, a specific type of argument usually preceded by a -"

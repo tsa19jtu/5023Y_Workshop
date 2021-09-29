@@ -1,5 +1,6 @@
 fig:unnamed-chunk-2
 fig:unnamed-chunk-28
+fig:unnamed-chunk-45
 introduction
 approach-and-style
 teaching
@@ -31,3 +32,12 @@ more-fun-with-functions
 packages
 my-first-data-visualisation
 quitting
+workflow-part-one---week-two
+meet-the-penguins
+insights-from-data
+the-question
+the-hypothesis
+study-design
+preparing-the-data
+tidy-data
+the-dataset
