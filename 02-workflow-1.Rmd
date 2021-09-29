@@ -322,8 +322,13 @@ penguins %>%
 knitr::include_graphics("images/NA.png")
 ```
 
-> What is the %>% ??? It's known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the `select` function which picks only those variables we want. The result of this is then sent to the `head` function which with the argument for number of rows set to 10, prints the top 10 rows. The other way to write this series of functions would be to use brackets and the rules of BODMAS.
-> head(select(penguins, `Flipper Length (mm)`, `Body Mass (g)`),10)
+> What is the %>% ??? It's known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the `select` function which picks only those variables we want. The result of this is then sent to the `head` function which with the argument for number of rows set to 10, prints the top 10 rows. 
+
+> The other way to write this series of functions would be to use brackets and the rules of BODMAS:
+
+```
+head(select(penguins, `Flipper Length (mm)`, `Body Mass (g)`),10)
+```
 > Hopefully you agree that the pipes make the code a lot more human-reader friendly. More on pipes later
 
 So what's the problem with our data? in the Flipper length variable, missing observations have been correctly marked as `NA` signifying missing data. R can handle missing data just fine. However, in thew Body mass variable, it looks as though someone has actually typed "na" in observations where the data is missing. Here R has failed to recognise an `NA` and has read it as a word instead. This is because `read_csv()` looks for gaps or `NA` but not "na". 

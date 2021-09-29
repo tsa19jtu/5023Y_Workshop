@@ -1212,8 +1212,18 @@ If R thinks \texttt{Body\ Mass\ (g)} is a character variable, then it probably c
 \includegraphics[width=0.8\linewidth]{images/NA}
 
 \begin{quote}
-What is the \%\textgreater\% ??? It's known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the \texttt{select} function which picks only those variables we want. The result of this is then sent to the \texttt{head} function which with the argument for number of rows set to 10, prints the top 10 rows. The other way to write this series of functions would be to use brackets and the rules of BODMAS.
-head(select(penguins, \texttt{Flipper\ Length\ (mm)}, \texttt{Body\ Mass\ (g)}),10)
+What is the \%\textgreater\% ??? It's known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the \texttt{select} function which picks only those variables we want. The result of this is then sent to the \texttt{head} function which with the argument for number of rows set to 10, prints the top 10 rows.
+\end{quote}
+
+\begin{quote}
+The other way to write this series of functions would be to use brackets and the rules of BODMAS:
+\end{quote}
+
+\begin{verbatim}
+head(select(penguins, `Flipper Length (mm)`, `Body Mass (g)`),10)
+\end{verbatim}
+
+\begin{quote}
 Hopefully you agree that the pipes make the code a lot more human-reader friendly. More on pipes later
 \end{quote}
 
