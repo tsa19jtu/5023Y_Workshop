@@ -59,3 +59,5 @@ check-for-duplication
 check-for-typos-or-implausible-values
 missing-values---na
 summing-up
+what-we-learned
+quitting-1

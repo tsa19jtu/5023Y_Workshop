@@ -565,7 +565,9 @@ We've now got a clean & tidy dataset!!
 
 ## Summing up
 
-There was a lot of preparation here, and we haven't really got close to make any major insights. But you have 
+### What we learned
+
+There was a lot of preparation here, and we haven't really got close to make any major insights. But you have: 
 
 * Organised your project space
 
@@ -576,8 +578,6 @@ There was a lot of preparation here, and we haven't really got close to make any
 * Checked the data import
 
 * Cleaned and tidied the data
-
-> Remember to save your RScript before you leave. And ideally don't save your .Rdata either!
 
 You have also been introduced to the `tidyverse` and two of its packages
 
@@ -591,6 +591,12 @@ As well as:
 
 * `lubridate` @R-lubridate
 
+### Quitting
 
+* Remember to save your RScript before you leave. And ideally don't save your .Rdata either!
+
+* Close your RStudio Cloud Browser
+
+* Go to Blackboard to complete this week's quiz!
 
 
