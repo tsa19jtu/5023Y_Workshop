@@ -577,6 +577,8 @@ There was a lot of preparation here, and we haven't really got close to make any
 
 * Cleaned and tidied the data
 
+> Remember to save your RScript before you leave. And ideally don't save your .Rdata either!
+
 You have also been introduced to the `tidyverse` and two of its packages
 
 * `readr` @R-readr
