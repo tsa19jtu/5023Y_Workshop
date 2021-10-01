@@ -61,20 +61,19 @@ Don't worry if you don't understand exactly what each function does at the momen
 
 Imagine that you are a Penguin biologist. Chilly. 
 
-Imagine that you want to know more about the feeding habits of the different penguin species in the Antarctic. You also wish to characterise features such as bill morphology, and body size and compare them across species. Adelie and Chinstrap penguins are off-shore, shallow diving foragers, while Gentoo's feed closer inshort and are deep-divers.
+Imagine that you want to know more about the feeding habits of the different penguin species in the Antarctic. You also wish to characterise features such as bill morphology, and body size and compare them across species. Adelie and Chinstrap penguins are off-shore, shallow diving foragers, while Gentoo's feed closer inshort and are deep-divers. We might expect that we can find some features of Gentoo's that align with their different lifestyle/feeding habits.
 
 
 With simple measuring techniques and identification skills we can sex the penguins, identify their species and take simple non-invasive measurements of features such as body size, flipper length and bill dimensions. You also recently read a paper about the ratios of different Nitrogen and Carbon isotopes in blood, and how these can be used to infer the types of prey that are forming an organism's diet. 
 
 ### Hypotheses
 
-These hypthoses are fairly basic, we have not included directionality or specific expecations of the magnitude of the difference. This would come from doing more research on the subject area. 
+These hypotheses are fairly basic, we have not included directionality or specific expecations of the magnitude of the difference. This would come from doing more research on the subject area. 
 
-* Gentoo penguins will have a different beak length to Adelie and Chinstrap penguins
 
-* Gentoo penguins will have a different beak depth to Adelie and Chinstrap penguins
+* The bill lengths/depths ratio to body size of Gentoo penguins will be different to Adelie and Chinstrap penguins. 
 
-* Gentoo penguins will have a different isotope ratio than Adelie and Chinstrap penguins
+* Gentoo penguins will have a different N and carbon isotope ratio than Adelie and Chinstrap penguins.
 
 
 ## Preparing the data
@@ -209,9 +208,9 @@ Add the following
 Then load the following add-on package to the R script, just underneath these comments. Tidyverse isn't actually one package, but a bundle of many different packages that play well together - for example it *includes* `ggplot2` which we used in the last session, so we don't have to call that separately
 
 ```{r}
-library(tidyverse)
-library(janitor)
-library(lubridate)
+library(tidyverse) # tidy data packages
+library(janitor) # cleaning variable names
+library(lubridate) # make sure dates are processed properly
 ```
 
 Now save this file in the scripts folder and call it *penguin_measurements.R*

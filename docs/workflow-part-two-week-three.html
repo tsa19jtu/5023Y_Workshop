@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Workflow Part Two - Week Three | Data Science for Biologists - 5023Y</title>
+  <meta name="description" content="This is very brief introduction to some of the basic skills required to learn R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Workflow Part Two - Week Three | Data Science for Biologists - 5023Y" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is very brief introduction to some of the basic skills required to learn R" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Workflow Part Two - Week Three | Data Science for Biologists - 5023Y" />
+  
+  <meta name="twitter:description" content="This is very brief introduction to some of the basic skills required to learn R" />
+  
+
+<meta name="author" content="Philip Leftwich" />
+
+
+<meta name="date" content="2021-10-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="workflow-part-one-week-two.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#approach-and-style"><i class="fa fa-check"></i><b>1.1</b> Approach and style</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#teaching"><i class="fa fa-check"></i><b>1.2</b> Teaching</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#workshops"><i class="fa fa-check"></i><b>1.2.1</b> Workshops</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#introduction-to-r"><i class="fa fa-check"></i><b>1.3</b> Introduction to R</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#getting-around-on-rstudio"><i class="fa fa-check"></i><b>1.4</b> Getting around on RStudio</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#an-intro-to-rstudio"><i class="fa fa-check"></i><b>1.4.1</b> An intro to RStudio</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#using-r-studio-cloud"><i class="fa fa-check"></i><b>1.4.2</b> Using R Studio Cloud</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#reading"><i class="fa fa-check"></i><b>1.5</b> Reading</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#get-help"><i class="fa fa-check"></i><b>1.6</b> Get Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html"><i class="fa fa-check"></i><b>2</b> Getting to know R - Week One</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#your-first-r-command"><i class="fa fa-check"></i><b>2.1</b> Your first R command</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#typos"><i class="fa fa-check"></i><b>2.1.1</b> Typos</a></li>
+<li class="chapter" data-level="2.1.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#more-simple-arithmetic"><i class="fa fa-check"></i><b>2.1.2</b> More simple arithmetic</a></li>
+<li class="chapter" data-level="2.1.3" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#try-some-maths"><i class="fa fa-check"></i><b>2.1.3</b> Try some maths</a></li>
+<li class="chapter" data-level="2.1.4" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#perform-some-combos"><i class="fa fa-check"></i><b>2.1.4</b> Perform some combos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#true-or-false-data"><i class="fa fa-check"></i><b>2.2</b> “true or false” data</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#assessing-mathematical-truths"><i class="fa fa-check"></i><b>2.2.1</b> Assessing mathematical truths</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#storing-outputs"><i class="fa fa-check"></i><b>2.3</b> Storing outputs</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#choosing-names"><i class="fa fa-check"></i><b>2.3.1</b> Choosing names</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#writing-scripts"><i class="fa fa-check"></i><b>2.4</b> Writing scripts</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#commenting-on-scripts"><i class="fa fa-check"></i><b>2.4.1</b> Commenting on scripts</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#running-your-script"><i class="fa fa-check"></i><b>2.4.2</b> Running your script</a></li>
+<li class="chapter" data-level="2.4.3" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#saving-your-script"><i class="fa fa-check"></i><b>2.4.3</b> Saving your script</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#error"><i class="fa fa-check"></i><b>2.5</b> Error</a></li>
+<li class="chapter" data-level="2.6" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#functions"><i class="fa fa-check"></i><b>2.6</b> Functions</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#storing-the-output-of-functions"><i class="fa fa-check"></i><b>2.6.1</b> Storing the output of functions</a></li>
+<li class="chapter" data-level="2.6.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#more-fun-with-functions"><i class="fa fa-check"></i><b>2.6.2</b> More fun with functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#packages"><i class="fa fa-check"></i><b>2.7</b> Packages</a></li>
+<li class="chapter" data-level="2.8" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#my-first-data-visualisation"><i class="fa fa-check"></i><b>2.8</b> My first data visualisation</a></li>
+<li class="chapter" data-level="2.9" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#quitting"><i class="fa fa-check"></i><b>2.9</b> Quitting</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html"><i class="fa fa-check"></i><b>3</b> Workflow Part One - Week Two</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#meet-the-penguins"><i class="fa fa-check"></i><b>3.1</b> Meet the Penguins</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#insights-from-data"><i class="fa fa-check"></i><b>3.1.1</b> Insights from data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#the-question"><i class="fa fa-check"></i><b>3.2</b> The Question?</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#hypotheses"><i class="fa fa-check"></i><b>3.2.1</b> Hypotheses</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#preparing-the-data"><i class="fa fa-check"></i><b>3.3</b> Preparing the data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#tidy-data"><i class="fa fa-check"></i><b>3.3.1</b> Tidy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#the-dataset"><i class="fa fa-check"></i><b>3.3.2</b> The dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#prepare-the-rstudio-workspace"><i class="fa fa-check"></i><b>3.4</b> Prepare the RStudio workspace</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#organise"><i class="fa fa-check"></i><b>3.4.1</b> Organise</a></li>
+<li class="chapter" data-level="3.4.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#create-a-new-r-script"><i class="fa fa-check"></i><b>3.4.2</b> Create a new R script</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#get-the-data-into-r"><i class="fa fa-check"></i><b>3.5</b> Get the data into R</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#view-and-refine"><i class="fa fa-check"></i><b>3.5.1</b> View and refine</a></li>
+<li class="chapter" data-level="3.5.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#data-management"><i class="fa fa-check"></i><b>3.5.2</b> Data management</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#dataframes-and-tibbles"><i class="fa fa-check"></i><b>3.6</b> Dataframes and tibbles</a></li>
+<li class="chapter" data-level="3.7" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#clean-and-tidy"><i class="fa fa-check"></i><b>3.7</b> Clean and tidy</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#tidy"><i class="fa fa-check"></i><b>3.7.1</b> Tidy</a></li>
+<li class="chapter" data-level="3.7.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#clean"><i class="fa fa-check"></i><b>3.7.2</b> Clean</a></li>
+<li class="chapter" data-level="3.7.3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#refine-variable-names"><i class="fa fa-check"></i><b>3.7.3</b> Refine variable names</a></li>
+<li class="chapter" data-level="3.7.4" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#dates"><i class="fa fa-check"></i><b>3.7.4</b> Dates</a></li>
+<li class="chapter" data-level="3.7.5" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#rename-some-values"><i class="fa fa-check"></i><b>3.7.5</b> Rename some values</a></li>
+<li class="chapter" data-level="3.7.6" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#check-for-duplication"><i class="fa fa-check"></i><b>3.7.6</b> Check for duplication</a></li>
+<li class="chapter" data-level="3.7.7" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#check-for-typos-or-implausible-values"><i class="fa fa-check"></i><b>3.7.7</b> Check for typos or implausible values</a></li>
+<li class="chapter" data-level="3.7.8" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#missing-values---na"><i class="fa fa-check"></i><b>3.7.8</b> Missing values - NA</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#summing-up"><i class="fa fa-check"></i><b>3.8</b> Summing up</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#what-we-learned"><i class="fa fa-check"></i><b>3.8.1</b> What we learned</a></li>
+<li class="chapter" data-level="3.8.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#quitting-1"><i class="fa fa-check"></i><b>3.8.2</b> Quitting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html"><i class="fa fa-check"></i><b>4</b> Workflow Part Two - Week Three</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#initial-insights"><i class="fa fa-check"></i><b>4.1</b> Initial insights</a></li>
+<li class="chapter" data-level="4.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#numbers-sex-and-bodyweight-of-penguins"><i class="fa fa-check"></i><b>4.2</b> Numbers, sex and bodyweight of penguins</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#making-a-simple-figure"><i class="fa fa-check"></i><b>4.2.1</b> Making a simple figure</a></li>
+<li class="chapter" data-level="4.2.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#challenge"><i class="fa fa-check"></i><b>4.2.2</b> Challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#distributions"><i class="fa fa-check"></i><b>4.3</b> Distributions</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#insights"><i class="fa fa-check"></i><b>4.3.1</b> Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#more-distributions"><i class="fa fa-check"></i><b>4.4</b> More distributions</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#initial-conclusions"><i class="fa fa-check"></i><b>4.4.1</b> Initial conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#data-transformation"><i class="fa fa-check"></i><b>4.5</b> Data transformation</a></li>
+<li class="chapter" data-level="4.6" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#developing-insights"><i class="fa fa-check"></i><b>4.6</b> Developing insights</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#distributions-of-the-relative-bill-length"><i class="fa fa-check"></i><b>4.6.1</b> Distributions of the relative bill length</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#relationshipdifferences"><i class="fa fa-check"></i><b>4.7</b> Relationship/differences</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#differences"><i class="fa fa-check"></i><b>4.7.1</b> Differences</a></li>
+<li class="chapter" data-level="4.7.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#associations"><i class="fa fa-check"></i><b>4.7.2</b> Associations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#sex-interactions"><i class="fa fa-check"></i><b>4.8</b> Sex interactions</a></li>
+<li class="chapter" data-level="4.9" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#making-our-graphs-more-attractive"><i class="fa fa-check"></i><b>4.9</b> Making our graphs more attractive</a></li>
+<li class="chapter" data-level="4.10" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#quitting-2"><i class="fa fa-check"></i><b>4.10</b> Quitting</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science for Biologists - 5023Y</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="workflow-part-two---week-three" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Workflow Part Two - Week Three</h1>
+<script>
+  addClassKlippyTo("pre.r, pre.bash");
+  addKlippy('right', 'top', 'auto', '1', 'copy to clipboard', 'Copied!');
+</script>
+<p>Last week we worked through the journey of importing and tidying data to produce a clean dataset.</p>
+<p>It’s important to remember what questions you have about the data collected, and to make an outline about what you want to do.</p>
+<p>What figures might we want to produce from our data?</p>
+<div id="initial-insights" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Initial insights</h2>
+<p>Let’s start with some basic insights, perhaps by focusing on further questions about specific variables.</p>
+<ul>
+<li><p>How many penguins were observed?</p></li>
+<li><p>How many Adelie, Gentoo and Chinstrap penguins</p></li>
+<li><p>What is the distribution of morphologies such as bill length, body size, flipper length</p></li>
+<li><p>How many adults produced a successful clutch?</p></li>
+</ul>
+<p>Some of these are very simple in that they are summaries of single variables. Some are more complex, like evaluating the numbers of males and females which are the two groups in the sex variable.</p>
+<p>These are ‘safety-checking’ insights. You might already know the answers to some of these questions because you may have been responsible for collecting the data. Checking your answers against what you expect is a good way to check your data has been cleaned properly.</p>
+</div>
+<div id="numbers-sex-and-bodyweight-of-penguins" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Numbers, sex and bodyweight of penguins</h2>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="workflow-part-two-week-three.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many observations of penguins were made</span></span>
+<span id="cb67-2"><a href="workflow-part-two-week-three.html#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-3"><a href="workflow-part-two-week-three.html#cb67-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb67-4"><a href="workflow-part-two-week-three.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">n</span>())</span>
+<span id="cb67-5"><a href="workflow-part-two-week-three.html#cb67-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-6"><a href="workflow-part-two-week-three.html#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="co"># but there are multiple observations of penguins across different years</span></span>
+<span id="cb67-7"><a href="workflow-part-two-week-three.html#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="co"># n_distinct deals with this</span></span>
+<span id="cb67-8"><a href="workflow-part-two-week-three.html#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-9"><a href="workflow-part-two-week-three.html#cb67-9" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb67-10"><a href="workflow-part-two-week-three.html#cb67-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">n_distinct</span>(individual_id))</span></code></pre></div>
+<p>The answer we get is that there are 190 different penguins observed across our multi-year study.</p>
+<p>This answer is provided in a tibble, but the variable name is an ugly composition of the functions applied, but we can modify the code</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="workflow-part-two-week-three.html#cb68-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb68-2"><a href="workflow-part-two-week-three.html#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num_penguin_id=</span><span class="fu">n_distinct</span>(individual_id))</span></code></pre></div>
+<p>How about the number of penguins observed from each species?</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="workflow-part-two-week-three.html#cb69-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb69-2"><a href="workflow-part-two-week-three.html#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> <span class="co"># ask for distinct counts in each species</span></span>
+<span id="cb69-3"><a href="workflow-part-two-week-three.html#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num_penguin_id=</span><span class="fu">n_distinct</span>(individual_id))</span></code></pre></div>
+<p>By adding the <code>group_by</code> function we tell R to apply any subsequent functions separately according to the group specified. Let’s do this again for male and female penguins</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="workflow-part-two-week-three.html#cb70-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="workflow-part-two-week-three.html#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> <span class="co"># ask for distinct counts in each species</span></span>
+<span id="cb70-3"><a href="workflow-part-two-week-three.html#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num_penguin_id=</span><span class="fu">n_distinct</span>(individual_id))</span></code></pre></div>
+<p>Now what about the number of female Gentoo penguins?</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="workflow-part-two-week-three.html#cb71-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb71-2"><a href="workflow-part-two-week-three.html#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, species) <span class="sc">%&gt;%</span> <span class="co"># ask for distinct counts in each species</span></span>
+<span id="cb71-3"><a href="workflow-part-two-week-three.html#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num_penguin_id=</span><span class="fu">n_distinct</span>(individual_id))</span></code></pre></div>
+<p>Now we have a table that shows each combination of penguin species by sex, we can see for example that 65 unique Male Adelie penguins were observed in our study. We can also see that for 6 Adelie and 5 Gentoo penguins, sex was not recorded.</p>
+<blockquote>
+<p>You have just had a crash course in using the <code>pipe</code> and <code>dplyr</code> to produce quick data summaries. Have a go at making some other summaries of your data, perhaps the numbers of penguins by island or region. Try some combinations.</p>
+</blockquote>
+<div id="making-a-simple-figure" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Making a simple figure</h3>
+<p>Let’s translate some of our simple summaries into graphs.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="workflow-part-two-week-three.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make summary data and assign to an object with a sensible name we can use</span></span>
+<span id="cb72-2"><a href="workflow-part-two-week-three.html#cb72-2" aria-hidden="true" tabindex="-1"></a>penguin_species_sex <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb72-3"><a href="workflow-part-two-week-three.html#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, species) <span class="sc">%&gt;%</span> <span class="co"># ask for distinct counts in each species</span></span>
+<span id="cb72-4"><a href="workflow-part-two-week-three.html#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num_penguin_id=</span><span class="fu">n_distinct</span>(individual_id)) <span class="sc">%&gt;%</span> </span>
+<span id="cb72-5"><a href="workflow-part-two-week-three.html#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="co"># remove the missing data</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="workflow-part-two-week-three.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># basic ggplot function to make a stacked barplot</span></span>
+<span id="cb73-2"><a href="workflow-part-two-week-three.html#cb73-2" aria-hidden="true" tabindex="-1"></a>penguin_species_sex <span class="sc">%&gt;%</span> </span>
+<span id="cb73-3"><a href="workflow-part-two-week-three.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>species, </span>
+<span id="cb73-4"><a href="workflow-part-two-week-three.html#cb73-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y=</span>num_penguin_id, </span>
+<span id="cb73-5"><a href="workflow-part-two-week-three.html#cb73-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill=</span>sex))<span class="sc">+</span></span>
+<span id="cb73-6"><a href="workflow-part-two-week-three.html#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-77"></span>
+<img src="images/stacked_bar.png" alt="A first insight the number of male and female penguins of each species in our study" width="80%" />
+<p class="caption">
+Figure 4.1: A first insight the number of male and female penguins of each species in our study
+</p>
+</div>
+<p>We will cover how ggplot works in more detail next week. But in brief, to get the graph we first use the <code>ggplot</code> function, we give <code>ggplot</code> the ‘aesthetic mappings’ of the plot, the values we wish to assign to the x axis, y axis and how we want to “fill in” the objects we will draw.</p>
+<p>This first line of code will just draw a blank plot, with the <em>plus</em> + sign we signify that we want to add a new layer, this builds on top of the first layer and by specifying the function <code>geom_col</code> we request columns are layered onto the plot. This layer inherits all of the specifications of x,y and fill from <code>ggplot()</code>. And it produces a handy legend.</p>
+</div>
+<div id="challenge" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Challenge</h3>
+<p>Write and run a script, with appropriate comments, that produces a summary tibble and graph for the number of penguins of each species, on the three study islands</p>
+</div>
+</div>
+<div id="distributions" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Distributions</h2>
+<p>We now know how many penguins were surveyed. Let’s move on to look at some distributions. One of our interests was the size of bill lengths, so let’s look at the distribution of values in this variable.</p>
+<p>Looking at frequency distributions is very <em>useful</em> because it shows the shape of the <em>sample distribution</em>, that shape is very important for the types of formal statistics we can do later.</p>
+<p>Here is the script to plot frequency distribution, as before we pipe the data into ggplot. This time we only specify an x variable because we intend to plot a histogram and the y variable is always the count of observations. We then ask for the data to be presented in 50 equally sized bins of data. So in this case we have chopped the range of the x axis into 50 equal parts and counted the number of observations that fall within each one.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="workflow-part-two-week-three.html#cb74-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb74-2"><a href="workflow-part-two-week-three.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm))<span class="sc">+</span></span>
+<span id="cb74-3"><a href="workflow-part-two-week-three.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-79"></span>
+<img src="images/Distribution.png" alt="Frequency distribution of culmen length in penguins" width="80%" />
+<p class="caption">
+Figure 4.2: Frequency distribution of culmen length in penguins
+</p>
+</div>
+<blockquote>
+<p>Have a go at changing the value specified to the bins argument, and observe how the figure changes.</p>
+</blockquote>
+<div id="insights" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Insights</h3>
+<ul>
+<li><p>Are you surprised at all by the distribution? We have drawn a continuous variable from a natural population, what did you expect the distribution to look like?</p></li>
+<li><p>Can you change the code for the histogram plot to produce distributions for each sex?</p></li>
+<li><p>How has this changed your interpretation of the distributions?</p></li>
+</ul>
+</div>
+</div>
+<div id="more-distributions" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> More distributions</h2>
+<p>From the figures you have made, you should be able to make some guesses about the means and medians of the data. But we can use <code>dplyr</code> to get more accurate answers.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="workflow-part-two-week-three.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate the mean, median and standard deviation of culmen length in three species of penguins</span></span>
+<span id="cb75-2"><a href="workflow-part-two-week-three.html#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="workflow-part-two-week-three.html#cb75-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb75-4"><a href="workflow-part-two-week-three.html#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-5"><a href="workflow-part-two-week-three.html#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_culmen_length=</span><span class="fu">mean</span>(culmen_length_mm),</span>
+<span id="cb75-6"><a href="workflow-part-two-week-three.html#cb75-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_culmen_length=</span><span class="fu">median</span>(culmen_length_mm),</span>
+<span id="cb75-7"><a href="workflow-part-two-week-three.html#cb75-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_culmen_length=</span><span class="fu">sd</span>(culmen_length_mm))</span></code></pre></div>
+<p>Huh??? What’s going on??? We get NAs because there are NAs in our dataset any calculation involving nothing produces nothing. Try this</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="workflow-part-two-week-three.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># messing about with NA calculations</span></span>
+<span id="cb76-2"><a href="workflow-part-two-week-three.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span><span class="sc">+</span><span class="cn">NA</span></span>
+<span id="cb76-3"><a href="workflow-part-two-week-three.html#cb76-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-4"><a href="workflow-part-two-week-three.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">*</span><span class="cn">NA</span></span>
+<span id="cb76-5"><a href="workflow-part-two-week-three.html#cb76-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-6"><a href="workflow-part-two-week-three.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span><span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb76-7"><a href="workflow-part-two-week-three.html#cb76-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-8"><a href="workflow-part-two-week-three.html#cb76-8" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span><span class="sc">+</span><span class="dv">2</span><span class="sc">+</span><span class="cn">NA</span>)<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
+<p>We need to remember to specify the argument to remove <code>NA</code></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="workflow-part-two-week-three.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate the mean, median and standard deviation of culmen length in three species of penguins</span></span>
+<span id="cb77-2"><a href="workflow-part-two-week-three.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the removal of NA values</span></span>
+<span id="cb77-3"><a href="workflow-part-two-week-three.html#cb77-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb77-4"><a href="workflow-part-two-week-three.html#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species)</span>
+<span id="cb77-5"><a href="workflow-part-two-week-three.html#cb77-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_culmen_length=</span><span class="fu">mean</span>(culmen_length_mm, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb77-6"><a href="workflow-part-two-week-three.html#cb77-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_culmen_length=</span><span class="fu">median</span>(culmen_length_mm, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb77-7"><a href="workflow-part-two-week-three.html#cb77-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_culmen_length=</span><span class="fu">sd</span>(culmen_length_mm, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<blockquote>
+<p>The mean and median values for each species are <em>very</em> similar, which indicates we do not have much <em>skew</em> in our data. This detail is important because statistical analyses make lots of assumptions about the underlying distributions of the data.</p>
+</blockquote>
+<div id="initial-conclusions" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Initial conclusions</h3>
+<p>In these data we are already able to make some useful insights</p>
+<ul>
+<li><p>Fewer Chinstrap penguins were surveyed than Adelie or Gentoo’s</p></li>
+<li><p>The average bill length for Adelie penguins is 38.8 mm, on average 8.7mm shorter than Gentoo’s and 10mm shorter than Chinstrap’s</p></li>
+<li><p>There does not appear to be much difference between Chinstrap and Gentoo bill lengths (on average 1.3mm)</p></li>
+</ul>
+<p>These might appear to be modest insights - but have learned several data manipulation and summary techniques. We can also start to take a look at some of our initial hypotheses!!!</p>
+<ul>
+<li>How does this data stack up against the hypothesis about bill morphology we put forward last week?</li>
+</ul>
+<p>To make more and conclusive insights we have a bit further to go, but I think you deserve a pat on the back</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="workflow-part-two-week-three.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R generate some praise</span></span>
+<span id="cb78-2"><a href="workflow-part-two-week-three.html#cb78-2" aria-hidden="true" tabindex="-1"></a>praise<span class="sc">::</span><span class="fu">praise</span>()</span></code></pre></div>
+</div>
+</div>
+<div id="data-transformation" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Data transformation</h2>
+<p>In the previous section we made some basic insights into observation numbers, distributed by species, sex and location. We also started to gain core insights into some of our central hypotheses, but you have probably noticed we don’t actually have a variable on the <code>relative bill lengths/depths</code>. Why is this important? Well we clearly saw there was a difference in bill lengths between our three species. But we haven’t taken into account that some of these species might be very different in body size. Our measure of bill lengths as an indicator of feeding strategy, might be confounded by body size (a bigger penguin is likely to have a bigger bill).</p>
+<p>We don’t have a variable explicitly called body size. Instead we have to use “proxies” suitable proxies might be ‘flipper length’ or ‘body mass.’ Neither is perfect</p>
+<ul>
+<li>Flipper length
+<ul>
+<li>Pros: linked to skeletal structure, constant</li>
+<li>Cons: relative flipper length could also vary by species</li>
+</ul></li>
+<li>Body mass
+<ul>
+<li>Pros: more of an indication of central size?</li>
+<li>Cons: very condition dependent, likely to change over the year</li>
+</ul></li>
+</ul>
+<p>Let’s take a look at the distribution of flipper length among our three species.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="workflow-part-two-week-three.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># frequency distribution of body mass by species</span></span>
+<span id="cb79-2"><a href="workflow-part-two-week-three.html#cb79-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb79-3"><a href="workflow-part-two-week-three.html#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>body_mass_g, <span class="at">fill=</span>species))<span class="sc">+</span></span>
+<span id="cb79-4"><a href="workflow-part-two-week-three.html#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>)</span></code></pre></div>
+<p>How does the distribution you have found compare with your insights on bill length? We can do this using the <code>cor_test</code> function from the package <code>rstatix</code> (<span class="citation"><a href="references.html#ref-R-rstatix" role="doc-biblioref">Kassambara</a> (<a href="references.html#ref-R-rstatix" role="doc-biblioref">2020</a>)</span>). This package contains a number of ‘pipe-friendly’ simple statistics functions</p>
+<p>Add the <code>library()</code> for <code>rstatix</code> at the <strong>top</strong> of your RScript with an appropriate comment #</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="workflow-part-two-week-three.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a simple correlation test from the rstatix package</span></span>
+<span id="cb80-2"><a href="workflow-part-two-week-three.html#cb80-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb80-3"><a href="workflow-part-two-week-three.html#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> <span class="co"># group by species</span></span>
+<span id="cb80-4"><a href="workflow-part-two-week-three.html#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor_test</span>(flipper_length_mm, culmen_length_mm) <span class="co"># correlation between body mass and bill length</span></span></code></pre></div>
+<p>We can see that these two variables ‘co-vary’ a lot, but this appears to be quite species specific. We can already make the insight that Adelie penguins appear to have the shortest bill length relative to flipper length.</p>
+<p>We can make a new variable that is the ‘relative size of culmen length compared to flipper length’</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="workflow-part-two-week-three.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use mutate to produce a new variable that is a ratio of culmen length to flipper length</span></span>
+<span id="cb81-2"><a href="workflow-part-two-week-three.html#cb81-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb81-3"><a href="workflow-part-two-week-three.html#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">relative_bill_length =</span> culmen_length_mm<span class="sc">/</span>body_mass_g)</span></code></pre></div>
+<p>We are probably also interested in bill depth?</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="workflow-part-two-week-three.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use mutate to produce a new variable that is a ratio of culmen depth to flipper length</span></span>
+<span id="cb82-2"><a href="workflow-part-two-week-three.html#cb82-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb82-3"><a href="workflow-part-two-week-three.html#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">relative_bill_depth =</span> culmen_depth_mm<span class="sc">/</span>body_mass_g)</span>
+<span id="cb82-4"><a href="workflow-part-two-week-three.html#cb82-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-5"><a href="workflow-part-two-week-three.html#cb82-5" aria-hidden="true" tabindex="-1"></a><span class="co"># check that these new variables have been included in the dataset</span></span>
+<span id="cb82-6"><a href="workflow-part-two-week-three.html#cb82-6" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb82-7"><a href="workflow-part-two-week-three.html#cb82-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()</span></code></pre></div>
+</div>
+<div id="developing-insights" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Developing insights</h2>
+<p>First let’s focus on the distributions of four variables of interest. Then we will progress on to look at their relationships and differences</p>
+<ul>
+<li><p>relative_bill_length</p></li>
+<li><p>relative_bill_depth</p></li>
+<li><p>delta_15n</p></li>
+<li><p>delta_13c</p></li>
+</ul>
+<div id="distributions-of-the-relative-bill-length" class="section level3" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Distributions of the relative bill length</h3>
+<p>We will examine the shape of the <em>sample distribution</em> of the data again by using histograms.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="workflow-part-two-week-three.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># frequency distribution of relative bill length by species</span></span>
+<span id="cb83-2"><a href="workflow-part-two-week-three.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we already know we are interested in looking at the distributions &#39;within&#39; each species</span></span>
+<span id="cb83-3"><a href="workflow-part-two-week-three.html#cb83-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb83-4"><a href="workflow-part-two-week-three.html#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>relative_bill_length, <span class="at">fill=</span>species))<span class="sc">+</span></span>
+<span id="cb83-5"><a href="workflow-part-two-week-three.html#cb83-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-89"></span>
+<img src="images/bill_length_distribution.png" alt="Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo" width="80%" />
+<p class="caption">
+Figure 4.3: Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo
+</p>
+</div>
+<p>Important questions, what shape is the distribution?</p>
+<ul>
+<li><p>First there must be a lower limit of zero (penguins cannot have negative length bills), does this lead to any truncating of the expected normal distribution bell curve? It doesn’t look it.</p></li>
+<li><p>Is it symmetrical? Mostly.</p></li>
+</ul>
+<p>If it’s a little difficult to see - we can separate out these figures using the handy function <code>facet_wrap</code></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="workflow-part-two-week-three.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># frequency distribution of relative bill length by species</span></span>
+<span id="cb84-2"><a href="workflow-part-two-week-three.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we already know we are interested in looking at the distributions &#39;within&#39; each species</span></span>
+<span id="cb84-3"><a href="workflow-part-two-week-three.html#cb84-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb84-4"><a href="workflow-part-two-week-three.html#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>relative_bill_length, <span class="at">fill=</span>species))<span class="sc">+</span></span>
+<span id="cb84-5"><a href="workflow-part-two-week-three.html#cb84-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>)<span class="sc">+</span></span>
+<span id="cb84-6"><a href="workflow-part-two-week-three.html#cb84-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species) <span class="co"># facet wrap to look at the separate species more easily</span></span></code></pre></div>
+<p>Looking at these distributions, how do you think the mean &amp; median values will compare in these three species? Think about it first - then run this code.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="workflow-part-two-week-three.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean and Median summaries</span></span>
+<span id="cb85-2"><a href="workflow-part-two-week-three.html#cb85-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb85-3"><a href="workflow-part-two-week-three.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-4"><a href="workflow-part-two-week-three.html#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_relative_bill_length=</span><span class="fu">mean</span>(relative_bill_length, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb85-5"><a href="workflow-part-two-week-three.html#cb85-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_relative_bill_length=</span><span class="fu">median</span>(relative_bill_length, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code># A tibble: 3 x 3
+  species   mean_relative_bill_length median_relative_bill_length
+  &lt;chr&gt;                         &lt;dbl&gt;                       &lt;dbl&gt;
+1 Adelie                      0.0106                      0.0105 
+2 Chinstrap                   0.0132                      0.0129 
+3 Gentoo                      0.00941                     0.00939</code></pre>
+<p>We can see that the mean and median values are almost identical for each species. This indicates we <em>aren’t</em> dealing with a lot of skew, this is important for when using statistics, which are based on a lot of assumptions like normal distribution.</p>
+<ul>
+<li>Repeat these steps for the variable <code>relative_bill_depth</code>, <code>delta_15n</code> and <code>delta_13c</code> - add all appropriate comments and commands to your R Script.</li>
+</ul>
+</div>
+</div>
+<div id="relationshipdifferences" class="section level2" number="4.7">
+<h2><span class="header-section-number">4.7</span> Relationship/differences</h2>
+<p>Getting proper data insights involves looking for relationships or differences.
+Remember, if we have a manipulated variable in a well-designed experiment, we may be able to identify a causal effect. With a study without this manipulation, like this penguin study - we cannot be sure any relationships or differences are causal. We have to include some caution in our interpretations.</p>
+<div id="differences" class="section level3" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Differences</h3>
+<p>We have already looked at frequency distributions of the data, where it is possible to see differences. However we can use ggplot and <code>geom_point</code> to produce difference plots.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="workflow-part-two-week-three.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specifying position with a jitter argument positions points randomly across the x axis this prevents overcrowding</span></span>
+<span id="cb87-2"><a href="workflow-part-two-week-three.html#cb87-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb87-3"><a href="workflow-part-two-week-three.html#cb87-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>species, </span>
+<span id="cb87-4"><a href="workflow-part-two-week-three.html#cb87-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">y=</span>culmen_length_mm, </span>
+<span id="cb87-5"><a href="workflow-part-two-week-three.html#cb87-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour=</span>species))<span class="sc">+</span> <span class="co"># some geoms use color rather than fill to specify colour</span></span>
+<span id="cb87-6"><a href="workflow-part-two-week-three.html#cb87-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitter</span>(<span class="at">width=</span><span class="fl">0.2</span>)) </span></code></pre></div>
+<blockquote>
+<p>Note - try altering the width argument and see how it affects the output of the plot.
+Note - we will do a deeper dive into ggplot later.</p>
+</blockquote>
+<p>Try producing these figures for the <code>culmen_depth_mm</code>, <code>delta_15n</code> and <code>delta_13c</code> variables as well. Make notes of the relative differences.</p>
+</div>
+<div id="associations" class="section level3" number="4.7.2">
+<h3><span class="header-section-number">4.7.2</span> Associations</h3>
+<p>It might also be of interest to look at whether any of our variables of interest are strongly associated. For example what is the relationship between heavy carbon/heavy nitrogen isotopes?</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="workflow-part-two-week-three.html#cb88-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb88-2"><a href="workflow-part-two-week-three.html#cb88-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>delta_15n, <span class="at">y=</span>delta_13c, <span class="at">colour=</span>species))<span class="sc">+</span></span>
+<span id="cb88-3"><a href="workflow-part-two-week-three.html#cb88-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb88-4"><a href="workflow-part-two-week-three.html#cb88-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="co"># produces a simple regression line</span></span>
+<span id="cb88-5"><a href="workflow-part-two-week-three.html#cb88-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">se=</span><span class="cn">FALSE</span>)    <span class="co"># no standard error intervals</span></span></code></pre></div>
+<p>We can see here that the association between these isotopes varies a lot by different species, there is probably quite a complex relationship here. It also indicates we should probably investigate these two isotopes separately.</p>
+<ul>
+<li>Have a look at the relative bill length and depth relationships as well</li>
+</ul>
+</div>
+</div>
+<div id="sex-interactions" class="section level2" number="4.8">
+<h2><span class="header-section-number">4.8</span> Sex interactions</h2>
+<p>Now let’s concern ourselves with interactions. We have <em>already</em> seen how our interpretation of certain variables can be heavily altered if we don’t take into account important contexts - like morphology in relation to species.</p>
+<p>Thinking about sensible interactions takes patience and good biological understanding, the payoff is it can produce unique insights.</p>
+<p>Focusing on relative bill length, we have seen there are differences between species, however we have not considered the potential association of sex. In many species males and females are ‘dimorphic’ and this has the potential to influence our observations if:</p>
+<ul>
+<li><p>sex has a substantial/bigger effect on morphology than species</p></li>
+<li><p>uneven numbers of males/females were scored in our studies</p></li>
+</ul>
+<p>Using <code>summarise</code> <code>group_by</code> and <code>n_distinct</code> you should quickly be able to check the numbers of males and females surveyed within each species.</p>
+<pre><code># A tibble: 6 x 3
+# Groups:   species [3]
+  species   sex    num_penguin_id
+  &lt;chr&gt;     &lt;chr&gt;           &lt;int&gt;
+1 Adelie    FEMALE             65
+2 Adelie    MALE               65
+3 Chinstrap FEMALE             31
+4 Chinstrap MALE               31
+5 Gentoo    FEMALE             46
+6 Gentoo    MALE               49</code></pre>
+<p>Looks like numbers are even, which is good. Again focusing on relative bill length let’s generate some figures breaking down this variable by sex and species.</p>
+<p>First let’s generate some more simple summary stats - this time we are assigning it to an object to use later</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="workflow-part-two-week-three.html#cb90-1" aria-hidden="true" tabindex="-1"></a>penguin_stats <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="workflow-part-two-week-three.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, species) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-3"><a href="workflow-part-two-week-three.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_relative_bill_length=</span><span class="fu">mean</span>(relative_bill_length, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<p>Now we are going to make our first figure which includes both raw and summary data. Copy and run the code below, and see if you can add comments next to the arguments you are unfamiliar with about what they might be doing.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="workflow-part-two-week-three.html#cb91-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb91-2"><a href="workflow-part-two-week-three.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-3"><a href="workflow-part-two-week-three.html#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>sex, </span>
+<span id="cb91-4"><a href="workflow-part-two-week-three.html#cb91-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y=</span>relative_bill_length))<span class="sc">+</span></span>
+<span id="cb91-5"><a href="workflow-part-two-week-three.html#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">position=</span><span class="fu">position_jitter</span>(<span class="at">width=</span><span class="fl">0.2</span>), </span>
+<span id="cb91-6"><a href="workflow-part-two-week-three.html#cb91-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha=</span><span class="fl">0.4</span>)<span class="sc">+</span></span>
+<span id="cb91-7"><a href="workflow-part-two-week-three.html#cb91-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>penguin_stats, <span class="fu">aes</span>(<span class="at">x=</span>sex, </span>
+<span id="cb91-8"><a href="workflow-part-two-week-three.html#cb91-8" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">y=</span>mean_relative_bill_length), </span>
+<span id="cb91-9"><a href="workflow-part-two-week-three.html#cb91-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">4</span>, </span>
+<span id="cb91-10"><a href="workflow-part-two-week-three.html#cb91-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">color=</span><span class="st">&quot;blue&quot;</span>)<span class="sc">+</span></span>
+<span id="cb91-11"><a href="workflow-part-two-week-three.html#cb91-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species)</span></code></pre></div>
+<blockquote>
+<p>Note - we could be producing something much simpler, like a box and whisker plot. It is often better to plot the data points rather than summaries of them</p>
+</blockquote>
+<p>Imagine a line connects the two blue dots in each facet, these blue dots are the mean values. The slope of the line (if we drew them) would be downwards from females to males, indicating that on average females are larger. But the slop would not be very large. If we drew slope between <em>each</em> of the three female averages these would be much steeper. So we can say that size ‘on average’ varies more <em>between</em> species than <em>between</em> sexes.</p>
+<p>See if you can make figures for all four of our variables of interest, then compare them to our initial hypotheses.</p>
+<p>At this stage we do not have enough evidence to formally “reject” any of our null hypotheses, however we can describe the trends which appear to be present.</p>
+<div class="figure"><span id="fig:unnamed-chunk-96"></span>
+<img src="images/summary.png" alt="Difference in relative bill length and depth, and heavy carbon and nitrogen ratios, in male and female penguins from three different species - Adelie, Chinstrap and Gentoo" width="80%" />
+<p class="caption">
+Figure 4.4: Difference in relative bill length and depth, and heavy carbon and nitrogen ratios, in male and female penguins from three different species - Adelie, Chinstrap and Gentoo
+</p>
+</div>
+</div>
+<div id="making-our-graphs-more-attractive" class="section level2" number="4.9">
+<h2><span class="header-section-number">4.9</span> Making our graphs more attractive</h2>
+<p>We will dive into making attractive ggplots in more detail later. But let’s spend a little time now fixing some of the more serious issues with our figures.</p>
+<p>The aim with making a good figure, is that it is:</p>
+<ul>
+<li><p>Accurate - the figure must present the data properly, and not distort or mislead</p></li>
+<li><p>Beautiful - attractive figures will invite people to spend more time studying them</p></li>
+<li><p>Clear - a good figure should be able to stand on its own - see the answer or insight without prompting from the text</p></li>
+</ul>
+<p>There are lots of things we could change here, but we will stick with the basics for now. We will:</p>
+<ul>
+<li><p>Change the axis labels</p></li>
+<li><p>Add some colours</p></li>
+<li><p>Remove the grey background</p></li>
+</ul>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="workflow-part-two-week-three.html#cb92-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="workflow-part-two-week-three.html#cb92-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-3"><a href="workflow-part-two-week-three.html#cb92-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>sex, </span>
+<span id="cb92-4"><a href="workflow-part-two-week-three.html#cb92-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">y=</span>relative_bill_depth,</span>
+<span id="cb92-5"><a href="workflow-part-two-week-three.html#cb92-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour=</span>sex))<span class="sc">+</span></span>
+<span id="cb92-6"><a href="workflow-part-two-week-three.html#cb92-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">position=</span><span class="fu">position_jitter</span>(<span class="at">width=</span><span class="fl">0.2</span>), </span>
+<span id="cb92-7"><a href="workflow-part-two-week-three.html#cb92-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">alpha=</span><span class="fl">0.4</span>)<span class="sc">+</span></span>
+<span id="cb92-8"><a href="workflow-part-two-week-three.html#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;blue&quot;</span>))<span class="sc">+</span></span>
+<span id="cb92-9"><a href="workflow-part-two-week-three.html#cb92-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(<span class="sc">~</span>species)<span class="sc">+</span></span>
+<span id="cb92-10"><a href="workflow-part-two-week-three.html#cb92-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Relative culmen depth (mm)&quot;</span>)<span class="sc">+</span></span>
+<span id="cb92-11"><a href="workflow-part-two-week-three.html#cb92-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sex&quot;</span>)<span class="sc">+</span></span>
+<span id="cb92-12"><a href="workflow-part-two-week-three.html#cb92-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>))<span class="sc">+</span></span>
+<span id="cb92-13"><a href="workflow-part-two-week-three.html#cb92-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb92-14"><a href="workflow-part-two-week-three.html#cb92-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="images/final_figure_penguins.png" width="80%" /></p>
+</div>
+<div id="quitting-2" class="section level2" number="4.10">
+<h2><span class="header-section-number">4.10</span> Quitting</h2>
+<ul>
+<li><p>Make sure you have saved you script!</p></li>
+<li><p>Complete this week’s quiz on Blackboard</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="workflow-part-one-week-two.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-workflow-2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

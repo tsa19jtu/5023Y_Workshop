@@ -22,7 +22,7 @@ always_allow_html: true
 library(tidyverse)
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'palmerpenguins', 'lubridate', 'janitor'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'palmerpenguins', 'lubridate', 'janitor', 'rstatix'
 ), 'packages.bib')
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, eval=FALSE)
