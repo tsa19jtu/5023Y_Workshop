@@ -24,7 +24,7 @@
 <meta name="author" content="Philip Leftwich" />
 
 
-<meta name="date" content="2021-10-01" />
+<meta name="date" content="2021-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -234,7 +234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html"><i class="fa fa-check"></i><b>4</b> Workflow Part Two - Week Three</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#initial-insights"><i class="fa fa-check"></i><b>4.1</b> Initial insights</a></li>
-<li class="chapter" data-level="4.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#numbers-sex-and-bodyweight-of-penguins"><i class="fa fa-check"></i><b>4.2</b> Numbers, sex and bodyweight of penguins</a>
+<li class="chapter" data-level="4.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#numbers-and-sex-of-the-penguins"><i class="fa fa-check"></i><b>4.2</b> Numbers and sex of the penguins</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#making-a-simple-figure"><i class="fa fa-check"></i><b>4.2.1</b> Making a simple figure</a></li>
 <li class="chapter" data-level="4.2.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#challenge"><i class="fa fa-check"></i><b>4.2.2</b> Challenge</a></li>
@@ -354,35 +354,35 @@ Figure 3.1: Top image: Penguins data viewed in Excel, Bottom image: Penguins dat
 <h3><span class="header-section-number">3.3.2</span> The dataset</h3>
 <p>For today’s workshop we want to acquire the dataset to work on it. We can retrieve the file we need from here (<a href="https://github.com/UEABIO/5023Y_Workshop/blob/main/data/penguins_raw.csv" class="uri">https://github.com/UEABIO/5023Y_Workshop/blob/main/data/penguins_raw.csv</a>).</p>
 <div class="figure"><span id="fig:unnamed-chunk-46"></span>
-<img src="images/penguin_github.png" alt="Click on the copy raw contents button" width="80%" />
+<img src="images/penguin_github.png" alt="Click on the copy raw contents button" width="100%" />
 <p class="caption">
 Figure 3.2: Click on the copy raw contents button
 </p>
 </div>
 <p>We then need to</p>
-<ul>
+<ol style="list-style-type: decimal">
 <li><p>Select the copy raw contents button</p></li>
 <li><p>Open a blank notepad</p></li>
 <li><p>Paste the contents</p></li>
 <li><p>Save the file as ‘penguin_data.csv’</p></li>
 <li><p>Open the newly saved file in Excel and take a look</p></li>
-</ul>
+</ol>
 <p>We can see a dataset with 345 rows (including the headers) and 17 variables</p>
 <ul>
-<li><p>Study name: an identifier for the year in which sets of observations were made</p></li>
-<li><p>Region: the area in which the observation was recorded</p></li>
-<li><p>Island: the specific island where the observation was recorded</p></li>
-<li><p>Stage: Denotes reproductive stage of the penguin</p></li>
-<li><p>Individual ID: the unique ID of the individual</p></li>
-<li><p>Clutch completion: if the study nest observed with a full clutch e.g. 2 eggs</p></li>
-<li><p>Date egg: the date at which the study nest observed with 1 egg</p></li>
-<li><p>Culmen length: length of the dorsal ridge of the bird’s bill (mm)</p></li>
-<li><p>Culmen depth: depth of the dorsal ridge of the bird’s bill (mm)</p></li>
-<li><p>Flipper Length: length of bird’s flipper (mm)</p></li>
-<li><p>Body Mass: Bird’s mass in (g)</p></li>
-<li><p>Sex: Denotes the sex of the bird</p></li>
-<li><p>Delta 15N : the ratio of stable Nitrogen isotopes 15N:14N from blood sample</p></li>
-<li><p>Delta 13C: the ratio of stable Carbon isotopes 13C:12C from blood sample</p></li>
+<li><p><strong>Study name</strong>: an identifier for the year in which sets of observations were made</p></li>
+<li><p><strong>Region</strong>: the area in which the observation was recorded</p></li>
+<li><p><strong>Island</strong>: the specific island where the observation was recorded</p></li>
+<li><p><strong>Stage</strong>: Denotes reproductive stage of the penguin</p></li>
+<li><p><strong>Individual</strong> ID: the unique ID of the individual</p></li>
+<li><p><strong>Clutch completion</strong>: if the study nest observed with a full clutch e.g. 2 eggs</p></li>
+<li><p><strong>Date egg</strong>: the date at which the study nest observed with 1 egg</p></li>
+<li><p><strong>Culmen length</strong>: length of the dorsal ridge of the bird’s bill (mm)</p></li>
+<li><p><strong>Culmen depth</strong>: depth of the dorsal ridge of the bird’s bill (mm)</p></li>
+<li><p><strong>Flipper Length</strong>: length of bird’s flipper (mm)</p></li>
+<li><p><strong>Body Mass</strong>: Bird’s mass in (g)</p></li>
+<li><p><strong>Sex</strong>: Denotes the sex of the bird</p></li>
+<li><p><strong>Delta 15N</strong> : the ratio of stable Nitrogen isotopes 15N:14N from blood sample</p></li>
+<li><p><strong>Delta 13C</strong>: the ratio of stable Carbon isotopes 13C:12C from blood sample</p></li>
 </ul>
 </div>
 </div>
@@ -403,10 +403,14 @@ Figure 3.2: Click on the copy raw contents button
 <li><p>scripts</p></li>
 <li><p>figures</p></li>
 </ul>
-<p>Make sure you type these <strong>exactly</strong> as printed here - remember that to R ‘data’ and ‘Data’ are two different things!</p>
+<div class="rmdwarning">
+<p>
+Make sure you type these <strong>exactly</strong> as printed here - remember that to R is case-sensitive so ‘data’ and ‘Data’ are two different things!
+</p>
+</div>
 <p>Having these separate subfolders within our project helps keep things tidy, means it’s harder to lose things, and lets you easily tell R exactly where to go to retrieve data.</p>
 <p>Now do you remember where you saved the ‘penguin_data.csv’ file? I hope so!!! Go to the upload button in the Files tab of RStudio Cloud and tell it where the file is located on your local computer and upload it to the ‘data’ folder you have made in your Project.</p>
-<div class="figure"><span id="fig:unnamed-chunk-47"></span>
+<div class="figure"><span id="fig:unnamed-chunk-48"></span>
 <img src="images/Project.png" alt="An example of a typical R project set-up" width="80%" />
 <p class="caption">
 Figure 3.3: An example of a typical R project set-up
@@ -416,7 +420,7 @@ Figure 3.3: An example of a typical R project set-up
 <div id="create-a-new-r-script" class="section level3" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Create a new R script</h3>
 <p>Let’s now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. Use the File &gt; New Script menu item and select an R Script.</p>
-<p>Add the following</p>
+<p>Add the following:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="workflow-part-one-week-two.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># An analysis of the bill dimensions of male and female Adelie, Gentoo and Chinstrap penguins. </span></span>
 <span id="cb42-2"><a href="workflow-part-one-week-two.html#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-3"><a href="workflow-part-one-week-two.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Data first published in  Gorman, KB, TD Williams, and WR Fraser. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” PLos One 9 (3): e90081. https://doi.org/10.1371/journal.pone.0090081.</span></span></code></pre></div>
@@ -466,7 +470,11 @@ cols(
 <li><p><code>col_character()</code> means the column contains letters or words</p></li>
 <li><p><code>col_double()</code> means the column contains numbers</p></li>
 </ul>
-<p>Have a look - do all of these seem correct to you? If not we should fix these, and we will get onto that in a little bit.</p>
+<div class="rmdquestion">
+<p>
+Have a look - do all of these seem correct to you? If not we should fix these, and we will get onto that in a little bit.
+</p>
+</div>
 <div id="view-and-refine" class="section level3" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> View and refine</h3>
 <p>So we know our data is in R, and we know the columns and names have been imported. But we still don’t know whether all of our values imported, or whether it captured all the rows.</p>
@@ -482,7 +490,7 @@ cols(
 <li><p>type <code>head(penguins)</code> will show the first 10 lines of the data, rather than the whole dataset</p></li>
 </ul>
 <blockquote>
-<p><code>view()</code> lets you do cool stuff like reorder rows and quickly scroll through the dataset without affecting the underlying data.</p>
+<p>**Note - <code>view()</code> lets you do cool stuff like reorder rows and quickly scroll through the dataset without affecting the underlying data.</p>
 </blockquote>
 </div>
 <div id="data-management" class="section level3" number="3.5.2">
@@ -497,7 +505,7 @@ cols(
 <span id="cb49-5"><a href="workflow-part-one-week-two.html#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="co"># 10 rows</span></span></code></pre></div>
 <p><img src="images/NA.png" width="80%" /></p>
 <blockquote>
-<p>What is the %&gt;% ??? It’s known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the <code>select</code> function which picks only those variables we want. The result of this is then sent to the <code>head</code> function which with the argument for number of rows set to 10, prints the top 10 rows.</p>
+<p>**Note - What is the %&gt;% ??? It’s known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the <code>select</code> function which picks only those variables we want. The result of this is then sent to the <code>head</code> function which with the argument for number of rows set to 10, prints the top 10 rows.</p>
 </blockquote>
 <blockquote>
 <p>The other way to write this series of functions would be to use brackets and the rules of BODMAS:</p>
@@ -573,7 +581,7 @@ All ok now?</p>
 <li><p>Check and deal with missing values</p></li>
 </ul>
 <blockquote>
-<p>Remember because we are doing everything in a script, the original data remains unchanged. This means we have data integrity, and a clear record of what we did to tidy and clean a dataset in order to produce summaries and data visuals</p>
+<p>**Note - Remember because we are doing everything in a script, the original data remains unchanged. This means we have data integrity, and a clear record of what we did to tidy and clean a dataset in order to produce summaries and data visuals</p>
 </blockquote>
 </div>
 <div id="refine-variable-names" class="section level3" number="3.7.3">
@@ -593,7 +601,7 @@ All ok now?</p>
 <span id="cb56-7"><a href="workflow-part-one-week-two.html#cb56-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-8"><a href="workflow-part-one-week-two.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins) <span class="co"># quickly check the new variable names</span></span></code></pre></div>
 <blockquote>
-<p>Note - in this example you can see that I put the name of the package janitor, in front of the function <code>clean_names</code>. But if I have already loaded the package with library(janitor) then this isn’t strictly necessary and penguins %&gt;% clean_names() would also have worked just fine. So why do this? Remember when we loaded the tidyverse package - we got a warning about conflicts - this was because two of our packages <code>dplyr</code> and <code>stats</code> have functions that are different, but share the same name. But we can make sure we call the one we want by specifying which package we are calling a function from. We don’t need to do this very often, but it’s good to know.</p>
+<p>**Note - in this example you can see that I put the name of the package janitor, in front of the function <code>clean_names</code>. But if I have already loaded the package with library(janitor) then this isn’t strictly necessary and penguins %&gt;% clean_names() would also have worked just fine. So why do this? Remember when we loaded the tidyverse package - we got a warning about conflicts - this was because two of our packages <code>dplyr</code> and <code>stats</code> have functions that are different, but share the same name. But we can make sure we call the one we want by specifying which package we are calling a function from. We don’t need to do this very often, but it’s good to know.</p>
 </blockquote>
 <pre><code>&gt; library(tidyverse)
 -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
@@ -617,6 +625,11 @@ x dplyr::lag()    masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="workflow-part-one-week-two.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use dmy from stringr package to encode date properly</span></span>
 <span id="cb59-2"><a href="workflow-part-one-week-two.html#cb59-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb59-3"><a href="workflow-part-one-week-two.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_egg_proper=</span><span class="fu">dmy</span>(date_egg))</span></code></pre></div>
+<div class="rmdquestion">
+<p>
+What is the deliberate mistake in my code comment above? By now you may have picked up there are the odd mistakes (possibly some non-deliberate ones) - to make sure you aren’t just copy-pasting on autpilot.
+</p>
+</div>
 <p>Here we use the <code>mutate</code> function from <code>dplyr</code> to create a new variable called <code>date_egg_proper</code> based on the output of converting the characters in <code>date_egg</code> to date format. The original variable is left intact, if we had specified the “new” variable was also called <code>date_egg</code> then it would have overwritten the original variable.</p>
 </div>
 <div id="rename-some-values" class="section level3" number="3.7.5">
@@ -647,7 +660,7 @@ x dplyr::lag()    masks stats::lag()</code></pre>
 <span id="cb63-4"><a href="workflow-part-one-week-two.html#cb63-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(body_mass_g, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
 <p>The minimum weight for our penguins is 2.7kg, and the max is 6.3kg - not outrageous. If the min had come out at 27g we might have been suspicious. We will use <code>summarise</code> again to calculate other metrics in the future.</p>
 <blockquote>
-<p>Note - our first data insight, the difference the smallest adult penguin in our dataset is nearly half the size of the largest penguin.</p>
+<p>**Note - our first data insight, the difference the smallest adult penguin in our dataset is nearly half the size of the largest penguin.</p>
 </blockquote>
 <p>We can also look for typos by asking R to produce all of the distinct values in a variable. This is more useful for categorical data, where we expect there to be only a few distinct categories</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="workflow-part-one-week-two.html#cb64-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
@@ -694,8 +707,12 @@ x dplyr::lag()    masks stats::lag()</code></pre>
 </div>
 <div id="quitting-1" class="section level3" number="3.8.2">
 <h3><span class="header-section-number">3.8.2</span> Quitting</h3>
+<div class="rmdwarning">
+<p>
+Remember to <strong>save</strong> your RScript before you leave. And ideally don’t save your .Rdata!
+</p>
+</div>
 <ul>
-<li><p>Remember to save your RScript before you leave. And ideally don’t save your .Rdata either!</p></li>
 <li><p>Close your RStudio Cloud Browser</p></li>
 <li><p>Go to Blackboard to complete this week’s quiz!</p></li>
 </ul>

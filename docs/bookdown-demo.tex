@@ -158,6 +158,9 @@
 \newenvironment{rmdtip}
   {\begin{block}{tip}}
   {\end{block}}
+\newenvironment{rmdquestion}
+  {\begin{block}{question}}
+  {\end{block}}
 \newenvironment{rmdwarning}
   {\begin{block}{warning}}
   {\end{block}}
@@ -175,7 +178,7 @@
 
 \title{Data Science for Biologists - 5023Y}
 \author{Philip Leftwich}
-\date{2021-10-01}
+\date{2021-10-02}
 
 \begin{document}
 \maketitle
@@ -502,7 +505,7 @@ Of course, so far R is just doing the calculations. I haven't asked it to explic
 What I've done here is use the \textbf{\emph{equality operator}}, \texttt{==}, to force R to make a ``true or false'' judgement.
 
 \begin{quote}
-Note that this is a very different operator to the assignment operator \texttt{=} you saw previously. A common typo that people make when trying to write logical commands in R (or other languages, since the ``\texttt{=} versus \texttt{==}'' distinction is important in most programming languages) is to accidentally type \texttt{=} when you really mean \texttt{==}.
+**Note that this is a very different operator to the assignment operator \texttt{=} you saw previously. A common typo that people make when trying to write logical commands in R (or other languages, since the ``\texttt{=} versus \texttt{==}'' distinction is important in most programming languages) is to accidentally type \texttt{=} when you really mean \texttt{==}.
 \end{quote}
 
 Okay, let's see what R thinks of the Party slogan:
@@ -539,7 +542,7 @@ With simple questions like the ones above we are happy to just see the answer, b
 This literally means please \emph{assign} the value of \texttt{1+2} to the name \texttt{a}. We use the \textbf{assignment operator} \texttt{\textless{}-} to make this assignment.
 
 \begin{quote}
-Note the shortcut key for \textless- is Alt + - (Windows) or Option + - (Mac)
+**Note the shortcut key for \textless- is Alt + - (Windows) or Option + - (Mac)
 \end{quote}
 
 If you perform this action you should be able to do two things
@@ -611,7 +614,7 @@ Note that if you now change the value of b, the value of c does \emph{not} chang
 Look at the environment tab again - you should see it's starting to fill up now!
 
 \begin{quote}
-Note - RStudio will by default save the objects in its memory when you close a session. These will then be there the next time you logon. It might seem nice to be able to close things down and pick up where you left off, but its actually quite dangerous. It's messy, and can cause lots of problems when we work with scripts later, so don't do this!!! To stop RStudio from saving objects by default go to the Preferences option and change ``Save workspace to .RData on exit'' to ``Never''. Instead we are going to learn how to use scripts to quickly re-run analyses we have been working on.
+**Note - RStudio will by default save the objects in its memory when you close a session. These will then be there the next time you logon. It might seem nice to be able to close things down and pick up where you left off, but its actually quite dangerous. It's messy, and can cause lots of problems when we work with scripts later, so don't do this!!! To stop RStudio from saving objects by default go to the Preferences option and change ``Save workspace to .RData on exit'' to ``Never''. Instead we are going to learn how to use scripts to quickly re-run analyses we have been working on.
 \end{quote}
 
 \hypertarget{choosing-names}{%
@@ -833,7 +836,7 @@ Copy this into your console and hit Enter.
 \end{Shaded}
 
 \begin{quote}
-Note - you may have noticed R gave you a warning. Not the same as a big scary error, but R wants you to be aware of something. In this case that two of the observations had missing data in them (either bill length or bill depth), so couldn't be plotted.
+**Note - you may have noticed R gave you a warning. Not the same as a big scary error, but R wants you to be aware of something. In this case that two of the observations had missing data in them (either bill length or bill depth), so couldn't be plotted.
 \end{quote}
 
 The above command can also be written as below, its in a longer style with each new line for each argument in the function. This style can be easier to read, and makes it easier to write comments with \#. Copy this longer command into your \texttt{script} then run it by either highlighting the entire command or placing the cursor in the first line and then hit Run or Ctrl+Enter.
@@ -969,12 +972,13 @@ It is possible to import data into R in an Excel format, but I recommend stickin
 For today's workshop we want to acquire the dataset to work on it. We can retrieve the file we need from here (\url{https://github.com/UEABIO/5023Y_Workshop/blob/main/data/penguins_raw.csv}).
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{images/penguin_github} \caption{Click on the copy raw contents button}\label{fig:unnamed-chunk-46}
+\includegraphics[width=1\linewidth]{images/penguin_github} \caption{Click on the copy raw contents button}\label{fig:unnamed-chunk-46}
 \end{figure}
 
 We then need to
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \item
   Select the copy raw contents button
 \item
@@ -985,39 +989,39 @@ We then need to
   Save the file as `penguin\_data.csv'
 \item
   Open the newly saved file in Excel and take a look
-\end{itemize}
+\end{enumerate}
 
 We can see a dataset with 345 rows (including the headers) and 17 variables
 
 \begin{itemize}
 \item
-  Study name: an identifier for the year in which sets of observations were made
+  \textbf{Study name}: an identifier for the year in which sets of observations were made
 \item
-  Region: the area in which the observation was recorded
+  \textbf{Region}: the area in which the observation was recorded
 \item
-  Island: the specific island where the observation was recorded
+  \textbf{Island}: the specific island where the observation was recorded
 \item
-  Stage: Denotes reproductive stage of the penguin
+  \textbf{Stage}: Denotes reproductive stage of the penguin
 \item
-  Individual ID: the unique ID of the individual
+  \textbf{Individual} ID: the unique ID of the individual
 \item
-  Clutch completion: if the study nest observed with a full clutch e.g.~2 eggs
+  \textbf{Clutch completion}: if the study nest observed with a full clutch e.g.~2 eggs
 \item
-  Date egg: the date at which the study nest observed with 1 egg
+  \textbf{Date egg}: the date at which the study nest observed with 1 egg
 \item
-  Culmen length: length of the dorsal ridge of the bird's bill (mm)
+  \textbf{Culmen length}: length of the dorsal ridge of the bird's bill (mm)
 \item
-  Culmen depth: depth of the dorsal ridge of the bird's bill (mm)
+  \textbf{Culmen depth}: depth of the dorsal ridge of the bird's bill (mm)
 \item
-  Flipper Length: length of bird's flipper (mm)
+  \textbf{Flipper Length}: length of bird's flipper (mm)
 \item
-  Body Mass: Bird's mass in (g)
+  \textbf{Body Mass}: Bird's mass in (g)
 \item
-  Sex: Denotes the sex of the bird
+  \textbf{Sex}: Denotes the sex of the bird
 \item
-  Delta 15N : the ratio of stable Nitrogen isotopes 15N:14N from blood sample
+  \textbf{Delta 15N} : the ratio of stable Nitrogen isotopes 15N:14N from blood sample
 \item
-  Delta 13C: the ratio of stable Carbon isotopes 13C:12C from blood sample
+  \textbf{Delta 13C}: the ratio of stable Carbon isotopes 13C:12C from blood sample
 \end{itemize}
 
 \hypertarget{prepare-the-rstudio-workspace}{%
@@ -1051,14 +1055,18 @@ Then we create the following folders:
   figures
 \end{itemize}
 
-Make sure you type these \textbf{exactly} as printed here - remember that to R `data' and `Data' are two different things!
+\begin{rmdwarning}
+Make sure you type these \textbf{exactly} as printed here - remember
+that to R is case-sensitive so `data' and `Data' are two different
+things!
+\end{rmdwarning}
 
 Having these separate subfolders within our project helps keep things tidy, means it's harder to lose things, and lets you easily tell R exactly where to go to retrieve data.
 
 Now do you remember where you saved the `penguin\_data.csv' file? I hope so!!! Go to the upload button in the Files tab of RStudio Cloud and tell it where the file is located on your local computer and upload it to the `data' folder you have made in your Project.
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{images/project} \caption{An example of a typical R project set-up}\label{fig:unnamed-chunk-47}
+\includegraphics[width=0.8\linewidth]{images/project} \caption{An example of a typical R project set-up}\label{fig:unnamed-chunk-48}
 \end{figure}
 
 \hypertarget{create-a-new-r-script}{%
@@ -1066,7 +1074,7 @@ Now do you remember where you saved the `penguin\_data.csv' file? I hope so!!! G
 
 Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. Use the File \textgreater{} New Script menu item and select an R Script.
 
-Add the following
+Add the following:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1153,7 +1161,10 @@ The lines printed in the R console tell us the names of the columns that were id
   \texttt{col\_double()} means the column contains numbers
 \end{itemize}
 
-Have a look - do all of these seem correct to you? If not we should fix these, and we will get onto that in a little bit.
+\begin{rmdquestion}
+Have a look - do all of these seem correct to you? If not we should fix
+these, and we will get onto that in a little bit.
+\end{rmdquestion}
 
 \hypertarget{view-and-refine}{%
 \subsection{View and refine}\label{view-and-refine}}
@@ -1185,7 +1196,7 @@ Other ways to view the data
 \end{itemize}
 
 \begin{quote}
-\texttt{view()} lets you do cool stuff like reorder rows and quickly scroll through the dataset without affecting the underlying data.
+**Note - \texttt{view()} lets you do cool stuff like reorder rows and quickly scroll through the dataset without affecting the underlying data.
 \end{quote}
 
 \hypertarget{data-management}{%
@@ -1210,7 +1221,7 @@ If R thinks \texttt{Body\ Mass\ (g)} is a character variable, then it probably c
 \includegraphics[width=0.8\linewidth]{images/NA}
 
 \begin{quote}
-What is the \%\textgreater\% ??? It's known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the \texttt{select} function which picks only those variables we want. The result of this is then sent to the \texttt{head} function which with the argument for number of rows set to 10, prints the top 10 rows.
+**Note - What is the \%\textgreater\% ??? It's known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the \texttt{select} function which picks only those variables we want. The result of this is then sent to the \texttt{head} function which with the argument for number of rows set to 10, prints the top 10 rows.
 \end{quote}
 
 \begin{quote}
@@ -1336,7 +1347,7 @@ Here are a few things we might want to do to our data to make it `clean'.
 \end{itemize}
 
 \begin{quote}
-Remember because we are doing everything in a script, the original data remains unchanged. This means we have data integrity, and a clear record of what we did to tidy and clean a dataset in order to produce summaries and data visuals
+**Note - Remember because we are doing everything in a script, the original data remains unchanged. This means we have data integrity, and a clear record of what we did to tidy and clean a dataset in order to produce summaries and data visuals
 \end{quote}
 
 \hypertarget{refine-variable-names}{%
@@ -1367,7 +1378,7 @@ Let's correct these quickly
 \end{Shaded}
 
 \begin{quote}
-Note - in this example you can see that I put the name of the package janitor, in front of the function \texttt{clean\_names}. But if I have already loaded the package with library(janitor) then this isn't strictly necessary and penguins \%\textgreater\% clean\_names() would also have worked just fine. So why do this? Remember when we loaded the tidyverse package - we got a warning about conflicts - this was because two of our packages \texttt{dplyr} and \texttt{stats} have functions that are different, but share the same name. But we can make sure we call the one we want by specifying which package we are calling a function from. We don't need to do this very often, but it's good to know.
+**Note - in this example you can see that I put the name of the package janitor, in front of the function \texttt{clean\_names}. But if I have already loaded the package with library(janitor) then this isn't strictly necessary and penguins \%\textgreater\% clean\_names() would also have worked just fine. So why do this? Remember when we loaded the tidyverse package - we got a warning about conflicts - this was because two of our packages \texttt{dplyr} and \texttt{stats} have functions that are different, but share the same name. But we can make sure we call the one we want by specifying which package we are calling a function from. We don't need to do this very often, but it's good to know.
 \end{quote}
 
 \begin{verbatim}
@@ -1406,6 +1417,12 @@ We can also see there is a \texttt{date\_egg} variable. If you check it (using a
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{date\_egg\_proper=}\FunctionTok{dmy}\NormalTok{(date\_egg))}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{rmdquestion}
+What is the deliberate mistake in my code comment above? By now you may
+have picked up there are the odd mistakes (possibly some non-deliberate
+ones) - to make sure you aren't just copy-pasting on autpilot.
+\end{rmdquestion}
 
 Here we use the \texttt{mutate} function from \texttt{dplyr} to create a new variable called \texttt{date\_egg\_proper} based on the output of converting the characters in \texttt{date\_egg} to date format. The original variable is left intact, if we had specified the ``new'' variable was also called \texttt{date\_egg} then it would have overwritten the original variable.
 
@@ -1461,7 +1478,7 @@ We can also explore our data for very obvious typos by checking for implausibly 
 The minimum weight for our penguins is 2.7kg, and the max is 6.3kg - not outrageous. If the min had come out at 27g we might have been suspicious. We will use \texttt{summarise} again to calculate other metrics in the future.
 
 \begin{quote}
-Note - our first data insight, the difference the smallest adult penguin in our dataset is nearly half the size of the largest penguin.
+**Note - our first data insight, the difference the smallest adult penguin in our dataset is nearly half the size of the largest penguin.
 \end{quote}
 
 We can also look for typos by asking R to produce all of the distinct values in a variable. This is more useful for categorical data, where we expect there to be only a few distinct categories
@@ -1546,9 +1563,12 @@ As well as:
 \hypertarget{quitting-1}{%
 \subsection{Quitting}\label{quitting-1}}
 
+\begin{rmdwarning}
+Remember to \textbf{save} your RScript before you leave. And ideally
+don't save your .Rdata!
+\end{rmdwarning}
+
 \begin{itemize}
-\item
-  Remember to save your RScript before you leave. And ideally don't save your .Rdata either!
 \item
   Close your RStudio Cloud Browser
 \item
@@ -1562,7 +1582,16 @@ Last week we worked through the journey of importing and tidying data to produce
 
 It's important to remember what questions you have about the data collected, and to make an outline about what you want to do.
 
-What figures might we want to produce from our data?
+\begin{rmdquestion}
+Now is a good time to think about what figures might we want to produce
+from our data?
+
+We are mostly interested in observable `differences' between our three
+penguin species. What sort of figures might illustrate that?
+
+Sometimes it's good to get a pen/pencil and paper - and sketch the
+figure you might want to make.
+\end{rmdquestion}
 
 \hypertarget{initial-insights}{%
 \section{Initial insights}\label{initial-insights}}
@@ -1576,16 +1605,14 @@ Let's start with some basic insights, perhaps by focusing on further questions a
   How many Adelie, Gentoo and Chinstrap penguins
 \item
   What is the distribution of morphologies such as bill length, body size, flipper length
-\item
-  How many adults produced a successful clutch?
 \end{itemize}
 
 Some of these are very simple in that they are summaries of single variables. Some are more complex, like evaluating the numbers of males and females which are the two groups in the sex variable.
 
 These are `safety-checking' insights. You might already know the answers to some of these questions because you may have been responsible for collecting the data. Checking your answers against what you expect is a good way to check your data has been cleaned properly.
 
-\hypertarget{numbers-sex-and-bodyweight-of-penguins}{%
-\section{Numbers, sex and bodyweight of penguins}\label{numbers-sex-and-bodyweight-of-penguins}}
+\hypertarget{numbers-and-sex-of-the-penguins}{%
+\section{Numbers and sex of the penguins}\label{numbers-and-sex-of-the-penguins}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1646,7 +1673,7 @@ Now what about the number of female Gentoo penguins?
 Now we have a table that shows each combination of penguin species by sex, we can see for example that 65 unique Male Adelie penguins were observed in our study. We can also see that for 6 Adelie and 5 Gentoo penguins, sex was not recorded.
 
 \begin{quote}
-You have just had a crash course in using the \texttt{pipe} and \texttt{dplyr} to produce quick data summaries. Have a go at making some other summaries of your data, perhaps the numbers of penguins by island or region. Try some combinations.
+**Note - You have just had a crash course in using the \texttt{pipe} and \texttt{dplyr} to produce quick data summaries. Have a go at making some other summaries of your data, perhaps the numbers of penguins by island or region. Try some combinations.
 \end{quote}
 
 \hypertarget{making-a-simple-figure}{%
@@ -1676,7 +1703,7 @@ Let's translate some of our simple summaries into graphs.
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{images/stacked_bar} \caption{A first insight the number of male and female penguins of each species in our study}\label{fig:unnamed-chunk-77}
+\includegraphics[width=0.8\linewidth]{images/stacked_bar} \caption{A first insight the number of male and female penguins of each species in our study}\label{fig:unnamed-chunk-82}
 \end{figure}
 
 We will cover how ggplot works in more detail next week. But in brief, to get the graph we first use the \texttt{ggplot} function, we give \texttt{ggplot} the `aesthetic mappings' of the plot, the values we wish to assign to the x axis, y axis and how we want to ``fill in'' the objects we will draw.
@@ -1686,7 +1713,11 @@ This first line of code will just draw a blank plot, with the \emph{plus} + sign
 \hypertarget{challenge}{%
 \subsection{Challenge}\label{challenge}}
 
-Write and run a script, with appropriate comments, that produces a summary tibble and graph for the number of penguins of each species, on the three study islands
+\begin{rmdquestion}
+Can you write and run a script, with appropriate comments, that produces
+a summary tibble and graph for the number of penguins of each species,
+on the three study islands?
+\end{rmdquestion}
 
 \hypertarget{distributions}{%
 \section{Distributions}\label{distributions}}
@@ -1706,24 +1737,29 @@ Here is the script to plot frequency distribution, as before we pipe the data in
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{images/Distribution} \caption{Frequency distribution of culmen length in penguins}\label{fig:unnamed-chunk-79}
+\includegraphics[width=0.8\linewidth]{images/Distribution} \caption{Frequency distribution of culmen length in penguins}\label{fig:unnamed-chunk-85}
 \end{figure}
 
 \begin{quote}
-Have a go at changing the value specified to the bins argument, and observe how the figure changes.
+** Note - Bins. Have a go at changing the value specified to the bins argument, and observe how the figure changes.
 \end{quote}
 
 \hypertarget{insights}{%
 \subsection{Insights}\label{insights}}
 
+\begin{rmdquestion}
 \begin{itemize}
 \item
-  Are you surprised at all by the distribution? We have drawn a continuous variable from a natural population, what did you expect the distribution to look like?
+  Are you surprised at all by the distribution? We have drawn a
+  continuous variable from a natural population, what did you expect the
+  distribution to look like?
 \item
-  Can you change the code for the histogram plot to produce distributions for each sex?
+  Can you change the code for the histogram plot to produce
+  distributions for each sex?
 \item
   How has this changed your interpretation of the distributions?
 \end{itemize}
+\end{rmdquestion}
 
 \hypertarget{more-distributions}{%
 \section{More distributions}\label{more-distributions}}
@@ -1791,11 +1827,14 @@ In these data we are already able to make some useful insights
 
 These might appear to be modest insights - but have learned several data manipulation and summary techniques. We can also start to take a look at some of our initial hypotheses!!!
 
+\begin{rmdquestion}
 \begin{itemize}
 \tightlist
 \item
-  How does this data stack up against the hypothesis about bill morphology we put forward last week?
+  How does this data stack up against the hypothesis about bill
+  morphology we put forward last week?
 \end{itemize}
+\end{rmdquestion}
 
 To make more and conclusive insights we have a bit further to go, but I think you deserve a pat on the back
 
@@ -1833,11 +1872,11 @@ We don't have a variable explicitly called body size. Instead we have to use ``p
   \item
     Pros: more of an indication of central size?
   \item
-    Cons: very condition dependent, likely to change over the year
+    Cons: condition dependent, likely to change over the year
   \end{itemize}
 \end{itemize}
 
-Let's take a look at the distribution of flipper length among our three species.
+Let's take a look at the distribution of body mass among our three species.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1857,11 +1896,11 @@ Add the \texttt{library()} for \texttt{rstatix} at the \textbf{top} of your RScr
 \CommentTok{\# a simple correlation test from the rstatix package}
 \NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# group by species}
-  \FunctionTok{cor\_test}\NormalTok{(flipper\_length\_mm, culmen\_length\_mm) }\CommentTok{\# correlation between body mass and bill length}
+  \FunctionTok{cor\_test}\NormalTok{(body\_mass\_g, culmen\_length\_mm) }\CommentTok{\# correlation between body mass and bill length}
 \end{Highlighting}
 \end{Shaded}
 
-We can see that these two variables `co-vary' a lot, but this appears to be quite species specific. We can already make the insight that Adelie penguins appear to have the shortest bill length relative to flipper length.
+We can see that these two variables `co-vary' a lot, but this appears to be quite species specific. We can already make the insight that Chinstrap penguins appear to have the shortest bill length relative to body mass.
 
 We can make a new variable that is the `relative size of culmen length compared to flipper length'
 
@@ -1919,7 +1958,7 @@ We will examine the shape of the \emph{sample distribution} of the data again by
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{images/bill_length_distribution} \caption{Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo}\label{fig:unnamed-chunk-89}
+\includegraphics[width=0.8\linewidth]{images/bill_length_distribution} \caption{Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo}\label{fig:unnamed-chunk-97}
 \end{figure}
 
 Important questions, what shape is the distribution?
@@ -1944,7 +1983,15 @@ If it's a little difficult to see - we can separate out these figures using the 
 \end{Highlighting}
 \end{Shaded}
 
-Looking at these distributions, how do you think the mean \& median values will compare in these three species? Think about it first - then run this code.
+\textbackslash begin\{figure\}
+\includegraphics[width=1\linewidth]{images/facetdistribution} \textbackslash caption\{Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo - histograms split into three panes by facet\_wrap\}\label{fig:unnamed-chunk-99}
+\textbackslash end\{figure\}
+
+\begin{rmdquestion}
+Looking at these distributions, how do you think the mean \& median
+values will compare in these three species? Think about it first - then
+run the code below.
+\end{rmdquestion}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1967,11 +2014,12 @@ Looking at these distributions, how do you think the mean \& median values will 
 
 We can see that the mean and median values are almost identical for each species. This indicates we \emph{aren't} dealing with a lot of skew, this is important for when using statistics, which are based on a lot of assumptions like normal distribution.
 
-\begin{itemize}
-\tightlist
-\item
-  Repeat these steps for the variable \texttt{relative\_bill\_depth}, \texttt{delta\_15n} and \texttt{delta\_13c} - add all appropriate comments and commands to your R Script.
-\end{itemize}
+\begin{rmdquestion}
+Can you \textbf{repeat} these steps for the variable
+\texttt{relative\_bill\_depth}, \texttt{delta\_15n} and
+\texttt{delta\_13c} - add all appropriate comments and commands to your
+R Script.
+\end{rmdquestion}
 
 \hypertarget{relationshipdifferences}{%
 \section{Relationship/differences}\label{relationshipdifferences}}
@@ -1995,12 +2043,21 @@ We have already looked at frequency distributions of the data, where it is possi
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/jitterplot} \caption{Differences in relative bill length of three different species of Antarctic Penguin.}\label{fig:unnamed-chunk-104}
+\end{figure}
+
 \begin{quote}
-Note - try altering the width argument and see how it affects the output of the plot.
-Note - we will do a deeper dive into ggplot later.
+**Note - try altering the width argument and see how it affects the output of the plot.
+We will do a deeper dive into ggplot later.
 \end{quote}
 
-Try producing these figures for the \texttt{culmen\_depth\_mm}, \texttt{delta\_15n} and \texttt{delta\_13c} variables as well. Make notes of the relative differences.
+\begin{rmdquestion}
+Try producing these figures for the \texttt{culmen\_depth\_mm},
+\texttt{delta\_15n} and \texttt{delta\_13c} variables as well.
+
+What are you observations of the relative differences?
+\end{rmdquestion}
 
 \hypertarget{associations}{%
 \subsection{Associations}\label{associations}}
@@ -2016,6 +2073,10 @@ It might also be of interest to look at whether any of our variables of interest
                 \AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{)    }\CommentTok{\# no standard error intervals}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/corrplot} \caption{Asssocation between heavy Nitrogen and heavy Carbon isotopes in blood samples from three Antarctic Penguin species}\label{fig:unnamed-chunk-107}
+\end{figure}
 
 We can see here that the association between these isotopes varies a lot by different species, there is probably quite a complex relationship here. It also indicates we should probably investigate these two isotopes separately.
 
@@ -2086,9 +2147,8 @@ Now we are going to make our first figure which includes both raw and summary da
 \end{Highlighting}
 \end{Shaded}
 
-\begin{quote}
-Note - we could be producing something much simpler, like a box and whisker plot. It is often better to plot the data points rather than summaries of them
-\end{quote}
+\includegraphics[width=1\linewidth]{images/bluedotplot}
+\textgreater{} Note - we could be producing something much simpler, like a box and whisker plot. It is often better to plot the data points rather than summaries of them
 
 Imagine a line connects the two blue dots in each facet, these blue dots are the mean values. The slope of the line (if we drew them) would be downwards from females to males, indicating that on average females are larger. But the slop would not be very large. If we drew slope between \emph{each} of the three female averages these would be much steeper. So we can say that size `on average' varies more \emph{between} species than \emph{between} sexes.
 
@@ -2097,7 +2157,7 @@ See if you can make figures for all four of our variables of interest, then comp
 At this stage we do not have enough evidence to formally ``reject'' any of our null hypotheses, however we can describe the trends which appear to be present.
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{images/summary} \caption{Difference in relative bill length and depth, and heavy carbon and nitrogen ratios, in male and female penguins from three different species - Adelie, Chinstrap and Gentoo}\label{fig:unnamed-chunk-96}
+\includegraphics[width=0.8\linewidth]{images/summary} \caption{Difference in relative bill length and depth, and heavy carbon and nitrogen ratios, in male and female penguins from three different species - Adelie, Chinstrap and Gentoo}\label{fig:unnamed-chunk-111}
 \end{figure}
 
 \hypertarget{making-our-graphs-more-attractive}{%
@@ -2151,12 +2211,13 @@ There are lots of things we could change here, but we will stick with the basics
 \hypertarget{quitting-2}{%
 \section{Quitting}\label{quitting-2}}
 
-\begin{itemize}
-\item
-  Make sure you have saved you script!
-\item
-  Complete this week's quiz on Blackboard
-\end{itemize}
+\begin{rmdwarning}
+Make sure you have saved you script!
+\end{rmdwarning}
+
+\begin{rmdquestion}
+Complete this week's Blackboard Quiz!
+\end{rmdquestion}
 
 *\href{https://www.rstudio.com/resources/cheatsheets/}{R Cheat Sheets}
 

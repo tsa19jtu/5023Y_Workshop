@@ -13,7 +13,13 @@ Last week we worked through the journey of importing and tidying data to produce
 
 It's important to remember what questions you have about the data collected, and to make an outline about what you want to do. 
 
-What figures might we want to produce from our data?
+```{block, type="rmdquestion"}
+Now is a good time to think about what figures might we want to produce from our data?
+
+We are mostly interested in observable 'differences' between our three penguin species. What sort of figures might illustrate that?
+
+Sometimes it's good to get a pen/pencil and paper - and sketch the figure you might want to make. 
+```
 
 ## Initial insights
 
@@ -25,13 +31,12 @@ Let's start with some basic insights, perhaps by focusing on further questions a
 
 * What is the distribution of morphologies such as bill length, body size, flipper length
 
-* How many adults produced a successful clutch?
 
 Some of these are very simple in that they are summaries of single variables. Some are more complex, like evaluating the numbers of males and females which are the two groups in the sex variable. 
 
 These are 'safety-checking' insights. You might already know the answers to some of these questions because you may have been responsible for collecting the data. Checking your answers against what you expect is a good way to check your data has been cleaned properly. 
 
-## Numbers, sex and bodyweight of penguins
+## Numbers and sex of the penguins
 
 ```{r}
 # how many observations of penguins were made
@@ -81,9 +86,10 @@ penguins %>%
   group_by(sex, species) %>% # ask for distinct counts in each species
   summarise(num_penguin_id=n_distinct(individual_id))
 ```
+
 Now we have a table that shows each combination of penguin species by sex, we can see for example that 65 unique Male Adelie penguins were observed in our study. We can also see that for 6 Adelie and 5 Gentoo penguins, sex was not recorded. 
 
-> You have just had a crash course in using the `pipe` and `dplyr` to produce quick data summaries. Have a go at making some other summaries of your data, perhaps the numbers of penguins by island or region. Try some combinations. 
+> **Note - You have just had a crash course in using the `pipe` and `dplyr` to produce quick data summaries. Have a go at making some other summaries of your data, perhaps the numbers of penguins by island or region. Try some combinations. 
 
 ### Making a simple figure
 
@@ -117,7 +123,9 @@ This first line of code will just draw a blank plot, with the *plus* + sign we s
 
 ### Challenge
 
-Write and run a script, with appropriate comments, that produces a summary tibble and graph for the number of penguins of each species, on the three study islands
+```{block, type="rmdquestion"}
+Can you write and run a script, with appropriate comments, that produces a summary tibble and graph for the number of penguins of each species, on the three study islands?
+```
 
 ## Distributions
 
@@ -138,15 +146,18 @@ penguins %>%
 knitr::include_graphics("images/Distribution.png")
 
 ```
-> Have a go at changing the value specified to the bins argument, and observe how the figure changes.
+> ** Note - Bins. Have a go at changing the value specified to the bins argument, and observe how the figure changes.
 
 ### Insights
 
+```{block, type="rmdquestion"}
 * Are you surprised at all by the distribution? We have drawn a continuous variable from a natural population, what did you expect the distribution to look like?
 
 * Can you change the code for the histogram plot to produce distributions for each sex? 
 
 * How has this changed your interpretation of the distributions?
+```
+
 
 ## More distributions
 
@@ -204,7 +215,9 @@ In these data we are already able to make some useful insights
 
 These might appear to be modest insights - but have learned several data manipulation and summary techniques. We can also start to take a look at some of our initial hypotheses!!!
 
+```{block, type="rmdquestion"}
 * How does this data stack up against the hypothesis about bill morphology we put forward last week?
+```
 
 To make more and conclusive insights we have a bit further to go, but I think you deserve a pat on the back
 
@@ -212,6 +225,7 @@ To make more and conclusive insights we have a bit further to go, but I think yo
 # R generate some praise
 praise::praise()
 ```
+
 ## Data transformation
 
 In the previous section we made some basic insights into observation numbers, distributed by species, sex and location. We also started to gain core insights into some of our central hypotheses, but you have probably noticed we don't actually have a variable on the `relative bill lengths/depths`. Why is this important? Well we clearly saw there was a difference in bill lengths between our three species. But we haven't taken into account that some of these species might be very different in body size. Our measure of bill lengths as an indicator of feeding strategy, might be confounded by body size (a bigger penguin is likely to have a bigger bill). 
@@ -224,9 +238,9 @@ We don't have a variable explicitly called body size. Instead we have to use "pr
 
 * Body mass
     - Pros: more of an indication of central size?
-    - Cons: very condition dependent, likely to change over the year
+    - Cons: condition dependent, likely to change over the year
 
-Let's take a look at the distribution of flipper length among our three species. 
+Let's take a look at the distribution of body mass among our three species. 
 
 ```{r}
 # frequency distribution of body mass by species
@@ -243,10 +257,10 @@ Add the `library()` for `rstatix` at the **top** of your RScript with an appropr
 # a simple correlation test from the rstatix package
 penguins %>% 
   group_by(species) %>% # group by species
-  cor_test(flipper_length_mm, culmen_length_mm) # correlation between body mass and bill length
+  cor_test(body_mass_g, culmen_length_mm) # correlation between body mass and bill length
 ```
 
-We can see that these two variables 'co-vary' a lot, but this appears to be quite species specific. We can already make the insight that Adelie penguins appear to have the shortest bill length relative to flipper length. 
+We can see that these two variables 'co-vary' a lot, but this appears to be quite species specific. We can already make the insight that Chinstrap penguins appear to have the shortest bill length relative to body mass. 
 
 We can make a new variable that is the 'relative size of culmen length compared to flipper length'
 
@@ -291,6 +305,7 @@ penguins %>%
   ggplot(aes(x=relative_bill_length, fill=species))+
   geom_histogram(bins=50)
 ```
+
 ```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.cap= "Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo"}
 knitr::include_graphics("images/bill_length_distribution.png")
 ```
@@ -310,9 +325,14 @@ penguins %>%
   geom_histogram(bins=50)+
   facet_wrap(~species) # facet wrap to look at the separate species more easily
 ```
+```{r, eval=TRUE, echo=FALSE, out.width="100%", fig.cap= "Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo - histograms split into three panes by facet_wrap"}
+knitr::include_graphics("images/facetdistribution.png")
+```
 
+```{block, type="rmdquestion"}
+Looking at these distributions, how do you think the mean & median values will compare in these three species? Think about it first - then run the code below.
+```
 
-Looking at these distributions, how do you think the mean & median values will compare in these three species? Think about it first - then run this code.
 
 ```{r}
 # Mean and Median summaries
@@ -334,7 +354,9 @@ penguins %>%
 
 We can see that the mean and median values are almost identical for each species. This indicates we *aren't* dealing with a lot of skew, this is important for when using statistics, which are based on a lot of assumptions like normal distribution.
 
-* Repeat these steps for the variable `relative_bill_depth`, `delta_15n` and `delta_13c` - add all appropriate comments and commands to your R Script. 
+```{block, type="rmdquestion"}
+Can you **repeat** these steps for the variable `relative_bill_depth`, `delta_15n` and `delta_13c` - add all appropriate comments and commands to your R Script. 
+```
 
 ## Relationship/differences
 
@@ -354,10 +376,19 @@ penguins %>%
     geom_point(position=position_jitter(width=0.2)) 
 
 ```
-> Note - try altering the width argument and see how it affects the output of the plot. 
-> Note - we will do a deeper dive into ggplot later. 
 
-Try producing these figures for the `culmen_depth_mm`, `delta_15n` and `delta_13c` variables as well. Make notes of the relative differences. 
+```{r, eval=TRUE, echo=FALSE, out.width="100%", fig.cap= "Differences in relative bill length of three different species of Antarctic Penguin."}
+knitr::include_graphics("images/jitterplot.png")
+```
+
+> **Note - try altering the width argument and see how it affects the output of the plot. 
+> We will do a deeper dive into ggplot later. 
+
+```{block, type="rmdquestion"}
+Try producing these figures for the `culmen_depth_mm`, `delta_15n` and `delta_13c` variables as well. 
+
+What are you observations of the relative differences? 
+```
 
 ### Associations
 
@@ -371,6 +402,9 @@ penguins %>%
     geom_smooth(method="lm", # produces a simple regression line
                 se=FALSE)    # no standard error intervals
 
+```
+```{r, eval=TRUE, echo=FALSE, out.width="100%", fig.cap= "Asssocation between heavy Nitrogen and heavy Carbon isotopes in blood samples from three Antarctic Penguin species"}
+knitr::include_graphics("images/corrplot.png")
 ```
 
 We can see here that the association between these isotopes varies a lot by different species, there is probably quite a complex relationship here. It also indicates we should probably investigate these two isotopes separately. 
@@ -430,6 +464,9 @@ penguins %>%
   facet_wrap(~species)
 
 ```
+```{r, eval=TRUE, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/bluedotplot.png")
+```
 > Note - we could be producing something much simpler, like a box and whisker plot. It is often better to plot the data points rather than summaries of them
 
 Imagine a line connects the two blue dots in each facet, these blue dots are the mean values. The slope of the line (if we drew them) would be downwards from females to males, indicating that on average females are larger. But the slop would not be very large. If we drew slope between *each* of the three female averages these would be much steeper. So we can say that size 'on average' varies more *between* species than *between* sexes. 
@@ -488,8 +525,16 @@ penguins %>%
 knitr::include_graphics("images/final_figure_penguins.png")
 ```
 
+
 ## Quitting
 
-* Make sure you have saved you script!
+```{block, type="rmdwarning"}
+Make sure you have saved you script!
+```
 
-* Complete this week's quiz on Blackboard
+```{block, type="rmdquestion"}
+Complete this week's Blackboard Quiz!
+```
+
+
+

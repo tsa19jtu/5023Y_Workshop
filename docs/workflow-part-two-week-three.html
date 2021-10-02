@@ -24,7 +24,7 @@
 <meta name="author" content="Philip Leftwich" />
 
 
-<meta name="date" content="2021-10-01" />
+<meta name="date" content="2021-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -234,7 +234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html"><i class="fa fa-check"></i><b>4</b> Workflow Part Two - Week Three</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#initial-insights"><i class="fa fa-check"></i><b>4.1</b> Initial insights</a></li>
-<li class="chapter" data-level="4.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#numbers-sex-and-bodyweight-of-penguins"><i class="fa fa-check"></i><b>4.2</b> Numbers, sex and bodyweight of penguins</a>
+<li class="chapter" data-level="4.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#numbers-and-sex-of-the-penguins"><i class="fa fa-check"></i><b>4.2</b> Numbers and sex of the penguins</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#making-a-simple-figure"><i class="fa fa-check"></i><b>4.2.1</b> Making a simple figure</a></li>
 <li class="chapter" data-level="4.2.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#challenge"><i class="fa fa-check"></i><b>4.2.2</b> Challenge</a></li>
@@ -290,7 +290,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>Last week we worked through the journey of importing and tidying data to produce a clean dataset.</p>
 <p>It’s important to remember what questions you have about the data collected, and to make an outline about what you want to do.</p>
-<p>What figures might we want to produce from our data?</p>
+<div class="rmdquestion">
+<p>
+Now is a good time to think about what figures might we want to produce from our data?
+</p>
+<p>
+We are mostly interested in observable ‘differences’ between our three penguin species. What sort of figures might illustrate that?
+</p>
+<p>
+Sometimes it’s good to get a pen/pencil and paper - and sketch the figure you might want to make.
+</p>
+</div>
 <div id="initial-insights" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Initial insights</h2>
 <p>Let’s start with some basic insights, perhaps by focusing on further questions about specific variables.</p>
@@ -298,13 +308,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>How many penguins were observed?</p></li>
 <li><p>How many Adelie, Gentoo and Chinstrap penguins</p></li>
 <li><p>What is the distribution of morphologies such as bill length, body size, flipper length</p></li>
-<li><p>How many adults produced a successful clutch?</p></li>
 </ul>
 <p>Some of these are very simple in that they are summaries of single variables. Some are more complex, like evaluating the numbers of males and females which are the two groups in the sex variable.</p>
 <p>These are ‘safety-checking’ insights. You might already know the answers to some of these questions because you may have been responsible for collecting the data. Checking your answers against what you expect is a good way to check your data has been cleaned properly.</p>
 </div>
-<div id="numbers-sex-and-bodyweight-of-penguins" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Numbers, sex and bodyweight of penguins</h2>
+<div id="numbers-and-sex-of-the-penguins" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Numbers and sex of the penguins</h2>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="workflow-part-two-week-three.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many observations of penguins were made</span></span>
 <span id="cb67-2"><a href="workflow-part-two-week-three.html#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-3"><a href="workflow-part-two-week-three.html#cb67-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
@@ -333,7 +342,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb71-3"><a href="workflow-part-two-week-three.html#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num_penguin_id=</span><span class="fu">n_distinct</span>(individual_id))</span></code></pre></div>
 <p>Now we have a table that shows each combination of penguin species by sex, we can see for example that 65 unique Male Adelie penguins were observed in our study. We can also see that for 6 Adelie and 5 Gentoo penguins, sex was not recorded.</p>
 <blockquote>
-<p>You have just had a crash course in using the <code>pipe</code> and <code>dplyr</code> to produce quick data summaries. Have a go at making some other summaries of your data, perhaps the numbers of penguins by island or region. Try some combinations.</p>
+<p>**Note - You have just had a crash course in using the <code>pipe</code> and <code>dplyr</code> to produce quick data summaries. Have a go at making some other summaries of your data, perhaps the numbers of penguins by island or region. Try some combinations.</p>
 </blockquote>
 <div id="making-a-simple-figure" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Making a simple figure</h3>
@@ -349,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb73-4"><a href="workflow-part-two-week-three.html#cb73-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y=</span>num_penguin_id, </span>
 <span id="cb73-5"><a href="workflow-part-two-week-three.html#cb73-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill=</span>sex))<span class="sc">+</span></span>
 <span id="cb73-6"><a href="workflow-part-two-week-three.html#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-77"></span>
+<div class="figure"><span id="fig:unnamed-chunk-82"></span>
 <img src="images/stacked_bar.png" alt="A first insight the number of male and female penguins of each species in our study" width="80%" />
 <p class="caption">
 Figure 4.1: A first insight the number of male and female penguins of each species in our study
@@ -360,7 +369,11 @@ Figure 4.1: A first insight the number of male and female penguins of each speci
 </div>
 <div id="challenge" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Challenge</h3>
-<p>Write and run a script, with appropriate comments, that produces a summary tibble and graph for the number of penguins of each species, on the three study islands</p>
+<div class="rmdquestion">
+<p>
+Can you write and run a script, with appropriate comments, that produces a summary tibble and graph for the number of penguins of each species, on the three study islands?
+</p>
+</div>
 </div>
 </div>
 <div id="distributions" class="section level2" number="4.3">
@@ -371,22 +384,36 @@ Figure 4.1: A first insight the number of male and female penguins of each speci
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="workflow-part-two-week-three.html#cb74-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb74-2"><a href="workflow-part-two-week-three.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm))<span class="sc">+</span></span>
 <span id="cb74-3"><a href="workflow-part-two-week-three.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-79"></span>
+<div class="figure"><span id="fig:unnamed-chunk-85"></span>
 <img src="images/Distribution.png" alt="Frequency distribution of culmen length in penguins" width="80%" />
 <p class="caption">
 Figure 4.2: Frequency distribution of culmen length in penguins
 </p>
 </div>
 <blockquote>
-<p>Have a go at changing the value specified to the bins argument, and observe how the figure changes.</p>
+<p>** Note - Bins. Have a go at changing the value specified to the bins argument, and observe how the figure changes.</p>
 </blockquote>
 <div id="insights" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Insights</h3>
+<div class="rmdquestion">
 <ul>
-<li><p>Are you surprised at all by the distribution? We have drawn a continuous variable from a natural population, what did you expect the distribution to look like?</p></li>
-<li><p>Can you change the code for the histogram plot to produce distributions for each sex?</p></li>
-<li><p>How has this changed your interpretation of the distributions?</p></li>
+<li>
+<p>
+Are you surprised at all by the distribution? We have drawn a continuous variable from a natural population, what did you expect the distribution to look like?
+</p>
+</li>
+<li>
+<p>
+Can you change the code for the histogram plot to produce distributions for each sex?
+</p>
+</li>
+<li>
+<p>
+How has this changed your interpretation of the distributions?
+</p>
+</li>
 </ul>
+</div>
 </div>
 </div>
 <div id="more-distributions" class="section level2" number="4.4">
@@ -428,9 +455,13 @@ Figure 4.2: Frequency distribution of culmen length in penguins
 <li><p>There does not appear to be much difference between Chinstrap and Gentoo bill lengths (on average 1.3mm)</p></li>
 </ul>
 <p>These might appear to be modest insights - but have learned several data manipulation and summary techniques. We can also start to take a look at some of our initial hypotheses!!!</p>
+<div class="rmdquestion">
 <ul>
-<li>How does this data stack up against the hypothesis about bill morphology we put forward last week?</li>
+<li>
+How does this data stack up against the hypothesis about bill morphology we put forward last week?
+</li>
 </ul>
+</div>
 <p>To make more and conclusive insights we have a bit further to go, but I think you deserve a pat on the back</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="workflow-part-two-week-three.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R generate some praise</span></span>
 <span id="cb78-2"><a href="workflow-part-two-week-three.html#cb78-2" aria-hidden="true" tabindex="-1"></a>praise<span class="sc">::</span><span class="fu">praise</span>()</span></code></pre></div>
@@ -449,10 +480,10 @@ Figure 4.2: Frequency distribution of culmen length in penguins
 <li>Body mass
 <ul>
 <li>Pros: more of an indication of central size?</li>
-<li>Cons: very condition dependent, likely to change over the year</li>
+<li>Cons: condition dependent, likely to change over the year</li>
 </ul></li>
 </ul>
-<p>Let’s take a look at the distribution of flipper length among our three species.</p>
+<p>Let’s take a look at the distribution of body mass among our three species.</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="workflow-part-two-week-three.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># frequency distribution of body mass by species</span></span>
 <span id="cb79-2"><a href="workflow-part-two-week-three.html#cb79-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb79-3"><a href="workflow-part-two-week-three.html#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>body_mass_g, <span class="at">fill=</span>species))<span class="sc">+</span></span>
@@ -462,8 +493,8 @@ Figure 4.2: Frequency distribution of culmen length in penguins
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="workflow-part-two-week-three.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a simple correlation test from the rstatix package</span></span>
 <span id="cb80-2"><a href="workflow-part-two-week-three.html#cb80-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb80-3"><a href="workflow-part-two-week-three.html#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> <span class="co"># group by species</span></span>
-<span id="cb80-4"><a href="workflow-part-two-week-three.html#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor_test</span>(flipper_length_mm, culmen_length_mm) <span class="co"># correlation between body mass and bill length</span></span></code></pre></div>
-<p>We can see that these two variables ‘co-vary’ a lot, but this appears to be quite species specific. We can already make the insight that Adelie penguins appear to have the shortest bill length relative to flipper length.</p>
+<span id="cb80-4"><a href="workflow-part-two-week-three.html#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor_test</span>(body_mass_g, culmen_length_mm) <span class="co"># correlation between body mass and bill length</span></span></code></pre></div>
+<p>We can see that these two variables ‘co-vary’ a lot, but this appears to be quite species specific. We can already make the insight that Chinstrap penguins appear to have the shortest bill length relative to body mass.</p>
 <p>We can make a new variable that is the ‘relative size of culmen length compared to flipper length’</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="workflow-part-two-week-three.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use mutate to produce a new variable that is a ratio of culmen length to flipper length</span></span>
 <span id="cb81-2"><a href="workflow-part-two-week-three.html#cb81-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
@@ -494,7 +525,7 @@ Figure 4.2: Frequency distribution of culmen length in penguins
 <span id="cb83-3"><a href="workflow-part-two-week-three.html#cb83-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb83-4"><a href="workflow-part-two-week-three.html#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>relative_bill_length, <span class="at">fill=</span>species))<span class="sc">+</span></span>
 <span id="cb83-5"><a href="workflow-part-two-week-three.html#cb83-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-89"></span>
+<div class="figure"><span id="fig:unnamed-chunk-97"></span>
 <img src="images/bill_length_distribution.png" alt="Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo" width="80%" />
 <p class="caption">
 Figure 4.3: Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo
@@ -512,7 +543,17 @@ Figure 4.3: Frequency distribution of relative bill length in three species of p
 <span id="cb84-4"><a href="workflow-part-two-week-three.html#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>relative_bill_length, <span class="at">fill=</span>species))<span class="sc">+</span></span>
 <span id="cb84-5"><a href="workflow-part-two-week-three.html#cb84-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">50</span>)<span class="sc">+</span></span>
 <span id="cb84-6"><a href="workflow-part-two-week-three.html#cb84-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species) <span class="co"># facet wrap to look at the separate species more easily</span></span></code></pre></div>
-<p>Looking at these distributions, how do you think the mean &amp; median values will compare in these three species? Think about it first - then run this code.</p>
+<div class="figure"><span id="fig:unnamed-chunk-99"></span>
+<img src="images/facetdistribution.png" alt="Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo - histograms split into three panes by facet_wrap" width="100%" />
+<p class="caption">
+Figure 4.4: Frequency distribution of relative bill length in three species of penguins, Adelie, Chinstrap and Gentoo - histograms split into three panes by facet_wrap
+</p>
+</div>
+<div class="rmdquestion">
+<p>
+Looking at these distributions, how do you think the mean &amp; median values will compare in these three species? Think about it first - then run the code below.
+</p>
+</div>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="workflow-part-two-week-three.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean and Median summaries</span></span>
 <span id="cb85-2"><a href="workflow-part-two-week-three.html#cb85-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb85-3"><a href="workflow-part-two-week-three.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
@@ -525,9 +566,11 @@ Figure 4.3: Frequency distribution of relative bill length in three species of p
 2 Chinstrap                   0.0132                      0.0129 
 3 Gentoo                      0.00941                     0.00939</code></pre>
 <p>We can see that the mean and median values are almost identical for each species. This indicates we <em>aren’t</em> dealing with a lot of skew, this is important for when using statistics, which are based on a lot of assumptions like normal distribution.</p>
-<ul>
-<li>Repeat these steps for the variable <code>relative_bill_depth</code>, <code>delta_15n</code> and <code>delta_13c</code> - add all appropriate comments and commands to your R Script.</li>
-</ul>
+<div class="rmdquestion">
+<p>
+Can you <strong>repeat</strong> these steps for the variable <code>relative_bill_depth</code>, <code>delta_15n</code> and <code>delta_13c</code> - add all appropriate comments and commands to your R Script.
+</p>
+</div>
 </div>
 </div>
 <div id="relationshipdifferences" class="section level2" number="4.7">
@@ -543,11 +586,24 @@ Remember, if we have a manipulated variable in a well-designed experiment, we ma
 <span id="cb87-4"><a href="workflow-part-two-week-three.html#cb87-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">y=</span>culmen_length_mm, </span>
 <span id="cb87-5"><a href="workflow-part-two-week-three.html#cb87-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour=</span>species))<span class="sc">+</span> <span class="co"># some geoms use color rather than fill to specify colour</span></span>
 <span id="cb87-6"><a href="workflow-part-two-week-three.html#cb87-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitter</span>(<span class="at">width=</span><span class="fl">0.2</span>)) </span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-104"></span>
+<img src="images/jitterplot.png" alt="Differences in relative bill length of three different species of Antarctic Penguin." width="100%" />
+<p class="caption">
+Figure 4.5: Differences in relative bill length of three different species of Antarctic Penguin.
+</p>
+</div>
 <blockquote>
-<p>Note - try altering the width argument and see how it affects the output of the plot.
-Note - we will do a deeper dive into ggplot later.</p>
+<p>**Note - try altering the width argument and see how it affects the output of the plot.
+We will do a deeper dive into ggplot later.</p>
 </blockquote>
-<p>Try producing these figures for the <code>culmen_depth_mm</code>, <code>delta_15n</code> and <code>delta_13c</code> variables as well. Make notes of the relative differences.</p>
+<div class="rmdquestion">
+<p>
+Try producing these figures for the <code>culmen_depth_mm</code>, <code>delta_15n</code> and <code>delta_13c</code> variables as well.
+</p>
+<p>
+What are you observations of the relative differences?
+</p>
+</div>
 </div>
 <div id="associations" class="section level3" number="4.7.2">
 <h3><span class="header-section-number">4.7.2</span> Associations</h3>
@@ -557,6 +613,12 @@ Note - we will do a deeper dive into ggplot later.</p>
 <span id="cb88-3"><a href="workflow-part-two-week-three.html#cb88-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
 <span id="cb88-4"><a href="workflow-part-two-week-three.html#cb88-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="co"># produces a simple regression line</span></span>
 <span id="cb88-5"><a href="workflow-part-two-week-three.html#cb88-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">se=</span><span class="cn">FALSE</span>)    <span class="co"># no standard error intervals</span></span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-107"></span>
+<img src="images/corrplot.png" alt="Asssocation between heavy Nitrogen and heavy Carbon isotopes in blood samples from three Antarctic Penguin species" width="100%" />
+<p class="caption">
+Figure 4.6: Asssocation between heavy Nitrogen and heavy Carbon isotopes in blood samples from three Antarctic Penguin species
+</p>
+</div>
 <p>We can see here that the association between these isotopes varies a lot by different species, there is probably quite a complex relationship here. It also indicates we should probably investigate these two isotopes separately.</p>
 <ul>
 <li>Have a look at the relative bill length and depth relationships as well</li>
@@ -600,16 +662,15 @@ Note - we will do a deeper dive into ggplot later.</p>
 <span id="cb91-9"><a href="workflow-part-two-week-three.html#cb91-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">4</span>, </span>
 <span id="cb91-10"><a href="workflow-part-two-week-three.html#cb91-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">color=</span><span class="st">&quot;blue&quot;</span>)<span class="sc">+</span></span>
 <span id="cb91-11"><a href="workflow-part-two-week-three.html#cb91-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species)</span></code></pre></div>
-<blockquote>
-<p>Note - we could be producing something much simpler, like a box and whisker plot. It is often better to plot the data points rather than summaries of them</p>
-</blockquote>
+<p><img src="images/bluedotplot.png" width="100%" />
+&gt; Note - we could be producing something much simpler, like a box and whisker plot. It is often better to plot the data points rather than summaries of them</p>
 <p>Imagine a line connects the two blue dots in each facet, these blue dots are the mean values. The slope of the line (if we drew them) would be downwards from females to males, indicating that on average females are larger. But the slop would not be very large. If we drew slope between <em>each</em> of the three female averages these would be much steeper. So we can say that size ‘on average’ varies more <em>between</em> species than <em>between</em> sexes.</p>
 <p>See if you can make figures for all four of our variables of interest, then compare them to our initial hypotheses.</p>
 <p>At this stage we do not have enough evidence to formally “reject” any of our null hypotheses, however we can describe the trends which appear to be present.</p>
-<div class="figure"><span id="fig:unnamed-chunk-96"></span>
+<div class="figure"><span id="fig:unnamed-chunk-111"></span>
 <img src="images/summary.png" alt="Difference in relative bill length and depth, and heavy carbon and nitrogen ratios, in male and female penguins from three different species - Adelie, Chinstrap and Gentoo" width="80%" />
 <p class="caption">
-Figure 4.4: Difference in relative bill length and depth, and heavy carbon and nitrogen ratios, in male and female penguins from three different species - Adelie, Chinstrap and Gentoo
+Figure 4.7: Difference in relative bill length and depth, and heavy carbon and nitrogen ratios, in male and female penguins from three different species - Adelie, Chinstrap and Gentoo
 </p>
 </div>
 </div>
@@ -646,10 +707,16 @@ Figure 4.4: Difference in relative bill length and depth, and heavy carbon and n
 </div>
 <div id="quitting-2" class="section level2" number="4.10">
 <h2><span class="header-section-number">4.10</span> Quitting</h2>
-<ul>
-<li><p>Make sure you have saved you script!</p></li>
-<li><p>Complete this week’s quiz on Blackboard</p></li>
-</ul>
+<div class="rmdwarning">
+<p>
+Make sure you have saved you script!
+</p>
+</div>
+<div class="rmdquestion">
+<p>
+Complete this week’s Blackboard Quiz!
+</p>
+</div>
 
 </div>
 </div>
