@@ -512,7 +512,7 @@ penguins %>%
                 alpha=0.4)+
   scale_color_manual(values=c("darkorange", "blue"))+
         facet_wrap(~species)+
-  ylab("Relative culmen depth (mm)")+
+  ylab("Culmen depth relative to body mass")+
   xlab("Sex")+
   scale_x_discrete(labels=c("Female", "Male"))+
   theme_classic()+
@@ -525,6 +525,27 @@ penguins %>%
 knitr::include_graphics("images/final_figure_penguins.png")
 ```
 
+### Saving your output
+
+Now we have made a plot, that perhaps we think is worth saving. We can use the `ggsave` function. 
+Just like when we imported data, when we output we specify a relative file path, this time we are saying where we want to 'send' the output. At the start of our project set-up we made a folder for figures to end up. 
+
+```{r}
+# save the last figure to a .png file in the figures folder
+
+ggsave("figures/Jitter plot of relative culmen depth.png", 
+       dpi=300, # resolution
+       width=7, # width in inches
+       height=7)
+
+```
+
+```{block, type="rmdwarning"}
+Be careful here, if you ran this command again it would overwrite your previous file with a new output. 
+
+```
+
+Check your Files tab - your image file should be saved in the appropriate folder
 
 ## Quitting
 

@@ -2198,7 +2198,7 @@ There are lots of things we could change here, but we will stick with the basics
                 \AttributeTok{alpha=}\FloatTok{0.4}\NormalTok{)}\SpecialCharTok{+}
   \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{"darkorange"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}\SpecialCharTok{+}
         \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{species)}\SpecialCharTok{+}
-  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Relative culmen depth (mm)"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Culmen depth relative to body mass"}\NormalTok{)}\SpecialCharTok{+}
   \FunctionTok{xlab}\NormalTok{(}\StringTok{"Sex"}\NormalTok{)}\SpecialCharTok{+}
   \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{))}\SpecialCharTok{+}
   \FunctionTok{theme\_classic}\NormalTok{()}\SpecialCharTok{+}
@@ -2207,6 +2207,30 @@ There are lots of things we could change here, but we will stick with the basics
 \end{Shaded}
 
 \includegraphics[width=0.8\linewidth]{images/final_figure_penguins}
+
+\hypertarget{saving-your-output}{%
+\subsection{Saving your output}\label{saving-your-output}}
+
+Now we have made a plot, that perhaps we think is worth saving. We can use the \texttt{ggsave} function.
+Just like when we imported data, when we output we specify a relative file path, this time we are saying where we want to `send' the output. At the start of our project set-up we made a folder for figures to end up.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# save the last figure to a .png file in the figures folder}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"figures/Jitter plot of relative culmen depth.png"}\NormalTok{, }
+       \AttributeTok{dpi=}\DecValTok{300}\NormalTok{, }\CommentTok{\# resolution}
+       \AttributeTok{width=}\DecValTok{7}\NormalTok{, }\CommentTok{\# width in inches}
+       \AttributeTok{height=}\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdwarning}
+Be careful here, if you ran this command again it would overwrite your
+previous file with a new output.
+\end{rmdwarning}
+
+Check your Files tab - your image file should be saved in the appropriate folder
 
 \hypertarget{quitting-2}{%
 \section{Quitting}\label{quitting-2}}

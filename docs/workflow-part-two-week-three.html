@@ -258,7 +258,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#associations"><i class="fa fa-check"></i><b>4.7.2</b> Associations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#sex-interactions"><i class="fa fa-check"></i><b>4.8</b> Sex interactions</a></li>
-<li class="chapter" data-level="4.9" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#making-our-graphs-more-attractive"><i class="fa fa-check"></i><b>4.9</b> Making our graphs more attractive</a></li>
+<li class="chapter" data-level="4.9" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#making-our-graphs-more-attractive"><i class="fa fa-check"></i><b>4.9</b> Making our graphs more attractive</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#saving-your-output"><i class="fa fa-check"></i><b>4.9.1</b> Saving your output</a></li>
+</ul></li>
 <li class="chapter" data-level="4.10" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#quitting-2"><i class="fa fa-check"></i><b>4.10</b> Quitting</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -698,12 +701,29 @@ Figure 4.7: Difference in relative bill length and depth, and heavy carbon and n
 <span id="cb92-7"><a href="workflow-part-two-week-three.html#cb92-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">alpha=</span><span class="fl">0.4</span>)<span class="sc">+</span></span>
 <span id="cb92-8"><a href="workflow-part-two-week-three.html#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;blue&quot;</span>))<span class="sc">+</span></span>
 <span id="cb92-9"><a href="workflow-part-two-week-three.html#cb92-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(<span class="sc">~</span>species)<span class="sc">+</span></span>
-<span id="cb92-10"><a href="workflow-part-two-week-three.html#cb92-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Relative culmen depth (mm)&quot;</span>)<span class="sc">+</span></span>
+<span id="cb92-10"><a href="workflow-part-two-week-three.html#cb92-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Culmen depth relative to body mass&quot;</span>)<span class="sc">+</span></span>
 <span id="cb92-11"><a href="workflow-part-two-week-three.html#cb92-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sex&quot;</span>)<span class="sc">+</span></span>
 <span id="cb92-12"><a href="workflow-part-two-week-three.html#cb92-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>))<span class="sc">+</span></span>
 <span id="cb92-13"><a href="workflow-part-two-week-three.html#cb92-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
 <span id="cb92-14"><a href="workflow-part-two-week-three.html#cb92-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p><img src="images/final_figure_penguins.png" width="80%" /></p>
+<div id="saving-your-output" class="section level3" number="4.9.1">
+<h3><span class="header-section-number">4.9.1</span> Saving your output</h3>
+<p>Now we have made a plot, that perhaps we think is worth saving. We can use the <code>ggsave</code> function.
+Just like when we imported data, when we output we specify a relative file path, this time we are saying where we want to ‘send’ the output. At the start of our project set-up we made a folder for figures to end up.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="workflow-part-two-week-three.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save the last figure to a .png file in the figures folder</span></span>
+<span id="cb93-2"><a href="workflow-part-two-week-three.html#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="workflow-part-two-week-three.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;figures/Jitter plot of relative culmen depth.png&quot;</span>, </span>
+<span id="cb93-4"><a href="workflow-part-two-week-three.html#cb93-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi=</span><span class="dv">300</span>, <span class="co"># resolution</span></span>
+<span id="cb93-5"><a href="workflow-part-two-week-three.html#cb93-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">width=</span><span class="dv">7</span>, <span class="co"># width in inches</span></span>
+<span id="cb93-6"><a href="workflow-part-two-week-three.html#cb93-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">height=</span><span class="dv">7</span>)</span></code></pre></div>
+<div class="rmdwarning">
+<p>
+Be careful here, if you ran this command again it would overwrite your previous file with a new output.
+</p>
+</div>
+<p>Check your Files tab - your image file should be saved in the appropriate folder</p>
+</div>
 </div>
 <div id="quitting-2" class="section level2" number="4.10">
 <h2><span class="header-section-number">4.10</span> Quitting</h2>
