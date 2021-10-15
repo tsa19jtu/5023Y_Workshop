@@ -1,0 +1,779 @@
+
+# ggplot2 A grammar of graphics - Week Four
+
+```{r , echo=FALSE, eval=TRUE, include=TRUE}
+klippy::klippy(c('r', 'bash'), position = c('top', 'right'), tooltip_message = 'copy to clipboard', tooltip_success = 'Copied!')
+```
+
+```{r include=FALSE}
+knitr::opts_chunk$set(eval=FALSE)
+```
+
+## Intro to grammar
+
+The ggplot2 package is widely used and valued for its simple, consistent approach to making plots.
+
+The ‘grammar’ of graphics relates to the different components of a plot that function like different parts of linguistic grammar. For example, all plots require axes, so the x and y axes form one part of the ‘language’ of a plot. Similarly, all plots have data represented between the axes, often as points, lines or bars. The visual way that the data is represented forms another component of the grammar of graphics. Furthermore, the colour, shape or size of points and lines can be used to encode additional information in the plot. This information is usually clarified in a key, or legend, which can also be considered part of this ‘grammar’.
+
+The most common components of a ggplot are:
+
+* aesthetics
+
+* geometric representations
+
+* facets
+
+* coordinate space
+
+* coordinate labels
+
+* plot theme
+
+We will cover each below.
+
+The philosophy of ggplot is much better explained by the package author, Hadley Wickham (@R-ggplot2). For now, we just need to be aware that ggplots are constructed by specifying the different components that we want to display, based on underlying information in a data frame.
+
+## Building a plot
+
+We are going to use the *simple* penguin data set contained in the `palmerpenguins` package (@R-palmerpenguins). 
+
+```{block, type="rmdwarning"}
+Make sure you have a folder structure for your project
+- scripts
+- data (won't be needed this week)
+- figures
+
+Make sure your new script is in the scripts folder!
+
+Throughout this practical you will be introduced to new R packages. Please remember to include all the library() calls at the TOP of your script.
+
+And if you need to install a package, the command is `install.packages("") - but DON'T include this in your script 
+```
+
+```{r}
+library(palmerpenguins)
+
+```
+
+Let’s check the first 6 rows of information contained in the data frame, using the head() function:
+
+```{r}
+head(penguins)
+```
+
+```
+# A tibble: 344 x 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
+   <fct>   <fct>              <dbl>         <dbl>             <int>       <int> <fct>  <int>
+ 1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007
+ 2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007
+ 3 Adelie  Torgersen           40.3          18                 195        3250 female  2007
+ 4 Adelie  Torgersen           NA            NA                  NA          NA NA      2007
+ 5 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
+ 6 Adelie  Torgersen           39.3          20.6               190        3650 male    2007
+ 7 Adelie  Torgersen           38.9          17.8               181        3625 female  2007
+ 8 Adelie  Torgersen           39.2          19.6               195        4675 male    2007
+ 9 Adelie  Torgersen           34.1          18.1               193        3475 NA      2007
+10 Adelie  Torgersen           42            20.2               190        4250 NA      2007
+# ... with 334 more rows
+```
+
+Here, we aim to produce a scatter plot 
+
+## Plot background
+
+To start building the plot, we first specify the data frame that contains the relevant data. We can do this in two ways
+
+1) Here we are ‘sending the penguins data set into the ggplot function’:
+
+```{r}
+# render the plot background
+penguins %>% 
+  ggplot()
+```
+
+2) Here we are specifying the dataframe *within* the `ggplot()` function
+
+```{r}
+ggplot(data=penguins)
+```
+The output is identical
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/empty.png")
+```
+> **Note - Running this command will produce an empty grey panel. This is because we need to specify how different columns of the data frame should be represented in the plot.
+
+## Aesthetics - aes()
+
+We can call in different columns of data from any dataset based on their column names. Column names are given as ‘aesthetic’ elements to the ggplot function, and are wrapped in the aes() function.
+
+Because we want a scatter plot, each point will have an x and a y coordinate. We want the x axis to represent flipper length ( x = flipper_length_mm ), and the y axis to represent the body mass ( y = body_mass_g ).
+
+We give these specifications separated by a comma. Quotes are not required when giving variables within aes().
+
+> **Note - Those interested in why quotes aren’t required can read about [non-standard evaluation] (https://edwinth.github.io/blog/nse/).
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g))
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/axes.png")
+```
+So far we have the grid lines for our x and y axis. ggplot knows the variables required for the plot, and thus the scale, but has no information about how to display the data points.
+
+## Geometric representations - geom()
+
+Given we want a scatter plot, we need to specify that the geometric representation of the data will be in point form, using geom_point().
+
+Here we are adding a layer (hence the + sign) of points to the plot. We can think of this as similar to e.g. Adobe Photoshop which uses layers of images that can be reordered and modified individually. Because we add to plots layer by layer **the order** of your geoms may be important for your final aesthetic design. 
+
+For ggplot, each layer will be added over the plot according to its position in the code. Below I first show the full breakdown of the components in a layer. Each layer requires information on
+
+* data
+* aesthetics
+* geometric type
+* any summary of the data
+* position
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g))+
+  layer(                # layer inherits data and aesthetic arguments from previous
+    geom="point",       # draw point objects
+    stat="identity",    # each individual data point gets a geom (no summaries)
+    position=position_identity()) # data points are not moved in any way e.g. we could specify jitter or dodge if we want to avoid busy overlapping data
+```
+
+This is quite a complicate way to write new layers - and it is more usual to see a simpler more compact approach
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g))+
+  geom_point() # geom_point function will always draw points, and unless specified otherwise the arguments for position and stat are both "identity".
+
+```
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/simplepoints.png")
+```
+
+Now we have the scatter plot! Each row (except for two rows of missing data) in the penguins data set now has an x coordinate, a y coordinate, and a designated geometric representation (point).
+
+From this we can see that smaller penguins tend to have smaller flipper lengths.
+
+## %>% and +
+
+ggplot2, an early component of the tidyverse package, was written before the pipe was introduced. The + sign in ggplot2 functions in a similar way to the pipe in other functions in the tidyverse: by allowing code to be written from left to right.
+
+## Colour
+
+The current plot could be more informative, to include information about the species of each penguin.
+
+In order to achieve this we need to use aes() again, and specify which column we want to be represented as the colour of the points.
+Here, the aes() function containing the relevant column name, is given within the geom_point() function.
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g))+
+  geom_point(aes(colour=species))
+
+
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/colourpoints.png")
+```
+
+> **Note - you may (or may not) have noticed that the grammar of ggplot (and tidyverse in general) accepts British/Americanization for spelling!!!
+
+So now we can see that the Gentoo penguins tend to be both larger and have longer flippers
+
+Remember to keep adding carriage returns (new lines), which must be inserted after the %>% or + symbols.
+In most cases, R is blind to white space and new lines, so this is simply to make our code more readable, and allow us to add readable comments.
+
+## More layers
+
+We can see the relationship between body size and flipper length. But what if we want to model this relationship with a trend line? We can add another ‘layer’ to this plot, using a different geometric representation of the data. In this case a trend line, which is in fact a summary of the data rather than a representation of each point.
+
+The geom_smooth() function draws a trend line through the data. The default behaviour is to draw a local regression line (curve) through the points, however these can be hard to interpret. We want to add a straight line based on a linear model (‘lm’) of the relationship between x and y. 
+
+This is our **first** encounter with linear models in this course, but we will learn a lot more about them later on. 
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g))+
+  geom_point(aes(colour=species))+
+  geom_smooth(method="lm",    #add another layer of data representation.
+              se=FALSE,
+              aes(colour=species)) # note layers inherit information from the top ggplot() function but not previous layers - if we want separate lines per species we need to either specify this again *or* move the color aesthetic to the top layer. 
+
+
+```
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ ### now colour is set here it will be inherited by ALL layers
+  geom_point()+
+  geom_smooth(method="lm",    #add another layer of data representation.
+              se=FALSE)
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/linearmodel.png")
+```
+> **Note - that the trend line is blocking out certain points, because it is the ‘top layer’ of the plot. The geom layers that appear early in the command are drawn first, and can be obscured by the geom layers that come after them.
+
+```{block, type="rmdquestion"}
+What happens if you switch the order of the geom_point() and geom_smooth()
+functions above? What do you notice about the trend line?
+```
+
+## Facets
+
+In some cases we want to break up a single plot into sub-plots, called ‘faceting’. Facets are commonly used when there is too much data to display clearly in a single plot. We will revisit faceting below, however for now, let’s try to facet the plot according to species.
+To do this we use the tilde symbol ‘~’ to indicate the column name that will form each facet.
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  facet_wrap(~species)
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/facet.png")
+```
+
+> **Note - the aesthetics and geoms including the regression line that were specified for the original plot, are applied to each of the facets.
+
+## Co-ordinate space
+
+ggplot will automatically pick the scale for each axis, and the type of coordinate space. Most plots are in Cartesian (linear X vs linear Y) coordinate space.
+
+For this plot, let’s say we want the x and y origin to be set at 0. To do this we can add in xlim() and ylim() functions, which define the limits of the axes:
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  xlim(0,240) + ylim(0,7000)
+
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/zerolim.png")
+```
+
+Further, we can control the coordinate space using coord() functions. Say we want to flip the x and y axes, we add coord_flip():
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  xlim(0,240) + ylim(0,7000)+
+  coord_flip()
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/flip.png")
+```
+
+## Labels
+
+By default, the axis labels will be the column names we gave as aesthetics aes(). We can change the axis labels using the xlab() and ylab() functions. Given that column names are often short and can be cryptic, this functionality is particularly important for effectively communicating results.
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  labs(x = "Flipper length (mm)",
+       y = "Body mass (g)")
+```
+
+We can also add titles and subtitles
+
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  labs(x = "Flipper length (mm)",
+       y = "Body mass (g)",
+       title= "Penguin Size, Palmer Station LTER",
+       subtitle= "Flipper length and body mass for Adelie, Chinstrap and Gentoo penguins")
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/title.png")
+```
+
+## Themes
+
+Finally, the overall appearance of the plot can be modified using theme() functions. The default theme has a grey background which maximizes contrast with other contrasts.
+You may prefer `theme_classic()`, a `theme_minimal()` or even `theme_void()`. Try them out.
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  labs(x = "Flipper length (mm)",
+       y = "Body mass (g)",
+       title= "Penguin Size, Palmer Station LTER",
+       subtitle= "Flipper length and body mass for Adelie, Chinstrap and Gentoo penguins")+
+  theme_bw()
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/theme_bw.png")
+```
+
+> **Note - there is a lot more customisation available through the theme() function. We will look at making our own custom themes in later lessons
+
+```{block, type="rmdwarning"}
+You can try installing and running an even wider range of pre-built themes if you install the R package `ggthemes`.
+
+First you will need to run the `install.packages("ggthemes")` command. Remember this is one of the few times a command should NOT be written in your script but typed directly into the console. That's because it's rude to send someone a script that will install packages on their computer - think of library() as a polite request instead!
+
+To access the range of themes available type `help(ggthemes)` then follow the documentation to find out what you can do. 
+
+```
+
+
+## Jitter
+
+The geom_jitter() command adds some random scatter to the points which can reduce over-plotting. Compare these two plots:
+
+```{r}
+ggplot(data = penguins, aes(x = species, y = bill_length_mm)) +
+  geom_jitter(aes(color = species),
+              width = 0.1, # specifies the width, change this to change the range of scatter
+              alpha = 0.7, # specifies the amount of transparency in the points
+              show.legend = FALSE) # don't leave a legend in a plot, if it doesn't add value
+```
+
+```{r}
+ggplot(data = penguins, aes(x = species, y = bill_length_mm)) +
+  geom_point(aes(color = species),
+              alpha = 0.7, 
+              show.legend = FALSE) 
+
+```
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/jitter.png")
+```
+
+
+## Boxplots
+
+Box plots, or ‘box & whisker plots’ are another essential tool for data analysis. Box plots summarize the distribution of a set of values by displaying the minimum and maximum values, the median (i.e. middle-ranked value), and the range of the middle 50% of values (inter-quartile range).
+The whisker line extending above and below the IQR box define Q3 + (1.5 x IQR), and Q1 - (1.5 x IQR) respectively. You can watch a short video to learn more about box plots [here](https://www.youtube.com/watch?v=fHLhBnmwUM0).
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/boxplot.png")
+```
+
+To create a box plot from our data we use (no prizes here) geom_boxplot()!
+
+```{r}
+ggplot(data = penguins, aes(x = species, y = bill_length_mm)) +
+  geom_boxplot(aes(fill = species), # note fill is "inside" colour and colour is "edges" - try it for yourself
+              alpha = 0.7, 
+              width = 0.5, # change width of boxplot
+              show.legend = FALSE)
+
+```
+The points indicate outlier values [i.e., those greater than Q3 + (1.5 x IQR)].
+
+We can overlay a boxplot on the scatter plot for the entire dataset, to fully communicate both the raw and summary data. Here we reduce the width of the jitter points slightly.
+
+
+```{r}
+ggplot(data = penguins, aes(x = species, y = bill_length_mm)) +
+  geom_boxplot(aes(fill = species), # note fill is "inside" colour and colour is "edges" - try it for yourself
+              alpha = 0.2, # fainter boxes so the points "pop"
+              width = 0.5, # change width of boxplot
+              outlier.shape=NA)+
+  geom_jitter(aes(colour = species),
+                width=0.2)+
+  theme(legend.position = "none")
+
+```
+
+
+```{block, type="rmdwarning"}
+In the above example I switched from using show.legend=FALSE inside the geom layer to using theme(legend.position="none").
+Why?
+This is an example of reducing redunant code. I would have to specify show.legend=FALSE for every geom layer in my plot, but the theme function applies to every layer. Save code, save time, reduce errors!
+
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/boxandjitter.png")
+```
+
+## Density and histogram
+
+Compare the following two sets of code
+
+```{r}
+penguins %>% 
+    ggplot(aes(x=bill_length_mm, fill=species))+
+    geom_histogram(bins=50)
+```
+
+```{r}
+penguins %>% 
+    ggplot(aes(x=bill_length_mm, fill=species))+
+    geom_histogram(bins=50, aes(y=..density..))
+
+```
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/density.png")
+```
+
+At first you might struggle to see/understand the difference between these two charts. The shapes should be roughly the same. 
+
+The first block of code produced a frequency histogram, each bar represents the actual number of observations made within each "bin", the second block of code shows the "relative density" within each bin. In a density histogram the area under the curve for each sub-group will sum to 1. This allows us to compare distributions and shapes between sub-groups of different sizes. For example there are far fewer Adelie penguins in our dataset, but in a density histogram they occupy the same area of the graph as the other two species. 
+
+## Colours
+
+There are two main differences when it comes to colors in `ggplot2`. Both arguments, color and fill, can be specified as single color or
+assigned to variables.
+
+As you have already seen in this tutorial, variables that are inside the aesthetics are encoded by variables and those that are outside are properties that are unrelated to the variables.
+
+```{r}
+penguins %>% 
+    ggplot(aes(x=bill_length_mm))+
+    geom_histogram(bins=50, 
+                   aes(y=..density..,
+                       fill=species), 
+                   colour="black")
+
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/color_fill.png")
+```
+
+### Assign colours to variables
+
+You can specify what colours you want to assign to variables in a number of different ways. 
+
+In ggplot2, colors that are assigned to variables are modified via the scale_color_* and the scale_fill_* functions. In order to use color with your data, most importantly you need to know if you are dealing with a categorical or continuous variable. The color palette should be chosen depending on type of the variable, with sequential or diverging color palettes being used for continuous variables and qualitative color palettes for categorical variables:
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/palette.png")
+```
+
+You can pick your own sets of colours and assign them to a categorical variable. The number of specified colours **has** to match the number of categories. You can use a wide number of preset colour [names](https://www.datanovia.com/en/blog/awesome-list-of-657-r-color-names/) or you can use [hexadecimals](https://www.datanovia.com/en/blog/awesome-list-of-hexadecimal-colors-you-should-have/). 
+
+
+```{r}
+
+penguin_colours <- c("darkolivegreen4", "darkorchid3", "goldenrod1")
+
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g))+
+  geom_point(aes(colour=species))+
+  scale_color_manual(values=penguin_colours)+
+  theme_minimal()
+
+```
+
+You can also use a range of inbuilt colour palettes: 
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g))+
+  geom_point(aes(colour=species))+
+  scale_color_brewer(palette="Set1")+
+  theme_minimal()
+
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/penguinspalette.png")
+```
+
+```{block, type="rmdwarning"}
+You can explore all schemes available with the command `RColorBrewer::display.brewer.all()`
+```
+
+There are also many, many extensions that provide additional colour palettes. Some of my favourite packages include `ggsci`(@R-ggsci) and `wesanderson`(@R-wesanderson).
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/wesanderson.png")
+```
+
+### Accessibility
+
+It's very easy to get carried away with colour palettes, but you should remember at all times that your figures must be accessible. One way to check how accessible your figures are is to use a colour blindness checker @R-colorBlindness
+
+```{r}
+library(colorBlindness)
+cvdPlot() # will automatically run on the last plot you made
+
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/colorblind.png")
+```
+
+## Patchwork
+
+There are many times you might want to combine figures into multi-panel plots. Probably the easiest way to do this is with the `patchwork` package (@R-patchwork). 
+
+```{r}
+p1 <- penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = bill_length_mm))+
+  geom_point(aes(colour=species))+
+  scale_color_manual(values=penguin_colours)+
+  theme_minimal()
+
+p2 <- penguins %>% 
+  ggplot(aes(x=bill_depth_mm, 
+             y = bill_length_mm))+
+  geom_point(aes(colour=species))+
+  scale_color_manual(values=penguin_colours)+
+  theme_minimal()
+
+p3 <- penguins %>%     
+  group_by(sex,species) %>% 
+    summarise(n=n()) %>% 
+     drop_na(sex) %>% 
+     ggplot(aes(x=species, y=n)) + 
+  geom_col(aes(fill=sex), 
+               width=0.8,
+               position=position_dodge(width=0.9), 
+               alpha=0.6)+
+     scale_fill_manual(values=c("darkorange1", "azure4"))+
+     theme_classic()
+
+library(patchwork)
+
+ (p1+p2)/p3+
+  plot_layout(guides = "collect") 
+
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="90%"}
+knitr::include_graphics("images/patchwork.png")
+```
+
+
+## Test
+
+```{block, type="rmdquestion"}
+Challenge - How close can you get to replicating the figure below?
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/ambitious.png")
+```
+
+## Saving
+
+One of the easiest ways to save a figure you have made is with the `ggsave()` function. By default it will save the last plot you made on the screen. 
+
+You should specify the output path to your **figures** folder, then provide a file name. Here I have decided to call my plot *plot* (imaginative!) and I want to save it as a .PNG image file. I can also specify the resolution (dpi 300 is good enough for most computer screens).
+
+```{r}
+ggsave("figures/plot.png", dpi=300)
+
+```
+
+
+## Quitting
+
+```{block, type="rmdwarning"}
+Make sure you have saved your script!
+```
+
+```{block, type="rmdquestion"}
+Download your saved figure from RStudio Cloud and submit it to Blackboard "Week Four Test"
+```
+
+```{r,echo=FALSE}
+
+library(colorspace)
+library(showtext)
+font_add_google("Open Sans", "Sans")
+
+penguin_summary <- penguins %>% 
+  group_by(species) %>% 
+  summarise(bill_depth_mm_mean = mean(bill_depth_mm, na.rm=T),
+            bill_depth_mm_sd=sd(bill_depth_mm, na.rm=T),
+            bill_length_mm_mean=mean(bill_length_mm, na.rm=T),
+            bill_length_mm_sd=sd(bill_depth_mm, na.rm=T),
+body_mass_g_mean=mean(body_mass_g, na.rm=T))%>% 
+   mutate(label = glue::glue("Mean depth: {format(round(bill_length_mm_mean, 1), nsmall = 1)} mm\nMean length: {format(round(bill_length_mm_mean, 1), nsmall = 1)} mm\nMean body mass: {format(body_mass_g_mean / 1000, nsmall = 1)} kg"))
+
+data <- tribble(
+    ~species, ~x, ~y,
+    "Adélie", 34.7, 20.7,
+    "Chinstrap", 55.7, 19,
+    "Gentoo", 50.7, 13.6
+  )
+
+penguin_summary <- full_join(data, penguin_summary)
+
+pal <- c("#FF8C00", "#A034F0", "#159090")
+
+scat <- 
+  ggplot(penguins, aes(bill_length_mm, bill_depth_mm)) +
+    geom_point(
+        aes(
+            fill = species, 
+            size = body_mass_g
+        ), 
+        shape = 21,
+        color = "white",
+        alpha = .5
+    ) +
+    geom_errorbar(
+        data = penguin_summary,
+        aes(
+            x = bill_length_mm_mean,
+            ymin = bill_depth_mm_mean - bill_depth_mm_sd,
+            ymax = bill_depth_mm_mean + bill_depth_mm_sd,
+            color = species, 
+            color = after_scale(darken(color, .2, space = "combined"))
+        ),
+        inherit.aes = F,
+        width = .8,
+        size = .8
+    ) +
+    geom_errorbar(
+        data = penguin_summary,
+        aes(
+            y = bill_depth_mm_mean,
+            xmin = bill_length_mm_mean - bill_length_mm_sd,
+            xmax = bill_length_mm_mean + bill_length_mm_sd,
+            color = species, 
+            color = after_scale(darken(color, .2, space = "combined"))
+        ),
+        inherit.aes = F,
+        width = .5,
+        size = .8
+    ) +
+   geom_text(
+    data = penguin_summary,
+    aes(
+      x = x, y = y, 
+      label = species, 
+      color = species
+    ),
+    family = "Sans",
+    fontface = "bold",
+    size = 5.6
+  )+
+  geom_text(
+    data = penguin_summary,
+    aes(
+      x = x, y = y - .6, 
+      label = label, 
+      color = species,
+      color = after_scale(lighten(color, .3))
+    ),
+    family = "Sans",
+    size = 3.5,
+    lineheight = .8
+  ) +
+  annotate(
+    "text",
+    x = 37.5, y = 14.85,
+    label = "Bubble size represents\nindividual body mass",
+    family = "Sans",
+    fontface= "bold",
+    color = "grey50",
+    size = 3,
+    lineheight = .9
+  ) +
+  annotate(
+    "text",
+    x = 40.1, y = 21.95,
+    label = "Pygoscelis adéliae (Adélie penguin)  •  P. antarctica (Chinstrap penguin)  •  P. papua (Gentoo penguin)\n\n\n\n\n\n\n\n",
+    family = "Sans",
+    fontface = "italic",
+    color = "black",
+    size = 3.9
+  )  +
+  scale_y_continuous(
+    limits = c(12, 22),
+    breaks = seq(12, 22, by = 2),
+    expand = c(0, 0)
+  ) +
+  scale_color_manual(
+    values = pal,
+    guide = F
+  ) +
+  scale_fill_manual(
+    values = pal,
+    guide = F
+  ) +
+  scale_size(
+    name = "",
+    breaks = 3:6 * 1000,
+    labels = c("3 kg", "4 kg", "5 kg", "6 kg")
+  ) +
+  guides(size = guide_legend(label.position = "bottom", 
+                             override.aes = list(color = pal[2], stroke = .8, fill = NA))) +
+  theme(legend.position = c(.24, .21), legend.direction = "horizontal", legend.key.width = unit(.01, "lines"), legend.text = element_text(size = 8, family = "Sans", face="italic", color = "grey50")) +
+  labs(
+    x = "Bill length (mm)",
+    y = "Bill depth (mm)",
+    title = "Bill dimensions of brush-tailed penguins",
+    subtitle = "Scatterplot of bill length versus bill depth (error bars show mean +/- sd)"
+  )
+
+```
+
+
+## Further Reading, Guides and tips
+
+https://clauswilke.com/dataviz/
+
+https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/
+
+https://ggplot2-book.org/
+
+* [Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
+
+
+

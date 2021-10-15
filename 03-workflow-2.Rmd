@@ -550,7 +550,7 @@ Check your Files tab - your image file should be saved in the appropriate folder
 ## Quitting
 
 ```{block, type="rmdwarning"}
-Make sure you have saved you script!
+Make sure you have saved your script!
 ```
 
 ```{block, type="rmdquestion"}
