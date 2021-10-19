@@ -601,6 +601,8 @@ knitr::include_graphics("images/patchwork.png")
 
 ```{block, type="rmdquestion"}
 Challenge - How close can you get to replicating the figure below?
+
+Make sure to use the tips and links at the end of this chapter
 ```
 
 ```{r, eval=TRUE, echo=FALSE, out.width="100%"}
@@ -767,13 +769,15 @@ scat <-
 
 ## Further Reading, Guides and tips
 
+[R Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
+
 https://clauswilke.com/dataviz/
 
 https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/
 
 https://ggplot2-book.org/
 
-* [Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
+
 
 
 
