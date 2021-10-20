@@ -24,14 +24,14 @@
 <meta name="author" content="Philip Leftwich" />
 
 
-<meta name="date" content="2021-10-15" />
+<meta name="date" content="2021-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ggplot2-a-grammar-of-graphics-week-four.html"/>
+<link rel="prev" href="reports-with-rmarkdown-week-four.html"/>
 
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -292,6 +292,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.20" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#quitting-3"><i class="fa fa-check"></i><b>5.20</b> Quitting</a></li>
 <li class="chapter" data-level="5.21" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#further-reading-guides-and-tips"><i class="fa fa-check"></i><b>5.21</b> Further Reading, Guides and tips</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html"><i class="fa fa-check"></i><b>6</b> Reports with Rmarkdown - Week Four</a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#format"><i class="fa fa-check"></i><b>6.0.1</b> Format</a></li>
+<li class="chapter" data-level="6.1" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#background-to-rmarkdown"><i class="fa fa-check"></i><b>6.1</b> Background to Rmarkdown</a></li>
+<li class="chapter" data-level="6.2" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#starting-a-new-rmd-file"><i class="fa fa-check"></i><b>6.2</b> Starting a new Rmd file</a></li>
+<li class="chapter" data-level="6.3" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#r-markdown-parts"><i class="fa fa-check"></i><b>6.3</b> R Markdown parts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#yaml"><i class="fa fa-check"></i><b>6.3.1</b> YAML</a></li>
+<li class="chapter" data-level="6.3.2" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#text"><i class="fa fa-check"></i><b>6.3.2</b> Text</a></li>
+<li class="chapter" data-level="6.3.3" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#code-chunks"><i class="fa fa-check"></i><b>6.3.3</b> Code Chunks</a></li>
+<li class="chapter" data-level="6.3.4" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#here"><i class="fa fa-check"></i><b>6.3.4</b> Here</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#images"><i class="fa fa-check"></i><b>6.4</b> Images</a></li>
+<li class="chapter" data-level="6.5" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#tables"><i class="fa fa-check"></i><b>6.5</b> Tables</a></li>
+<li class="chapter" data-level="6.6" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#self-contained-documents"><i class="fa fa-check"></i><b>6.6</b> Self-contained documents</a></li>
+<li class="chapter" data-level="6.7" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#source-files"><i class="fa fa-check"></i><b>6.7</b> Source files</a></li>
+<li class="chapter" data-level="6.8" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#exercise---make-your-own-rmd-document"><i class="fa fa-check"></i><b>6.8</b> Exercise - Make your own Rmd document</a></li>
+<li class="chapter" data-level="6.9" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#further-reading-guides-and-tips-1"><i class="fa fa-check"></i><b>6.9</b> Further Reading, Guides and tips</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -333,6 +352,9 @@ Horst, Allison, Alison Hill, and Kristen Gorman. 2020. <em>Palmerpenguins: Palme
 <div id="ref-R-rstatix" class="csl-entry">
 Kassambara, Alboukadel. 2020. <em>Rstatix: Pipe-Friendly Framework for Basic Statistical Tests</em>. <a href="https://rpkgs.datanovia.com/rstatix/">https://rpkgs.datanovia.com/rstatix/</a>.
 </div>
+<div id="ref-R-here" class="csl-entry">
+Müller, Kirill. 2020. <em>Here: A Simpler Way to Find Your Files</em>. <a href="https://CRAN.R-project.org/package=here">https://CRAN.R-project.org/package=here</a>.
+</div>
 <div id="ref-R-colorBlindness" class="csl-entry">
 Ou, Jianhong. 2021. <em>colorBlindness: Safe Color Set for Color Blindness</em>. <a href="https://CRAN.R-project.org/package=colorBlindness">https://CRAN.R-project.org/package=colorBlindness</a>.
 </div>
@@ -360,8 +382,18 @@ Wickham, Hadley, Jim Hester, and Romain Francois. 2018. <em>Readr: Read Rectangu
 <div id="ref-R-ggsci" class="csl-entry">
 Xiao, Nan. 2018. <em>Ggsci: Scientific Journal and Sci-Fi Themed Color Palettes for Ggplot2</em>. <a href="https://CRAN.R-project.org/package=ggsci">https://CRAN.R-project.org/package=ggsci</a>.
 </div>
+<div id="ref-xie2015" class="csl-entry">
+Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.
+</div>
+<div id="ref-R-kableExtra" class="csl-entry">
+Zhu, Hao. 2020. <em>kableExtra: Construct Complex Table with Kable and Pipe Syntax</em>. <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a>.
 </div>
 </div>
+</div>
+
+
+
+
 
 
 
@@ -375,7 +407,7 @@ Xiao, Nan. 2018. <em>Ggsci: Scientific Journal and Sci-Fi Themed Color Palettes 
           </div>
         </div>
       </div>
-<a href="ggplot2-a-grammar-of-graphics-week-four.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reports-with-rmarkdown-week-four.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

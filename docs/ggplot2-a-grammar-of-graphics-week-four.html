@@ -24,7 +24,7 @@
 <meta name="author" content="Philip Leftwich" />
 
 
-<meta name="date" content="2021-10-15" />
+<meta name="date" content="2021-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="workflow-part-two-week-three.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="reports-with-rmarkdown-week-four.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -291,6 +291,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.19" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#saving"><i class="fa fa-check"></i><b>5.19</b> Saving</a></li>
 <li class="chapter" data-level="5.20" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#quitting-3"><i class="fa fa-check"></i><b>5.20</b> Quitting</a></li>
 <li class="chapter" data-level="5.21" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#further-reading-guides-and-tips"><i class="fa fa-check"></i><b>5.21</b> Further Reading, Guides and tips</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html"><i class="fa fa-check"></i><b>6</b> Reports with Rmarkdown - Week Four</a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#format"><i class="fa fa-check"></i><b>6.0.1</b> Format</a></li>
+<li class="chapter" data-level="6.1" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#background-to-rmarkdown"><i class="fa fa-check"></i><b>6.1</b> Background to Rmarkdown</a></li>
+<li class="chapter" data-level="6.2" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#starting-a-new-rmd-file"><i class="fa fa-check"></i><b>6.2</b> Starting a new Rmd file</a></li>
+<li class="chapter" data-level="6.3" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#r-markdown-parts"><i class="fa fa-check"></i><b>6.3</b> R Markdown parts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#yaml"><i class="fa fa-check"></i><b>6.3.1</b> YAML</a></li>
+<li class="chapter" data-level="6.3.2" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#text"><i class="fa fa-check"></i><b>6.3.2</b> Text</a></li>
+<li class="chapter" data-level="6.3.3" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#code-chunks"><i class="fa fa-check"></i><b>6.3.3</b> Code Chunks</a></li>
+<li class="chapter" data-level="6.3.4" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#here"><i class="fa fa-check"></i><b>6.3.4</b> Here</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#images"><i class="fa fa-check"></i><b>6.4</b> Images</a></li>
+<li class="chapter" data-level="6.5" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#tables"><i class="fa fa-check"></i><b>6.5</b> Tables</a></li>
+<li class="chapter" data-level="6.6" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#self-contained-documents"><i class="fa fa-check"></i><b>6.6</b> Self-contained documents</a></li>
+<li class="chapter" data-level="6.7" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#source-files"><i class="fa fa-check"></i><b>6.7</b> Source files</a></li>
+<li class="chapter" data-level="6.8" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#exercise---make-your-own-rmd-document"><i class="fa fa-check"></i><b>6.8</b> Exercise - Make your own Rmd document</a></li>
+<li class="chapter" data-level="6.9" data-path="reports-with-rmarkdown-week-four.html"><a href="reports-with-rmarkdown-week-four.html#further-reading-guides-and-tips-1"><i class="fa fa-check"></i><b>6.9</b> Further Reading, Guides and tips</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -724,6 +743,9 @@ You can explore all schemes available with the command <code>RColorBrewer::displ
 <p>
 Challenge - How close can you get to replicating the figure below?
 </p>
+<p>
+Make sure to use the tips and links at the end of this chapter
+</p>
 </div>
 <p><img src="images/ambitious.png" width="100%" /></p>
 </div>
@@ -748,12 +770,10 @@ Download your saved figure from RStudio Cloud and submit it to Blackboard “Wee
 </div>
 <div id="further-reading-guides-and-tips" class="section level2" number="5.21">
 <h2><span class="header-section-number">5.21</span> Further Reading, Guides and tips</h2>
+<p><a href="https://www.rstudio.com/resources/cheatsheets/">R Cheat Sheets</a></p>
 <p><a href="https://clauswilke.com/dataviz/" class="uri">https://clauswilke.com/dataviz/</a></p>
 <p><a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/" class="uri">https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/</a></p>
 <p><a href="https://ggplot2-book.org/" class="uri">https://ggplot2-book.org/</a></p>
-<ul>
-<li><a href="https://www.rstudio.com/resources/cheatsheets/">Cheat Sheets</a></li>
-</ul>
 
 </div>
 </div>
@@ -763,7 +783,7 @@ Download your saved figure from RStudio Cloud and submit it to Blackboard “Wee
         </div>
       </div>
 <a href="workflow-part-two-week-three.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reports-with-rmarkdown-week-four.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
