@@ -2845,26 +2845,14 @@ It's very easy to get carried away with colour palettes, but you should remember
 
 \includegraphics[width=0.8\linewidth]{images/colorblind}
 
-\hypertarget{using-shapes}{%
-\subsection{Using shapes}\label{using-shapes}}
+\hypertarget{guides-to-visual-accessibility}{%
+\subsection{Guides to visual accessibility}\label{guides-to-visual-accessibility}}
 
-Using colours to tell categories apart can be useful, but as we can see in the example above, not always completely accessible.
+Using colours to tell categories apart can be useful, but as we can see in the example above, you should choose carefully. Other aesthetics which you can access in your geoms include \texttt{shape}, and \texttt{size} - you can combine these in complimentary ways to enhance the accessibility of your plots. Here is a hierarchy of ``interpretability'' for different types of data
 
-A complementary approach is to set the \emph{shape} of your geoms according to categorical variables.
+\includegraphics[width=0.8\linewidth]{images/list}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{flipper\_length\_mm, }
-             \AttributeTok{y =}\NormalTok{ body\_mass\_g))}\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour=}\NormalTok{species,}
-                 \AttributeTok{shape=}\NormalTok{species))}\SpecialCharTok{+} \CommentTok{\# as with colours we could set these to specific values if we want}
-  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values=}\NormalTok{penguin\_colours)}\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics[width=0.8\linewidth]{images/shapes}
+\includegraphics[width=0.8\linewidth]{images/shape_v_colour}
 
 \hypertarget{patchwork}{%
 \section{Patchwork}\label{patchwork}}

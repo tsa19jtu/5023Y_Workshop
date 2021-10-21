@@ -285,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.16.1" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#assign-colours-to-variables"><i class="fa fa-check"></i><b>5.16.1</b> Assign colours to variables</a></li>
 <li class="chapter" data-level="5.16.2" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#accessibility"><i class="fa fa-check"></i><b>5.16.2</b> Accessibility</a></li>
-<li class="chapter" data-level="5.16.3" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#using-shapes"><i class="fa fa-check"></i><b>5.16.3</b> Using shapes</a></li>
+<li class="chapter" data-level="5.16.3" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#guides-to-visual-accessibility"><i class="fa fa-check"></i><b>5.16.3</b> Guides to visual accessibility</a></li>
 </ul></li>
 <li class="chapter" data-level="5.17" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#patchwork"><i class="fa fa-check"></i><b>5.17</b> Patchwork</a></li>
 <li class="chapter" data-level="5.18" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#test"><i class="fa fa-check"></i><b>5.18</b> Test</a></li>
@@ -702,53 +702,46 @@ You can explore all schemes available with the command <code>RColorBrewer::displ
 <span id="cb120-2"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cvdPlot</span>() <span class="co"># will automatically run on the last plot you made</span></span></code></pre></div>
 <p><img src="images/colorblind.png" width="80%" /></p>
 </div>
-<div id="using-shapes" class="section level3" number="5.16.3">
-<h3><span class="header-section-number">5.16.3</span> Using shapes</h3>
-<p>Using colours to tell categories apart can be useful, but as we can see in the example above, not always completely accessible.</p>
-<p>A complementary approach is to set the <em>shape</em> of your geoms according to categorical variables.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb121-2"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, </span>
-<span id="cb121-3"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> body_mass_g))<span class="sc">+</span></span>
-<span id="cb121-4"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>species,</span>
-<span id="cb121-5"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">shape=</span>species))<span class="sc">+</span> <span class="co"># as with colours we could set these to specific values if we want</span></span>
-<span id="cb121-6"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span>penguin_colours)<span class="sc">+</span></span>
-<span id="cb121-7"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="images/shapes.png" width="80%" /></p>
+<div id="guides-to-visual-accessibility" class="section level3" number="5.16.3">
+<h3><span class="header-section-number">5.16.3</span> Guides to visual accessibility</h3>
+<p>Using colours to tell categories apart can be useful, but as we can see in the example above, you should choose carefully. Other aesthetics which you can access in your geoms include <code>shape</code>, and <code>size</code> - you can combine these in complimentary ways to enhance the accessibility of your plots. Here is a hierarchy of “interpretability” for different types of data</p>
+<p><img src="images/list.png" width="80%" /></p>
+<p><img src="images/shape_v_colour.png" width="80%" /></p>
 </div>
 </div>
 <div id="patchwork" class="section level2" number="5.17">
 <h2><span class="header-section-number">5.17</span> Patchwork</h2>
 <p>There are many times you might want to combine figures into multi-panel plots. Probably the easiest way to do this is with the <code>patchwork</code> package (<span class="citation"><a href="references.html#ref-R-patchwork" role="doc-biblioref">Pedersen</a> (<a href="references.html#ref-R-patchwork" role="doc-biblioref">2020</a>)</span>).</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb122-2"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, </span>
-<span id="cb122-3"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> bill_length_mm))<span class="sc">+</span></span>
-<span id="cb122-4"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>species))<span class="sc">+</span></span>
-<span id="cb122-5"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span>penguin_colours)<span class="sc">+</span></span>
-<span id="cb122-6"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb122-7"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-8"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb122-9"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>bill_depth_mm, </span>
-<span id="cb122-10"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> bill_length_mm))<span class="sc">+</span></span>
-<span id="cb122-11"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>species))<span class="sc">+</span></span>
-<span id="cb122-12"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span>penguin_colours)<span class="sc">+</span></span>
-<span id="cb122-13"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb122-14"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-15"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-15" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span>     </span>
-<span id="cb122-16"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex,species) <span class="sc">%&gt;%</span> </span>
-<span id="cb122-17"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb122-18"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-18" aria-hidden="true" tabindex="-1"></a>     <span class="fu">drop_na</span>(sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb122-19"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-19" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>species, <span class="at">y=</span>n)) <span class="sc">+</span> </span>
-<span id="cb122-20"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill=</span>sex), </span>
-<span id="cb122-21"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">width=</span><span class="fl">0.8</span>,</span>
-<span id="cb122-22"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-22" aria-hidden="true" tabindex="-1"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.9</span>), </span>
-<span id="cb122-23"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-23" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha=</span><span class="fl">0.6</span>)<span class="sc">+</span></span>
-<span id="cb122-24"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-24" aria-hidden="true" tabindex="-1"></a>     <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;darkorange1&quot;</span>, <span class="st">&quot;azure4&quot;</span>))<span class="sc">+</span></span>
-<span id="cb122-25"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-25" aria-hidden="true" tabindex="-1"></a>     <span class="fu">theme_classic</span>()</span>
-<span id="cb122-26"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-27"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb122-28"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-29"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-29" aria-hidden="true" tabindex="-1"></a> (p1<span class="sc">+</span>p2)<span class="sc">/</span>p3<span class="sc">+</span></span>
-<span id="cb122-30"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">&quot;collect&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb121-2"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, </span>
+<span id="cb121-3"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> bill_length_mm))<span class="sc">+</span></span>
+<span id="cb121-4"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>species))<span class="sc">+</span></span>
+<span id="cb121-5"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span>penguin_colours)<span class="sc">+</span></span>
+<span id="cb121-6"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb121-7"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-8"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb121-9"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>bill_depth_mm, </span>
+<span id="cb121-10"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> bill_length_mm))<span class="sc">+</span></span>
+<span id="cb121-11"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>species))<span class="sc">+</span></span>
+<span id="cb121-12"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span>penguin_colours)<span class="sc">+</span></span>
+<span id="cb121-13"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb121-14"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-15"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-15" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span>     </span>
+<span id="cb121-16"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex,species) <span class="sc">%&gt;%</span> </span>
+<span id="cb121-17"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb121-18"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-18" aria-hidden="true" tabindex="-1"></a>     <span class="fu">drop_na</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb121-19"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-19" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>species, <span class="at">y=</span>n)) <span class="sc">+</span> </span>
+<span id="cb121-20"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill=</span>sex), </span>
+<span id="cb121-21"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">width=</span><span class="fl">0.8</span>,</span>
+<span id="cb121-22"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-22" aria-hidden="true" tabindex="-1"></a>               <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.9</span>), </span>
+<span id="cb121-23"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-23" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha=</span><span class="fl">0.6</span>)<span class="sc">+</span></span>
+<span id="cb121-24"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-24" aria-hidden="true" tabindex="-1"></a>     <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;darkorange1&quot;</span>, <span class="st">&quot;azure4&quot;</span>))<span class="sc">+</span></span>
+<span id="cb121-25"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-25" aria-hidden="true" tabindex="-1"></a>     <span class="fu">theme_classic</span>()</span>
+<span id="cb121-26"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-27"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb121-28"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-29"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-29" aria-hidden="true" tabindex="-1"></a> (p1<span class="sc">+</span>p2)<span class="sc">/</span>p3<span class="sc">+</span></span>
+<span id="cb121-30"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb121-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">&quot;collect&quot;</span>) </span></code></pre></div>
 <p><img src="images/patchwork.png" width="90%" /></p>
 </div>
 <div id="test" class="section level2" number="5.18">
@@ -767,7 +760,7 @@ Make sure to use the tips and links at the end of this chapter
 <h2><span class="header-section-number">5.19</span> Saving</h2>
 <p>One of the easiest ways to save a figure you have made is with the <code>ggsave()</code> function. By default it will save the last plot you made on the screen.</p>
 <p>You should specify the output path to your <strong>figures</strong> folder, then provide a file name. Here I have decided to call my plot <em>plot</em> (imaginative!) and I want to save it as a .PNG image file. I can also specify the resolution (dpi 300 is good enough for most computer screens).</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;figures/plot.png&quot;</span>, <span class="at">dpi=</span><span class="dv">300</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="ggplot2-a-grammar-of-graphics-week-four.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;figures/plot.png&quot;</span>, <span class="at">dpi=</span><span class="dv">300</span>)</span></code></pre></div>
 </div>
 <div id="quitting-3" class="section level2" number="5.20">
 <h2><span class="header-section-number">5.20</span> Quitting</h2>

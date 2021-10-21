@@ -106,7 +106,7 @@ density-and-histogram
 more-colours
 assign-colours-to-variables
 accessibility
-using-shapes
+guides-to-visual-accessibility
 patchwork
 test
 saving
