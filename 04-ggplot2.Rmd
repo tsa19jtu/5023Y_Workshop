@@ -467,7 +467,7 @@ At first you might struggle to see/understand the difference between these two c
 
 The first block of code produced a frequency histogram, each bar represents the actual number of observations made within each "bin", the second block of code shows the "relative density" within each bin. In a density histogram the area under the curve for each sub-group will sum to 1. This allows us to compare distributions and shapes between sub-groups of different sizes. For example there are far fewer Adelie penguins in our dataset, but in a density histogram they occupy the same area of the graph as the other two species. 
 
-## Colours
+## More Colours
 
 There are two main differences when it comes to colors in `ggplot2`. Both arguments, color and fill, can be specified as single color or
 assigned to variables.
