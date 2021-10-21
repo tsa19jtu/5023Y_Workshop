@@ -1,5 +1,5 @@
 
-# Reports with Rmarkdown - Week Four
+# Reports with Rmarkdown - Week Five
 
 ```{r , echo=FALSE, eval=TRUE, include=TRUE}
 klippy::klippy(c('r', 'bash'), position = c('top', 'right'), tooltip_message = 'copy to clipboard', tooltip_success = 'Copied!')
@@ -376,7 +376,15 @@ Can you make your first reproducible document?
     
     * A summary results table with the mean and s.d. for the plants
     
-    * Write a summary of the results where the figures and table are referenced but you *must* describe the results too. e.g. results shown in Figure 1 is **not ok**, *in your own words* describe the direction and effect size of any differences and then refer to Figures and tables
+    * Write a summary of the results where the figures and table are referenced but you *must* describe the results too. e.g. 
+    
+    
+"Results are shown in Figure 1" is **not ok**
+
+But *in your own words* describe the direction and effect size of any differences and then refer to Figures and tables
+
+"The mean height of self-crossed plants is *x* and the mean height of crossed plants is *y*, meaning on average self-crossed plants are... which may indicate that ... (Figure 1, Table 1)"
+
     
 * knit your rmarkdown as a **pdf** and submit to Blackboard. 
 
