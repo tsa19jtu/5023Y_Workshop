@@ -178,7 +178,7 @@
 
 \title{Data Science for Biologists - 5023Y}
 \author{Philip Leftwich}
-\date{2021-10-20}
+\date{2021-10-21}
 
 \begin{document}
 \maketitle
@@ -2762,8 +2762,8 @@ At first you might struggle to see/understand the difference between these two c
 
 The first block of code produced a frequency histogram, each bar represents the actual number of observations made within each ``bin'', the second block of code shows the ``relative density'' within each bin. In a density histogram the area under the curve for each sub-group will sum to 1. This allows us to compare distributions and shapes between sub-groups of different sizes. For example there are far fewer Adelie penguins in our dataset, but in a density histogram they occupy the same area of the graph as the other two species.
 
-\hypertarget{colours}{%
-\section{Colours}\label{colours}}
+\hypertarget{more-colours}{%
+\section{More Colours}\label{more-colours}}
 
 There are two main differences when it comes to colors in \texttt{ggplot2}. Both arguments, color and fill, can be specified as single color or
 assigned to variables.
@@ -2844,6 +2844,27 @@ It's very easy to get carried away with colour palettes, but you should remember
 \end{Shaded}
 
 \includegraphics[width=0.8\linewidth]{images/colorblind}
+
+\hypertarget{using-shapes}{%
+\subsection{Using shapes}\label{using-shapes}}
+
+Using colours to tell categories apart can be useful, but as we can see in the example above, not always completely accessible.
+
+A complementary approach is to set the \emph{shape} of your geoms according to categorical variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{flipper\_length\_mm, }
+             \AttributeTok{y =}\NormalTok{ body\_mass\_g))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour=}\NormalTok{species,}
+                 \AttributeTok{shape=}\NormalTok{species))}\SpecialCharTok{+} \CommentTok{\# as with colours we could set these to specific values if we want}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values=}\NormalTok{penguin\_colours)}\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=0.8\linewidth]{images/shapes}
 
 \hypertarget{patchwork}{%
 \section{Patchwork}\label{patchwork}}
@@ -3218,7 +3239,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 \texttt{\textbackslash{}r\ Sys.Date()\textbackslash{}}
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-20
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-21
 
 The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g.~to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks \emph{earlier} in the script.
 

@@ -103,9 +103,10 @@ themes
 jitter
 boxplots
 density-and-histogram
-colours
+more-colours
 assign-colours-to-variables
 accessibility
+using-shapes
 patchwork
 test
 saving

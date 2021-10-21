@@ -554,6 +554,27 @@ cvdPlot() # will automatically run on the last plot you made
 knitr::include_graphics("images/colorblind.png")
 ```
 
+### Using shapes
+
+Using colours to tell categories apart can be useful, but as we can see in the example above, not always completely accessible. 
+
+A complementary approach is to set the *shape* of your geoms according to categorical variables. 
+
+
+```{r}
+penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g))+
+  geom_point(aes(colour=species,
+                 shape=species))+ # as with colours we could set these to specific values if we want
+  scale_color_manual(values=penguin_colours)+
+  theme_minimal()
+
+```
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/shapes.png")
+```
+
 ## Patchwork
 
 There are many times you might want to combine figures into multi-panel plots. Probably the easiest way to do this is with the `patchwork` package (@R-patchwork). 
