@@ -309,9 +309,18 @@ knitr::include_graphics(here("data", "images", "darwin.png"))
 
 ```
 
+```{block, type="rmdquestion"}
+Can you get your document to knit with this new image included?
+```
+
 ## Tables
 
 To create and manage able objects, we first pass the data frame through the `kable()` function. The package `kableExtra` @R-kableExtra gives us lots of extra styling options.^[(https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)]
+
+```{block, type="rmdquestion"}
+Can you get this working?
+Add the library call for `kableExtra` to the first chunk of your Rmd file, then make a chunk for the below at the bottom of your file and hit knit to test.
+```
 
 ```{r}
 darwin %>% 
@@ -355,8 +364,16 @@ In this approach, the final R Markdown script simply combines pre-processed outp
 source(here("scripts", "your-script.R"))
 ```
 
+```{block, type="rmdquestion"}
+Can you try it for yourself? There is a pre-written script in your R project, just use the source command to read in this script - then you can call objects made externally - in this case a penguin plot - put the code block in and hit knit.
 
+```
 
+```{r}
+source(here("scripts", "penguin script.R"))
+scat
+```
+```
 
 ## Exercise - Make your own Rmd document
 

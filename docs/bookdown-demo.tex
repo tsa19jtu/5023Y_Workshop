@@ -178,7 +178,7 @@
 
 \title{Data Science for Biologists - 5023Y}
 \author{Philip Leftwich}
-\date{2021-10-21}
+\date{2021-10-25}
 
 \begin{document}
 \maketitle
@@ -3227,7 +3227,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 \texttt{\textbackslash{}r\ Sys.Date()\textbackslash{}}
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-21
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-25
 
 The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g.~to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks \emph{earlier} in the script.
 
@@ -3271,10 +3271,20 @@ knitr::include\_graphics(here::here(``path'', ``to'', ``image.png''))
 \end{Highlighting}
 \end{Shaded}
 
+\begin{rmdquestion}
+Can you get your document to knit with this new image included?
+\end{rmdquestion}
+
 \hypertarget{tables}{%
 \section{Tables}\label{tables}}
 
 To create and manage able objects, we first pass the data frame through the \texttt{kable()} function. The package \texttt{kableExtra} \citet{R-kableExtra} gives us lots of extra styling options.\footnote{(\url{https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html})}
+
+\begin{rmdquestion}
+Can you get this working? Add the library call for \texttt{kableExtra}
+to the first chunk of your Rmd file, then make a chunk for the below at
+the bottom of your file and hit knit to test.
+\end{rmdquestion}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3322,6 +3332,22 @@ In this approach, the final R Markdown script simply combines pre-processed outp
 \begin{verbatim}
 source(here("scripts", "your-script.R"))
 \end{verbatim}
+
+\begin{rmdquestion}
+Can you try it for yourself? There is a pre-written script in your R
+project, just use the source command to read in this script - then you
+can call objects made externally - in this case a penguin plot - put the
+code block in and hit knit.
+\end{rmdquestion}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"scripts"}\NormalTok{, }\StringTok{"penguin script.R"}\NormalTok{))}
+\NormalTok{scat}
+\end{Highlighting}
+\end{Shaded}
+
+```
 
 \hypertarget{exercise---make-your-own-rmd-document}{%
 \section{Exercise - Make your own Rmd document}\label{exercise---make-your-own-rmd-document}}

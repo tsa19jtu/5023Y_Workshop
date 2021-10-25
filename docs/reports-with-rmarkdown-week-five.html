@@ -24,7 +24,7 @@
 <meta name="author" content="Philip Leftwich" />
 
 
-<meta name="date" content="2021-10-21" />
+<meta name="date" content="2021-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -530,7 +530,7 @@ For instance, so that only the outputs are shown for each code chunk and not the
 <h4><span class="header-section-number">6.3.4.2</span> In-text code</h4>
 <p>You can also include minimal R code within back-ticks. Within the back-ticks, begin the code with “r” and a space, so RStudio knows to evaluate the code as R code. See the example below.</p>
 <p><code>\r Sys.Date()\</code></p>
-<p>When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-21</p>
+<p>When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-25</p>
 <p>The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g. to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks <em>earlier</em> in the script.</p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="reports-with-rmarkdown-week-five.html#cb128-1" aria-hidden="true" tabindex="-1"></a>average_height <span class="ot">&lt;-</span> darwin <span class="sc">%&gt;%</span> </span>
 <span id="cb128-2"><a href="reports-with-rmarkdown-week-five.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_self=</span><span class="fu">mean</span>(Self),</span>
@@ -553,10 +553,20 @@ Can you include the above code block and make sure it runs without the code bein
 <p>Alternatively we could use the <code>here()</code> function - which means it doesn’t matter where our markdown file ‘lives.’</p>
 <p>knitr::include_graphics(here::here(“path,” “to,” “image.png”))</p>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="reports-with-rmarkdown-week-five.html#cb130-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;images&quot;</span>, <span class="st">&quot;darwin.png&quot;</span>))</span></code></pre></div>
+<div class="rmdquestion">
+<p>
+Can you get your document to knit with this new image included?
+</p>
+</div>
 </div>
 <div id="tables" class="section level2" number="6.5">
 <h2><span class="header-section-number">6.5</span> Tables</h2>
 <p>To create and manage able objects, we first pass the data frame through the <code>kable()</code> function. The package <code>kableExtra</code> <span class="citation"><a href="references.html#ref-R-kableExtra" role="doc-biblioref">Zhu</a> (<a href="references.html#ref-R-kableExtra" role="doc-biblioref">2020</a>)</span> gives us lots of extra styling options.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
+<div class="rmdquestion">
+<p>
+Can you get this working? Add the library call for <code>kableExtra</code> to the first chunk of your Rmd file, then make a chunk for the below at the bottom of your file and hit knit to test.
+</p>
+</div>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="reports-with-rmarkdown-week-five.html#cb131-1" aria-hidden="true" tabindex="-1"></a>darwin <span class="sc">%&gt;%</span> </span>
 <span id="cb131-2"><a href="reports-with-rmarkdown-week-five.html#cb131-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_self=</span><span class="fu">mean</span>(Self),</span>
 <span id="cb131-3"><a href="reports-with-rmarkdown-week-five.html#cb131-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_cross=</span><span class="fu">mean</span>(Cross)) <span class="sc">%&gt;%</span> </span>
@@ -583,6 +593,14 @@ Can you include the above code block and make sure it runs without the code bein
 <p>This can make your R Markdown script less cluttered, more simple, and easier to organize. It can also help if you want to display final figures at the beginning of the report.</p>
 <p>In this approach, the final R Markdown script simply combines pre-processed outputs into a document.</p>
 <pre><code>source(here(&quot;scripts&quot;, &quot;your-script.R&quot;))</code></pre>
+<div class="rmdquestion">
+<p>
+Can you try it for yourself? There is a pre-written script in your R project, just use the source command to read in this script - then you can call objects made externally - in this case a penguin plot - put the code block in and hit knit.
+</p>
+</div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="reports-with-rmarkdown-week-five.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;scripts&quot;</span>, <span class="st">&quot;penguin script.R&quot;</span>))</span>
+<span id="cb133-2"><a href="reports-with-rmarkdown-week-five.html#cb133-2" aria-hidden="true" tabindex="-1"></a>scat</span></code></pre></div>
+<p>```</p>
 </div>
 <div id="exercise---make-your-own-rmd-document" class="section level2" number="6.8">
 <h2><span class="header-section-number">6.8</span> Exercise - Make your own Rmd document</h2>
