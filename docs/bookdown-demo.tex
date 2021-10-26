@@ -178,7 +178,7 @@
 
 \title{Data Science for Biologists - 5023Y}
 \author{Philip Leftwich}
-\date{2021-10-25}
+\date{2021-10-26}
 
 \begin{document}
 \maketitle
@@ -2956,6 +2956,8 @@ Documents produced with Rmarkdown, allow analyses to be included easily - and ma
 
 With Rmarkdown we can make reproducible html, word, pdf, powerpoints or websites and dashboards\footnote{(\url{https://rmarkdown.rstudio.com/lesson-9.html})}
 
+\textbf{To make your Rmd publish - hit the knit button at the top of the doc}
+
 \hypertarget{format}{%
 \subsection{Format}\label{format}}
 
@@ -3070,20 +3072,6 @@ Double asterisks (**text**) for \textbf{bold} text
 Back-ticks (`text`) to display text as \texttt{code}
 
 The actual appearance of the font can be set by using specific templates (specified in the YAML metadata).
-
-\hypertarget{colour-1}{%
-\subsubsection{Colour}\label{colour-1}}
-
-Color
-There is no simple mechanism to change the color of text in R Markdown. One work-around, \textbf{IF} your output is an HTML file, is to add an HTML line into the markdown text. The below HTML code will print a line of text in bold red. HTML code will \textbf{not} work if you are outputting your .rmd to a pdf for example.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\SpecialCharTok{\textless{}}\NormalTok{span style}\OtherTok{=}\StringTok{"color: red;"}\SpecialCharTok{\textgreater{}}\ErrorTok{**}\NormalTok{\_DANGER}\SpecialCharTok{:}\NormalTok{\_}\SpecialCharTok{**}\NormalTok{ This is a warning.}\SpecialCharTok{\textless{}}\ErrorTok{/}\NormalTok{span}\SpecialCharTok{\textgreater{}}  
-\end{Highlighting}
-\end{Shaded}
-
-{\textbf{\emph{DANGER:}} This is a warning.}
 
 \hypertarget{titles-and-headings}{%
 \subsubsection{Titles and headings}\label{titles-and-headings}}
@@ -3225,9 +3213,9 @@ For instance, so that only the outputs are shown for each code chunk and not the
 
 You can also include minimal R code within back-ticks. Within the back-ticks, begin the code with ``r'' and a space, so RStudio knows to evaluate the code as R code. See the example below.
 
-\texttt{\textbackslash{}r\ Sys.Date()\textbackslash{}}
+` r Sys.Date()`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-25
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-26
 
 The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g.~to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks \emph{earlier} in the script.
 
@@ -3239,7 +3227,7 @@ The example above is simple (showing the current date), but using the same synta
 \end{Highlighting}
 \end{Shaded}
 
-The average height of the self-crossed plants is \texttt{\textbackslash{}r\ average\_height\ {[},1{]}\textbackslash{}}cm while the outcrossed plants are \texttt{\textbackslash{}r\ average\_height\ {[},2{]}\textbackslash{}}cm, so on average the outcrossed plants are \texttt{\textbackslash{}r\ average\_height\ {[},2{]}-\ average\_height\ {[},1{]}\textbackslash{}}cm taller.
+The average height of the self-crossed plants is ` r average\_height {[},1{]}`cm while the outcrossed plants are ` r average\_height {[},2{]}`cm, so on average the outcrossed plants are ` r average\_height {[},2{]}- average\_height {[},1{]}`cm taller.
 
 \begin{rmdquestion}
 Can you include the above code block and make sure it runs without the

@@ -24,7 +24,7 @@
 <meta name="author" content="Philip Leftwich" />
 
 
-<meta name="date" content="2021-10-25" />
+<meta name="date" content="2021-10-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -344,6 +344,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>An R Markdown script combines R code and text such that the script actually becomes your output document. You can create an entire formatted document, including narrative text (can be dynamic to change based on your data), tables, figures, bullets/numbers, bibliographies, etc.</p>
 <p>Documents produced with Rmarkdown, allow analyses to be included easily - and make the link between raw data, analysis &amp; and a published report <em>completely reproducible</em>.</p>
 <p>With Rmarkdown we can make reproducible html, word, pdf, powerpoints or websites and dashboards<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p><strong>To make your Rmd publish - hit the knit button at the top of the doc</strong></p>
 <div id="format" class="section level3" number="6.0.1">
 <h3><span class="header-section-number">6.0.1</span> Format</h3>
 <ul>
@@ -429,15 +430,8 @@ Can you edit the YAML in the Rmarkdown file in the markdown folder to have your 
 <p>Back-ticks (`text`) to display text as <code>code</code></p>
 <p>The actual appearance of the font can be set by using specific templates (specified in the YAML metadata).</p>
 </div>
-<div id="colour-1" class="section level4" number="6.3.2.3">
-<h4><span class="header-section-number">6.3.2.3</span> Colour</h4>
-<p>Color
-There is no simple mechanism to change the color of text in R Markdown. One work-around, <strong>IF</strong> your output is an HTML file, is to add an HTML line into the markdown text. The below HTML code will print a line of text in bold red. HTML code will <strong>not</strong> work if you are outputting your .rmd to a pdf for example.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="reports-with-rmarkdown-week-five.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>span style<span class="ot">=</span><span class="st">&quot;color: red;&quot;</span><span class="sc">&gt;</span><span class="er">**</span>_DANGER<span class="sc">:</span>_<span class="sc">**</span> This is a warning.<span class="sc">&lt;</span><span class="er">/</span>span<span class="sc">&gt;</span>  </span></code></pre></div>
-<p><span style="color: red;"><strong><em>DANGER:</em></strong> This is a warning.</span></p>
-</div>
-<div id="titles-and-headings" class="section level4" number="6.3.2.4">
-<h4><span class="header-section-number">6.3.2.4</span> Titles and headings</h4>
+<div id="titles-and-headings" class="section level4" number="6.3.2.3">
+<h4><span class="header-section-number">6.3.2.3</span> Titles and headings</h4>
 <p>A hash symbol in a text portion of a R Markdown script creates a heading. This is different than in a chunk of R code in the script, in which a hash symbol is a mechanism to comment/annotate/de-activate, as in a normal R script.</p>
 <p>Different heading levels are established with different numbers of hash symbols at the start of a new line. One hash symbol is a title or primary heading. Two hash symbols are a second-level heading. Third- and fourth-level headings can be made with successively more hash symbols.</p>
 <pre><code>
@@ -448,8 +442,8 @@ There is no simple mechanism to change the color of text in R Markdown. One work
 ### Third-level heading
 </code></pre>
 </div>
-<div id="bullets-and-numbering" class="section level4" number="6.3.2.5">
-<h4><span class="header-section-number">6.3.2.5</span> Bullets and numbering</h4>
+<div id="bullets-and-numbering" class="section level4" number="6.3.2.4">
+<h4><span class="header-section-number">6.3.2.4</span> Bullets and numbering</h4>
 <p>Use asterisks (*) to created a bullets list. Finish the previous sentence, enter two spaces, Enter/Return twice, and then start your bullets. Include a space between the asterisk and your bullet text. After each bullet enter two spaces and then Enter/Return. Sub-bullets work the same way but are indented. Numbers work the same way but instead of an asterisk, write 1), 2), etc. Below is how your R Markdown script text might look.</p>
 <p>Here are my bullets (there are two spaces after this colon):</p>
 <pre><code>* Bullet 1 (followed by two spaces and Enter/Return)  
@@ -502,11 +496,11 @@ Can you take the code below and put it into an R code chunk?
 Try your first “knit” to make a document.
 </p>
 </div>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="reports-with-rmarkdown-week-five.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb126-2"><a href="reports-with-rmarkdown-week-five.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb126-3"><a href="reports-with-rmarkdown-week-five.html#cb126-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb126-4"><a href="reports-with-rmarkdown-week-five.html#cb126-4" aria-hidden="true" tabindex="-1"></a>darwin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;darwin.csv&quot;</span>))</span>
-<span id="cb126-5"><a href="reports-with-rmarkdown-week-five.html#cb126-5" aria-hidden="true" tabindex="-1"></a>darwin</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="reports-with-rmarkdown-week-five.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb125-2"><a href="reports-with-rmarkdown-week-five.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb125-3"><a href="reports-with-rmarkdown-week-five.html#cb125-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-4"><a href="reports-with-rmarkdown-week-five.html#cb125-4" aria-hidden="true" tabindex="-1"></a>darwin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;darwin.csv&quot;</span>))</span>
+<span id="cb125-5"><a href="reports-with-rmarkdown-week-five.html#cb125-5" aria-hidden="true" tabindex="-1"></a>darwin</span></code></pre></div>
 <p><img src="images/markdown_output.png" width="120%" /></p>
 <div class="rmdquestion">
 <p>
@@ -524,18 +518,18 @@ Once you have made your edits try hitting ‘knit’ again.
 <p>For global options to be applied to all chunks in the script, you can set this up within your very first R code chunk in the script.
 This is very handy if you know you will want the majority of your code chunks to behave in the same way.
 For instance, so that only the outputs are shown for each code chunk and not the code itself, you can include this command in the R code chunk (and set this chunk to include=false):</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="reports-with-rmarkdown-week-five.html#cb127-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="reports-with-rmarkdown-week-five.html#cb126-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>) </span></code></pre></div>
 </div>
 <div id="in-text-code" class="section level4" number="6.3.4.2">
 <h4><span class="header-section-number">6.3.4.2</span> In-text code</h4>
 <p>You can also include minimal R code within back-ticks. Within the back-ticks, begin the code with “r” and a space, so RStudio knows to evaluate the code as R code. See the example below.</p>
-<p><code>\r Sys.Date()\</code></p>
-<p>When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-25</p>
+<p>` r Sys.Date()`</p>
+<p>When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-26</p>
 <p>The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g. to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks <em>earlier</em> in the script.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="reports-with-rmarkdown-week-five.html#cb128-1" aria-hidden="true" tabindex="-1"></a>average_height <span class="ot">&lt;-</span> darwin <span class="sc">%&gt;%</span> </span>
-<span id="cb128-2"><a href="reports-with-rmarkdown-week-five.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_self=</span><span class="fu">mean</span>(Self),</span>
-<span id="cb128-3"><a href="reports-with-rmarkdown-week-five.html#cb128-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_cross=</span><span class="fu">mean</span>(Cross))</span></code></pre></div>
-<p>The average height of the self-crossed plants is <code>\r average_height [,1]\</code>cm while the outcrossed plants are <code>\r average_height [,2]\</code>cm, so on average the outcrossed plants are <code>\r average_height [,2]- average_height [,1]\</code>cm taller.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="reports-with-rmarkdown-week-five.html#cb127-1" aria-hidden="true" tabindex="-1"></a>average_height <span class="ot">&lt;-</span> darwin <span class="sc">%&gt;%</span> </span>
+<span id="cb127-2"><a href="reports-with-rmarkdown-week-five.html#cb127-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_self=</span><span class="fu">mean</span>(Self),</span>
+<span id="cb127-3"><a href="reports-with-rmarkdown-week-five.html#cb127-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_cross=</span><span class="fu">mean</span>(Cross))</span></code></pre></div>
+<p>The average height of the self-crossed plants is ` r average_height [,1]`cm while the outcrossed plants are ` r average_height [,2]`cm, so on average the outcrossed plants are ` r average_height [,2]- average_height [,1]`cm taller.</p>
 <div class="rmdquestion">
 <p>
 Can you include the above code block and make sure it runs without the code being visible? Underneath include the text - it should produce the code outputs in the knitted doc. Try it!
@@ -548,11 +542,11 @@ Can you include the above code block and make sure it runs without the code bein
 <h2><span class="header-section-number">6.4</span> Images</h2>
 <p>You can include images in your R Markdown in several ways:</p>
 <p>knitr::include_graphics(“path/to/image.png”)</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="reports-with-rmarkdown-week-five.html#cb129-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;../data/images/darwin.png&quot;</span>)</span>
-<span id="cb129-2"><a href="reports-with-rmarkdown-week-five.html#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ../ is necessary here because in order to organise the file path starting in the markdown folder, directing it to go UP to the parent folder then down through data/images</span></span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="reports-with-rmarkdown-week-five.html#cb128-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;../data/images/darwin.png&quot;</span>)</span>
+<span id="cb128-2"><a href="reports-with-rmarkdown-week-five.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ../ is necessary here because in order to organise the file path starting in the markdown folder, directing it to go UP to the parent folder then down through data/images</span></span></code></pre></div>
 <p>Alternatively we could use the <code>here()</code> function - which means it doesn’t matter where our markdown file ‘lives.’</p>
 <p>knitr::include_graphics(here::here(“path,” “to,” “image.png”))</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="reports-with-rmarkdown-week-five.html#cb130-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;images&quot;</span>, <span class="st">&quot;darwin.png&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="reports-with-rmarkdown-week-five.html#cb129-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;images&quot;</span>, <span class="st">&quot;darwin.png&quot;</span>))</span></code></pre></div>
 <div class="rmdquestion">
 <p>
 Can you get your document to knit with this new image included?
@@ -567,11 +561,11 @@ Can you get your document to knit with this new image included?
 Can you get this working? Add the library call for <code>kableExtra</code> to the first chunk of your Rmd file, then make a chunk for the below at the bottom of your file and hit knit to test.
 </p>
 </div>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="reports-with-rmarkdown-week-five.html#cb131-1" aria-hidden="true" tabindex="-1"></a>darwin <span class="sc">%&gt;%</span> </span>
-<span id="cb131-2"><a href="reports-with-rmarkdown-week-five.html#cb131-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_self=</span><span class="fu">mean</span>(Self),</span>
-<span id="cb131-3"><a href="reports-with-rmarkdown-week-five.html#cb131-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_cross=</span><span class="fu">mean</span>(Cross)) <span class="sc">%&gt;%</span> </span>
-<span id="cb131-4"><a href="reports-with-rmarkdown-week-five.html#cb131-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption=</span><span class="st">&quot;Table 1. example table caption&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb131-5"><a href="reports-with-rmarkdown-week-five.html#cb131-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">&quot;striped&quot;</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="reports-with-rmarkdown-week-five.html#cb130-1" aria-hidden="true" tabindex="-1"></a>darwin <span class="sc">%&gt;%</span> </span>
+<span id="cb130-2"><a href="reports-with-rmarkdown-week-five.html#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_self=</span><span class="fu">mean</span>(Self),</span>
+<span id="cb130-3"><a href="reports-with-rmarkdown-week-five.html#cb130-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_cross=</span><span class="fu">mean</span>(Cross)) <span class="sc">%&gt;%</span> </span>
+<span id="cb130-4"><a href="reports-with-rmarkdown-week-five.html#cb130-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption=</span><span class="st">&quot;Table 1. example table caption&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb130-5"><a href="reports-with-rmarkdown-week-five.html#cb130-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">&quot;striped&quot;</span>, <span class="at">full_width =</span> F, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>)</span></code></pre></div>
 </div>
 <div id="self-contained-documents" class="section level2" number="6.6">
 <h2><span class="header-section-number">6.6</span> Self-contained documents</h2>
@@ -598,8 +592,8 @@ Can you get this working? Add the library call for <code>kableExtra</code> to th
 Can you try it for yourself? There is a pre-written script in your R project, just use the source command to read in this script - then you can call objects made externally - in this case a penguin plot - put the code block in and hit knit.
 </p>
 </div>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="reports-with-rmarkdown-week-five.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;scripts&quot;</span>, <span class="st">&quot;penguin script.R&quot;</span>))</span>
-<span id="cb133-2"><a href="reports-with-rmarkdown-week-five.html#cb133-2" aria-hidden="true" tabindex="-1"></a>scat</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="reports-with-rmarkdown-week-five.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;scripts&quot;</span>, <span class="st">&quot;penguin script.R&quot;</span>))</span>
+<span id="cb132-2"><a href="reports-with-rmarkdown-week-five.html#cb132-2" aria-hidden="true" tabindex="-1"></a>scat</span></code></pre></div>
 <p>```</p>
 </div>
 <div id="exercise---make-your-own-rmd-document" class="section level2" number="6.8">
