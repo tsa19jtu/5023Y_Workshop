@@ -362,9 +362,9 @@ Can you try it for yourself? There is a pre-written script in your R project, ju
 
 ```{r}
 source(here("scripts", "penguin script.R"))
-scat
+scat ### object generated in penguin script
 ```
-```
+
 
 ## Exercise - Make your own Rmd document
 

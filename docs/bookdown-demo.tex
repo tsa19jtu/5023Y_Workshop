@@ -170,6 +170,20 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -178,7 +192,7 @@
 
 \title{Data Science for Biologists - 5023Y}
 \author{Philip Leftwich}
-\date{2021-10-26}
+\date{2021-10-29}
 
 \begin{document}
 \maketitle
@@ -3215,7 +3229,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 ` r Sys.Date()`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-26
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-29
 
 The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g.~to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks \emph{earlier} in the script.
 
@@ -3331,11 +3345,9 @@ code block in and hit knit.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{source}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"scripts"}\NormalTok{, }\StringTok{"penguin script.R"}\NormalTok{))}
-\NormalTok{scat}
+\NormalTok{scat }\DocumentationTok{\#\#\# object generated in penguin script}
 \end{Highlighting}
 \end{Shaded}
-
-```
 
 \hypertarget{exercise---make-your-own-rmd-document}{%
 \section{Exercise - Make your own Rmd document}\label{exercise---make-your-own-rmd-document}}
@@ -3386,6 +3398,476 @@ Remember your code blocks must be in the right order!!!
 (\url{https://rmarkdown.rstudio.com/articles_intro.html})
 
 (\url{https://rmarkdown.rstudio.com/authoring_quick_tour.html})
+
+\hypertarget{version-control-with-github---week-six}{%
+\chapter{Version control with GitHub - Week Six}\label{version-control-with-github---week-six}}
+
+\hypertarget{lets-git-it-started}{%
+\section{Let's Git it started}\label{lets-git-it-started}}
+
+Git is a \textbf{version control system}. Originally built to help groups of developers work collaboratively on big software projects. It helps us manage our RStudio projects - with tracked changes.
+
+Git and GitHub are a big part of the data science community. We can use GitHub in a number of ways
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  To source code and repurpose analyses built by others for our own uses
+\item
+  Manage our analysis projects so that all parts of it:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  Data
+\item
+  Scripts
+\item
+  Figures
+\item
+  Reports
+\end{itemize}
+
+Are version controlled and open access
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\item
+  Version control lets you recover from any mistakes \& your analysis is \emph{backed up} externally
+\item
+  When you come to publish any reports - your analysis is accessible to others
+\item
+  Build up your own library of projects to show what you can do in Data Science
+\end{enumerate}
+
+Watch \href{https://www.youtube.com/watch?v=w3jLJU7DT5E}{this video} \emph{before} or \emph{after} today's session
+
+\hypertarget{will-this-be-fun}{%
+\subsection{Will this be fun?}\label{will-this-be-fun}}
+
+No.
+
+Using GitHub and version control is a bit like cleaning your teeth. It's not exactly fun, but it's good for you and it promotes excellent hygiene. It also only takes about 2 minutes.
+
+When we talk a about projects on GitHub we refer to Repositories / repos.
+
+Repos on GitHub are the same unit as an RStudio Project - it's a place where you can easily store all information/data/etc. related to whatever project you're working on.
+
+The way in which we will set up our RStudio Projects will now have a few extra steps to it
+
+\begin{itemize}
+\item
+  Make a new GitHub repository (or \emph{fork} an existing one)
+\item
+  Make a New project on RStudio Cloud - selecting the \emph{from GitHub Repository} option
+\item
+  Clone your GitHub repo into an RStudio Project
+\item
+  Make sure RStudio and Github can \emph{talk} to each other
+\item
+  Go about your normal business
+\item
+  When it comes to \emph{saving} your files, you will also periodically make a \textbf{commit} - this takes a multi-file \emph{snapshot} of your \emph{entire} project
+\item
+  At the end of a session \textbf{push} your changes to GitHub.
+\end{itemize}
+
+These changes to working with RStudio will feel a little different at first, but will quickly become routine - and are a big step forward in your Data Science skills.
+
+\hypertarget{the-payoff}{%
+\subsection{The Payoff}\label{the-payoff}}
+
+\begin{itemize}
+\item
+  \textbf{A portfolio} build up a library of data science projects you can show off
+\item
+  \textbf{be keen} track the development of R packages on GitHUb
+\item
+  \textbf{version control} keep a safe archive of all your edits and changes
+\item
+  \textbf{play with others} easy ways to collaborate on data science projects
+\end{itemize}
+
+For the full rundown on how to use Git and R you can't go wrong with checking out \citet{happygit}
+
+\hypertarget{set-up-github}{%
+\section{Set up GitHub}\label{set-up-github}}
+
+First things first you will need to set yourself up with a GitHub account.
+
+Head to \href{https://github.com/}{GitHub} and sign up for a free account.
+
+\begin{rmdwarning}
+Make a careful note of
+
+\begin{itemize}
+\item
+  The username you choose
+\item
+  Use the same email you have signed up to RStudio Cloud with
+\item
+  Note your password carefully!
+\end{itemize}
+\end{rmdwarning}
+
+\hypertarget{exercise-1.-fork-clone-an-existing-repo-on-github-make-edits-push-back}{%
+\section{\texorpdfstring{\textbf{Exercise 1.} Fork \& clone an existing repo on GitHub, make edits, push back}{Exercise 1. Fork \& clone an existing repo on GitHub, make edits, push back}}\label{exercise-1.-fork-clone-an-existing-repo-on-github-make-edits-push-back}}
+
+\textbf{a.} Go to \href{https://github.com/}{github.com} and log in (you need your own account - for sign up with your uea.ac.uk e-mail)
+
+\textbf{b.} In the Search bar, look for repo \textbf{Philip-Leftwich/5023Y-Happy-Git}
+
+\textbf{c.} Click on the repo name, and look at the existing repo structure
+
+\textbf{d.} \textbf{FORK} the repo
+
+\hypertarget{what-the-hell-is-a-fork}{%
+\subsection{What the hell is a fork?}\label{what-the-hell-is-a-fork}}
+
+\includegraphics[width=27.68in]{images/fork}
+
+A fork is when you generate a \emph{personal} copy of another user's repository (\ref{glossary-github}).
+
+\textbf{e.} Press Clone/download and copy the URL, then create a \textbf{new} project in RStudio Cloud selecting the \textbf{New project from Git repository} option - make sure you are in the 5023Y Workspace
+
+\includegraphics[width=25.46in]{images/new-project}
+
+\textbf{f.} Open the some\_cool\_animals.Rmd document, and the accompanying html
+
+\textbf{g.} Add \emph{your name} to the top of the document
+
+\textbf{h.} BUT WAIT. We have forgotten to add a great image and facts about a very important species - Baby Yoda, including an image (the file is in the repo, and the info to add is below).
+
+\textbf{FACTS}
+
+\includegraphics[width=16.25in]{images/Grogu}
+
+\begin{itemize}
+\item
+  Also known as ``The Child''
+\item
+  likes unfertilised frog eggs \& control knobs
+\item
+  strong with the force
+\end{itemize}
+
+~
+
+~
+
+\textbf{i.} Once you've added Grogu, knit the Rmd document to update the html
+
+\textbf{j.} Add your Git credentials go to section (\ref{talking-to-github})
+
+\textbf{k.} Stage, Commit \& Push all files (\ref{glossary-github})
+
+Staged - pick those files which you intend to bind to a commit
+
+Commit - write a short descriptive message, binds changes to a single commit (\ref{commit})
+
+Push - ``Pushes'' your changes from the local repo to the remote repo on GitHub (\ref{push})
+
+\textbf{l.} On GitHub, refresh and see that files are updated. Cool! Now you've used something someone else has created, customized it, and saved your updated version.
+
+\hypertarget{talking-to-github}{%
+\section{Talking to GitHub}\label{talking-to-github}}
+
+Getting set up to talk to GitHub can seem like a pain. Eventually when you work on your own computer - with a copy of R \& RStudio installed - you will only have to do this once. For now when we use RStudio Cloud - it looks like we have to do this \textbf{once per project}. It only takes a few seconds and you should put these commands \textbf{directly into your console}.
+
+Run this first line \textbf{in your console} and put in your GitHub username and the e-mail connected to your GitHub account.
+
+\begin{quote}
+**Note - you might not have to do this first step if you go to your RStudio Cloud profile \textgreater{} Authentication and select Github Enabled \& Private repo access also enabled
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{usethis}\SpecialCharTok{::}\FunctionTok{use\_git\_config}\NormalTok{(}\AttributeTok{user.name =} \StringTok{"Jane Doe"}\NormalTok{, }\AttributeTok{user.email =} \StringTok{"jane@example.org"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then you need to give RStudio Cloud your GitHub Personal Access Token, which you can retrieve by going to Settings \textgreater{} Develope Settings \textgreater{} Generate Token (\ref{glossary-github})
+
+Select all the ``scopes'' and name your token.
+
+\includegraphics[width=25.19in]{images/git-PAT}
+
+Make a note of this because you will need it whenever you set up a new project you want to talk to GitHub. GitHub recently removed password authentication in favour of PATs, but RStudio Cloud doesn't seem to have updated this yet - that's ok though - just enter this line of code - then copy+paste your PAT when prompted. - Option set/replace these credentials.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gitcreds}\SpecialCharTok{::}\FunctionTok{gitcreds\_set}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+If you forget your PAT - that's ok - you can't retrieve it - but you can just generate a new one.
+
+\hypertarget{see-changes}{%
+\subsection{See changes}\label{see-changes}}
+
+The first and most immediate benefit of using GitHub with your RStudio Project is seeing the changes you have made since your last commit.
+
+The RStudio Git pane lists every file that's been added, modified or deleted. The icon describes the change:
+
+\begin{itemize}
+\item
+  \includegraphics[width=0.53in]{images/git-modified} You've changed a file
+\item
+  \includegraphics[width=0.56in]{images/git-unknown} You've added a new file Git hasn't seen before
+\item
+  \includegraphics[width=0.58in]{images/git-deleted} You've deleted a file
+\end{itemize}
+
+You can get more details on the changes that have been made to each file by right-clicking and selecting diff
+\includegraphics[width=1.28in]{images/git-diff} . This opens a new window highlighting the \textbf{diff}erences between your current file and the previous commit.
+
+\includegraphics[width=18.61in]{images/git-diff-window}
+The background colours tells you whether the text has been added (green) or removed (red). (If you're colourblind you can use the line numbers in the two columns at the far left as a guide).
+
+\hypertarget{how-to-use-version-control---when-to-commit-push-and-pull}{%
+\section{How to use version control - when to commit, push and pull}\label{how-to-use-version-control---when-to-commit-push-and-pull}}
+
+Repositories (repos) on GitHub are the same unit as an RStudio Project - it's a place where you can easily store all information/data/etc. related to whatever project you're working on.
+
+When we create a Repository in GitHub and have it communicating with a Project in RStudio, then we can get (\textbf{pull}) information from GitHub to RStudio, or \textbf{push} information from RStudio to GitHub where it is safely stored and/or our collaborators can access it. It also keeps a \emph{complete history} of updated versions that can be accessed/reviewed by you and your collaborators at any time, from anywhere, as long as you have the internet.
+
+I have mentioned the term \textbf{commit} a few times (\ref{glossary-github}). The fundamental unit of work in Git is a commit. A commit takes a snapshot of your code at a specified point in time.
+
+You create a commit in two stages:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  You \textbf{stage} files, telling Git which changes should be included in the next commit.
+\item
+  You \textbf{commit} the staged files, describing the changes with a message.
+\end{enumerate}
+
+To create a new commit, \textbf{save} your files, then select files for inclusion by \emph{staging} them, tick the checkbox and then select the commit box
+
+\includegraphics[width=11in]{images/stage_step_4}
+
+A new window will open - and you will see the diffs in the bottom pane, and all the files you have selected for the latest commit.
+
+\hypertarget{commit}{%
+\subsection{Commit}\label{commit}}
+
+You now need to write a \textbf{commit message}. This should be short but meaningful
+
+\includegraphics[width=17.38in]{images/stage_step_5}
+
+Describe the \textbf{why}, not the what. Git stores all the associated differences between commits, the message doesn't need to say exactly what changed. Instead it should provide a summary that focuses on the \textbf{reasons} for the change. Make this understandable for someone else!
+
+Once you click commit a new window will open that summarises your commit - and you can close this
+
+\includegraphics[width=17.36in]{images/stage_step_6}
+
+\hypertarget{push}{%
+\subsection{Push}\label{push}}
+
+At the moment, all of your commits are \emph{local}, in order to send them to GitHub you have to select \textbf{Push} at this point your github credentials need to be in place - if you get prompted to provide these, close the windows and follow the steps here (\ref{talking-to-github}) before trying again.
+
+Your git pane will be empty at this point - but there is a little message at the top detailing how many commits you are \emph{ahead} of the master repo on GitHub.
+
+\includegraphics[width=26.65in]{images/stage_step_7}
+
+\hypertarget{a-couple-of-general-tips}{%
+\subsection{A couple of general tips:}\label{a-couple-of-general-tips}}
+
+\begin{rmdnote}
+\begin{itemize}
+\item
+  Pull at the start of \textbf{every session} this retrieves the master
+  repo from GitHub - which you update at the end of every session. This
+  helps prevent \emph{conflicts}
+\item
+  \textbf{Commit/push} in small, meaningful increments and do this
+  often. You can make \textbf{multiple} commits in a session - and
+  \textbf{always push at the end of the session}
+\item
+  In this way your GitHub Repo becomes the \textbf{master copy} of your
+  project.
+\end{itemize}
+\end{rmdnote}
+
+\hypertarget{turn-back-time-with-git}{%
+\subsection{Turn back time with Git}\label{turn-back-time-with-git}}
+
+"If I could turn back time,
+
+If I could find a way,
+
+I'd take back those commits that have hurt you,
+
+And you'd stay" - Cher
+
+Once you start using Git with RStudio - you get a whole bunch of different options for undoing changes, correcting mistakes and turning back time to previous versions!
+
+\begin{itemize}
+\item
+  To undo changes between commits you can select the diff option and remove lines one-by-one
+\item
+  Right-click on a file in the Git pane and select the revert option will undo all changes between this and the previous commit \textbf{beware} cannot be undone.
+\end{itemize}
+
+If you don't catch a mistake right away you can select the history button
+\includegraphics[width=0.56in]{images/git-history} and \textbf{pull} previous commits from GitHub
+
+\hypertarget{exercise-2.-github-classrooms-enabled-r-projects-with-subfolders}{%
+\section{\texorpdfstring{\textbf{Exercise 2.} GitHub Classrooms enabled R Projects with subfolders}{Exercise 2. GitHub Classrooms enabled R Projects with subfolders}}\label{exercise-2.-github-classrooms-enabled-r-projects-with-subfolders}}
+
+GitHub Classrooms is a way for me to set repos as assigments - when you accept an assignment on GitHub Classroom it \emph{automatically} forks a private repo for you.
+
+You should make regular commits and pushes to save your work as you go - and I will be grading your project repositories on GitHub classrooms when you do your assignment work.
+
+\begin{rmdwarning}
+When you accept an assignment on GitHub classrooms - the repo won't
+appear on your main profile, this is because it belongs to our class
+rather than you. You can always find it by searching through your
+Organisations - \textbf{but} it's probably easiest just to make a
+bookmark/make a note of your unique URL for each assignment.
+\end{rmdwarning}
+
+\textbf{a.} Follow this \href{https://classroom.github.com/a/QFt76-i2}{invite link}
+
+\textbf{b.} You will be invited to sign-in to Github (if not already) \& to join the UEABIO organisation
+
+\textbf{c.} Clone your assignment to work locally in RStudio Cloud - 5023Y Workspace
+
+\textbf{d.} In your local project folder, create subfolders `data' and `figures', `scripts', `markdown' (\textbf{Note} use the dir.create commands in the console)
+
+\textbf{e.} Drop the file disease\_burden.csv into the `data' subfolder
+
+\textbf{f.} Open a new .R script
+
+\textbf{g.} Attach the \texttt{tidyverse}, \texttt{janitor}, and optionally \texttt{here} packages
+
+\textbf{h.} Read in the disease\_burden.csv data
+
+This is a file look at the death rate for every country in the world across six decades. See the README for more information
+
+\textbf{i.} Stage, commit \& push at this point - notice that the empty folder `final\_graphs' doesn't show up (won't commit an empty folder) - \textbf{you will have to set up your git credentials again}
+
+\textbf{j.} Back in the script, write a short script to read and clean the data.
+
+This script is pre-written, it puts the data in tidy format, cleans names, makes sure year is treated as date data and filters four countries of interest.
+
+Assign this to a new object
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(lubridate)}
+\FunctionTok{library}\NormalTok{(janitor)}
+\FunctionTok{library}\NormalTok{(plotly)}
+
+\NormalTok{infant\_mortality }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/infant\_mortality.csv"}\NormalTok{) }
+
+\NormalTok{subset\_infant\_mortality }\OtherTok{\textless{}{-}}\NormalTok{ infant\_mortality }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols=}\StringTok{"1960"}\SpecialCharTok{:}\StringTok{"2020"}\NormalTok{, }
+               \AttributeTok{names\_to=}\StringTok{"year"}\NormalTok{,               }
+               \AttributeTok{values\_to=}\StringTok{"infant\_mortality\_rate"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{year=}\NormalTok{lubridate}\SpecialCharTok{::}\FunctionTok{years}\NormalTok{(year)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# set ymd format}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{year=}\NormalTok{lubridate}\SpecialCharTok{::}\FunctionTok{year}\NormalTok{(year)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# extract year}
+\NormalTok{  janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# put names in snake case}
+  \FunctionTok{filter}\NormalTok{(country\_name }\SpecialCharTok{\%in\%} 
+           \FunctionTok{c}\NormalTok{(}\StringTok{"United States"}\NormalTok{, }
+             \StringTok{"Japan"}\NormalTok{, }
+             \StringTok{"Afghanistan"}\NormalTok{, }
+             \StringTok{"United Kingdom"}\NormalTok{)) }\CommentTok{\# extract four countries}
+
+\CommentTok{\# View(subset\_infant\_mortality)}
+
+\CommentTok{\# subset the date according to (US,UK, Japan = lowest infant death rates, Afghanistan = highest infant death rates)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{k.} Make a ggplot plotting the infant mortality rate by country
+
+HINT - use \texttt{geom\_line()} and remember to separate countries by colour
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ subset\_infant\_mortality) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ year,}
+                 \AttributeTok{y =}\NormalTok{ infant\_mortality\_rate,}
+                 \AttributeTok{color =}\NormalTok{ country\_name))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{l.} Update your graph with direct labels (using \texttt{annotate}) and vertical or horizontal lines with \texttt{geom\_vline} or \texttt{geom\_hline}.
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-221-1.pdf}
+
+\textbf{m.} Use ggsave() to write your graph to a .png in the `final\_graphs' subfolder
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"figures/infant mortality graph.png"}\NormalTok{, }\AttributeTok{plot=}\NormalTok{mortality\_figure, }\AttributeTok{dpi=}\DecValTok{900}\NormalTok{, }\AttributeTok{width =} \DecValTok{7}\NormalTok{, }\AttributeTok{height =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{n.} Save, stage, commit
+
+\textbf{o} Let's do one more cool and fun thing! And make an interactive version of our plot - just for fun!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplotly}\NormalTok{(mortality\_figure, }\AttributeTok{tooltip =} \FunctionTok{c}\NormalTok{(}\StringTok{"infant\_mortality\_rate"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{p} Now save, stage, commit \& \textbf{push}
+
+\textbf{q.} Check that changes are stored on GitHub
+
+(\textbf{NOTE} this will be in your organisations rather than repos)
+
+\textbf{Make sure you finish both exercises before next week to become a GitHub pro!!!!!!!!!}
+
+\hypertarget{find-your-classroom-repos}{%
+\section{Find your classroom repos}\label{find-your-classroom-repos}}
+
+When you work with GitHub classrooms your repos become part of our organisation UEABIO.
+If you want to find your repos on GitHub then you can use the direct URL (if you noted it), or head to (\url{https://github.com/UEABIO}) - you should only be able to see repos that belong to \textbf{you}.
+
+\includegraphics[width=18.83in]{images/classroom-organisation}
+
+\hypertarget{glossary-github}{%
+\section{Glossary-GitHub}\label{glossary-github}}
+
+\begin{tabular}[t]{l|l}
+\hline
+Terms & Description\\
+\hline
+clone & A clone is a copy of a repository that lives on your computer instead of on a website's server somewhere, or the act of making that copy. When you make a clone, you can edit the files in your preferred editor and use Git to keep track of your changes without having to be online. The repository you cloned is still connected to the remote version so that you can push your local changes to the remote to keep them synced when you're online.\\
+\hline
+commit & A commit, or revision, is an individual change to a file (or set of files). When you make a commit to save your work, Git creates a unique ID that allows you to keep record of the specific changes committed along with who made them and when. Commits usually contain a commit message which is a brief description of what changes were made.\\
+\hline
+commit message & Short, descriptive text that accompanies a commit and communicates the change the commit is introducing.\\
+\hline
+fork & A fork is a personal copy of another user's repository that lives on your account. Forks allow you to freely make changes to a project without affecting the original upstream repository. You can also open a pull request in the upstream repository and keep your fork synced with the latest changes since both repositories are still connected.\\
+\hline
+Git & Git is an open source program for tracking changes in text files. It was written by the author of the Linux operating system, and is the core technology that GitHub, the social and user interface, is built on top of.\\
+\hline
+GitHub Classroom & GitHub Classroom automates repository creation and access control, making it easy to distribute starter code and collect assignments on GitHub\\
+\hline
+Markdown & Markdown is an incredibly simple semantic file format, not too dissimilar from .doc, .rtf and .txt. Markdown makes it easy for even those without a web-publishing background to write prose (including with links, lists, bullets, etc.) and have it displayed like a website.\\
+\hline
+pull & Pull refers to when you are fetching in changes and merging them. For instance, if someone has edited the remote file you're both working on, you'll want to pull in those changes to your local copy so that it's up to date\\
+\hline
+push & To push means to send your committed changes to a remote repository on GitHub.com. For instance, if you change something locally, you can push those changes so that others may access them.\\
+\hline
+README & A text file containing information about the files in a repository that is typically the first file a visitor to your repository will see. A README file, along with a repository license, contribution guidelines, and a code of conduct, helps you share expectations and manage contributions to your project.\\
+\hline
+repository & A repository (repo) is the most basic element of GitHub. They're easiest to imagine as a project's folder. A repository contains all of the project files (including documentation), and stores each file's revision history. Repositories can have multiple collaborators and can be either public or private.\\
+\hline
+RMarkdown & Rmarkdown is a package and filetype that are deeply embedded with RStudio to allow the integration of Markdown and output chunks of programming code (such as R) to publish a variety of different file types\\
+\hline
+personal access token & A token that is used in place of a password when performing Git operations over HTTPS. Also called a PAT.\\
+\hline
+\end{tabular}
 
 *\href{https://www.rstudio.com/resources/cheatsheets/}{R Cheat Sheets}
 

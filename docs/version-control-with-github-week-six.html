@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Version control with GitHub - Week Six | Data Science for Biologists - 5023Y</title>
+  <meta name="description" content="This is very brief introduction to some of the basic skills required to learn R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Version control with GitHub - Week Six | Data Science for Biologists - 5023Y" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is very brief introduction to some of the basic skills required to learn R" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Version control with GitHub - Week Six | Data Science for Biologists - 5023Y" />
+  
+  <meta name="twitter:description" content="This is very brief introduction to some of the basic skills required to learn R" />
+  
+
+<meta name="author" content="Philip Leftwich" />
+
+
+<meta name="date" content="2021-10-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="reports-with-rmarkdown-week-five.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#approach-and-style"><i class="fa fa-check"></i><b>1.1</b> Approach and style</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#teaching"><i class="fa fa-check"></i><b>1.2</b> Teaching</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#workshops"><i class="fa fa-check"></i><b>1.2.1</b> Workshops</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#introduction-to-r"><i class="fa fa-check"></i><b>1.3</b> Introduction to R</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#getting-around-on-rstudio"><i class="fa fa-check"></i><b>1.4</b> Getting around on RStudio</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#an-intro-to-rstudio"><i class="fa fa-check"></i><b>1.4.1</b> An intro to RStudio</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#using-r-studio-cloud"><i class="fa fa-check"></i><b>1.4.2</b> Using R Studio Cloud</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#reading"><i class="fa fa-check"></i><b>1.5</b> Reading</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#get-help"><i class="fa fa-check"></i><b>1.6</b> Get Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html"><i class="fa fa-check"></i><b>2</b> Getting to know R - Week One</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#your-first-r-command"><i class="fa fa-check"></i><b>2.1</b> Your first R command</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#typos"><i class="fa fa-check"></i><b>2.1.1</b> Typos</a></li>
+<li class="chapter" data-level="2.1.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#more-simple-arithmetic"><i class="fa fa-check"></i><b>2.1.2</b> More simple arithmetic</a></li>
+<li class="chapter" data-level="2.1.3" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#try-some-maths"><i class="fa fa-check"></i><b>2.1.3</b> Try some maths</a></li>
+<li class="chapter" data-level="2.1.4" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#perform-some-combos"><i class="fa fa-check"></i><b>2.1.4</b> Perform some combos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#true-or-false-data"><i class="fa fa-check"></i><b>2.2</b> “true or false” data</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#assessing-mathematical-truths"><i class="fa fa-check"></i><b>2.2.1</b> Assessing mathematical truths</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#storing-outputs"><i class="fa fa-check"></i><b>2.3</b> Storing outputs</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#choosing-names"><i class="fa fa-check"></i><b>2.3.1</b> Choosing names</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#writing-scripts"><i class="fa fa-check"></i><b>2.4</b> Writing scripts</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#commenting-on-scripts"><i class="fa fa-check"></i><b>2.4.1</b> Commenting on scripts</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#running-your-script"><i class="fa fa-check"></i><b>2.4.2</b> Running your script</a></li>
+<li class="chapter" data-level="2.4.3" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#saving-your-script"><i class="fa fa-check"></i><b>2.4.3</b> Saving your script</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#error"><i class="fa fa-check"></i><b>2.5</b> Error</a></li>
+<li class="chapter" data-level="2.6" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#functions"><i class="fa fa-check"></i><b>2.6</b> Functions</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#storing-the-output-of-functions"><i class="fa fa-check"></i><b>2.6.1</b> Storing the output of functions</a></li>
+<li class="chapter" data-level="2.6.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#more-fun-with-functions"><i class="fa fa-check"></i><b>2.6.2</b> More fun with functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#packages"><i class="fa fa-check"></i><b>2.7</b> Packages</a></li>
+<li class="chapter" data-level="2.8" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#my-first-data-visualisation"><i class="fa fa-check"></i><b>2.8</b> My first data visualisation</a></li>
+<li class="chapter" data-level="2.9" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#quitting"><i class="fa fa-check"></i><b>2.9</b> Quitting</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html"><i class="fa fa-check"></i><b>3</b> Workflow Part One - Week Two</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#meet-the-penguins"><i class="fa fa-check"></i><b>3.1</b> Meet the Penguins</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#insights-from-data"><i class="fa fa-check"></i><b>3.1.1</b> Insights from data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#the-question"><i class="fa fa-check"></i><b>3.2</b> The Question?</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#hypotheses"><i class="fa fa-check"></i><b>3.2.1</b> Hypotheses</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#preparing-the-data"><i class="fa fa-check"></i><b>3.3</b> Preparing the data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#tidy-data"><i class="fa fa-check"></i><b>3.3.1</b> Tidy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#the-dataset"><i class="fa fa-check"></i><b>3.3.2</b> The dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#prepare-the-rstudio-workspace"><i class="fa fa-check"></i><b>3.4</b> Prepare the RStudio workspace</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#organise"><i class="fa fa-check"></i><b>3.4.1</b> Organise</a></li>
+<li class="chapter" data-level="3.4.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#create-a-new-r-script"><i class="fa fa-check"></i><b>3.4.2</b> Create a new R script</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#get-the-data-into-r"><i class="fa fa-check"></i><b>3.5</b> Get the data into R</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#view-and-refine"><i class="fa fa-check"></i><b>3.5.1</b> View and refine</a></li>
+<li class="chapter" data-level="3.5.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#data-management"><i class="fa fa-check"></i><b>3.5.2</b> Data management</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#dataframes-and-tibbles"><i class="fa fa-check"></i><b>3.6</b> Dataframes and tibbles</a></li>
+<li class="chapter" data-level="3.7" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#clean-and-tidy"><i class="fa fa-check"></i><b>3.7</b> Clean and tidy</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#tidy"><i class="fa fa-check"></i><b>3.7.1</b> Tidy</a></li>
+<li class="chapter" data-level="3.7.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#clean"><i class="fa fa-check"></i><b>3.7.2</b> Clean</a></li>
+<li class="chapter" data-level="3.7.3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#refine-variable-names"><i class="fa fa-check"></i><b>3.7.3</b> Refine variable names</a></li>
+<li class="chapter" data-level="3.7.4" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#dates"><i class="fa fa-check"></i><b>3.7.4</b> Dates</a></li>
+<li class="chapter" data-level="3.7.5" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#rename-some-values"><i class="fa fa-check"></i><b>3.7.5</b> Rename some values</a></li>
+<li class="chapter" data-level="3.7.6" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#check-for-duplication"><i class="fa fa-check"></i><b>3.7.6</b> Check for duplication</a></li>
+<li class="chapter" data-level="3.7.7" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#check-for-typos-or-implausible-values"><i class="fa fa-check"></i><b>3.7.7</b> Check for typos or implausible values</a></li>
+<li class="chapter" data-level="3.7.8" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#missing-values---na"><i class="fa fa-check"></i><b>3.7.8</b> Missing values - NA</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#summing-up"><i class="fa fa-check"></i><b>3.8</b> Summing up</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#what-we-learned"><i class="fa fa-check"></i><b>3.8.1</b> What we learned</a></li>
+<li class="chapter" data-level="3.8.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#quitting-1"><i class="fa fa-check"></i><b>3.8.2</b> Quitting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html"><i class="fa fa-check"></i><b>4</b> Workflow Part Two - Week Three</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#initial-insights"><i class="fa fa-check"></i><b>4.1</b> Initial insights</a></li>
+<li class="chapter" data-level="4.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#numbers-and-sex-of-the-penguins"><i class="fa fa-check"></i><b>4.2</b> Numbers and sex of the penguins</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#making-a-simple-figure"><i class="fa fa-check"></i><b>4.2.1</b> Making a simple figure</a></li>
+<li class="chapter" data-level="4.2.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#challenge"><i class="fa fa-check"></i><b>4.2.2</b> Challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#distributions"><i class="fa fa-check"></i><b>4.3</b> Distributions</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#insights"><i class="fa fa-check"></i><b>4.3.1</b> Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#more-distributions"><i class="fa fa-check"></i><b>4.4</b> More distributions</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#initial-conclusions"><i class="fa fa-check"></i><b>4.4.1</b> Initial conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#data-transformation"><i class="fa fa-check"></i><b>4.5</b> Data transformation</a></li>
+<li class="chapter" data-level="4.6" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#developing-insights"><i class="fa fa-check"></i><b>4.6</b> Developing insights</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#distributions-of-the-relative-bill-length"><i class="fa fa-check"></i><b>4.6.1</b> Distributions of the relative bill length</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#relationshipdifferences"><i class="fa fa-check"></i><b>4.7</b> Relationship/differences</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#differences"><i class="fa fa-check"></i><b>4.7.1</b> Differences</a></li>
+<li class="chapter" data-level="4.7.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#associations"><i class="fa fa-check"></i><b>4.7.2</b> Associations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#sex-interactions"><i class="fa fa-check"></i><b>4.8</b> Sex interactions</a></li>
+<li class="chapter" data-level="4.9" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#making-our-graphs-more-attractive"><i class="fa fa-check"></i><b>4.9</b> Making our graphs more attractive</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#saving-your-output"><i class="fa fa-check"></i><b>4.9.1</b> Saving your output</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#quitting-2"><i class="fa fa-check"></i><b>4.10</b> Quitting</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html"><i class="fa fa-check"></i><b>5</b> ggplot2 A grammar of graphics - Week Four</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#intro-to-grammar"><i class="fa fa-check"></i><b>5.1</b> Intro to grammar</a></li>
+<li class="chapter" data-level="5.2" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#building-a-plot"><i class="fa fa-check"></i><b>5.2</b> Building a plot</a></li>
+<li class="chapter" data-level="5.3" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#plot-background"><i class="fa fa-check"></i><b>5.3</b> Plot background</a></li>
+<li class="chapter" data-level="5.4" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#aesthetics---aes"><i class="fa fa-check"></i><b>5.4</b> Aesthetics - aes()</a></li>
+<li class="chapter" data-level="5.5" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#geometric-representations---geom"><i class="fa fa-check"></i><b>5.5</b> Geometric representations - geom()</a></li>
+<li class="chapter" data-level="5.6" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#and"><i class="fa fa-check"></i><b>5.6</b> %&gt;% and +</a></li>
+<li class="chapter" data-level="5.7" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#colour"><i class="fa fa-check"></i><b>5.7</b> Colour</a></li>
+<li class="chapter" data-level="5.8" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#more-layers"><i class="fa fa-check"></i><b>5.8</b> More layers</a></li>
+<li class="chapter" data-level="5.9" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#facets"><i class="fa fa-check"></i><b>5.9</b> Facets</a></li>
+<li class="chapter" data-level="5.10" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#co-ordinate-space"><i class="fa fa-check"></i><b>5.10</b> Co-ordinate space</a></li>
+<li class="chapter" data-level="5.11" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#labels"><i class="fa fa-check"></i><b>5.11</b> Labels</a></li>
+<li class="chapter" data-level="5.12" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#themes"><i class="fa fa-check"></i><b>5.12</b> Themes</a></li>
+<li class="chapter" data-level="5.13" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#jitter"><i class="fa fa-check"></i><b>5.13</b> Jitter</a></li>
+<li class="chapter" data-level="5.14" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#boxplots"><i class="fa fa-check"></i><b>5.14</b> Boxplots</a></li>
+<li class="chapter" data-level="5.15" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#density-and-histogram"><i class="fa fa-check"></i><b>5.15</b> Density and histogram</a></li>
+<li class="chapter" data-level="5.16" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#more-colours"><i class="fa fa-check"></i><b>5.16</b> More Colours</a>
+<ul>
+<li class="chapter" data-level="5.16.1" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#assign-colours-to-variables"><i class="fa fa-check"></i><b>5.16.1</b> Assign colours to variables</a></li>
+<li class="chapter" data-level="5.16.2" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#accessibility"><i class="fa fa-check"></i><b>5.16.2</b> Accessibility</a></li>
+<li class="chapter" data-level="5.16.3" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#guides-to-visual-accessibility"><i class="fa fa-check"></i><b>5.16.3</b> Guides to visual accessibility</a></li>
+</ul></li>
+<li class="chapter" data-level="5.17" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#patchwork"><i class="fa fa-check"></i><b>5.17</b> Patchwork</a></li>
+<li class="chapter" data-level="5.18" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#test"><i class="fa fa-check"></i><b>5.18</b> Test</a></li>
+<li class="chapter" data-level="5.19" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#saving"><i class="fa fa-check"></i><b>5.19</b> Saving</a></li>
+<li class="chapter" data-level="5.20" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#quitting-3"><i class="fa fa-check"></i><b>5.20</b> Quitting</a></li>
+<li class="chapter" data-level="5.21" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#further-reading-guides-and-tips"><i class="fa fa-check"></i><b>5.21</b> Further Reading, Guides and tips</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html"><i class="fa fa-check"></i><b>6</b> Reports with Rmarkdown - Week Five</a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#format"><i class="fa fa-check"></i><b>6.0.1</b> Format</a></li>
+<li class="chapter" data-level="6.1" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#background-to-rmarkdown"><i class="fa fa-check"></i><b>6.1</b> Background to Rmarkdown</a></li>
+<li class="chapter" data-level="6.2" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#starting-a-new-rmd-file"><i class="fa fa-check"></i><b>6.2</b> Starting a new Rmd file</a></li>
+<li class="chapter" data-level="6.3" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#r-markdown-parts"><i class="fa fa-check"></i><b>6.3</b> R Markdown parts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#yaml"><i class="fa fa-check"></i><b>6.3.1</b> YAML</a></li>
+<li class="chapter" data-level="6.3.2" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#text"><i class="fa fa-check"></i><b>6.3.2</b> Text</a></li>
+<li class="chapter" data-level="6.3.3" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#code-chunks"><i class="fa fa-check"></i><b>6.3.3</b> Code Chunks</a></li>
+<li class="chapter" data-level="6.3.4" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#here"><i class="fa fa-check"></i><b>6.3.4</b> Here</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#images"><i class="fa fa-check"></i><b>6.4</b> Images</a></li>
+<li class="chapter" data-level="6.5" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#tables"><i class="fa fa-check"></i><b>6.5</b> Tables</a></li>
+<li class="chapter" data-level="6.6" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#self-contained-documents"><i class="fa fa-check"></i><b>6.6</b> Self-contained documents</a></li>
+<li class="chapter" data-level="6.7" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#source-files"><i class="fa fa-check"></i><b>6.7</b> Source files</a></li>
+<li class="chapter" data-level="6.8" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#exercise---make-your-own-rmd-document"><i class="fa fa-check"></i><b>6.8</b> Exercise - Make your own Rmd document</a></li>
+<li class="chapter" data-level="6.9" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#further-reading-guides-and-tips-1"><i class="fa fa-check"></i><b>6.9</b> Further Reading, Guides and tips</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html"><i class="fa fa-check"></i><b>7</b> Version control with GitHub - Week Six</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#lets-git-it-started"><i class="fa fa-check"></i><b>7.1</b> Let’s Git it started</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#will-this-be-fun"><i class="fa fa-check"></i><b>7.1.1</b> Will this be fun?</a></li>
+<li class="chapter" data-level="7.1.2" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#the-payoff"><i class="fa fa-check"></i><b>7.1.2</b> The Payoff</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#set-up-github"><i class="fa fa-check"></i><b>7.2</b> Set up GitHub</a></li>
+<li class="chapter" data-level="7.3" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#exercise-1.-fork-clone-an-existing-repo-on-github-make-edits-push-back"><i class="fa fa-check"></i><b>7.3</b> <strong>Exercise 1.</strong> Fork &amp; clone an existing repo on GitHub, make edits, push back</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#what-the-hell-is-a-fork"><i class="fa fa-check"></i><b>7.3.1</b> What the hell is a fork?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#talking-to-github"><i class="fa fa-check"></i><b>7.4</b> Talking to GitHub</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#see-changes"><i class="fa fa-check"></i><b>7.4.1</b> See changes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#how-to-use-version-control---when-to-commit-push-and-pull"><i class="fa fa-check"></i><b>7.5</b> How to use version control - when to commit, push and pull</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#commit"><i class="fa fa-check"></i><b>7.5.1</b> Commit</a></li>
+<li class="chapter" data-level="7.5.2" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#push"><i class="fa fa-check"></i><b>7.5.2</b> Push</a></li>
+<li class="chapter" data-level="7.5.3" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#a-couple-of-general-tips"><i class="fa fa-check"></i><b>7.5.3</b> A couple of general tips:</a></li>
+<li class="chapter" data-level="7.5.4" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#turn-back-time-with-git"><i class="fa fa-check"></i><b>7.5.4</b> Turn back time with Git</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#exercise-2.-github-classrooms-enabled-r-projects-with-subfolders"><i class="fa fa-check"></i><b>7.6</b> <strong>Exercise 2.</strong> GitHub Classrooms enabled R Projects with subfolders</a></li>
+<li class="chapter" data-level="7.7" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#find-your-classroom-repos"><i class="fa fa-check"></i><b>7.7</b> Find your classroom repos</a></li>
+<li class="chapter" data-level="7.8" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#glossary-github"><i class="fa fa-check"></i><b>7.8</b> Glossary-GitHub</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science for Biologists - 5023Y</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="version-control-with-github---week-six" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Version control with GitHub - Week Six</h1>
+<script>
+  addClassKlippyTo("pre.r, pre.bash");
+  addKlippy('right', 'top', 'auto', '1', 'copy to clipboard', 'Copied!');
+</script>
+<div id="lets-git-it-started" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Let’s Git it started</h2>
+<p>Git is a <strong>version control system</strong>. Originally built to help groups of developers work collaboratively on big software projects. It helps us manage our RStudio projects - with tracked changes.</p>
+<p>Git and GitHub are a big part of the data science community. We can use GitHub in a number of ways</p>
+<ol style="list-style-type: decimal">
+<li><p>To source code and repurpose analyses built by others for our own uses</p></li>
+<li><p>Manage our analysis projects so that all parts of it:</p></li>
+</ol>
+<ul>
+<li><p>Data</p></li>
+<li><p>Scripts</p></li>
+<li><p>Figures</p></li>
+<li><p>Reports</p></li>
+</ul>
+<p>Are version controlled and open access</p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Version control lets you recover from any mistakes &amp; your analysis is <em>backed up</em> externally</p></li>
+<li><p>When you come to publish any reports - your analysis is accessible to others</p></li>
+<li><p>Build up your own library of projects to show what you can do in Data Science</p></li>
+</ol>
+<p>Watch <a href="https://www.youtube.com/watch?v=w3jLJU7DT5E">this video</a> <em>before</em> or <em>after</em> today’s session</p>
+<div id="will-this-be-fun" class="section level3" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Will this be fun?</h3>
+<p>No.</p>
+<p>Using GitHub and version control is a bit like cleaning your teeth. It’s not exactly fun, but it’s good for you and it promotes excellent hygiene. It also only takes about 2 minutes.</p>
+<p>When we talk a about projects on GitHub we refer to Repositories / repos.</p>
+<p>Repos on GitHub are the same unit as an RStudio Project - it’s a place where you can easily store all information/data/etc. related to whatever project you’re working on.</p>
+<p>The way in which we will set up our RStudio Projects will now have a few extra steps to it</p>
+<ul>
+<li><p>Make a new GitHub repository (or <em>fork</em> an existing one)</p></li>
+<li><p>Make a New project on RStudio Cloud - selecting the <em>from GitHub Repository</em> option</p></li>
+<li><p>Clone your GitHub repo into an RStudio Project</p></li>
+<li><p>Make sure RStudio and Github can <em>talk</em> to each other</p></li>
+<li><p>Go about your normal business</p></li>
+<li><p>When it comes to <em>saving</em> your files, you will also periodically make a <strong>commit</strong> - this takes a multi-file <em>snapshot</em> of your <em>entire</em> project</p></li>
+<li><p>At the end of a session <strong>push</strong> your changes to GitHub.</p></li>
+</ul>
+<p>These changes to working with RStudio will feel a little different at first, but will quickly become routine - and are a big step forward in your Data Science skills.</p>
+</div>
+<div id="the-payoff" class="section level3" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> The Payoff</h3>
+<ul>
+<li><p><strong>A portfolio</strong> build up a library of data science projects you can show off</p></li>
+<li><p><strong>be keen</strong> track the development of R packages on GitHUb</p></li>
+<li><p><strong>version control</strong> keep a safe archive of all your edits and changes</p></li>
+<li><p><strong>play with others</strong> easy ways to collaborate on data science projects</p></li>
+</ul>
+<p>For the full rundown on how to use Git and R you can’t go wrong with checking out <span class="citation"><a href="references.html#ref-happygit" role="doc-biblioref">Bryan</a> (<a href="references.html#ref-happygit" role="doc-biblioref">2012</a>)</span></p>
+</div>
+</div>
+<div id="set-up-github" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Set up GitHub</h2>
+<p>First things first you will need to set yourself up with a GitHub account.</p>
+<p>Head to <a href="https://github.com/">GitHub</a> and sign up for a free account.</p>
+<div class="rmdwarning">
+<p>
+Make a careful note of
+</p>
+<ul>
+<li>
+<p>
+The username you choose
+</p>
+</li>
+<li>
+<p>
+Use the same email you have signed up to RStudio Cloud with
+</p>
+</li>
+<li>
+<p>
+Note your password carefully!
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div id="exercise-1.-fork-clone-an-existing-repo-on-github-make-edits-push-back" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> <strong>Exercise 1.</strong> Fork &amp; clone an existing repo on GitHub, make edits, push back</h2>
+<p><strong>a.</strong> Go to <a href="https://github.com/">github.com</a> and log in (you need your own account - for sign up with your uea.ac.uk e-mail)</p>
+<p><strong>b.</strong> In the Search bar, look for repo <strong>Philip-Leftwich/5023Y-Happy-Git</strong></p>
+<p><strong>c.</strong> Click on the repo name, and look at the existing repo structure</p>
+<p><strong>d.</strong> <strong>FORK</strong> the repo</p>
+<div id="what-the-hell-is-a-fork" class="section level3" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> What the hell is a fork?</h3>
+<p><img src="images/fork.png" width="996" /></p>
+<p>A fork is when you generate a <em>personal</em> copy of another user’s repository (<a href="version-control-with-github-week-six.html#glossary-github">7.8</a>).</p>
+<p><strong>e.</strong> Press Clone/download and copy the URL, then create a <strong>new</strong> project in RStudio Cloud selecting the <strong>New project from Git repository</strong> option - make sure you are in the 5023Y Workspace</p>
+<p><img src="images/new-project.png" width="916" /></p>
+<p><strong>f.</strong> Open the some_cool_animals.Rmd document, and the accompanying html</p>
+<p><strong>g.</strong> Add <em>your name</em> to the top of the document</p>
+<p><strong>h.</strong> BUT WAIT. We have forgotten to add a great image and facts about a very important species - Baby Yoda, including an image (the file is in the repo, and the info to add is below).</p>
+<p><strong>FACTS</strong></p>
+<p><img src="images/Grogu.png" width="585" /></p>
+<ul>
+<li><p>Also known as “The Child”</p></li>
+<li><p>likes unfertilised frog eggs &amp; control knobs</p></li>
+<li><p>strong with the force</p></li>
+</ul>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p><strong>i.</strong> Once you’ve added Grogu, knit the Rmd document to update the html</p>
+<p><strong>j.</strong> Add your Git credentials go to section (<a href="version-control-with-github-week-six.html#talking-to-github">7.4</a>)</p>
+<p><strong>k.</strong> Stage, Commit &amp; Push all files (<a href="version-control-with-github-week-six.html#glossary-github">7.8</a>)</p>
+<p>Staged - pick those files which you intend to bind to a commit</p>
+<p>Commit - write a short descriptive message, binds changes to a single commit (<a href="version-control-with-github-week-six.html#commit">7.5.1</a>)</p>
+<p>Push - “Pushes” your changes from the local repo to the remote repo on GitHub (<a href="version-control-with-github-week-six.html#push">7.5.2</a>)</p>
+<p><strong>l.</strong> On GitHub, refresh and see that files are updated. Cool! Now you’ve used something someone else has created, customized it, and saved your updated version.</p>
+</div>
+</div>
+<div id="talking-to-github" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Talking to GitHub</h2>
+<p>Getting set up to talk to GitHub can seem like a pain. Eventually when you work on your own computer - with a copy of R &amp; RStudio installed - you will only have to do this once. For now when we use RStudio Cloud - it looks like we have to do this <strong>once per project</strong>. It only takes a few seconds and you should put these commands <strong>directly into your console</strong>.</p>
+<p>Run this first line <strong>in your console</strong> and put in your GitHub username and the e-mail connected to your GitHub account.</p>
+<blockquote>
+<p>**Note - you might not have to do this first step if you go to your RStudio Cloud profile &gt; Authentication and select Github Enabled &amp; Private repo access also enabled</p>
+</blockquote>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="version-control-with-github-week-six.html#cb133-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git_config</span>(<span class="at">user.name =</span> <span class="st">&quot;Jane Doe&quot;</span>, <span class="at">user.email =</span> <span class="st">&quot;jane@example.org&quot;</span>)</span></code></pre></div>
+<p>Then you need to give RStudio Cloud your GitHub Personal Access Token, which you can retrieve by going to Settings &gt; Develope Settings &gt; Generate Token (<a href="version-control-with-github-week-six.html#glossary-github">7.8</a>)</p>
+<p>Select all the “scopes” and name your token.</p>
+<p><img src="images/git-PAT.png" width="907" /></p>
+<p>Make a note of this because you will need it whenever you set up a new project you want to talk to GitHub. GitHub recently removed password authentication in favour of PATs, but RStudio Cloud doesn’t seem to have updated this yet - that’s ok though - just enter this line of code - then copy+paste your PAT when prompted. - Option set/replace these credentials.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="version-control-with-github-week-six.html#cb134-1" aria-hidden="true" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code></pre></div>
+<p>If you forget your PAT - that’s ok - you can’t retrieve it - but you can just generate a new one.</p>
+<div id="see-changes" class="section level3" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> See changes</h3>
+<p>The first and most immediate benefit of using GitHub with your RStudio Project is seeing the changes you have made since your last commit.</p>
+<p>The RStudio Git pane lists every file that’s been added, modified or deleted. The icon describes the change:</p>
+<ul>
+<li><p><img src="images/git-modified.png" width="38" /> You’ve changed a file</p></li>
+<li><p><img src="images/git-unknown.png" width="40" />You’ve added a new file Git hasn’t seen before</p></li>
+<li><p><img src="images/git-deleted.png" width="42" /> You’ve deleted a file</p></li>
+</ul>
+<p>You can get more details on the changes that have been made to each file by right-clicking and selecting diff <img src="images/git-diff.png" width="92" />. This opens a new window highlighting the <strong>diff</strong>erences between your current file and the previous commit.</p>
+<p><img src="images/git-diff-window.png" width="670" />
+The background colours tells you whether the text has been added (green) or removed (red). (If you’re colourblind you can use the line numbers in the two columns at the far left as a guide).</p>
+</div>
+</div>
+<div id="how-to-use-version-control---when-to-commit-push-and-pull" class="section level2" number="7.5">
+<h2><span class="header-section-number">7.5</span> How to use version control - when to commit, push and pull</h2>
+<p>Repositories (repos) on GitHub are the same unit as an RStudio Project - it’s a place where you can easily store all information/data/etc. related to whatever project you’re working on.</p>
+<p>When we create a Repository in GitHub and have it communicating with a Project in RStudio, then we can get (<strong>pull</strong>) information from GitHub to RStudio, or <strong>push</strong> information from RStudio to GitHub where it is safely stored and/or our collaborators can access it. It also keeps a <em>complete history</em> of updated versions that can be accessed/reviewed by you and your collaborators at any time, from anywhere, as long as you have the internet.</p>
+<p>I have mentioned the term <strong>commit</strong> a few times (<a href="version-control-with-github-week-six.html#glossary-github">7.8</a>). The fundamental unit of work in Git is a commit. A commit takes a snapshot of your code at a specified point in time.</p>
+<p>You create a commit in two stages:</p>
+<ol style="list-style-type: decimal">
+<li><p>You <strong>stage</strong> files, telling Git which changes should be included in the next commit.</p></li>
+<li><p>You <strong>commit</strong> the staged files, describing the changes with a message.</p></li>
+</ol>
+<p>To create a new commit, <strong>save</strong> your files, then select files for inclusion by <em>staging</em> them, tick the checkbox and then select the commit box</p>
+<p><img src="images/stage_step_4.png" width="396" /></p>
+<p>A new window will open - and you will see the diffs in the bottom pane, and all the files you have selected for the latest commit.</p>
+<div id="commit" class="section level3" number="7.5.1">
+<h3><span class="header-section-number">7.5.1</span> Commit</h3>
+<p>You now need to write a <strong>commit message</strong>. This should be short but meaningful</p>
+<p><img src="images/stage_step_5.png" width="626" /></p>
+<p>Describe the <strong>why</strong>, not the what. Git stores all the associated differences between commits, the message doesn’t need to say exactly what changed. Instead it should provide a summary that focuses on the <strong>reasons</strong> for the change. Make this understandable for someone else!</p>
+<p>Once you click commit a new window will open that summarises your commit - and you can close this</p>
+<p><img src="images/stage_step_6.png" width="625" /></p>
+</div>
+<div id="push" class="section level3" number="7.5.2">
+<h3><span class="header-section-number">7.5.2</span> Push</h3>
+<p>At the moment, all of your commits are <em>local</em>, in order to send them to GitHub you have to select <strong>Push</strong> at this point your github credentials need to be in place - if you get prompted to provide these, close the windows and follow the steps here (<a href="version-control-with-github-week-six.html#talking-to-github">7.4</a>) before trying again.</p>
+<p>Your git pane will be empty at this point - but there is a little message at the top detailing how many commits you are <em>ahead</em> of the master repo on GitHub.</p>
+<p><img src="images/stage_step_7.png" width="960" /></p>
+</div>
+<div id="a-couple-of-general-tips" class="section level3" number="7.5.3">
+<h3><span class="header-section-number">7.5.3</span> A couple of general tips:</h3>
+<div class="rmdnote">
+<ul>
+<li>
+<p>
+Pull at the start of <strong>every session</strong> this retrieves the master repo from GitHub - which you update at the end of every session. This helps prevent <em>conflicts</em>
+</p>
+</li>
+<li>
+<p>
+<strong>Commit/push</strong> in small, meaningful increments and do this often. You can make <strong>multiple</strong> commits in a session - and <strong>always push at the end of the session</strong>
+</p>
+</li>
+<li>
+<p>
+In this way your GitHub Repo becomes the <strong>master copy</strong> of your project.
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div id="turn-back-time-with-git" class="section level3" number="7.5.4">
+<h3><span class="header-section-number">7.5.4</span> Turn back time with Git</h3>
+<p>"If I could turn back time,</p>
+<p>If I could find a way,</p>
+<p>I’d take back those commits that have hurt you,</p>
+<p>And you’d stay" - Cher</p>
+<p>Once you start using Git with RStudio - you get a whole bunch of different options for undoing changes, correcting mistakes and turning back time to previous versions!</p>
+<ul>
+<li><p>To undo changes between commits you can select the diff option and remove lines one-by-one</p></li>
+<li><p>Right-click on a file in the Git pane and select the revert option will undo all changes between this and the previous commit <strong>beware</strong> cannot be undone.</p></li>
+</ul>
+<p>If you don’t catch a mistake right away you can select the history button <img src="images/git-history.png" width="40" /> and <strong>pull</strong> previous commits from GitHub</p>
+</div>
+</div>
+<div id="exercise-2.-github-classrooms-enabled-r-projects-with-subfolders" class="section level2" number="7.6">
+<h2><span class="header-section-number">7.6</span> <strong>Exercise 2.</strong> GitHub Classrooms enabled R Projects with subfolders</h2>
+<p>GitHub Classrooms is a way for me to set repos as assigments - when you accept an assignment on GitHub Classroom it <em>automatically</em> forks a private repo for you.</p>
+<p>You should make regular commits and pushes to save your work as you go - and I will be grading your project repositories on GitHub classrooms when you do your assignment work.</p>
+<div class="rmdwarning">
+<p>
+When you accept an assignment on GitHub classrooms - the repo won’t appear on your main profile, this is because it belongs to our class rather than you. You can always find it by searching through your Organisations - <strong>but</strong> it’s probably easiest just to make a bookmark/make a note of your unique URL for each assignment.
+</p>
+</div>
+<p><strong>a.</strong> Follow this <a href="https://classroom.github.com/a/QFt76-i2">invite link</a></p>
+<p><strong>b.</strong> You will be invited to sign-in to Github (if not already) &amp; to join the UEABIO organisation</p>
+<p><strong>c.</strong> Clone your assignment to work locally in RStudio Cloud - 5023Y Workspace</p>
+<p><strong>d.</strong> In your local project folder, create subfolders ‘data’ and ‘figures,’ ‘scripts,’ ‘markdown’ (<strong>Note</strong> use the dir.create commands in the console)</p>
+<p><strong>e.</strong> Drop the file disease_burden.csv into the ‘data’ subfolder</p>
+<p><strong>f.</strong> Open a new .R script</p>
+<p><strong>g.</strong> Attach the <code>tidyverse</code>, <code>janitor</code>, and optionally <code>here</code> packages</p>
+<p><strong>h.</strong> Read in the disease_burden.csv data</p>
+<p>This is a file look at the death rate for every country in the world across six decades. See the README for more information</p>
+<p><strong>i.</strong> Stage, commit &amp; push at this point - notice that the empty folder ‘final_graphs’ doesn’t show up (won’t commit an empty folder) - <strong>you will have to set up your git credentials again</strong></p>
+<p><strong>j.</strong> Back in the script, write a short script to read and clean the data.</p>
+<p>This script is pre-written, it puts the data in tidy format, cleans names, makes sure year is treated as date data and filters four countries of interest.</p>
+<p>Assign this to a new object</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="version-control-with-github-week-six.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb135-2"><a href="version-control-with-github-week-six.html#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb135-3"><a href="version-control-with-github-week-six.html#cb135-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb135-4"><a href="version-control-with-github-week-six.html#cb135-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb135-5"><a href="version-control-with-github-week-six.html#cb135-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-6"><a href="version-control-with-github-week-six.html#cb135-6" aria-hidden="true" tabindex="-1"></a>infant_mortality <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/infant_mortality.csv&quot;</span>) </span>
+<span id="cb135-7"><a href="version-control-with-github-week-six.html#cb135-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-8"><a href="version-control-with-github-week-six.html#cb135-8" aria-hidden="true" tabindex="-1"></a>subset_infant_mortality <span class="ot">&lt;-</span> infant_mortality <span class="sc">%&gt;%</span></span>
+<span id="cb135-9"><a href="version-control-with-github-week-six.html#cb135-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="st">&quot;1960&quot;</span><span class="sc">:</span><span class="st">&quot;2020&quot;</span>, </span>
+<span id="cb135-10"><a href="version-control-with-github-week-six.html#cb135-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to=</span><span class="st">&quot;year&quot;</span>,               </span>
+<span id="cb135-11"><a href="version-control-with-github-week-six.html#cb135-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to=</span><span class="st">&quot;infant_mortality_rate&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb135-12"><a href="version-control-with-github-week-six.html#cb135-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year=</span>lubridate<span class="sc">::</span><span class="fu">years</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># set ymd format</span></span>
+<span id="cb135-13"><a href="version-control-with-github-week-six.html#cb135-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year=</span>lubridate<span class="sc">::</span><span class="fu">year</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># extract year</span></span>
+<span id="cb135-14"><a href="version-control-with-github-week-six.html#cb135-14" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> <span class="co"># put names in snake case</span></span>
+<span id="cb135-15"><a href="version-control-with-github-week-six.html#cb135-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country_name <span class="sc">%in%</span> </span>
+<span id="cb135-16"><a href="version-control-with-github-week-six.html#cb135-16" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="st">&quot;United States&quot;</span>, </span>
+<span id="cb135-17"><a href="version-control-with-github-week-six.html#cb135-17" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Japan&quot;</span>, </span>
+<span id="cb135-18"><a href="version-control-with-github-week-six.html#cb135-18" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Afghanistan&quot;</span>, </span>
+<span id="cb135-19"><a href="version-control-with-github-week-six.html#cb135-19" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;United Kingdom&quot;</span>)) <span class="co"># extract four countries</span></span>
+<span id="cb135-20"><a href="version-control-with-github-week-six.html#cb135-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-21"><a href="version-control-with-github-week-six.html#cb135-21" aria-hidden="true" tabindex="-1"></a><span class="co"># View(subset_infant_mortality)</span></span>
+<span id="cb135-22"><a href="version-control-with-github-week-six.html#cb135-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-23"><a href="version-control-with-github-week-six.html#cb135-23" aria-hidden="true" tabindex="-1"></a><span class="co"># subset the date according to (US,UK, Japan = lowest infant death rates, Afghanistan = highest infant death rates)</span></span></code></pre></div>
+<p><strong>k.</strong> Make a ggplot plotting the infant mortality rate by country</p>
+<p>HINT - use <code>geom_line()</code> and remember to separate countries by colour</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="version-control-with-github-week-six.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> subset_infant_mortality) <span class="sc">+</span></span>
+<span id="cb136-2"><a href="version-control-with-github-week-six.html#cb136-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb136-3"><a href="version-control-with-github-week-six.html#cb136-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> infant_mortality_rate,</span>
+<span id="cb136-4"><a href="version-control-with-github-week-six.html#cb136-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> country_name))</span></code></pre></div>
+<p><strong>l.</strong> Update your graph with direct labels (using <code>annotate</code>) and vertical or horizontal lines with <code>geom_vline</code> or <code>geom_hline</code>.</p>
+<div id="htmlwidget-29d0b096ce45625aef81" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-29d0b096ce45625aef81">{"x":{"data":[{"x":[1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,null,null,null,null,null,null,null,null,null,null],"y":[200.9,197.1,193.4,189.4,185.5,181.5,177.6,173.5,169.4,165.3,161,156.8,152.5,148.4,144.3,140.3,136.2,132.2,128.2,124.2,120.4,116.8,113.3,109.9,106.7,103.7,100.8,98.1,95.3,92.7,90.2,87.6,84.9,82.3,79.6,77,74.3,71.7,69,66.5,64.1,61.7,59.5,57.2,55.2,53.2,51.3,49.6,48,46.5,null,null,null,232,227.8,223.9,219.9,216.1,212.4,208.6,204.7],"text":["infant_mortality_rate: 200.9","infant_mortality_rate: 197.1","infant_mortality_rate: 193.4","infant_mortality_rate: 189.4","infant_mortality_rate: 185.5","infant_mortality_rate: 181.5","infant_mortality_rate: 177.6","infant_mortality_rate: 173.5","infant_mortality_rate: 169.4","infant_mortality_rate: 165.3","infant_mortality_rate: 161.0","infant_mortality_rate: 156.8","infant_mortality_rate: 152.5","infant_mortality_rate: 148.4","infant_mortality_rate: 144.3","infant_mortality_rate: 140.3","infant_mortality_rate: 136.2","infant_mortality_rate: 132.2","infant_mortality_rate: 128.2","infant_mortality_rate: 124.2","infant_mortality_rate: 120.4","infant_mortality_rate: 116.8","infant_mortality_rate: 113.3","infant_mortality_rate: 109.9","infant_mortality_rate: 106.7","infant_mortality_rate: 103.7","infant_mortality_rate: 100.8","infant_mortality_rate:  98.1","infant_mortality_rate:  95.3","infant_mortality_rate:  92.7","infant_mortality_rate:  90.2","infant_mortality_rate:  87.6","infant_mortality_rate:  84.9","infant_mortality_rate:  82.3","infant_mortality_rate:  79.6","infant_mortality_rate:  77.0","infant_mortality_rate:  74.3","infant_mortality_rate:  71.7","infant_mortality_rate:  69.0","infant_mortality_rate:  66.5","infant_mortality_rate:  64.1","infant_mortality_rate:  61.7","infant_mortality_rate:  59.5","infant_mortality_rate:  57.2","infant_mortality_rate:  55.2","infant_mortality_rate:  53.2","infant_mortality_rate:  51.3","infant_mortality_rate:  49.6","infant_mortality_rate:  48.0","infant_mortality_rate:  46.5","infant_mortality_rate:    NA","infant_mortality_rate:    NA","infant_mortality_rate:    NA","infant_mortality_rate: 232.0","infant_mortality_rate: 227.8","infant_mortality_rate: 223.9","infant_mortality_rate: 219.9","infant_mortality_rate: 216.1","infant_mortality_rate: 212.4","infant_mortality_rate: 208.6","infant_mortality_rate: 204.7"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","name":"Afghanistan","legendgroup":"Afghanistan","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,null,null,null,null,null,null,null,null,null,null],"y":[13.4,12.6,11.9,11.2,10.6,10,9.4,8.8,8.3,7.8,7.4,7,6.5,6.2,5.8,5.5,5.2,5,4.8,4.7,4.6,4.5,4.4,4.4,4.2,4.1,3.9,3.8,3.6,3.4,3.3,3.1,3,2.9,2.8,2.8,2.7,2.6,2.5,2.4,2.3,2.3,2.2,2.1,2.1,2,2,1.9,1.8,1.8,null,30.4,27.9,25.5,23.1,21,19.1,17.6,16.3,15.1,14.2],"text":["infant_mortality_rate:  13.4","infant_mortality_rate:  12.6","infant_mortality_rate:  11.9","infant_mortality_rate:  11.2","infant_mortality_rate:  10.6","infant_mortality_rate:  10.0","infant_mortality_rate:   9.4","infant_mortality_rate:   8.8","infant_mortality_rate:   8.3","infant_mortality_rate:   7.8","infant_mortality_rate:   7.4","infant_mortality_rate:   7.0","infant_mortality_rate:   6.5","infant_mortality_rate:   6.2","infant_mortality_rate:   5.8","infant_mortality_rate:   5.5","infant_mortality_rate:   5.2","infant_mortality_rate:   5.0","infant_mortality_rate:   4.8","infant_mortality_rate:   4.7","infant_mortality_rate:   4.6","infant_mortality_rate:   4.5","infant_mortality_rate:   4.4","infant_mortality_rate:   4.4","infant_mortality_rate:   4.2","infant_mortality_rate:   4.1","infant_mortality_rate:   3.9","infant_mortality_rate:   3.8","infant_mortality_rate:   3.6","infant_mortality_rate:   3.4","infant_mortality_rate:   3.3","infant_mortality_rate:   3.1","infant_mortality_rate:   3.0","infant_mortality_rate:   2.9","infant_mortality_rate:   2.8","infant_mortality_rate:   2.8","infant_mortality_rate:   2.7","infant_mortality_rate:   2.6","infant_mortality_rate:   2.5","infant_mortality_rate:   2.4","infant_mortality_rate:   2.3","infant_mortality_rate:   2.3","infant_mortality_rate:   2.2","infant_mortality_rate:   2.1","infant_mortality_rate:   2.1","infant_mortality_rate:   2.0","infant_mortality_rate:   2.0","infant_mortality_rate:   1.9","infant_mortality_rate:   1.8","infant_mortality_rate:   1.8","infant_mortality_rate:    NA","infant_mortality_rate:  30.4","infant_mortality_rate:  27.9","infant_mortality_rate:  25.5","infant_mortality_rate:  23.1","infant_mortality_rate:  21.0","infant_mortality_rate:  19.1","infant_mortality_rate:  17.6","infant_mortality_rate:  16.3","infant_mortality_rate:  15.1","infant_mortality_rate:  14.2"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)","dash":"solid"},"hoveron":"points","name":"Japan","legendgroup":"Japan","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,null,null,null,null,null,null,null,null,null,null],"y":[18,17.6,17.2,16.6,16,15.4,14.7,14.1,13.4,12.7,12.1,11.4,10.8,10.4,10,9.7,9.4,9.2,8.8,8.4,7.9,7.4,6.9,6.6,6.3,6.1,6,5.9,5.8,5.7,5.6,5.5,5.4,5.3,5.2,5.1,5,4.9,4.8,4.6,4.4,4.3,4.1,4,3.9,3.8,3.8,3.8,3.7,3.7,null,22.9,22.5,22,21.4,20.8,20.1,19.6,19.1,18.7,18.4],"text":["infant_mortality_rate:  18.0","infant_mortality_rate:  17.6","infant_mortality_rate:  17.2","infant_mortality_rate:  16.6","infant_mortality_rate:  16.0","infant_mortality_rate:  15.4","infant_mortality_rate:  14.7","infant_mortality_rate:  14.1","infant_mortality_rate:  13.4","infant_mortality_rate:  12.7","infant_mortality_rate:  12.1","infant_mortality_rate:  11.4","infant_mortality_rate:  10.8","infant_mortality_rate:  10.4","infant_mortality_rate:  10.0","infant_mortality_rate:   9.7","infant_mortality_rate:   9.4","infant_mortality_rate:   9.2","infant_mortality_rate:   8.8","infant_mortality_rate:   8.4","infant_mortality_rate:   7.9","infant_mortality_rate:   7.4","infant_mortality_rate:   6.9","infant_mortality_rate:   6.6","infant_mortality_rate:   6.3","infant_mortality_rate:   6.1","infant_mortality_rate:   6.0","infant_mortality_rate:   5.9","infant_mortality_rate:   5.8","infant_mortality_rate:   5.7","infant_mortality_rate:   5.6","infant_mortality_rate:   5.5","infant_mortality_rate:   5.4","infant_mortality_rate:   5.3","infant_mortality_rate:   5.2","infant_mortality_rate:   5.1","infant_mortality_rate:   5.0","infant_mortality_rate:   4.9","infant_mortality_rate:   4.8","infant_mortality_rate:   4.6","infant_mortality_rate:   4.4","infant_mortality_rate:   4.3","infant_mortality_rate:   4.1","infant_mortality_rate:   4.0","infant_mortality_rate:   3.9","infant_mortality_rate:   3.8","infant_mortality_rate:   3.8","infant_mortality_rate:   3.8","infant_mortality_rate:   3.7","infant_mortality_rate:   3.7","infant_mortality_rate:    NA","infant_mortality_rate:  22.9","infant_mortality_rate:  22.5","infant_mortality_rate:  22.0","infant_mortality_rate:  21.4","infant_mortality_rate:  20.8","infant_mortality_rate:  20.1","infant_mortality_rate:  19.6","infant_mortality_rate:  19.1","infant_mortality_rate:  18.7","infant_mortality_rate:  18.4"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(255,0,255,1)","dash":"solid"},"hoveron":"points","name":"United Kingdom","legendgroup":"United Kingdom","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,null,null,null,null,null,null,null,null,null,null],"y":[19.9,19.1,18.3,17.5,16.7,15.9,15.2,14.5,13.8,13.2,12.6,12.1,11.7,11.3,10.9,10.6,10.4,10.2,9.9,9.7,9.4,9.1,8.8,8.5,8.2,7.9,7.7,7.5,7.4,7.2,7.1,7,6.9,6.9,6.8,6.7,6.7,6.6,6.5,6.4,6.2,6.1,6,6,5.9,5.8,5.8,5.7,5.6,5.6,null,25.9,25.4,24.9,24.4,23.8,23.3,22.7,22,21.3,20.6],"text":["infant_mortality_rate:  19.9","infant_mortality_rate:  19.1","infant_mortality_rate:  18.3","infant_mortality_rate:  17.5","infant_mortality_rate:  16.7","infant_mortality_rate:  15.9","infant_mortality_rate:  15.2","infant_mortality_rate:  14.5","infant_mortality_rate:  13.8","infant_mortality_rate:  13.2","infant_mortality_rate:  12.6","infant_mortality_rate:  12.1","infant_mortality_rate:  11.7","infant_mortality_rate:  11.3","infant_mortality_rate:  10.9","infant_mortality_rate:  10.6","infant_mortality_rate:  10.4","infant_mortality_rate:  10.2","infant_mortality_rate:   9.9","infant_mortality_rate:   9.7","infant_mortality_rate:   9.4","infant_mortality_rate:   9.1","infant_mortality_rate:   8.8","infant_mortality_rate:   8.5","infant_mortality_rate:   8.2","infant_mortality_rate:   7.9","infant_mortality_rate:   7.7","infant_mortality_rate:   7.5","infant_mortality_rate:   7.4","infant_mortality_rate:   7.2","infant_mortality_rate:   7.1","infant_mortality_rate:   7.0","infant_mortality_rate:   6.9","infant_mortality_rate:   6.9","infant_mortality_rate:   6.8","infant_mortality_rate:   6.7","infant_mortality_rate:   6.7","infant_mortality_rate:   6.6","infant_mortality_rate:   6.5","infant_mortality_rate:   6.4","infant_mortality_rate:   6.2","infant_mortality_rate:   6.1","infant_mortality_rate:   6.0","infant_mortality_rate:   6.0","infant_mortality_rate:   5.9","infant_mortality_rate:   5.8","infant_mortality_rate:   5.8","infant_mortality_rate:   5.7","infant_mortality_rate:   5.6","infant_mortality_rate:   5.6","infant_mortality_rate:    NA","infant_mortality_rate:  25.9","infant_mortality_rate:  25.4","infant_mortality_rate:  24.9","infant_mortality_rate:  24.4","infant_mortality_rate:  23.8","infant_mortality_rate:  23.3","infant_mortality_rate:  22.7","infant_mortality_rate:  22.0","infant_mortality_rate:  21.3","infant_mortality_rate:  20.6"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(255,165,0,1)","dash":"solid"},"hoveron":"points","name":"United States","legendgroup":"United States","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2023],"y":[50],"text":"Afghanistan","hovertext":"","textfont":{"size":15.1181102362205,"color":"rgba(0,0,0,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2023],"y":[-2],"text":"Japan","hovertext":"","textfont":{"size":15.1181102362205,"color":"rgba(0,0,255,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2023],"y":[15],"text":"United Kingdom","hovertext":"","textfont":{"size":15.1181102362205,"color":"rgba(255,165,0,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2023],"y":[5],"text":"United States","hovertext":"","textfont":{"size":15.1181102362205,"color":"rgba(255,0,255,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2000,2000],"y":[-13.7,243.7],"text":"","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":43.1050228310502},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Mortality rate, infant (per 1,000 live births) <br />has been steadily falling in Afghanistan from 1970 to present","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1967.25,2027.75],"tickmode":"array","ticktext":["1970","1980","1990","2000","2010","2020"],"tickvals":[1970,1980,1990,2000,2010,2020],"categoryorder":"array","categoryarray":["1970","1980","1990","2000","2010","2020"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-13.7,243.7],"tickmode":"array","ticktext":["0","50","100","150","200"],"tickvals":[0,50,100,150,200],"categoryorder":"array","categoryarray":["0","50","100","150","200"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Deaths per 100,000","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"5fe04e87eac":{"x":{},"y":{},"colour":{},"type":"scatter"},"5fe0efa55":{"x":{},"y":{}},"5fe08394e4e":{"x":{},"y":{}},"5fe012cf5b1":{"x":{},"y":{}},"5fe020f954e":{"x":{},"y":{}},"5fe056bc7275":{"xintercept":{}}},"cur_data":"5fe04e87eac","visdat":{"5fe04e87eac":["function (y) ","x"],"5fe0efa55":["function (y) ","x"],"5fe08394e4e":["function (y) ","x"],"5fe012cf5b1":["function (y) ","x"],"5fe020f954e":["function (y) ","x"],"5fe056bc7275":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><strong>m.</strong> Use ggsave() to write your graph to a .png in the ‘final_graphs’ subfolder</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="version-control-with-github-week-six.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;figures/infant mortality graph.png&quot;</span>, <span class="at">plot=</span>mortality_figure, <span class="at">dpi=</span><span class="dv">900</span>, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span>)</span></code></pre></div>
+<p><strong>n.</strong> Save, stage, commit</p>
+<p><strong>o</strong> Let’s do one more cool and fun thing! And make an interactive version of our plot - just for fun!</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="version-control-with-github-week-six.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(mortality_figure, <span class="at">tooltip =</span> <span class="fu">c</span>(<span class="st">&quot;infant_mortality_rate&quot;</span>))</span></code></pre></div>
+<p><strong>p</strong> Now save, stage, commit &amp; <strong>push</strong></p>
+<p><strong>q.</strong> Check that changes are stored on GitHub</p>
+<p>(<strong>NOTE</strong> this will be in your organisations rather than repos)</p>
+<p><strong>Make sure you finish both exercises before next week to become a GitHub pro!!!!!!!!!</strong></p>
+</div>
+<div id="find-your-classroom-repos" class="section level2" number="7.7">
+<h2><span class="header-section-number">7.7</span> Find your classroom repos</h2>
+<p>When you work with GitHub classrooms your repos become part of our organisation UEABIO.
+If you want to find your repos on GitHub then you can use the direct URL (if you noted it), or head to (<a href="https://github.com/UEABIO" class="uri">https://github.com/UEABIO</a>) - you should only be able to see repos that belong to <strong>you</strong>.</p>
+<p><img src="images/classroom-organisation.png" width="678" /></p>
+</div>
+<div id="glossary-github" class="section level2" number="7.8">
+<h2><span class="header-section-number">7.8</span> Glossary-GitHub</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Terms
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+clone
+</td>
+<td style="text-align:left;">
+A clone is a copy of a repository that lives on your computer instead of on a website’s server somewhere, or the act of making that copy. When you make a clone, you can edit the files in your preferred editor and use Git to keep track of your changes without having to be online. The repository you cloned is still connected to the remote version so that you can push your local changes to the remote to keep them synced when you’re online.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+commit
+</td>
+<td style="text-align:left;">
+A commit, or revision, is an individual change to a file (or set of files). When you make a commit to save your work, Git creates a unique ID that allows you to keep record of the specific changes committed along with who made them and when. Commits usually contain a commit message which is a brief description of what changes were made.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+commit message
+</td>
+<td style="text-align:left;">
+Short, descriptive text that accompanies a commit and communicates the change the commit is introducing.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fork
+</td>
+<td style="text-align:left;">
+A fork is a personal copy of another user’s repository that lives on your account. Forks allow you to freely make changes to a project without affecting the original upstream repository. You can also open a pull request in the upstream repository and keep your fork synced with the latest changes since both repositories are still connected.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Git
+</td>
+<td style="text-align:left;">
+Git is an open source program for tracking changes in text files. It was written by the author of the Linux operating system, and is the core technology that GitHub, the social and user interface, is built on top of.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GitHub Classroom
+</td>
+<td style="text-align:left;">
+GitHub Classroom automates repository creation and access control, making it easy to distribute starter code and collect assignments on GitHub
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Markdown
+</td>
+<td style="text-align:left;">
+Markdown is an incredibly simple semantic file format, not too dissimilar from .doc, .rtf and .txt. Markdown makes it easy for even those without a web-publishing background to write prose (including with links, lists, bullets, etc.) and have it displayed like a website.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pull
+</td>
+<td style="text-align:left;">
+Pull refers to when you are fetching in changes and merging them. For instance, if someone has edited the remote file you’re both working on, you’ll want to pull in those changes to your local copy so that it’s up to date
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+push
+</td>
+<td style="text-align:left;">
+To push means to send your committed changes to a remote repository on GitHub.com. For instance, if you change something locally, you can push those changes so that others may access them.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+README
+</td>
+<td style="text-align:left;">
+A text file containing information about the files in a repository that is typically the first file a visitor to your repository will see. A README file, along with a repository license, contribution guidelines, and a code of conduct, helps you share expectations and manage contributions to your project.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repository
+</td>
+<td style="text-align:left;">
+A repository (repo) is the most basic element of GitHub. They’re easiest to imagine as a project’s folder. A repository contains all of the project files (including documentation), and stores each file’s revision history. Repositories can have multiple collaborators and can be either public or private.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMarkdown
+</td>
+<td style="text-align:left;">
+Rmarkdown is a package and filetype that are deeply embedded with RStudio to allow the integration of Markdown and output chunks of programming code (such as R) to publish a variety of different file types
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+personal access token
+</td>
+<td style="text-align:left;">
+A token that is used in place of a password when performing Git operations over HTTPS. Also called a PAT.
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="reports-with-rmarkdown-week-five.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-GitHub.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
