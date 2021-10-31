@@ -458,11 +458,11 @@ ggsave("figures/infant mortality graph.png", plot=mortality_figure, dpi=900, wid
 
 **n.** Save, stage, commit
 
-**o** Let's do one more cool and fun thing! And make an interactive version of our plot - just for fun!
+**o** Let's do one more cool and fun thing! And make an interactive version of our plot using plotly @R-plotly just for fun!
 
 ```{r}
 ggplotly(mortality_figure, tooltip = c("infant_mortality_rate"))
-
+## uses plotly package
 ```
 
 **p** Now save, stage, commit & **push**

@@ -3820,11 +3820,12 @@ HINT - use \texttt{geom\_line()} and remember to separate countries by colour
 
 \textbf{n.} Save, stage, commit
 
-\textbf{o} Let's do one more cool and fun thing! And make an interactive version of our plot - just for fun!
+\textbf{o} Let's do one more cool and fun thing! And make an interactive version of our plot using plotly \citet{R-plotly} just for fun!
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplotly}\NormalTok{(mortality\_figure, }\AttributeTok{tooltip =} \FunctionTok{c}\NormalTok{(}\StringTok{"infant\_mortality\_rate"}\NormalTok{))}
+\DocumentationTok{\#\# uses plotly package}
 \end{Highlighting}
 \end{Shaded}
 
