@@ -192,7 +192,7 @@
 
 \title{Data Science for Biologists - 5023Y}
 \author{Philip Leftwich}
-\date{2021-10-29}
+\date{2021-10-31}
 
 \begin{document}
 \maketitle
@@ -2951,11 +2951,17 @@ Blackboard ``Week Four Test''
 
 \href{https://www.rstudio.com/resources/cheatsheets/}{R Cheat Sheets}
 
-\url{https://clauswilke.com/dataviz/}
+\citet{dataviz} \url{https://clauswilke.com/dataviz/}
+
+\emph{this book tells you everything you need to know about presenting your figures for accessbility and clarity}
 
 \url{https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/}
 
-\url{https://ggplot2-book.org/}
+\emph{an incredibly handy ggplot guide for how to build and improve your figures}
+
+\citet{ggplot} \url{https://ggplot2-book.org/}
+
+\emph{the original Hadley Wickham book on ggplot2}
 
 \hypertarget{reports-with-rmarkdown---week-five}{%
 \chapter{Reports with Rmarkdown - Week Five}\label{reports-with-rmarkdown---week-five}}
@@ -3229,7 +3235,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 ` r Sys.Date()`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-29
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-10-31
 
 The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g.~to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks \emph{earlier} in the script.
 
@@ -3393,7 +3399,11 @@ Remember your code blocks must be in the right order!!!
 \hypertarget{further-reading-guides-and-tips-1}{%
 \section{Further Reading, Guides and tips}\label{further-reading-guides-and-tips-1}}
 
-\citet{xie2015}
+\href{https://www.rstudio.com/resources/cheatsheets/}{R Cheat Sheets}
+
+\citet{xie2015} Dynamic documents with Rmarkdown
+
+\emph{The fully comprehensive guide}
 
 (\url{https://rmarkdown.rstudio.com/articles_intro.html})
 
@@ -3868,6 +3878,13 @@ RMarkdown & Rmarkdown is a package and filetype that are deeply embedded with RS
 personal access token & A token that is used in place of a password when performing Git operations over HTTPS. Also called a PAT.\\
 \hline
 \end{tabular}
+
+\hypertarget{further-reading-guides-and-tips-2}{%
+\section{Further Reading, Guides and tips}\label{further-reading-guides-and-tips-2}}
+
+\citet{happygit} \url{https://happygitwithr.com/}
+
+\emph{The definitive guide}
 
 *\href{https://www.rstudio.com/resources/cheatsheets/}{R Cheat Sheets}
 

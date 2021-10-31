@@ -150,3 +150,4 @@ turn-back-time-with-git
 exercise-2.-github-classrooms-enabled-r-projects-with-subfolders
 find-your-classroom-repos
 glossary-github
+further-reading-guides-and-tips-2

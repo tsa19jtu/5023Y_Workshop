@@ -789,12 +789,17 @@ scat <-
 
 [R Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
 
-https://clauswilke.com/dataviz/
+@dataviz https://clauswilke.com/dataviz/
+
+*this book tells you everything you need to know about presenting your figures for accessbility and clarity*
 
 https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/
 
-https://ggplot2-book.org/
+*an incredibly handy ggplot guide for how to build and improve your figures*
 
+@ggplot https://ggplot2-book.org/
+
+*the original Hadley Wickham book on ggplot2*
 
 
 

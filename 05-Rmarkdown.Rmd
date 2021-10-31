@@ -404,7 +404,11 @@ Remember your code blocks must be in the right order!!!
 
 ## Further Reading, Guides and tips
 
-@xie2015
+[R Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
+
+@xie2015 Dynamic documents with Rmarkdown
+
+*The fully comprehensive guide*
 
 (https://rmarkdown.rstudio.com/articles_intro.html)
 
