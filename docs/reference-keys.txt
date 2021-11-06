@@ -111,6 +111,8 @@ patchwork
 test
 saving
 quitting-3
+summing-up-ggplot
+what-we-learned-1
 further-reading-guides-and-tips
 reports-with-rmarkdown---week-five
 format
@@ -132,6 +134,8 @@ tables
 self-contained-documents
 source-files
 exercise---make-your-own-rmd-document
+summing-up-rmarkdown
+what-we-learned-2
 further-reading-guides-and-tips-1
 version-control-with-github---week-six
 lets-git-it-started
@@ -150,4 +154,6 @@ turn-back-time-with-git
 exercise-2.-github-classrooms-enabled-r-projects-with-subfolders
 find-your-classroom-repos
 glossary-github
+summing-up-github
+what-we-learned-3
 further-reading-guides-and-tips-2

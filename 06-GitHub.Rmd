@@ -513,7 +513,29 @@ text_tbl %>%
 
 ```
 
-## Further Reading, Guides and tips
+
+## Summing up GitHub
+
+### What we learned
+
+You have learned
+
+* How to fork and clone GitHub Projects
+
+* How to use GitHub classrooms
+
+* How to make RStudio and GitHub talk to each other
+
+* How to use version control, with stage, commit and push
+
+You have used
+
+* `gitcreds` @R-gitcreds
+
+* `usethis` @R-usethis
+
+
+### Further Reading, Guides and tips
 
 @happygit https://happygitwithr.com/
 

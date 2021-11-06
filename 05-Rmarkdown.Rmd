@@ -402,7 +402,32 @@ Remember your code blocks must be in the right order!!!
 
 ```
 
-## Further Reading, Guides and tips
+## Summing up Rmarkdown
+
+### What we learned
+
+You have learned
+
+* How to use markdown
+
+* How to embed R chunks, to produce code, figures and analyses
+
+* How to organise projects with `here`
+
+* How to knit to pdf and html outputs
+
+* How to make simple tables
+
+You have used
+
+* `knitr` as part of Rmarkdown
+
+* `kableExtra` @R-kableExtra
+
+* `here` @R-here
+
+
+### Further Reading, Guides and tips
 
 [R Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
 

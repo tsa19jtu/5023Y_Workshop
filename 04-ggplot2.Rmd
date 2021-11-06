@@ -784,8 +784,34 @@ scat <-
 
 ```
 
+## Summing up ggplot
 
-## Further Reading, Guides and tips
+### What we learned
+
+You have learned
+
+* The anatomy of ggplots
+
+* How to add geoms on different layers
+
+* How to use colour, colour palettes, facets, labels and themes
+
+* Putting together multiple figures
+
+* How to save and export images
+
+You have primarily worked with `tidyverse` and the package
+
+* `ggplot2` @R-ggplot2
+
+
+As well as:
+
+* `colorBlindness` @R-colorBlindness
+
+* `patchwork` @R-patchwork
+
+### Further Reading, Guides and tips
 
 [R Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
 
