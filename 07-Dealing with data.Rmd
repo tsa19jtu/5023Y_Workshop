@@ -1,0 +1,86 @@
+
+# Dealing with data: dplyr - Week Eight
+
+```{r , echo=FALSE, eval=TRUE, include=TRUE}
+klippy::klippy(c('r', 'bash'), position = c('top', 'right'), tooltip_message = 'copy to clipboard', tooltip_success = 'Copied!')
+```
+
+```{r include=FALSE}
+knitr::opts_chunk$set(eval=FALSE)
+```
+
+
+## Introduction to dplyr
+
+
+### select
+
+### mutate
+
+### filter
+
+
+### arrange
+
+## Group and summarise
+
+## Strings
+
+## Dates and times
+
+## Pivot
+
+
+
+
+
+```{block, type="rmdwarning"}
+Make a careful note of
+
+* The username you choose
+
+* Use the same email you have signed up to RStudio Cloud with
+
+* Note your password carefully! 
+
+```
+
+
+
+```{r fork, echo=FALSE, eval=TRUE}
+knitr::include_graphics("images/fork.png")
+```
+
+
+A fork is when you generate a *personal* copy of another user's repository (\@ref(glossary-github)).
+
+
+
+
+## Summing up GitHub
+
+### What we learned
+
+You have learned
+
+* How to fork and clone GitHub Projects
+
+* How to use GitHub classrooms
+
+* How to make RStudio and GitHub talk to each other
+
+* How to use version control, with stage, commit and push
+
+You have used
+
+* `gitcreds` @R-gitcreds
+
+* `usethis` @R-usethis
+
+
+### Further Reading, Guides and tips
+
+@happygit https://happygitwithr.com/
+
+*The definitive guide*
+
