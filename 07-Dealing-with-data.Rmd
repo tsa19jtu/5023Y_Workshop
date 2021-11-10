@@ -1,0 +1,401 @@
+
+# Dealing with data: dplyr - Week Eight
+
+```{r , echo=FALSE, eval=TRUE, include=TRUE}
+klippy::klippy(c('r', 'bash'), position = c('top', 'right'), tooltip_message = 'copy to clipboard', tooltip_success = 'Copied!')
+```
+
+```{r include=FALSE}
+knitr::opts_chunk$set(eval=FALSE)
+```
+
+
+## Introduction to dplyr
+
+In chapters 3 and 4 we demonstrated a brief data analysis on the `palmerpenguins` dataset. We ran through several pipelines, but without going into huge amounts of detail on each section. 
+
+In this chapter we are going to get really well acquainted with **dplyr** @R-dplyr. 
+
+We will look at several core functions:
+
+* select (get some columns)
+
+* filter (get some rows)
+
+* arrange (order the rows)
+
+* mutate (make new columns)
+
+* group_by (add grouping information)
+
+* summarise (calculate summary information)
+
+You should make careful notes about these functions and what they do. Build scripts with carefully added notes that you can use for future work
+
+As you work through this (and other chapters) - make notes, if you take a break, set up a commit, or reach the end of a session - push your work to Github.
+
+Make sure you are using the [R Cheat Sheets for dplyr](https://www.rstudio.com/resources/cheatsheets/)
+
+### select
+
+Start by setting up the packages you will need for this session
+
+```{r}
+library(tidyverse)
+library(lubridate)
+
+penguins <- read_csv("data/penguins_simple.csv")
+```
+> ** Note - if you don't have these packages available, then you will need to run `install.packages("tidyverse")` - you should do this in the *console* and **not** your script. 
+
+We use select to *select variables* from a dataframe or tibble. for example:
+
+```
+data_set %>% 
+  select(variable_1, variable_2)
+```
+> ** Note this is *pseudocode* an example, not something you should run.
+
+* The data is piped into the first argument position of the `select` function
+
+* We then include the arguments where each one is the name of a variable in the dataset
+
+For example if we actually run this:
+
+```{r}
+penguins %>% 
+  select(flipper_length_mm)
+```
+
+To look at flipper length - we should note a couple of things.
+
+* Variable name is **not** in quotes
+
+* The original data is unchanged e.g. penguins. Unless we assign the results of `select` with the assignment arrow (<-), the results will just be printed in the console
+
+* The order you ask for the variables in `select` determines the order of the columns in any new dataset
+
+* `select` returns a tibble
+
+* If we want to keep most variables, but *remove one*, use the minus operator
+
+```{r}
+penguins <- penguins %>% 
+  select(-flipper_length_mm)
+
+```
+
+```{block, type="rmdwarning"}
+In the above option we just *overwrote* the penguin dataset with a new version that *does not* contain flipper length. 
+Be careful - the above code will thrown an error message if you try to run it again (there is no longer a flipper length variable to remove). 
+If you want to *undo* this, the easiest way is to re-run your script to just before this line, so you
+
+```
+
+You can also use select to keep sets of consecutive variables together
+
+```{r}
+penguins %>% 
+  select(species:flipper_length_mm)
+```
+
+There are also a number of helper functions like `starts_with`, `ends_with`, `contains`, `matches`. So if we want to keep all the variables that start with "b"
+
+```{r}
+penguins %>% 
+  select(starts_with("b"))
+
+```
+
+### mutate
+
+Adding or creating new variables is a common task, we might want to make a log-transformation, subtract one value from another or use `mutate` to add a new date variable
+
+```{r}
+penguins <- penguins %>% 
+  mutate(date_proper=dmy(date))
+
+```
+
+Sometimes we want to change the values being used. For example we might want to change "male" and "female" to some abbreviation like "M" and "F". (Probably not, but it's an example!).
+
+```{r}
+  penguins %>% 
+  mutate(sex=case_when(sex == "male" ~ "M",
+                       sex == "female" ~ "F"))
+
+```
+
+Things to know about `mutate`:
+
+* Unless we assign the results of `mutate` back to an object (<-) the changes won't be saved
+
+* We can use newly created variables in further calculations *within* the same `mutate`
+
+### filter
+
+`filter` is used to subset observations in a dataframe. We might want to see the observations where `flipper_length_mm` is larger or smaller than a fixed value. Or we might want to only see the data from female penguins, or a particular species. 
+
+```{r}
+penguins %>% 
+  filter(sex == "female",
+         species == "Adelie",
+         flipper_length_mm < 180)
+
+```
+
+In this example we've created a subset of `penguins` that only includes the five observations where flipper length is less than 180mm in female, Adelie penguins. 
+
+We can also set an either/or filter, for example if we only want small & large flipper lengths.
+
+```{r}
+penguins %>% 
+  filter(species == "Adelie", 
+         flipper_length_mm <180 | 
+           flipper_length_mm >200)
+
+```
+
+This creates a subset of Adelie penguins, that only includes 14 observations where flipper length is less than 180mm or greater than 200mm. 
+
+The vertical bar | is understood by R as OR. 
+
+The alternative is to look at values *between* two amounts
+
+```{r}
+penguins %>% 
+  filter(species == "Adelie",
+         between(flipper_length_mm, 180,200))
+
+```
+
+
+### Arrange
+
+We use arrange to reorder the rows of our data. 
+
+## Group and summarise
+
+Very often we want to make calculations aobut groups of observations, such as the mean or median. We are often interested in comparing responses among groups. For example, we previously found the number of distinct penguins in our entire dataset
+
+```{r}
+penguins %>% 
+  summarise(n_distinct(penguin_id))
+
+```
+
+Now consider when the groups are subsets of observations, as when we find out the number of penguins in each species and sex
+
+```{r}
+penguins %>% 
+  group_by(species, sex) %>% 
+  summarise(n_distinct(penguin_id))
+
+```
+
+We are using summarise and group_by a lot! They are very powerful functions:
+
+* `group_by` adds *grouping* information into a data object, so that subsequent calculations happen on a *group-specific* basis. 
+
+* `summarise` is a data aggregation function thart calculates summaries of one or more variables, and it will do this separately for any groups defined by `group_by`
+
+### Using summarise
+
+```{r}
+penguins %>% 
+  summarise(mean_flipper_length = mean(flipper_length_mm, na.rm=TRUE),
+   mean_bill_length = mean(bill_length_mm, na.rm=TRUE))
+
+```
+> **Note - we provide informative names for ourselves on the left side of the =. 
+
+There are a number of different calculations we can use including:
+
+* `min` and `max` to calculate minimum and maximum values of a vector
+
+* `mean` and `median` 
+
+* `sd` and `var` calculate standard deviation and variance of a numeric vector
+
+We can use several functions in `summarise`. Which means we can string several calculations together in a single step
+
+```{r}
+penguins %>% 
+  summarise(n=n(),
+            num_penguins = n_distinct(penguin_id),
+            mean_flipper_length = mean(flipper_length_mm, na.rm=TRUE),
+            prop_female = sum(sex == "female", na.rm=TRUE) / n())
+            
+
+```
+> **Note - we have placed each argument on a separate line. This is just stylistic, it makes the code easier to read. 
+
+
+### Summarize all columns
+
+We can use the function `across` to count up the number of NAs in every column (by specifying `everything`). 
+
+```{r}
+
+penguins %>% 
+  summarise(across(.cols = everything(), 
+                   .fns = ~sum(is.na(.)))) %>% 
+  glimpse()
+
+```
+
+It has two arguments, `.cols` and `.fns`. The `.cols` argument lets you specify column types, while the `.fns` argument applies the required function to all of the selected columns. 
+
+
+```{r}
+# the mean of ALL numeric columns in the data, where(is.numeric) hunts for numeric columns
+
+penguins %>% 
+  summarise(across(.cols = where(is.numeric), 
+                   .fns = ~mean(., na.rm=TRUE)))
+
+```
+
+The above example calculates the means of any & all numeric variables in the dataset. 
+
+The below example is a slightly complicated way of running the n_distinct for summarise. The `.cols()` looks for any column that contains the word "penguin" and runs the `n_distinct()`command of these
+
+```{r}
+# number of distinct penguins, as only one column contains the word penguin
+
+penguins %>% 
+  summarise(across(.cols = contains("penguin"), 
+                   .fns = ~n_distinct(.))) %>% 
+  glimpse()
+
+```
+### group_by summary
+
+The `group_by` function provides the ability to separate our summary functions according to any subgroups we wish to make. The real magic happens when we pair this with `summarise` and `mutate`.
+
+In this example, by grouping on the individual penguin ids, then summarising by n - we can see how many times each penguin was monitored in the course of this study. 
+
+```{r}
+penguin_stats <- penguins %>% 
+  group_by(penguin_id) %>% 
+  summarise(num=n())
+```
+> **Note - the actions of group_by are powerful, but group_by on its own doesn't change the visible structure of the dataframe. 
+
+### More than one grouping variable
+
+What if we need to calculate by more than one variable at a time? 
+
+```{r}
+penguins_grouped <- penguins %>% 
+  group_by(sex, species)
+
+```
+
+ We can then calculate the mean flipper length of penguins in each of the six combinations
+
+```{r}
+penguin_summary <- penguins_grouped %>% 
+summarise(mean_flipper = mean(flipper_length_mm, na.rm=TRUE))
+```
+
+Now the first row of our summary table shows us the mean flipper length (in mm) for female Adelie penguins. There are eight rows in total, six unique combinations and two rows where the sex of the penguins was not recorded(`NA`)
+
+#### using group_by with mutate
+
+When `mutate` is used with a grouped object, the calculations occur by 'group'. Here's an example:
+
+```{r}
+centered_penguins <- penguins %>% 
+  group_by(sex, species) %>% 
+  mutate(flipper_centered = flipper_length_mm-mean(flipper_length_mm, na.rm=TRUE))
+
+```
+
+Here we are calculating a **group centered mean**, this new variable contains the *difference* between each observation and the mean of whichever group that observation is in. 
+
+### remove group_by
+
+On occasion we may need to remove the grouping information from a dataset. This is often required when we string pipes together, when we need to work using a grouping structure, then revert back to the whole dataset again
+
+Look at our grouped dataframe, and we can see the information on groups is at the top of the data:
+
+```
+# A tibble: 344 x 10
+# Groups:   sex, species [8]
+   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g
+   <chr>   <chr>           <dbl>         <dbl>            <dbl>       <dbl>
+ 1 Adelie  Torge~           39.1          18.7              181        3750
+ 2 Adelie  Torge~           39.5          17.4              186        3800
+ 3 Adelie  Torge~           40.3          18                195        3250
+ ```
+
+
+```{r}
+centered_penguins %>% 
+  ungroup()
+
+```
+
+Look at this output - you can see the information on groups has now been removed from the data. 
+
+
+## Strings
+
+## Dates and times
+
+## Pivot
+
+
+
+
+
+```{block, type="rmdwarning"}
+Make a careful note of
+
+* The username you choose
+
+* Use the same email you have signed up to RStudio Cloud with
+
+* Note your password carefully! 
+
+```
+
+
+
+```{r fork, echo=FALSE, eval=TRUE}
+knitr::include_graphics("images/fork.png")
+```
+
+
+A fork is when you generate a *personal* copy of another user's repository (\@ref(glossary-github)).
+
+
+
+
+## Summing up GitHub
+
+### What we learned
+
+You have learned
+
+* How to fork and clone GitHub Projects
+
+* How to use GitHub classrooms
+
+* How to make RStudio and GitHub talk to each other
+
+* How to use version control, with stage, commit and push
+
+You have used
+
+* `gitcreds` @R-gitcreds
+
+* `usethis` @R-usethis
+
+
+### Further Reading, Guides and tips
+
+[R Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
+
+
