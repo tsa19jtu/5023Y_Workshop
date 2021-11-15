@@ -192,7 +192,7 @@
 
 \title{Data Science for Biologists - 5023Y}
 \author{Philip Leftwich}
-\date{2021-11-06}
+\date{2021-11-15}
 
 \begin{document}
 \maketitle
@@ -3273,7 +3273,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 ` r Sys.Date()`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-11-06
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead 2021-11-15
 
 The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g.~to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks \emph{earlier} in the script.
 
@@ -3984,6 +3984,555 @@ You have used
 \citet{happygit} \url{https://happygitwithr.com/}
 
 \emph{The definitive guide}
+
+\hypertarget{dealing-with-data-dplyr---week-eight}{%
+\chapter{Dealing with data: dplyr - Week Eight}\label{dealing-with-data-dplyr---week-eight}}
+
+\hypertarget{lets-get-going}{%
+\section{Let's get going}\label{lets-get-going}}
+
+You need to accept the latest assignment from \href{https://classroom.github.com/a/ifsL9ZE1}{Github Classrooms}.
+
+We will be using this project until the end of term, so make sure you make regular commits, and push your work at the end of each session.
+
+\hypertarget{introduction-to-dplyr}{%
+\section{Introduction to dplyr}\label{introduction-to-dplyr}}
+
+In chapters 3 and 4 we demonstrated a brief data analysis on the \texttt{palmerpenguins} dataset. We ran through several pipelines, but without going into huge amounts of detail on each section.
+
+In this chapter we are going to get really well acquainted with \textbf{dplyr} \citet{R-dplyr}.
+
+We will look at several core functions:
+
+\begin{itemize}
+\item
+  \texttt{select} (get some columns)
+\item
+  \texttt{filter} (get some rows)
+\item
+  \texttt{arrange} (order the rows)
+\item
+  \texttt{mutate} (make new columns)
+\item
+  \texttt{group\_by} (add grouping information)
+\item
+  \texttt{summarise} (calculate summary information)
+\end{itemize}
+
+You should make careful notes about these functions and what they do. Build scripts with carefully added notes that you can use for future work
+
+As you work through this (and other chapters) - make notes, if you take a break, set up a commit, or reach the end of a session - push your work to Github.
+
+Make sure you are using the \href{https://www.rstudio.com/resources/cheatsheets/}{R Cheat Sheets for dplyr}
+
+\hypertarget{select}{%
+\section{select}\label{select}}
+
+Start by setting up the packages you will need for this session
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(lubridate)}
+
+\NormalTok{penguins }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/penguins\_simple.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+** Note - if you don't have these packages available, then you will need to run \texttt{install.packages("tidyverse")} - you should do this in the \emph{console} and \textbf{not} your script.
+\end{quote}
+
+We use select to \emph{select variables} from a dataframe or tibble. for example:
+
+\begin{verbatim}
+data_set %>% 
+  select(variable_1, variable_2)
+\end{verbatim}
+
+\begin{quote}
+** Note this is \emph{pseudocode} an example, not something you should run.
+\end{quote}
+
+\begin{itemize}
+\item
+  The data is piped into the first argument position of the \texttt{select} function
+\item
+  We then include the arguments where each one is the name of a variable in the dataset
+\end{itemize}
+
+For example if we actually run this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(flipper\_length\_mm)}
+\end{Highlighting}
+\end{Shaded}
+
+To look at flipper length - we should note a couple of things.
+
+\begin{itemize}
+\item
+  Variable name is \textbf{not} in quotes
+\item
+  The original data is unchanged e.g.~penguins. Unless we assign the results of \texttt{select} with the assignment arrow (\textless-), the results will just be printed in the console
+\item
+  The order you ask for the variables in \texttt{select} determines the order of the columns in any new dataset
+\item
+  \texttt{select} returns a tibble
+\item
+  If we want to keep most variables, but \emph{remove one}, use the minus operator
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\OtherTok{\textless{}{-}}\NormalTok{ penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{flipper\_length\_mm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdwarning}
+In the above option we just \emph{overwrote} the penguin dataset with a
+new version that \emph{does not} contain flipper length. Be careful -
+the above code will thrown an error message if you try to run it again
+(there is no longer a flipper length variable to remove). If you want to
+\emph{undo} this, the easiest way is to re-run your script to just
+before this line, so you
+\end{rmdwarning}
+
+You can also use select to keep sets of consecutive variables together
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(species}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm)}
+\end{Highlighting}
+\end{Shaded}
+
+There are also a number of helper functions like \texttt{starts\_with}, \texttt{ends\_with}, \texttt{contains}, \texttt{matches}. So if we want to keep all the variables that start with ``b''
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"b"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{mutate}{%
+\section{mutate}\label{mutate}}
+
+Adding or creating new variables is a common task, we might want to make a log-transformation, subtract one value from another or use \texttt{mutate} to add a new date variable
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\OtherTok{\textless{}{-}}\NormalTok{ penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{date\_proper=}\FunctionTok{dmy}\NormalTok{(date))}
+\end{Highlighting}
+\end{Shaded}
+
+Sometimes we want to change the values being used. For example we might want to change ``male'' and ``female'' to some abbreviation like ``M'' and ``F''. (Probably not, but it's an example!).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{sex=}\FunctionTok{case\_when}\NormalTok{(sex }\SpecialCharTok{==} \StringTok{"male"} \SpecialCharTok{\textasciitilde{}} \StringTok{"M"}\NormalTok{,}
+\NormalTok{                       sex }\SpecialCharTok{==} \StringTok{"female"} \SpecialCharTok{\textasciitilde{}} \StringTok{"F"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Things to know about \texttt{mutate}:
+
+\begin{itemize}
+\item
+  Unless we assign the results of \texttt{mutate} back to an object (\textless-) the changes won't be saved
+\item
+  We can use newly created variables in further calculations \emph{within} the same \texttt{mutate}
+\end{itemize}
+
+\hypertarget{filter}{%
+\section{filter}\label{filter}}
+
+\texttt{filter} is used to subset observations in a dataframe. We might want to see the observations where \texttt{flipper\_length\_mm} is larger or smaller than a fixed value. Or we might want to only see the data from female penguins, or a particular species.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(sex }\SpecialCharTok{==} \StringTok{"female"}\NormalTok{,}
+\NormalTok{         species }\SpecialCharTok{==} \StringTok{"Adelie"}\NormalTok{,}
+\NormalTok{         flipper\_length\_mm }\SpecialCharTok{\textless{}} \DecValTok{180}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+In this example we've created a subset of \texttt{penguins} that only includes the five observations where flipper length is less than 180mm in female, Adelie penguins.
+
+We can also set an either/or filter, for example if we only want small \& large flipper lengths.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(species }\SpecialCharTok{==} \StringTok{"Adelie"}\NormalTok{, }
+\NormalTok{         flipper\_length\_mm }\SpecialCharTok{\textless{}}\DecValTok{180} \SpecialCharTok{|} 
+\NormalTok{           flipper\_length\_mm }\SpecialCharTok{\textgreater{}}\DecValTok{200}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This creates a subset of Adelie penguins, that only includes 14 observations where flipper length is less than 180mm or greater than 200mm.
+
+The vertical bar \textbar{} is understood by R as OR.
+
+The alternative is to look at values \emph{between} two amounts
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(species }\SpecialCharTok{==} \StringTok{"Adelie"}\NormalTok{,}
+         \FunctionTok{between}\NormalTok{(flipper\_length\_mm, }\DecValTok{180}\NormalTok{,}\DecValTok{200}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{arrange}{%
+\section{arrange}\label{arrange}}
+
+We use arrange to reorder the rows of our data. Instances where we `need' to do this are rare. But we may often want to reorder rows so that we can understand the data more easily
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins\_ordered }\OtherTok{\textless{}{-}}\NormalTok{ penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(sex,body\_mass\_g)}
+
+\CommentTok{\# arrange data first by sex {-} all females then all males, within each sex order body mass from low to high}
+  
+\NormalTok{penguins\_ordered }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(penguin\_id, sex, body\_mass\_g)}
+\CommentTok{\# view just a few variables}
+\end{Highlighting}
+\end{Shaded}
+
+By default arrange sorts from low to high (and alphabetically) - we can reverse this if we wrap the variable names in the function \texttt{desc}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins\_reverse\_ordered }\OtherTok{\textless{}{-}}\NormalTok{ penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(sex,body\_mass\_g))}
+
+
+  
+\NormalTok{penguins\_reverse\_ordered }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(penguin\_id, sex, body\_mass\_g)}
+
+
+\CommentTok{\# we can also apply this to specific variables}
+\NormalTok{penguins\_reverse\_ordered }\OtherTok{\textless{}{-}}\NormalTok{ penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(sex,}\FunctionTok{desc}\NormalTok{(body\_mass\_g))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{group-and-summarise}{%
+\section{Group and summarise}\label{group-and-summarise}}
+
+Very often we want to make calculations aobut groups of observations, such as the mean or median. We are often interested in comparing responses among groups. For example, we previously found the number of distinct penguins in our entire dataset
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{n\_distinct}\NormalTok{(penguin\_id))}
+\end{Highlighting}
+\end{Shaded}
+
+Now consider when the groups are subsets of observations, as when we find out the number of penguins in each species and sex
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species, sex) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{n\_distinct}\NormalTok{(penguin\_id))}
+\end{Highlighting}
+\end{Shaded}
+
+We are using summarise and group\_by a lot! They are very powerful functions:
+
+\begin{itemize}
+\item
+  \texttt{group\_by} adds \emph{grouping} information into a data object, so that subsequent calculations happen on a \emph{group-specific} basis.
+\item
+  \texttt{summarise} is a data aggregation function thart calculates summaries of one or more variables, and it will do this separately for any groups defined by \texttt{group\_by}
+\end{itemize}
+
+\hypertarget{using-summarise}{%
+\subsection{Using summarise}\label{using-summarise}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_flipper\_length =} \FunctionTok{mean}\NormalTok{(flipper\_length\_mm, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{),}
+   \AttributeTok{mean\_bill\_length =} \FunctionTok{mean}\NormalTok{(bill\_length\_mm, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+**Note - we provide informative names for ourselves on the left side of the =.
+\end{quote}
+
+There are a number of different calculations we can use including:
+
+\begin{itemize}
+\item
+  \texttt{min} and \texttt{max} to calculate minimum and maximum values of a vector
+\item
+  \texttt{mean} and \texttt{median}
+\item
+  \texttt{sd} and \texttt{var} calculate standard deviation and variance of a numeric vector
+\end{itemize}
+
+We can use several functions in \texttt{summarise}. Which means we can string several calculations together in a single step
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n=}\FunctionTok{n}\NormalTok{(),}
+            \AttributeTok{num\_penguins =} \FunctionTok{n\_distinct}\NormalTok{(penguin\_id),}
+            \AttributeTok{mean\_flipper\_length =} \FunctionTok{mean}\NormalTok{(flipper\_length\_mm, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{prop\_female =} \FunctionTok{sum}\NormalTok{(sex }\SpecialCharTok{==} \StringTok{"female"}\NormalTok{, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+**Note - we have placed each argument on a separate line. This is just stylistic, it makes the code easier to read.
+\end{quote}
+
+\hypertarget{summarize-all-columns}{%
+\subsection{Summarize all columns}\label{summarize-all-columns}}
+
+We can use the function \texttt{across} to count up the number of NAs in every column (by specifying \texttt{everything}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\AttributeTok{.cols =} \FunctionTok{everything}\NormalTok{(), }
+                   \AttributeTok{.fns =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.)))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{glimpse}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+It has two arguments, \texttt{.cols} and \texttt{.fns}. The \texttt{.cols} argument lets you specify column types, while the \texttt{.fns} argument applies the required function to all of the selected columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# the mean of ALL numeric columns in the data, where(is.numeric) hunts for numeric columns}
+
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\AttributeTok{.cols =} \FunctionTok{where}\NormalTok{(is.numeric), }
+                   \AttributeTok{.fns =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(., }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+The above example calculates the means of any \& all numeric variables in the dataset.
+
+The below example is a slightly complicated way of running the n\_distinct for summarise. The \texttt{.cols()} looks for any column that contains the word ``penguin'' and runs the \texttt{n\_distinct()}command of these
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# number of distinct penguins, as only one column contains the word penguin}
+
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\AttributeTok{.cols =} \FunctionTok{contains}\NormalTok{(}\StringTok{"penguin"}\NormalTok{), }
+                   \AttributeTok{.fns =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{n\_distinct}\NormalTok{(.))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{glimpse}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{group_by-summary}{%
+\subsection{group\_by summary}\label{group_by-summary}}
+
+The \texttt{group\_by} function provides the ability to separate our summary functions according to any subgroups we wish to make. The real magic happens when we pair this with \texttt{summarise} and \texttt{mutate}.
+
+In this example, by grouping on the individual penguin ids, then summarising by n - we can see how many times each penguin was monitored in the course of this study.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguin\_stats }\OtherTok{\textless{}{-}}\NormalTok{ penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(penguin\_id) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{num=}\FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+**Note - the actions of group\_by are powerful, but group\_by on its own doesn't change the visible structure of the dataframe.
+\end{quote}
+
+\hypertarget{more-than-one-grouping-variable}{%
+\subsection{More than one grouping variable}\label{more-than-one-grouping-variable}}
+
+What if we need to calculate by more than one variable at a time?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins\_grouped }\OtherTok{\textless{}{-}}\NormalTok{ penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(sex, species)}
+\end{Highlighting}
+\end{Shaded}
+
+We can then calculate the mean flipper length of penguins in each of the six combinations
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguin\_summary }\OtherTok{\textless{}{-}}\NormalTok{ penguins\_grouped }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_flipper =} \FunctionTok{mean}\NormalTok{(flipper\_length\_mm, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Now the first row of our summary table shows us the mean flipper length (in mm) for female Adelie penguins. There are eight rows in total, six unique combinations and two rows where the sex of the penguins was not recorded(\texttt{NA})
+
+\hypertarget{using-group_by-with-mutate}{%
+\subsubsection{using group\_by with mutate}\label{using-group_by-with-mutate}}
+
+When \texttt{mutate} is used with a grouped object, the calculations occur by `group'. Here's an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{centered\_penguins }\OtherTok{\textless{}{-}}\NormalTok{ penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(sex, species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{flipper\_centered =}\NormalTok{ flipper\_length\_mm}\SpecialCharTok{{-}}\FunctionTok{mean}\NormalTok{(flipper\_length\_mm, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Here we are calculating a \textbf{group centered mean}, this new variable contains the \emph{difference} between each observation and the mean of whichever group that observation is in.
+
+\hypertarget{remove-group_by}{%
+\subsection{remove group\_by}\label{remove-group_by}}
+
+On occasion we may need to remove the grouping information from a dataset. This is often required when we string pipes together, when we need to work using a grouping structure, then revert back to the whole dataset again
+
+Look at our grouped dataframe, and we can see the information on groups is at the top of the data:
+
+\begin{verbatim}
+# A tibble: 344 x 10
+# Groups:   sex, species [8]
+   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g
+   <chr>   <chr>           <dbl>         <dbl>            <dbl>       <dbl>
+ 1 Adelie  Torge~           39.1          18.7              181        3750
+ 2 Adelie  Torge~           39.5          17.4              186        3800
+ 3 Adelie  Torge~           40.3          18                195        3250
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{centered\_penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Look at this output - you can see the information on groups has now been removed from the data.
+
+\hypertarget{dealing-with-data-part-2---week-nine}{%
+\chapter{Dealing with data part 2 - Week Nine}\label{dealing-with-data-part-2---week-nine}}
+
+In this chapter we go through some more miscellaneous topics around dealing with data.
+
+\hypertarget{pipes}{%
+\section{Pipes}\label{pipes}}
+
+As you have seen we often link our dplyr verbs together with \texttt{pipes}. Using one function after another e.g.~\texttt{mutate} then \texttt{group\_by} and perhaps \texttt{summarise}
+The pipe \%\textgreater\% allows us to make ``human-readable'' an logical strings of instructions.
+
+The two below examples of pseudocode would be read identically by R - but which one is easier for you to understand?
+
+\includegraphics[width=0.8\linewidth]{images/pipe}
+
+One way we can try and breakdown the complexity of multiple nested brackets is to make lots of ``intermediate'' R objects:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins\_grouped }\OtherTok{\textless{}{-}} \FunctionTok{group\_by}\NormalTok{(penguins, species, sex)}
+
+\NormalTok{penguins\_grouped\_full }\OtherTok{\textless{}{-}} \FunctionTok{drop\_na}\NormalTok{(penguins\_grouped, sex)}
+
+\NormalTok{penguins\_flipper\_length }\OtherTok{\textless{}{-}} \FunctionTok{summarise}\NormalTok{(penguins\_grouped\_full, }\AttributeTok{mean=}\FunctionTok{mean}\NormalTok{(flipper\_length\_mm, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\NormalTok{penguins\_flipper\_length}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+**Note - nothing wrong with this, but look at how many R objects are cluttering up your environment tab which you will probably never use again!
+\end{quote}
+
+Or\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species, sex) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{drop\_na}\NormalTok{(sex) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean=}\FunctionTok{mean}\NormalTok{(flipper\_length\_mm))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+**Note - check for yourself whether the outcome is identical
+\end{quote}
+
+\hypertarget{strings}{%
+\section{Strings}\label{strings}}
+
+Datasets often contain words, and we call these words ``strings''. Often these aren't quite how we want them to be, but we can manipulate these as much as we like.
+
+\hypertarget{separate}{%
+\subsection{separate}\label{separate}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{label=}\FunctionTok{c}\NormalTok{(}\StringTok{"a{-}1"}\NormalTok{, }\StringTok{"a{-}2"}\NormalTok{, }\StringTok{"a{-}3"}\NormalTok{))}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{separate}\NormalTok{(label, }\FunctionTok{c}\NormalTok{(}\StringTok{"treatment"}\NormalTok{, }\StringTok{"replicate"}\NormalTok{), }\AttributeTok{sep=}\StringTok{"{-}"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We started with one variable called \texttt{label} and then split it into two variables, \texttt{treatment} and \texttt{replicate}, with the split made where \texttt{-} occurs.
+The opposite of this function is \texttt{unite()}
+
+\hypertarget{more-stringr}{%
+\subsection{More stringr}\label{more-stringr}}
+
+Check out (\url{https://stringr.tidyverse.org/index.html}) \citet{R-stringr}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{species=}\FunctionTok{str\_to\_upper}\NormalTok{(species))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{species=}\FunctionTok{str\_remove\_all}\NormalTok{(species, }\StringTok{"e"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{dates-and-times}{%
+\section{Dates and times}\label{dates-and-times}}
+
+\hypertarget{pivot}{%
+\section{Pivot}\label{pivot}}
+
+\hypertarget{summing-up-1}{%
+\section{Summing up}\label{summing-up-1}}
+
+\hypertarget{what-we-learned-4}{%
+\subsection{What we learned}\label{what-we-learned-4}}
+
+\hypertarget{further-reading-guides-and-tips-3}{%
+\subsection{Further Reading, Guides and tips}\label{further-reading-guides-and-tips-3}}
+
+\href{https://www.rstudio.com/resources/cheatsheets/}{R Cheat Sheets}
 
 *\href{https://www.rstudio.com/resources/cheatsheets/}{R Cheat Sheets}
 

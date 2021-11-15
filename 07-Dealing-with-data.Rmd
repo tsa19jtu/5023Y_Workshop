@@ -10,6 +10,12 @@ knitr::opts_chunk$set(eval=FALSE)
 ```
 
 
+## Let's get going
+
+You need to accept the latest assignment from [Github Classrooms](https://classroom.github.com/a/ifsL9ZE1).
+
+We will be using this project until the end of term, so make sure you make regular commits, and push your work at the end of each session. 
+
 ## Introduction to dplyr
 
 In chapters 3 and 4 we demonstrated a brief data analysis on the `palmerpenguins` dataset. We ran through several pipelines, but without going into huge amounts of detail on each section. 
@@ -18,17 +24,17 @@ In this chapter we are going to get really well acquainted with **dplyr** @R-dpl
 
 We will look at several core functions:
 
-* select (get some columns)
+* `select` (get some columns)
 
-* filter (get some rows)
+* `filter` (get some rows)
 
-* arrange (order the rows)
+* `arrange` (order the rows)
 
-* mutate (make new columns)
+* `mutate` (make new columns)
 
-* group_by (add grouping information)
+* `group_by` (add grouping information)
 
-* summarise (calculate summary information)
+* `summarise` (calculate summary information)
 
 You should make careful notes about these functions and what they do. Build scripts with carefully added notes that you can use for future work
 
@@ -36,7 +42,7 @@ As you work through this (and other chapters) - make notes, if you take a break,
 
 Make sure you are using the [R Cheat Sheets for dplyr](https://www.rstudio.com/resources/cheatsheets/)
 
-### select
+## select
 
 Start by setting up the packages you will need for this session
 
@@ -107,7 +113,7 @@ penguins %>%
 
 ```
 
-### mutate
+## mutate
 
 Adding or creating new variables is a common task, we might want to make a log-transformation, subtract one value from another or use `mutate` to add a new date variable
 
@@ -132,7 +138,7 @@ Things to know about `mutate`:
 
 * We can use newly created variables in further calculations *within* the same `mutate`
 
-### filter
+## filter
 
 `filter` is used to subset observations in a dataframe. We might want to see the observations where `flipper_length_mm` is larger or smaller than a fixed value. Or we might want to only see the data from female penguins, or a particular species. 
 
@@ -170,9 +176,40 @@ penguins %>%
 ```
 
 
-### Arrange
+## arrange
 
-We use arrange to reorder the rows of our data. 
+We use arrange to reorder the rows of our data. Instances where we 'need' to do this are rare. But we may often want to reorder rows so that we can understand the data more easily
+
+```{r}
+penguins_ordered <- penguins %>% 
+  arrange(sex,body_mass_g)
+
+# arrange data first by sex - all females then all males, within each sex order body mass from low to high
+  
+penguins_ordered %>% 
+  select(penguin_id, sex, body_mass_g)
+# view just a few variables
+
+```
+
+By default arrange sorts from low to high (and alphabetically) - we can reverse this if we wrap the variable names in the function `desc`
+
+```{r}
+penguins_reverse_ordered <- penguins %>% 
+  arrange(desc(sex,body_mass_g))
+
+
+  
+penguins_reverse_ordered %>% 
+  select(penguin_id, sex, body_mass_g)
+
+
+# we can also apply this to specific variables
+penguins_reverse_ordered <- penguins %>% 
+  arrange(sex,desc(body_mass_g))
+
+```
+
 
 ## Group and summarise
 
@@ -269,6 +306,7 @@ penguins %>%
   glimpse()
 
 ```
+
 ### group_by summary
 
 The `group_by` function provides the ability to separate our summary functions according to any subgroups we wish to make. The real magic happens when we pair this with `summarise` and `mutate`.
@@ -339,59 +377,108 @@ centered_penguins %>%
 
 Look at this output - you can see the information on groups has now been removed from the data. 
 
+# Dealing with data part 2 - Week Nine
+
+In this chapter we go through some more miscellaneous topics around dealing with data.
+
+## Pipes
+
+As you have seen we often link our dplyr verbs together with `pipes`. Using one function after another e.g. `mutate` then `group_by` and perhaps `summarise`
+The pipe %>% allows us to make "human-readable" an logical strings of instructions. 
+
+The two below examples of pseudocode would be read identically by R - but which one is easier for you to understand?
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "Two very different ways of presenting the same code"}
+knitr::include_graphics("images/pipe.png")
+```
+
+One way we can try and breakdown the complexity of multiple nested brackets is to make lots of "intermediate" R objects:
+
+```{r}
+penguins_grouped <- group_by(penguins, species, sex)
+
+penguins_grouped_full <- drop_na(penguins_grouped, sex)
+
+penguins_flipper_length <- summarise(penguins_grouped_full, mean=mean(flipper_length_mm, na.rm=TRUE))
+
+penguins_flipper_length
+
+```
+> **Note - nothing wrong with this, but look at how many R objects are cluttering up your environment tab which you will probably never use again!
+
+Or...
+
+```{r}
+penguins %>% 
+  group_by(species, sex) %>% 
+  drop_na(sex) %>% 
+  summarise(mean=mean(flipper_length_mm))
+
+```
+> **Note - check for yourself whether the outcome is identical
+
 
 ## Strings
+
+Datasets often contain words, and we call these words "strings". Often these aren't quite how we want them to be, but we can manipulate these as much as we like. 
+
+### separate
+
+```{r}
+df <- tibble(label=c("a-1", "a-2", "a-3"))
+df
+```
+
+```{r}
+df %>% 
+  separate(label, c("treatment", "replicate"), sep="-")
+
+```
+
+We started with one variable called `label` and then split it into two variables, `treatment` and `replicate`, with the split made where `-` occurs. 
+The opposite of this function is `unite()`
+
+### More stringr
+
+Check out (https://stringr.tidyverse.org/index.html) @R-stringr
+
+
+```{r}
+penguins %>% 
+  mutate(species=str_to_upper(species))
+
+```
+
+```{r}
+penguins %>% 
+  mutate(species=str_remove_all(species, "e"))
+
+```
 
 ## Dates and times
 
 ## Pivot
 
-
-
-
-
-```{block, type="rmdwarning"}
-Make a careful note of
-
-* The username you choose
-
-* Use the same email you have signed up to RStudio Cloud with
-
-* Note your password carefully! 
-
+```{r , echo=FALSE, eval=TRUE}
+#knitr::include_graphics("images/tidyr-longer-wider.gif")
 ```
 
 
 
-```{r fork, echo=FALSE, eval=TRUE}
-knitr::include_graphics("images/fork.png")
-```
-
-
-A fork is when you generate a *personal* copy of another user's repository (\@ref(glossary-github)).
 
 
 
 
-## Summing up GitHub
+
+
+
+
+
+## Summing up 
 
 ### What we learned
 
-You have learned
 
-* How to fork and clone GitHub Projects
-
-* How to use GitHub classrooms
-
-* How to make RStudio and GitHub talk to each other
-
-* How to use version control, with stage, commit and push
-
-You have used
-
-* `gitcreds` @R-gitcreds
-
-* `usethis` @R-usethis
 
 
 ### Further Reading, Guides and tips

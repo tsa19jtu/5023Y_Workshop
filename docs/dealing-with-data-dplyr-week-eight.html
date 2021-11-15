@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Dealing with data: dplyr - Week Eight | Data Science for Biologists - 5023Y</title>
+  <meta name="description" content="This is very brief introduction to some of the basic skills required to learn R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Dealing with data: dplyr - Week Eight | Data Science for Biologists - 5023Y" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is very brief introduction to some of the basic skills required to learn R" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Dealing with data: dplyr - Week Eight | Data Science for Biologists - 5023Y" />
+  
+  <meta name="twitter:description" content="This is very brief introduction to some of the basic skills required to learn R" />
+  
+
+<meta name="author" content="Philip Leftwich" />
+
+
+<meta name="date" content="2021-11-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="version-control-with-github-week-six.html"/>
+<link rel="next" href="dealing-with-data-part-2-week-nine.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#approach-and-style"><i class="fa fa-check"></i><b>1.1</b> Approach and style</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#teaching"><i class="fa fa-check"></i><b>1.2</b> Teaching</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#workshops"><i class="fa fa-check"></i><b>1.2.1</b> Workshops</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#introduction-to-r"><i class="fa fa-check"></i><b>1.3</b> Introduction to R</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#getting-around-on-rstudio"><i class="fa fa-check"></i><b>1.4</b> Getting around on RStudio</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#an-intro-to-rstudio"><i class="fa fa-check"></i><b>1.4.1</b> An intro to RStudio</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#using-r-studio-cloud"><i class="fa fa-check"></i><b>1.4.2</b> Using R Studio Cloud</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#reading"><i class="fa fa-check"></i><b>1.5</b> Reading</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#get-help"><i class="fa fa-check"></i><b>1.6</b> Get Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html"><i class="fa fa-check"></i><b>2</b> Getting to know R - Week One</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#your-first-r-command"><i class="fa fa-check"></i><b>2.1</b> Your first R command</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#typos"><i class="fa fa-check"></i><b>2.1.1</b> Typos</a></li>
+<li class="chapter" data-level="2.1.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#more-simple-arithmetic"><i class="fa fa-check"></i><b>2.1.2</b> More simple arithmetic</a></li>
+<li class="chapter" data-level="2.1.3" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#try-some-maths"><i class="fa fa-check"></i><b>2.1.3</b> Try some maths</a></li>
+<li class="chapter" data-level="2.1.4" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#perform-some-combos"><i class="fa fa-check"></i><b>2.1.4</b> Perform some combos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#true-or-false-data"><i class="fa fa-check"></i><b>2.2</b> “true or false” data</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#assessing-mathematical-truths"><i class="fa fa-check"></i><b>2.2.1</b> Assessing mathematical truths</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#storing-outputs"><i class="fa fa-check"></i><b>2.3</b> Storing outputs</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#choosing-names"><i class="fa fa-check"></i><b>2.3.1</b> Choosing names</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#writing-scripts"><i class="fa fa-check"></i><b>2.4</b> Writing scripts</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#commenting-on-scripts"><i class="fa fa-check"></i><b>2.4.1</b> Commenting on scripts</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#running-your-script"><i class="fa fa-check"></i><b>2.4.2</b> Running your script</a></li>
+<li class="chapter" data-level="2.4.3" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#saving-your-script"><i class="fa fa-check"></i><b>2.4.3</b> Saving your script</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#error"><i class="fa fa-check"></i><b>2.5</b> Error</a></li>
+<li class="chapter" data-level="2.6" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#functions"><i class="fa fa-check"></i><b>2.6</b> Functions</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#storing-the-output-of-functions"><i class="fa fa-check"></i><b>2.6.1</b> Storing the output of functions</a></li>
+<li class="chapter" data-level="2.6.2" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#more-fun-with-functions"><i class="fa fa-check"></i><b>2.6.2</b> More fun with functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#packages"><i class="fa fa-check"></i><b>2.7</b> Packages</a></li>
+<li class="chapter" data-level="2.8" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#my-first-data-visualisation"><i class="fa fa-check"></i><b>2.8</b> My first data visualisation</a></li>
+<li class="chapter" data-level="2.9" data-path="getting-to-know-r-week-one.html"><a href="getting-to-know-r-week-one.html#quitting"><i class="fa fa-check"></i><b>2.9</b> Quitting</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html"><i class="fa fa-check"></i><b>3</b> Workflow Part One - Week Two</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#meet-the-penguins"><i class="fa fa-check"></i><b>3.1</b> Meet the Penguins</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#insights-from-data"><i class="fa fa-check"></i><b>3.1.1</b> Insights from data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#the-question"><i class="fa fa-check"></i><b>3.2</b> The Question?</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#hypotheses"><i class="fa fa-check"></i><b>3.2.1</b> Hypotheses</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#preparing-the-data"><i class="fa fa-check"></i><b>3.3</b> Preparing the data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#tidy-data"><i class="fa fa-check"></i><b>3.3.1</b> Tidy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#the-dataset"><i class="fa fa-check"></i><b>3.3.2</b> The dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#prepare-the-rstudio-workspace"><i class="fa fa-check"></i><b>3.4</b> Prepare the RStudio workspace</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#organise"><i class="fa fa-check"></i><b>3.4.1</b> Organise</a></li>
+<li class="chapter" data-level="3.4.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#create-a-new-r-script"><i class="fa fa-check"></i><b>3.4.2</b> Create a new R script</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#get-the-data-into-r"><i class="fa fa-check"></i><b>3.5</b> Get the data into R</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#view-and-refine"><i class="fa fa-check"></i><b>3.5.1</b> View and refine</a></li>
+<li class="chapter" data-level="3.5.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#data-management"><i class="fa fa-check"></i><b>3.5.2</b> Data management</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#dataframes-and-tibbles"><i class="fa fa-check"></i><b>3.6</b> Dataframes and tibbles</a></li>
+<li class="chapter" data-level="3.7" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#clean-and-tidy"><i class="fa fa-check"></i><b>3.7</b> Clean and tidy</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#tidy"><i class="fa fa-check"></i><b>3.7.1</b> Tidy</a></li>
+<li class="chapter" data-level="3.7.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#clean"><i class="fa fa-check"></i><b>3.7.2</b> Clean</a></li>
+<li class="chapter" data-level="3.7.3" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#refine-variable-names"><i class="fa fa-check"></i><b>3.7.3</b> Refine variable names</a></li>
+<li class="chapter" data-level="3.7.4" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#dates"><i class="fa fa-check"></i><b>3.7.4</b> Dates</a></li>
+<li class="chapter" data-level="3.7.5" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#rename-some-values"><i class="fa fa-check"></i><b>3.7.5</b> Rename some values</a></li>
+<li class="chapter" data-level="3.7.6" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#check-for-duplication"><i class="fa fa-check"></i><b>3.7.6</b> Check for duplication</a></li>
+<li class="chapter" data-level="3.7.7" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#check-for-typos-or-implausible-values"><i class="fa fa-check"></i><b>3.7.7</b> Check for typos or implausible values</a></li>
+<li class="chapter" data-level="3.7.8" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#missing-values---na"><i class="fa fa-check"></i><b>3.7.8</b> Missing values - NA</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#summing-up"><i class="fa fa-check"></i><b>3.8</b> Summing up</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#what-we-learned"><i class="fa fa-check"></i><b>3.8.1</b> What we learned</a></li>
+<li class="chapter" data-level="3.8.2" data-path="workflow-part-one-week-two.html"><a href="workflow-part-one-week-two.html#quitting-1"><i class="fa fa-check"></i><b>3.8.2</b> Quitting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html"><i class="fa fa-check"></i><b>4</b> Workflow Part Two - Week Three</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#initial-insights"><i class="fa fa-check"></i><b>4.1</b> Initial insights</a></li>
+<li class="chapter" data-level="4.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#numbers-and-sex-of-the-penguins"><i class="fa fa-check"></i><b>4.2</b> Numbers and sex of the penguins</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#making-a-simple-figure"><i class="fa fa-check"></i><b>4.2.1</b> Making a simple figure</a></li>
+<li class="chapter" data-level="4.2.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#challenge"><i class="fa fa-check"></i><b>4.2.2</b> Challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#distributions"><i class="fa fa-check"></i><b>4.3</b> Distributions</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#insights"><i class="fa fa-check"></i><b>4.3.1</b> Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#more-distributions"><i class="fa fa-check"></i><b>4.4</b> More distributions</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#initial-conclusions"><i class="fa fa-check"></i><b>4.4.1</b> Initial conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#data-transformation"><i class="fa fa-check"></i><b>4.5</b> Data transformation</a></li>
+<li class="chapter" data-level="4.6" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#developing-insights"><i class="fa fa-check"></i><b>4.6</b> Developing insights</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#distributions-of-the-relative-bill-length"><i class="fa fa-check"></i><b>4.6.1</b> Distributions of the relative bill length</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#relationshipdifferences"><i class="fa fa-check"></i><b>4.7</b> Relationship/differences</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#differences"><i class="fa fa-check"></i><b>4.7.1</b> Differences</a></li>
+<li class="chapter" data-level="4.7.2" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#associations"><i class="fa fa-check"></i><b>4.7.2</b> Associations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#sex-interactions"><i class="fa fa-check"></i><b>4.8</b> Sex interactions</a></li>
+<li class="chapter" data-level="4.9" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#making-our-graphs-more-attractive"><i class="fa fa-check"></i><b>4.9</b> Making our graphs more attractive</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#saving-your-output"><i class="fa fa-check"></i><b>4.9.1</b> Saving your output</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="workflow-part-two-week-three.html"><a href="workflow-part-two-week-three.html#quitting-2"><i class="fa fa-check"></i><b>4.10</b> Quitting</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html"><i class="fa fa-check"></i><b>5</b> ggplot2 A grammar of graphics - Week Four</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#intro-to-grammar"><i class="fa fa-check"></i><b>5.1</b> Intro to grammar</a></li>
+<li class="chapter" data-level="5.2" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#building-a-plot"><i class="fa fa-check"></i><b>5.2</b> Building a plot</a></li>
+<li class="chapter" data-level="5.3" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#plot-background"><i class="fa fa-check"></i><b>5.3</b> Plot background</a></li>
+<li class="chapter" data-level="5.4" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#aesthetics---aes"><i class="fa fa-check"></i><b>5.4</b> Aesthetics - aes()</a></li>
+<li class="chapter" data-level="5.5" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#geometric-representations---geom"><i class="fa fa-check"></i><b>5.5</b> Geometric representations - geom()</a></li>
+<li class="chapter" data-level="5.6" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#and"><i class="fa fa-check"></i><b>5.6</b> %&gt;% and +</a></li>
+<li class="chapter" data-level="5.7" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#colour"><i class="fa fa-check"></i><b>5.7</b> Colour</a></li>
+<li class="chapter" data-level="5.8" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#more-layers"><i class="fa fa-check"></i><b>5.8</b> More layers</a></li>
+<li class="chapter" data-level="5.9" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#facets"><i class="fa fa-check"></i><b>5.9</b> Facets</a></li>
+<li class="chapter" data-level="5.10" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#co-ordinate-space"><i class="fa fa-check"></i><b>5.10</b> Co-ordinate space</a></li>
+<li class="chapter" data-level="5.11" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#labels"><i class="fa fa-check"></i><b>5.11</b> Labels</a></li>
+<li class="chapter" data-level="5.12" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#themes"><i class="fa fa-check"></i><b>5.12</b> Themes</a></li>
+<li class="chapter" data-level="5.13" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#jitter"><i class="fa fa-check"></i><b>5.13</b> Jitter</a></li>
+<li class="chapter" data-level="5.14" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#boxplots"><i class="fa fa-check"></i><b>5.14</b> Boxplots</a></li>
+<li class="chapter" data-level="5.15" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#density-and-histogram"><i class="fa fa-check"></i><b>5.15</b> Density and histogram</a></li>
+<li class="chapter" data-level="5.16" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#more-colours"><i class="fa fa-check"></i><b>5.16</b> More Colours</a>
+<ul>
+<li class="chapter" data-level="5.16.1" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#assign-colours-to-variables"><i class="fa fa-check"></i><b>5.16.1</b> Assign colours to variables</a></li>
+<li class="chapter" data-level="5.16.2" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#accessibility"><i class="fa fa-check"></i><b>5.16.2</b> Accessibility</a></li>
+<li class="chapter" data-level="5.16.3" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#guides-to-visual-accessibility"><i class="fa fa-check"></i><b>5.16.3</b> Guides to visual accessibility</a></li>
+</ul></li>
+<li class="chapter" data-level="5.17" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#patchwork"><i class="fa fa-check"></i><b>5.17</b> Patchwork</a></li>
+<li class="chapter" data-level="5.18" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#test"><i class="fa fa-check"></i><b>5.18</b> Test</a></li>
+<li class="chapter" data-level="5.19" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#saving"><i class="fa fa-check"></i><b>5.19</b> Saving</a></li>
+<li class="chapter" data-level="5.20" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#quitting-3"><i class="fa fa-check"></i><b>5.20</b> Quitting</a></li>
+<li class="chapter" data-level="5.21" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#summing-up-ggplot"><i class="fa fa-check"></i><b>5.21</b> Summing up ggplot</a>
+<ul>
+<li class="chapter" data-level="5.21.1" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#what-we-learned-1"><i class="fa fa-check"></i><b>5.21.1</b> What we learned</a></li>
+<li class="chapter" data-level="5.21.2" data-path="ggplot2-a-grammar-of-graphics-week-four.html"><a href="ggplot2-a-grammar-of-graphics-week-four.html#further-reading-guides-and-tips"><i class="fa fa-check"></i><b>5.21.2</b> Further Reading, Guides and tips</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html"><i class="fa fa-check"></i><b>6</b> Reports with Rmarkdown - Week Five</a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#format"><i class="fa fa-check"></i><b>6.0.1</b> Format</a></li>
+<li class="chapter" data-level="6.1" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#background-to-rmarkdown"><i class="fa fa-check"></i><b>6.1</b> Background to Rmarkdown</a></li>
+<li class="chapter" data-level="6.2" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#starting-a-new-rmd-file"><i class="fa fa-check"></i><b>6.2</b> Starting a new Rmd file</a></li>
+<li class="chapter" data-level="6.3" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#r-markdown-parts"><i class="fa fa-check"></i><b>6.3</b> R Markdown parts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#yaml"><i class="fa fa-check"></i><b>6.3.1</b> YAML</a></li>
+<li class="chapter" data-level="6.3.2" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#text"><i class="fa fa-check"></i><b>6.3.2</b> Text</a></li>
+<li class="chapter" data-level="6.3.3" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#code-chunks"><i class="fa fa-check"></i><b>6.3.3</b> Code Chunks</a></li>
+<li class="chapter" data-level="6.3.4" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#here"><i class="fa fa-check"></i><b>6.3.4</b> Here</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#images"><i class="fa fa-check"></i><b>6.4</b> Images</a></li>
+<li class="chapter" data-level="6.5" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#tables"><i class="fa fa-check"></i><b>6.5</b> Tables</a></li>
+<li class="chapter" data-level="6.6" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#self-contained-documents"><i class="fa fa-check"></i><b>6.6</b> Self-contained documents</a></li>
+<li class="chapter" data-level="6.7" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#source-files"><i class="fa fa-check"></i><b>6.7</b> Source files</a></li>
+<li class="chapter" data-level="6.8" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#exercise---make-your-own-rmd-document"><i class="fa fa-check"></i><b>6.8</b> Exercise - Make your own Rmd document</a></li>
+<li class="chapter" data-level="6.9" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#summing-up-rmarkdown"><i class="fa fa-check"></i><b>6.9</b> Summing up Rmarkdown</a>
+<ul>
+<li class="chapter" data-level="6.9.1" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#what-we-learned-2"><i class="fa fa-check"></i><b>6.9.1</b> What we learned</a></li>
+<li class="chapter" data-level="6.9.2" data-path="reports-with-rmarkdown-week-five.html"><a href="reports-with-rmarkdown-week-five.html#further-reading-guides-and-tips-1"><i class="fa fa-check"></i><b>6.9.2</b> Further Reading, Guides and tips</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html"><i class="fa fa-check"></i><b>7</b> Version control with GitHub - Week Six</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#lets-git-it-started"><i class="fa fa-check"></i><b>7.1</b> Let’s Git it started</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#will-this-be-fun"><i class="fa fa-check"></i><b>7.1.1</b> Will this be fun?</a></li>
+<li class="chapter" data-level="7.1.2" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#the-payoff"><i class="fa fa-check"></i><b>7.1.2</b> The Payoff</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#set-up-github"><i class="fa fa-check"></i><b>7.2</b> Set up GitHub</a></li>
+<li class="chapter" data-level="7.3" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#exercise-1.-fork-clone-an-existing-repo-on-github-make-edits-push-back"><i class="fa fa-check"></i><b>7.3</b> <strong>Exercise 1.</strong> Fork &amp; clone an existing repo on GitHub, make edits, push back</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#what-the-hell-is-a-fork"><i class="fa fa-check"></i><b>7.3.1</b> What the hell is a fork?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#talking-to-github"><i class="fa fa-check"></i><b>7.4</b> Talking to GitHub</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#see-changes"><i class="fa fa-check"></i><b>7.4.1</b> See changes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#how-to-use-version-control---when-to-commit-push-and-pull"><i class="fa fa-check"></i><b>7.5</b> How to use version control - when to commit, push and pull</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#commit"><i class="fa fa-check"></i><b>7.5.1</b> Commit</a></li>
+<li class="chapter" data-level="7.5.2" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#push"><i class="fa fa-check"></i><b>7.5.2</b> Push</a></li>
+<li class="chapter" data-level="7.5.3" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#a-couple-of-general-tips"><i class="fa fa-check"></i><b>7.5.3</b> A couple of general tips:</a></li>
+<li class="chapter" data-level="7.5.4" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#turn-back-time-with-git"><i class="fa fa-check"></i><b>7.5.4</b> Turn back time with Git</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#exercise-2.-github-classrooms-enabled-r-projects-with-subfolders"><i class="fa fa-check"></i><b>7.6</b> <strong>Exercise 2.</strong> GitHub Classrooms enabled R Projects with subfolders</a></li>
+<li class="chapter" data-level="7.7" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#find-your-classroom-repos"><i class="fa fa-check"></i><b>7.7</b> Find your classroom repos</a></li>
+<li class="chapter" data-level="7.8" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#glossary-github"><i class="fa fa-check"></i><b>7.8</b> Glossary-GitHub</a></li>
+<li class="chapter" data-level="7.9" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#summing-up-github"><i class="fa fa-check"></i><b>7.9</b> Summing up GitHub</a>
+<ul>
+<li class="chapter" data-level="7.9.1" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#what-we-learned-3"><i class="fa fa-check"></i><b>7.9.1</b> What we learned</a></li>
+<li class="chapter" data-level="7.9.2" data-path="version-control-with-github-week-six.html"><a href="version-control-with-github-week-six.html#further-reading-guides-and-tips-2"><i class="fa fa-check"></i><b>7.9.2</b> Further Reading, Guides and tips</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html"><i class="fa fa-check"></i><b>8</b> Dealing with data: dplyr - Week Eight</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#lets-get-going"><i class="fa fa-check"></i><b>8.1</b> Let’s get going</a></li>
+<li class="chapter" data-level="8.2" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#introduction-to-dplyr"><i class="fa fa-check"></i><b>8.2</b> Introduction to dplyr</a></li>
+<li class="chapter" data-level="8.3" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#select"><i class="fa fa-check"></i><b>8.3</b> select</a></li>
+<li class="chapter" data-level="8.4" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#mutate"><i class="fa fa-check"></i><b>8.4</b> mutate</a></li>
+<li class="chapter" data-level="8.5" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#filter"><i class="fa fa-check"></i><b>8.5</b> filter</a></li>
+<li class="chapter" data-level="8.6" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#arrange"><i class="fa fa-check"></i><b>8.6</b> arrange</a></li>
+<li class="chapter" data-level="8.7" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#group-and-summarise"><i class="fa fa-check"></i><b>8.7</b> Group and summarise</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#using-summarise"><i class="fa fa-check"></i><b>8.7.1</b> Using summarise</a></li>
+<li class="chapter" data-level="8.7.2" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#summarize-all-columns"><i class="fa fa-check"></i><b>8.7.2</b> Summarize all columns</a></li>
+<li class="chapter" data-level="8.7.3" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#group_by-summary"><i class="fa fa-check"></i><b>8.7.3</b> group_by summary</a></li>
+<li class="chapter" data-level="8.7.4" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#more-than-one-grouping-variable"><i class="fa fa-check"></i><b>8.7.4</b> More than one grouping variable</a></li>
+<li class="chapter" data-level="8.7.5" data-path="dealing-with-data-dplyr-week-eight.html"><a href="dealing-with-data-dplyr-week-eight.html#remove-group_by"><i class="fa fa-check"></i><b>8.7.5</b> remove group_by</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="dealing-with-data-part-2-week-nine.html"><a href="dealing-with-data-part-2-week-nine.html"><i class="fa fa-check"></i><b>9</b> Dealing with data part 2 - Week Nine</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="dealing-with-data-part-2-week-nine.html"><a href="dealing-with-data-part-2-week-nine.html#pipes"><i class="fa fa-check"></i><b>9.1</b> Pipes</a></li>
+<li class="chapter" data-level="9.2" data-path="dealing-with-data-part-2-week-nine.html"><a href="dealing-with-data-part-2-week-nine.html#strings"><i class="fa fa-check"></i><b>9.2</b> Strings</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="dealing-with-data-part-2-week-nine.html"><a href="dealing-with-data-part-2-week-nine.html#separate"><i class="fa fa-check"></i><b>9.2.1</b> separate</a></li>
+<li class="chapter" data-level="9.2.2" data-path="dealing-with-data-part-2-week-nine.html"><a href="dealing-with-data-part-2-week-nine.html#more-stringr"><i class="fa fa-check"></i><b>9.2.2</b> More stringr</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="dealing-with-data-part-2-week-nine.html"><a href="dealing-with-data-part-2-week-nine.html#dates-and-times"><i class="fa fa-check"></i><b>9.3</b> Dates and times</a></li>
+<li class="chapter" data-level="9.4" data-path="dealing-with-data-part-2-week-nine.html"><a href="dealing-with-data-part-2-week-nine.html#pivot"><i class="fa fa-check"></i><b>9.4</b> Pivot</a></li>
+<li class="chapter" data-level="9.5" data-path="dealing-with-data-part-2-week-nine.html"><a href="dealing-with-data-part-2-week-nine.html#summing-up-1"><i class="fa fa-check"></i><b>9.5</b> Summing up</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="dealing-with-data-part-2-week-nine.html"><a href="dealing-with-data-part-2-week-nine.html#what-we-learned-4"><i class="fa fa-check"></i><b>9.5.1</b> What we learned</a></li>
+<li class="chapter" data-level="9.5.2" data-path="dealing-with-data-part-2-week-nine.html"><a href="dealing-with-data-part-2-week-nine.html#further-reading-guides-and-tips-3"><i class="fa fa-check"></i><b>9.5.2</b> Further Reading, Guides and tips</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science for Biologists - 5023Y</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dealing-with-data-dplyr---week-eight" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Dealing with data: dplyr - Week Eight</h1>
+<script>
+  addClassKlippyTo("pre.r, pre.bash");
+  addKlippy('right', 'top', 'auto', '1', 'copy to clipboard', 'Copied!');
+</script>
+<div id="lets-get-going" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Let’s get going</h2>
+<p>You need to accept the latest assignment from <a href="https://classroom.github.com/a/ifsL9ZE1">Github Classrooms</a>.</p>
+<p>We will be using this project until the end of term, so make sure you make regular commits, and push your work at the end of each session.</p>
+</div>
+<div id="introduction-to-dplyr" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Introduction to dplyr</h2>
+<p>In chapters 3 and 4 we demonstrated a brief data analysis on the <code>palmerpenguins</code> dataset. We ran through several pipelines, but without going into huge amounts of detail on each section.</p>
+<p>In this chapter we are going to get really well acquainted with <strong>dplyr</strong> <span class="citation"><a href="references.html#ref-R-dplyr" role="doc-biblioref">Wickham, François, et al.</a> (<a href="references.html#ref-R-dplyr" role="doc-biblioref">2020</a>)</span>.</p>
+<p>We will look at several core functions:</p>
+<ul>
+<li><p><code>select</code> (get some columns)</p></li>
+<li><p><code>filter</code> (get some rows)</p></li>
+<li><p><code>arrange</code> (order the rows)</p></li>
+<li><p><code>mutate</code> (make new columns)</p></li>
+<li><p><code>group_by</code> (add grouping information)</p></li>
+<li><p><code>summarise</code> (calculate summary information)</p></li>
+</ul>
+<p>You should make careful notes about these functions and what they do. Build scripts with carefully added notes that you can use for future work</p>
+<p>As you work through this (and other chapters) - make notes, if you take a break, set up a commit, or reach the end of a session - push your work to Github.</p>
+<p>Make sure you are using the <a href="https://www.rstudio.com/resources/cheatsheets/">R Cheat Sheets for dplyr</a></p>
+</div>
+<div id="select" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> select</h2>
+<p>Start by setting up the packages you will need for this session</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="dealing-with-data-dplyr-week-eight.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb139-2"><a href="dealing-with-data-dplyr-week-eight.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb139-3"><a href="dealing-with-data-dplyr-week-eight.html#cb139-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-4"><a href="dealing-with-data-dplyr-week-eight.html#cb139-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/penguins_simple.csv&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>** Note - if you don’t have these packages available, then you will need to run <code>install.packages("tidyverse")</code> - you should do this in the <em>console</em> and <strong>not</strong> your script.</p>
+</blockquote>
+<p>We use select to <em>select variables</em> from a dataframe or tibble. for example:</p>
+<pre><code>data_set %&gt;% 
+  select(variable_1, variable_2)</code></pre>
+<blockquote>
+<p>** Note this is <em>pseudocode</em> an example, not something you should run.</p>
+</blockquote>
+<ul>
+<li><p>The data is piped into the first argument position of the <code>select</code> function</p></li>
+<li><p>We then include the arguments where each one is the name of a variable in the dataset</p></li>
+</ul>
+<p>For example if we actually run this:</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="dealing-with-data-dplyr-week-eight.html#cb141-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb141-2"><a href="dealing-with-data-dplyr-week-eight.html#cb141-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(flipper_length_mm)</span></code></pre></div>
+<p>To look at flipper length - we should note a couple of things.</p>
+<ul>
+<li><p>Variable name is <strong>not</strong> in quotes</p></li>
+<li><p>The original data is unchanged e.g. penguins. Unless we assign the results of <code>select</code> with the assignment arrow (&lt;-), the results will just be printed in the console</p></li>
+<li><p>The order you ask for the variables in <code>select</code> determines the order of the columns in any new dataset</p></li>
+<li><p><code>select</code> returns a tibble</p></li>
+<li><p>If we want to keep most variables, but <em>remove one</em>, use the minus operator</p></li>
+</ul>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="dealing-with-data-dplyr-week-eight.html#cb142-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb142-2"><a href="dealing-with-data-dplyr-week-eight.html#cb142-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>flipper_length_mm)</span></code></pre></div>
+<div class="rmdwarning">
+<p>
+In the above option we just <em>overwrote</em> the penguin dataset with a new version that <em>does not</em> contain flipper length. Be careful - the above code will thrown an error message if you try to run it again (there is no longer a flipper length variable to remove). If you want to <em>undo</em> this, the easiest way is to re-run your script to just before this line, so you
+</p>
+</div>
+<p>You can also use select to keep sets of consecutive variables together</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="dealing-with-data-dplyr-week-eight.html#cb143-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb143-2"><a href="dealing-with-data-dplyr-week-eight.html#cb143-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species<span class="sc">:</span>flipper_length_mm)</span></code></pre></div>
+<p>There are also a number of helper functions like <code>starts_with</code>, <code>ends_with</code>, <code>contains</code>, <code>matches</code>. So if we want to keep all the variables that start with “b”</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="dealing-with-data-dplyr-week-eight.html#cb144-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb144-2"><a href="dealing-with-data-dplyr-week-eight.html#cb144-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;b&quot;</span>))</span></code></pre></div>
+</div>
+<div id="mutate" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> mutate</h2>
+<p>Adding or creating new variables is a common task, we might want to make a log-transformation, subtract one value from another or use <code>mutate</code> to add a new date variable</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="dealing-with-data-dplyr-week-eight.html#cb145-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb145-2"><a href="dealing-with-data-dplyr-week-eight.html#cb145-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_proper=</span><span class="fu">dmy</span>(date))</span></code></pre></div>
+<p>Sometimes we want to change the values being used. For example we might want to change “male” and “female” to some abbreviation like “M” and “F.” (Probably not, but it’s an example!).</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="dealing-with-data-dplyr-week-eight.html#cb146-1" aria-hidden="true" tabindex="-1"></a>  penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb146-2"><a href="dealing-with-data-dplyr-week-eight.html#cb146-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex=</span><span class="fu">case_when</span>(sex <span class="sc">==</span> <span class="st">&quot;male&quot;</span> <span class="sc">~</span> <span class="st">&quot;M&quot;</span>,</span>
+<span id="cb146-3"><a href="dealing-with-data-dplyr-week-eight.html#cb146-3" aria-hidden="true" tabindex="-1"></a>                       sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">~</span> <span class="st">&quot;F&quot;</span>))</span></code></pre></div>
+<p>Things to know about <code>mutate</code>:</p>
+<ul>
+<li><p>Unless we assign the results of <code>mutate</code> back to an object (&lt;-) the changes won’t be saved</p></li>
+<li><p>We can use newly created variables in further calculations <em>within</em> the same <code>mutate</code></p></li>
+</ul>
+</div>
+<div id="filter" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> filter</h2>
+<p><code>filter</code> is used to subset observations in a dataframe. We might want to see the observations where <code>flipper_length_mm</code> is larger or smaller than a fixed value. Or we might want to only see the data from female penguins, or a particular species.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="dealing-with-data-dplyr-week-eight.html#cb147-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb147-2"><a href="dealing-with-data-dplyr-week-eight.html#cb147-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span>,</span>
+<span id="cb147-3"><a href="dealing-with-data-dplyr-week-eight.html#cb147-3" aria-hidden="true" tabindex="-1"></a>         species <span class="sc">==</span> <span class="st">&quot;Adelie&quot;</span>,</span>
+<span id="cb147-4"><a href="dealing-with-data-dplyr-week-eight.html#cb147-4" aria-hidden="true" tabindex="-1"></a>         flipper_length_mm <span class="sc">&lt;</span> <span class="dv">180</span>)</span></code></pre></div>
+<p>In this example we’ve created a subset of <code>penguins</code> that only includes the five observations where flipper length is less than 180mm in female, Adelie penguins.</p>
+<p>We can also set an either/or filter, for example if we only want small &amp; large flipper lengths.</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="dealing-with-data-dplyr-week-eight.html#cb148-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb148-2"><a href="dealing-with-data-dplyr-week-eight.html#cb148-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Adelie&quot;</span>, </span>
+<span id="cb148-3"><a href="dealing-with-data-dplyr-week-eight.html#cb148-3" aria-hidden="true" tabindex="-1"></a>         flipper_length_mm <span class="sc">&lt;</span><span class="dv">180</span> <span class="sc">|</span> </span>
+<span id="cb148-4"><a href="dealing-with-data-dplyr-week-eight.html#cb148-4" aria-hidden="true" tabindex="-1"></a>           flipper_length_mm <span class="sc">&gt;</span><span class="dv">200</span>)</span></code></pre></div>
+<p>This creates a subset of Adelie penguins, that only includes 14 observations where flipper length is less than 180mm or greater than 200mm.</p>
+<p>The vertical bar | is understood by R as OR.</p>
+<p>The alternative is to look at values <em>between</em> two amounts</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="dealing-with-data-dplyr-week-eight.html#cb149-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb149-2"><a href="dealing-with-data-dplyr-week-eight.html#cb149-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Adelie&quot;</span>,</span>
+<span id="cb149-3"><a href="dealing-with-data-dplyr-week-eight.html#cb149-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">between</span>(flipper_length_mm, <span class="dv">180</span>,<span class="dv">200</span>))</span></code></pre></div>
+</div>
+<div id="arrange" class="section level2" number="8.6">
+<h2><span class="header-section-number">8.6</span> arrange</h2>
+<p>We use arrange to reorder the rows of our data. Instances where we ‘need’ to do this are rare. But we may often want to reorder rows so that we can understand the data more easily</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="dealing-with-data-dplyr-week-eight.html#cb150-1" aria-hidden="true" tabindex="-1"></a>penguins_ordered <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb150-2"><a href="dealing-with-data-dplyr-week-eight.html#cb150-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sex,body_mass_g)</span>
+<span id="cb150-3"><a href="dealing-with-data-dplyr-week-eight.html#cb150-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-4"><a href="dealing-with-data-dplyr-week-eight.html#cb150-4" aria-hidden="true" tabindex="-1"></a><span class="co"># arrange data first by sex - all females then all males, within each sex order body mass from low to high</span></span>
+<span id="cb150-5"><a href="dealing-with-data-dplyr-week-eight.html#cb150-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb150-6"><a href="dealing-with-data-dplyr-week-eight.html#cb150-6" aria-hidden="true" tabindex="-1"></a>penguins_ordered <span class="sc">%&gt;%</span> </span>
+<span id="cb150-7"><a href="dealing-with-data-dplyr-week-eight.html#cb150-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(penguin_id, sex, body_mass_g)</span>
+<span id="cb150-8"><a href="dealing-with-data-dplyr-week-eight.html#cb150-8" aria-hidden="true" tabindex="-1"></a><span class="co"># view just a few variables</span></span></code></pre></div>
+<p>By default arrange sorts from low to high (and alphabetically) - we can reverse this if we wrap the variable names in the function <code>desc</code></p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="dealing-with-data-dplyr-week-eight.html#cb151-1" aria-hidden="true" tabindex="-1"></a>penguins_reverse_ordered <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb151-2"><a href="dealing-with-data-dplyr-week-eight.html#cb151-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sex,body_mass_g))</span>
+<span id="cb151-3"><a href="dealing-with-data-dplyr-week-eight.html#cb151-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-4"><a href="dealing-with-data-dplyr-week-eight.html#cb151-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-5"><a href="dealing-with-data-dplyr-week-eight.html#cb151-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb151-6"><a href="dealing-with-data-dplyr-week-eight.html#cb151-6" aria-hidden="true" tabindex="-1"></a>penguins_reverse_ordered <span class="sc">%&gt;%</span> </span>
+<span id="cb151-7"><a href="dealing-with-data-dplyr-week-eight.html#cb151-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(penguin_id, sex, body_mass_g)</span>
+<span id="cb151-8"><a href="dealing-with-data-dplyr-week-eight.html#cb151-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-9"><a href="dealing-with-data-dplyr-week-eight.html#cb151-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-10"><a href="dealing-with-data-dplyr-week-eight.html#cb151-10" aria-hidden="true" tabindex="-1"></a><span class="co"># we can also apply this to specific variables</span></span>
+<span id="cb151-11"><a href="dealing-with-data-dplyr-week-eight.html#cb151-11" aria-hidden="true" tabindex="-1"></a>penguins_reverse_ordered <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb151-12"><a href="dealing-with-data-dplyr-week-eight.html#cb151-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sex,<span class="fu">desc</span>(body_mass_g))</span></code></pre></div>
+</div>
+<div id="group-and-summarise" class="section level2" number="8.7">
+<h2><span class="header-section-number">8.7</span> Group and summarise</h2>
+<p>Very often we want to make calculations aobut groups of observations, such as the mean or median. We are often interested in comparing responses among groups. For example, we previously found the number of distinct penguins in our entire dataset</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="dealing-with-data-dplyr-week-eight.html#cb152-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb152-2"><a href="dealing-with-data-dplyr-week-eight.html#cb152-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">n_distinct</span>(penguin_id))</span></code></pre></div>
+<p>Now consider when the groups are subsets of observations, as when we find out the number of penguins in each species and sex</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="dealing-with-data-dplyr-week-eight.html#cb153-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb153-2"><a href="dealing-with-data-dplyr-week-eight.html#cb153-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb153-3"><a href="dealing-with-data-dplyr-week-eight.html#cb153-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">n_distinct</span>(penguin_id))</span></code></pre></div>
+<p>We are using summarise and group_by a lot! They are very powerful functions:</p>
+<ul>
+<li><p><code>group_by</code> adds <em>grouping</em> information into a data object, so that subsequent calculations happen on a <em>group-specific</em> basis.</p></li>
+<li><p><code>summarise</code> is a data aggregation function thart calculates summaries of one or more variables, and it will do this separately for any groups defined by <code>group_by</code></p></li>
+</ul>
+<div id="using-summarise" class="section level3" number="8.7.1">
+<h3><span class="header-section-number">8.7.1</span> Using summarise</h3>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="dealing-with-data-dplyr-week-eight.html#cb154-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb154-2"><a href="dealing-with-data-dplyr-week-eight.html#cb154-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_flipper_length =</span> <span class="fu">mean</span>(flipper_length_mm, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb154-3"><a href="dealing-with-data-dplyr-week-eight.html#cb154-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">mean_bill_length =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<blockquote>
+<p>**Note - we provide informative names for ourselves on the left side of the =.</p>
+</blockquote>
+<p>There are a number of different calculations we can use including:</p>
+<ul>
+<li><p><code>min</code> and <code>max</code> to calculate minimum and maximum values of a vector</p></li>
+<li><p><code>mean</code> and <code>median</code></p></li>
+<li><p><code>sd</code> and <code>var</code> calculate standard deviation and variance of a numeric vector</p></li>
+</ul>
+<p>We can use several functions in <code>summarise</code>. Which means we can string several calculations together in a single step</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="dealing-with-data-dplyr-week-eight.html#cb155-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb155-2"><a href="dealing-with-data-dplyr-week-eight.html#cb155-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb155-3"><a href="dealing-with-data-dplyr-week-eight.html#cb155-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_penguins =</span> <span class="fu">n_distinct</span>(penguin_id),</span>
+<span id="cb155-4"><a href="dealing-with-data-dplyr-week-eight.html#cb155-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_flipper_length =</span> <span class="fu">mean</span>(flipper_length_mm, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb155-5"><a href="dealing-with-data-dplyr-week-eight.html#cb155-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">prop_female =</span> <span class="fu">sum</span>(sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">n</span>())</span></code></pre></div>
+<blockquote>
+<p>**Note - we have placed each argument on a separate line. This is just stylistic, it makes the code easier to read.</p>
+</blockquote>
+</div>
+<div id="summarize-all-columns" class="section level3" number="8.7.2">
+<h3><span class="header-section-number">8.7.2</span> Summarize all columns</h3>
+<p>We can use the function <code>across</code> to count up the number of NAs in every column (by specifying <code>everything</code>).</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="dealing-with-data-dplyr-week-eight.html#cb156-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb156-2"><a href="dealing-with-data-dplyr-week-eight.html#cb156-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">everything</span>(), </span>
+<span id="cb156-3"><a href="dealing-with-data-dplyr-week-eight.html#cb156-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">.fns =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb156-4"><a href="dealing-with-data-dplyr-week-eight.html#cb156-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+<p>It has two arguments, <code>.cols</code> and <code>.fns</code>. The <code>.cols</code> argument lets you specify column types, while the <code>.fns</code> argument applies the required function to all of the selected columns.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="dealing-with-data-dplyr-week-eight.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the mean of ALL numeric columns in the data, where(is.numeric) hunts for numeric columns</span></span>
+<span id="cb157-2"><a href="dealing-with-data-dplyr-week-eight.html#cb157-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb157-3"><a href="dealing-with-data-dplyr-week-eight.html#cb157-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb157-4"><a href="dealing-with-data-dplyr-week-eight.html#cb157-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">where</span>(is.numeric), </span>
+<span id="cb157-5"><a href="dealing-with-data-dplyr-week-eight.html#cb157-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">.fns =</span> <span class="sc">~</span><span class="fu">mean</span>(., <span class="at">na.rm=</span><span class="cn">TRUE</span>)))</span></code></pre></div>
+<p>The above example calculates the means of any &amp; all numeric variables in the dataset.</p>
+<p>The below example is a slightly complicated way of running the n_distinct for summarise. The <code>.cols()</code> looks for any column that contains the word “penguin” and runs the <code>n_distinct()</code>command of these</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="dealing-with-data-dplyr-week-eight.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of distinct penguins, as only one column contains the word penguin</span></span>
+<span id="cb158-2"><a href="dealing-with-data-dplyr-week-eight.html#cb158-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-3"><a href="dealing-with-data-dplyr-week-eight.html#cb158-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb158-4"><a href="dealing-with-data-dplyr-week-eight.html#cb158-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;penguin&quot;</span>), </span>
+<span id="cb158-5"><a href="dealing-with-data-dplyr-week-eight.html#cb158-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">.fns =</span> <span class="sc">~</span><span class="fu">n_distinct</span>(.))) <span class="sc">%&gt;%</span> </span>
+<span id="cb158-6"><a href="dealing-with-data-dplyr-week-eight.html#cb158-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+</div>
+<div id="group_by-summary" class="section level3" number="8.7.3">
+<h3><span class="header-section-number">8.7.3</span> group_by summary</h3>
+<p>The <code>group_by</code> function provides the ability to separate our summary functions according to any subgroups we wish to make. The real magic happens when we pair this with <code>summarise</code> and <code>mutate</code>.</p>
+<p>In this example, by grouping on the individual penguin ids, then summarising by n - we can see how many times each penguin was monitored in the course of this study.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="dealing-with-data-dplyr-week-eight.html#cb159-1" aria-hidden="true" tabindex="-1"></a>penguin_stats <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb159-2"><a href="dealing-with-data-dplyr-week-eight.html#cb159-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(penguin_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb159-3"><a href="dealing-with-data-dplyr-week-eight.html#cb159-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num=</span><span class="fu">n</span>())</span></code></pre></div>
+<blockquote>
+<p>**Note - the actions of group_by are powerful, but group_by on its own doesn’t change the visible structure of the dataframe.</p>
+</blockquote>
+</div>
+<div id="more-than-one-grouping-variable" class="section level3" number="8.7.4">
+<h3><span class="header-section-number">8.7.4</span> More than one grouping variable</h3>
+<p>What if we need to calculate by more than one variable at a time?</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="dealing-with-data-dplyr-week-eight.html#cb160-1" aria-hidden="true" tabindex="-1"></a>penguins_grouped <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb160-2"><a href="dealing-with-data-dplyr-week-eight.html#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, species)</span></code></pre></div>
+<p>We can then calculate the mean flipper length of penguins in each of the six combinations</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="dealing-with-data-dplyr-week-eight.html#cb161-1" aria-hidden="true" tabindex="-1"></a>penguin_summary <span class="ot">&lt;-</span> penguins_grouped <span class="sc">%&gt;%</span> </span>
+<span id="cb161-2"><a href="dealing-with-data-dplyr-week-eight.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">mean_flipper =</span> <span class="fu">mean</span>(flipper_length_mm, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<p>Now the first row of our summary table shows us the mean flipper length (in mm) for female Adelie penguins. There are eight rows in total, six unique combinations and two rows where the sex of the penguins was not recorded(<code>NA</code>)</p>
+<div id="using-group_by-with-mutate" class="section level4" number="8.7.4.1">
+<h4><span class="header-section-number">8.7.4.1</span> using group_by with mutate</h4>
+<p>When <code>mutate</code> is used with a grouped object, the calculations occur by ‘group.’ Here’s an example:</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="dealing-with-data-dplyr-week-eight.html#cb162-1" aria-hidden="true" tabindex="-1"></a>centered_penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb162-2"><a href="dealing-with-data-dplyr-week-eight.html#cb162-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, species) <span class="sc">%&gt;%</span> </span>
+<span id="cb162-3"><a href="dealing-with-data-dplyr-week-eight.html#cb162-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flipper_centered =</span> flipper_length_mm<span class="sc">-</span><span class="fu">mean</span>(flipper_length_mm, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<p>Here we are calculating a <strong>group centered mean</strong>, this new variable contains the <em>difference</em> between each observation and the mean of whichever group that observation is in.</p>
+</div>
+</div>
+<div id="remove-group_by" class="section level3" number="8.7.5">
+<h3><span class="header-section-number">8.7.5</span> remove group_by</h3>
+<p>On occasion we may need to remove the grouping information from a dataset. This is often required when we string pipes together, when we need to work using a grouping structure, then revert back to the whole dataset again</p>
+<p>Look at our grouped dataframe, and we can see the information on groups is at the top of the data:</p>
+<pre><code># A tibble: 344 x 10
+# Groups:   sex, species [8]
+   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g
+   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+ 1 Adelie  Torge~           39.1          18.7              181        3750
+ 2 Adelie  Torge~           39.5          17.4              186        3800
+ 3 Adelie  Torge~           40.3          18                195        3250</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="dealing-with-data-dplyr-week-eight.html#cb164-1" aria-hidden="true" tabindex="-1"></a>centered_penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb164-2"><a href="dealing-with-data-dplyr-week-eight.html#cb164-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<p>Look at this output - you can see the information on groups has now been removed from the data.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="version-control-with-github-week-six.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dealing-with-data-part-2-week-nine.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-Dealing-with-data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
