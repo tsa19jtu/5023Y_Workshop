@@ -107,3 +107,15 @@ penguin_stats <- penguins %>%
   group_by(penguin_id) %>% 
   summarise(num=n())
 #reassign penguins to penguin_stats, group by penguin id and summarise number, how many times each penguin monitored
+
+penguins_grouped <- penguins %>% 
+  group_by(sex, species) #penguins grouped, by sex and species 
+
+penguin_summary <- penguins_grouped %>% 
+  summarise(mean_flipper = mean(flipper_length_mm, na.rm=TRUE))
+#calculate mean flipper length in each of the 6 combinations, species and sex 
+
+centered_penguins <- penguins %>% 
+  group_by(sex, species) %>% 
+  mutate(flipper_centered = flipper_length_mm-mean(flipper_length_mm, na.rm=TRUE))
+#creating a group centered mean 
