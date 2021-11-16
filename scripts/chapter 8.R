@@ -21,3 +21,17 @@ penguins %>%
                        sex == "female" ~ "F")) 
 #unless the results of mutate are assigned to an object using <- the changes wont be saved
 
+penguins %>% 
+  filter(sex == "female", #specified sex
+         species == "Adelie", #specified species
+         flipper_length_mm < 180) #specified flipper length less then 180 mm
+
+penguins %>% 
+  filter(species == "Adelie", #specified species 
+         flipper_length_mm <180 |  #specified less than 180 mm
+           flipper_length_mm >200) # specified more than 200mm, so gives a range of flipper lengths 
+#less than 180mm or more than 200mm in female adelie penguins 
+
+penguins %>% 
+  filter(species == "Adelie",
+         between(flipper_length_mm, 180,200)) #alternative to above, shows flipper length between 180 and 200mm
