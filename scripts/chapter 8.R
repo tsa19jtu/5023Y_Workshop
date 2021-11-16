@@ -119,3 +119,7 @@ centered_penguins <- penguins %>%
   group_by(sex, species) %>% 
   mutate(flipper_centered = flipper_length_mm-mean(flipper_length_mm, na.rm=TRUE))
 #creating a group centered mean 
+
+centered_penguins %>% 
+  ungroup()
+#ungroups all the data from previous code so back to original data
