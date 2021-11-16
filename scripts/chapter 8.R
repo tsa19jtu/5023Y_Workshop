@@ -62,3 +62,10 @@ penguins_reverse_ordered %>%
 # we can also apply this to specific variables
 penguins_reverse_ordered <- penguins %>% 
   arrange(sex,desc(body_mass_g))
+
+penguins %>% 
+  summarise(n_distinct(penguin_id)) #number of distinct penguins in data set 
+
+penguins %>% 
+  group_by(species, sex) %>% 
+  summarise(n_distinct(penguin_id)) #number of each sex in each species 
