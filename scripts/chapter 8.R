@@ -103,3 +103,7 @@ penguins %>%
   glimpse()
 #more complex way of running n_distinct for number of individual penguins 
 
+penguin_stats <- penguins %>% 
+  group_by(penguin_id) %>% 
+  summarise(num=n())
+#reassign penguins to penguin_stats, group by penguin id and summarise number, how many times each penguin monitored
