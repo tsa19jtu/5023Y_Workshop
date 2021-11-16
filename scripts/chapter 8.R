@@ -69,3 +69,16 @@ penguins %>%
 penguins %>% 
   group_by(species, sex) %>% 
   summarise(n_distinct(penguin_id)) #number of each sex in each species 
+
+penguins %>% 
+  summarise(mean_flipper_length = mean(flipper_length_mm, na.rm=TRUE),
+            mean_bill_length = mean(bill_length_mm, na.rm=TRUE))
+#summary of mean flipper and bill lengths 
+
+penguins %>% 
+  summarise(n=n(),
+            num_penguins = n_distinct(penguin_id),
+            mean_flipper_length = mean(flipper_length_mm, na.rm=TRUE),
+            prop_female = sum(sex == "female", na.rm=TRUE) / n())
+#summary of number of penguins, mean flipper length, prop female 
+
