@@ -82,3 +82,24 @@ penguins %>%
             prop_female = sum(sex == "female", na.rm=TRUE) / n())
 #summary of number of penguins, mean flipper length, prop female 
 
+penguins %>% 
+  summarise(across(.cols = everything(), 
+                   .fns = ~sum(is.na(.)))) %>% 
+  glimpse()
+#summary across columns so find out how many NAs there are 
+
+# the mean of ALL numeric columns in the data, where(is.numeric) hunts for numeric columns
+
+penguins %>% 
+  summarise(across(.cols = where(is.numeric), 
+                   .fns = ~mean(., na.rm=TRUE)))
+#mean of all numeric columns in the data
+
+# number of distinct penguins, as only one column contains the word penguin
+
+penguins %>% 
+  summarise(across(.cols = contains("penguin"), 
+                   .fns = ~n_distinct(.))) %>% 
+  glimpse()
+#more complex way of running n_distinct for number of individual penguins 
+
