@@ -35,3 +35,30 @@ penguins %>%
 penguins %>% 
   filter(species == "Adelie",
          between(flipper_length_mm, 180,200)) #alternative to above, shows flipper length between 180 and 200mm
+
+penguins_ordered <- penguins %>% 
+  arrange(sex,body_mass_g)
+
+# arrange data first by sex - all females then all males, within each sex order body mass from low to high
+
+penguins_ordered <- penguins %>% 
+  arrange(sex,body_mass_g)
+
+# arrange data first by sex - all females then all males, within each sex order body mass from low to high
+
+penguins_ordered %>% 
+  select(penguin_id, sex, body_mass_g)
+# view just a few variables
+
+penguins_reverse_ordered <- penguins %>% 
+  arrange(desc(sex,body_mass_g))
+
+
+
+penguins_reverse_ordered %>% 
+  select(penguin_id, sex, body_mass_g)
+
+
+# we can also apply this to specific variables
+penguins_reverse_ordered <- penguins %>% 
+  arrange(sex,desc(body_mass_g))
