@@ -55,3 +55,13 @@ df2 %>%
 penguins %>% 
   filter(grepl("N1", individual_id)) %>% 
   distinct(individual_id)
+
+#date and time, make sure date names selected match the file you're pulling from 
+penguins %>% 
+  select(date, date_proper) %>% 
+  head()
+#min and max date, so earliest and latest date summary 
+penguins %>% 
+  summarise(min_date=min(date_proper),
+            max_date=max(date_proper))
+
