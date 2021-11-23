@@ -25,3 +25,12 @@ penguins %>%
 #strings
 #for all names in penguins replace lower case e with capital E (category headings)
 str_replace_all(names(penguins), c("e"= "E"))
+
+#separate
+#create data 'tibble' and then separate into one column
+df <- tibble(label=c("a-1", "a-2", "a-3")) 
+#make a one column tibble
+df
+#separates out into 2 columns of treatment and replicate
+df %>% 
+  separate(label, c("treatment", "replicate"), sep="-")
