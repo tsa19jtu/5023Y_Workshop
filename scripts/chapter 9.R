@@ -65,3 +65,19 @@ penguins %>%
   summarise(min_date=min(date_proper),
             max_date=max(date_proper))
 
+#how many times was each penguin measured and across what time period
+#make sure id and dates match the data set 
+penguins %>% 
+  group_by(penguin_id) %>% 
+  summarise(min=min(date_proper), 
+            max=max(date_proper), 
+            difference = max-min, 
+            n=n())
+
+penguins %>% 
+  group_by(penguin_id) %>% 
+  summarise(min=min(date_proper), 
+            max=max(date_proper), 
+            years = (max-min)/dyears(1), #converts into years by max-min 
+            n=n()) %>% 
+  arrange(desc(difference))
