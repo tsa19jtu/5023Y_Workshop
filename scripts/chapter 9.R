@@ -80,7 +80,7 @@ penguins %>%
             max=max(date_proper), 
             years = (max-min)/dyears(1), #converts into years by max-min 
             n=n()) %>% 
-  arrange(desc(difference))
+  arrange(desc(years))
 
 #9.5 pivot 
 #makes a table with tibble data, how many penguins from each species eat each type of prey 
