@@ -81,3 +81,26 @@ penguins %>%
             years = (max-min)/dyears(1), #converts into years by max-min 
             n=n()) %>% 
   arrange(desc(difference))
+
+#9.5 pivot 
+#makes a table with tibble data, how many penguins from each species eat each type of prey 
+#df3 means make a table with 3 rows
+penguin_id <- c("N1A1","N1A2","N2A1")
+krill <- c(70,20,43)
+fish <- c(5, 19,4)
+squid <- c(11,5,0)
+
+
+df3 <- tibble(penguin_id, krill, fish, squid)
+df3
+
+#make into tidy format where each row is a unique observation
+#longer data frame with fewer columns
+df3_long <- df3 %>% 
+  pivot_longer(cols=(krill:squid), names_to = "prey_type", values_to = "consumption_per_week")
+df3_long
+
+#ggplot data from a tidy data format 
+df3_long %>% #pipe df3 long 
+  ggplot(aes(x=penguin_id, y=consumption_per_week, fill=prey_type))+ #ggplot, define axis and fill
+  geom_bar(stat="identity", position=position_dodge()) #geom bar for graph type 
