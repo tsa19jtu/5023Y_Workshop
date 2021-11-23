@@ -34,3 +34,24 @@ df
 #separates out into 2 columns of treatment and replicate
 df %>% 
   separate(label, c("treatment", "replicate"), sep="-")
+
+#more stringr
+penguins %>% 
+  mutate(species=str_to_upper(species))
+#removes the letter e from all species names 
+penguins %>% 
+  mutate(species=str_remove_all(species, "e"))
+#trim leading or tailing data (spaces before or after) as considered different values by R
+df2 <- tibble(label=c("penguin", " penguin", "penguin ")) 
+df2
+#return the names of all different levels it can find in the data frame
+df2 %>% 
+  distinct()
+#pipe data through trim and pipe to distinct then white space is removed and R recognises it as one level
+df2 %>% 
+  mutate(label=str_trim(label, side="both")) %>% 
+  distinct()
+#find all penguin ids that begin with N1 using filter and distinct 
+penguins %>% 
+  filter(grepl("N1", individual_id)) %>% 
+  distinct(individual_id)
