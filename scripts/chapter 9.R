@@ -21,3 +21,7 @@ penguins %>%
   group_by(species, sex) %>% 
   drop_na(sex) %>% 
   summarise(mean=mean(flipper_length_mm))
+
+#strings
+#for all names in penguins replace lower case e with capital E (category headings)
+str_replace_all(names(penguins), c("e"= "E"))
