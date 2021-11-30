@@ -183,3 +183,12 @@ penguin_body_mass_summary <- penguins %>%
 
 penguin_body_mass_summary
 #1x2 tibble of mean and median body masses 
+
+#IQR
+penguins %>% 
+  summarise(IQR_body_mass = IQR(body_mass_g, na.rm=TRUE))
+#shows all quartiles (25, 50, 75)
+penguins %>%
+  summarise(q_body_mass = quantile(body_mass_g, c(0.25, 0.5, 0.75), na.rm=TRUE),
+            quantile = scales::percent(c(0.25, 0.5, 0.75))) 
+# scales package allows easy converting from data values to perceptual properties
