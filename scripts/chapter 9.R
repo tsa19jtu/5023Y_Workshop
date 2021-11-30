@@ -175,3 +175,11 @@ adelie_penguins %>%
   ggridges::geom_density_ridges(aes(x=body_mass_g,
                                     y=sex),
                                 alpha=0.8)
+
+#10.3 descriptive stats
+penguin_body_mass_summary <- penguins %>% 
+  summarise(mean_body_mass=mean(body_mass_g, na.rm=T),
+            median_body_mass=median(body_mass_g, na.rm=T))
+
+penguin_body_mass_summary
+#1x2 tibble of mean and median body masses 
