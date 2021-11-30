@@ -192,3 +192,16 @@ penguins %>%
   summarise(q_body_mass = quantile(body_mass_g, c(0.25, 0.5, 0.75), na.rm=TRUE),
             quantile = scales::percent(c(0.25, 0.5, 0.75))) 
 # scales package allows easy converting from data values to perceptual properties
+
+#10.3.3 visualising dispersion 
+#box and whisker plot of bodyweight vs mass with colours and set width and theme
+penguins %>% 
+  ggplot()+
+  geom_boxplot(aes(x="",
+                   y= body_mass_g),
+               fill="darkorange",
+               colour="steelblue",
+               width=0.4)+
+  labs(x= "Bodyweight",
+       y = "Mass (g)")+
+  theme_minimal()
