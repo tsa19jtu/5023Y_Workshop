@@ -125,3 +125,53 @@ ggplot()+
              colour="red",
              linetype="dashed")
 #graph showing that the data is normally distributed , with a red intercept line of mean
+
+ggplot()+
+  geom_histogram(data=adelie_penguins,
+                 aes(x=body_mass_g),
+                 bins=50, # fifty bins
+                 fill="steelblue",
+                 colour="darkgrey",
+                 alpha=0.8)+
+  labs(x="Body mass (g) of Adelie penguins",
+       y = "Count")
+
+#separate below graph by sex
+adelie_penguins %>% 
+  drop_na(sex) %>% 
+  ggplot()+
+  geom_histogram(aes(x=body_mass_g,
+                     fill=sex),
+                 bins=50, # fifty bins
+                 colour="darkgrey",
+                 alpha=0.8,
+                 position="identity")+
+  labs(x="Body mass (g) of Adelie penguins",
+       y = "Count")
+
+#shows density within the dataset
+adelie_penguins %>% 
+  drop_na(sex) %>% 
+  ggplot()+
+  geom_density(aes(x=body_mass_g,
+                   fill=sex),
+               colour="darkgrey",
+               alpha=0.8,
+               position="identity")+
+  labs(x="Body mass (g) of Adelie penguins",
+       y = "Count")
+
+#separate by sex on the y axis 
+adelie_penguins %>% 
+  drop_na(sex) %>% 
+  ggplot()+
+  ggridges::geom_density_ridges(aes(x=body_mass_g,
+                                    y=sex),
+                                alpha=0.8)
+library(ggridges) #needed to be installed to separate by sex on y axis 
+adelie_penguins %>% 
+  drop_na(sex) %>% 
+  ggplot()+
+  ggridges::geom_density_ridges(aes(x=body_mass_g,
+                                    y=sex),
+                                alpha=0.8)
