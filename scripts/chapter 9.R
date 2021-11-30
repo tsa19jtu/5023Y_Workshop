@@ -1,4 +1,5 @@
 #week 9
+library(path)
 #pipes
 penguins_grouped <- group_by(penguins, species, sex)
 
@@ -205,3 +206,38 @@ penguins %>%
   labs(x= "Bodyweight",
        y = "Mass (g)")+
   theme_minimal()
+
+#10.3.4 combining histograms and box plots
+library(patchwork) # put this at the TOP of your script
+
+penguins_na_sex <- penguins %>% 
+  drop_na(sex)
+
+colours <-  c("darkorange", "cyan") # set colour scheme here to save on repeating code
+lims <- c(3000,6000) # set axis limits here to save on repeating code
+
+p1 <- ggplot(data = penguins_na_sex,
+             aes(x = species,
+                 y = body_mass_g,
+                 fill = sex))+
+  geom_boxplot()+
+  scale_fill_manual(values = colours)+
+  scale_y_continuous(limits=lims)+
+  labs(x="",
+       y="")+
+  coord_flip()+ # rotate box plot 90 degrees
+  theme_minimal()+
+  theme(legend.position="none")
+
+p2 <- ggplot(data = penguins_na_sex,
+             aes(x = body_mass_g,
+                 y = species,
+                 fill = sex))+
+  ggridges::stat_density_ridges(quantile_lines = TRUE)+
+  scale_fill_manual(values = colours)+
+  scale_x_continuous(limits=lims)+
+  labs(y="",
+       x = "Body Mass (g)")+
+  theme_minimal()
+
+(p1/p2) # patchwork command to layer one plot above the other
