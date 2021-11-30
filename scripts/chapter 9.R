@@ -288,5 +288,6 @@ penguins %>%
                 x=species,
                 label=scales::percent(prob_obs)))+
   coord_flip()+
-  theme_minimal()
+  theme_minimal() 
+#end of chapter 10 30th November 2021
 
