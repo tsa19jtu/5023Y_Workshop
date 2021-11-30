@@ -1,5 +1,5 @@
 #week 9
-library(path)
+library(patchwork)
 #pipes
 penguins_grouped <- group_by(penguins, species, sex)
 
@@ -241,3 +241,52 @@ p2 <- ggplot(data = penguins_na_sex,
   theme_minimal()
 
 (p1/p2) # patchwork command to layer one plot above the other
+
+#10.4 categorical variables 
+# show what species are in the data 
+penguins %>% 
+  distinct(species)
+# count how many are in each species
+penguins %>% 
+  count(species, sort=TRUE)
+# show some quick data summaries (int and dbl)
+prob_obs_species <- penguins %>% 
+  count(species, sort=TRUE) %>% 
+  mutate(prob_obs = n/sum(n))
+
+prob_obs_species
+#shows about 44% of data is from adelie 
+#bar for count of species 
+penguins %>% 
+  ggplot()+
+  geom_bar(aes(x=species))
+
+#stacked bar to show % add up to 100% of the data 
+penguins %>% 
+  ggplot(aes(x="",
+             fill=species))+ # specify fill = species to ensure colours are defined by species
+  geom_bar(position="fill")+ # specify fill forces geom_bar to calculate percentages
+  scale_y_continuous(labels=scales::percent)+ #use scales package to turn y axis into percentages easily
+  labs(x="",
+       y="")+
+  theme_minimal()
+
+#improved stacked bar
+#species on y axis (flipped), % labels, and good colour
+penguins %>% 
+  mutate(species=factor(species, levels=c("Adelie",
+                                          "Gentoo",
+                                          "Chinstrap"))) %>% # set as factor and provide levels
+  ggplot()+
+  geom_bar(aes(x=species),
+           fill="steelblue",
+           width=0.8)+
+  labs(x="Species",
+       y = "Number of observations")+
+  geom_text(data=prob_obs_species,
+            aes(y=(n+10),
+                x=species,
+                label=scales::percent(prob_obs)))+
+  coord_flip()+
+  theme_minimal()
+
