@@ -104,3 +104,24 @@ df3_long
 df3_long %>% #pipe df3 long 
   ggplot(aes(x=penguin_id, y=consumption_per_week, fill=prey_type))+ #ggplot, define axis and fill
   geom_bar(stat="identity", position=position_dodge()) #geom bar for graph type 
+
+
+
+#chapter 10 
+glimpse(penguins)
+adelie_penguins <- penguins %>% 
+  filter(species=="Adelie")
+
+adelie_summary <- adelie_penguins %>% 
+  summarise(mean=mean(body_mass_g, 
+                      na.rm=TRUE))
+
+ggplot()+
+  geom_histogram(data= adelie_penguins,
+                 aes(x=body_mass_g),
+                 bins=10)+ #remember it is a good idea to try multiple bins of data
+  geom_vline(data=adelie_summary,
+             aes(xintercept=mean),
+             colour="red",
+             linetype="dashed")
+#graph showing that the data is normally distributed , with a red intercept line of mean
