@@ -401,4 +401,71 @@ penguins %>%
                  position="identity")+
   facet_wrap(~species,
              ncol=1)
-#creates 3 histograms, 1 per species with different colours and set bin size 
+#creates 3 histograms, 1 per species with different colours and set bin size
+
+colours <- c("cyan",
+             "darkorange",
+             "purple")
+
+length_depth_scatterplot_2 <- ggplot(penguins, aes(x= bill_length_mm, 
+                                                   y= bill_depth_mm,
+                                                   colour=species)) +
+  geom_point()+
+  geom_smooth(method="lm",
+              se=FALSE)+
+  scale_colour_manual(values=colours)+
+  theme_classic()+
+  theme(legend.position="none")+
+  labs(x="Bill length (mm)",
+       y="Bill depth (mm)")
+
+length_depth_scatterplot
+#length x depth scatterplot 
+bill_depth_marginal_2 <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=bill_depth_mm,
+                   fill=species),
+               alpha=0.5)+
+  scale_fill_manual(values=colours)+
+  theme_void()+
+  coord_flip() # this graph needs to be rotated
+
+bill_length_marginal_2 <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=bill_length_mm,
+                   fill=species),
+               alpha=0.5)+
+  scale_fill_manual(values=colours)+
+  theme_void()+
+  theme(legend.position="none")
+
+layout2 <- "
+AAA#
+BBBC
+BBBC
+BBBC"
+
+bill_length_marginal_2+length_depth_scatterplot_2+bill_depth_marginal_2+ # order of plots is important
+  plot_layout(design=layout2) # uses the layout argument defined above to arrange the size and position of plots
+#brings back density on the graph sides, with colours for species and lobf
+penguins %>% 
+  group_by(species) %>% 
+  cor_test(bill_length_mm, bill_depth_mm)
+#shows overall positive correlation when species are accounted for 
+
+penguins %>% 
+  drop_na(sex) %>% 
+  ggplot(aes(x= bill_length_mm, 
+             y= bill_depth_mm,
+             colour=sex)) + # colour aesthetic set to sex
+  geom_point()+
+  geom_smooth(method="lm",
+              se=FALSE)+
+  scale_colour_manual(values=c("#1B9E77", "#D95F02"))+ # pick two colour scheme
+  theme_classic()+
+  theme(legend.position="none")+
+  labs(x="Bill length (mm)",
+       y="Bill depth (mm)")+
+  facet_wrap(~species, ncol=1) # specify plots are stacked split by species
+#creates divided graphs per species with bill length and depth on and lobf
+#shows trends are similar across sexes, sexually dimorphic 
