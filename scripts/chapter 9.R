@@ -342,3 +342,46 @@ bill_length_marginal+length_depth_scatterplot+bill_depth_marginal+ # order of pl
   plot_layout(design=layout) # uses the layout argument defined above to arrange the size and position of plots
 #produes the length and depth scatterplot with density graph along the edges
 
+island_species_summary <- penguins %>% #assign name to section
+  group_by(island, species) %>% #group by 
+  summarise(n=n(),
+            n_distinct=n_distinct(penguin_id)) %>% #summarise by id 
+  ungroup() %>% # needed to remove group calculations
+  mutate(freq=n/sum(n)) # then calculates percentage of each group across WHOLE dataset
+
+island_species_summary #call section to console 
+
+penguins%>% 
+  ggplot(aes(x=island, fill=species))+
+  geom_bar(position=position_dodge())+
+  coord_flip()
+#bar graph with flipped axis (bars from the left) for each count per species
+penguins%>% 
+  ggplot(aes(x=island, fill=species))+
+  geom_bar(position=position_dodge2(preserve="single"))+ 
+  #keeps bars to appropriate widths
+  coord_flip()
+#shows each species on each island with each count on flipped bar graph
+
+penguins %>% 
+  ggplot(aes(x=island, fill=species))+
+  geom_bar(position=position_dodge2(preserve="single"))+ 
+  #keeps bars to appropriate widths
+  labs(x="Island",
+       y = "Number of observations")+
+  geom_text(data=island_species_summary, # use the data from the summarise object
+            aes(x=island,
+                y= n+10, # offset text to be slightly to the right of bar
+                group=species, # need species group to separate text
+                label=scales::percent(freq) # automatically add %
+            ),
+            position=position_dodge2(width=0.8))+ # set width of dodge
+  scale_fill_manual(values=c("cyan",
+                             "darkorange",
+                             "purple"
+  ))+
+  coord_flip()+
+  theme_minimal()+
+  theme(legend.position="bottom") # put legend at the bottom of the graph
+#adds in aesthetics eg labels and different colours and position of the legend
+
