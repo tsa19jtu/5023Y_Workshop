@@ -385,3 +385,20 @@ penguins %>%
   theme(legend.position="bottom") # put legend at the bottom of the graph
 #adds in aesthetics eg labels and different colours and position of the legend
 
+penguins %>% 
+  ggplot(aes(x=species,
+             y=body_mass_g))+
+  geom_boxplot()+
+  labs(y="Body mass (g)",
+       x= "Species")
+#creates a boxplot with labelled axis of body mass x species
+
+penguins %>% 
+  ggplot(aes(x=body_mass_g,
+             fill=species))+
+  geom_histogram(alpha=0.6,
+                 bins=30,
+                 position="identity")+
+  facet_wrap(~species,
+             ncol=1)
+#creates 3 histograms, 1 per species with different colours and set bin size 
