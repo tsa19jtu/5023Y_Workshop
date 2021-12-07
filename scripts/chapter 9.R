@@ -291,3 +291,54 @@ penguins %>%
   theme_minimal() 
 #end of chapter 10 30th November 2021
 
+#chapter 11, 7th December 2021
+library(rstatix)
+
+penguins %>% 
+  cor_test(bill_length_mm, bill_depth_mm)
+# shows the strength of correlation 1 is positive, -1 is negative
+penguins %>% select(bill_length_mm, 
+                    bill_depth_mm) %>% 
+  drop_na() %>% #remove na
+  mutate(rank_length=dense_rank((bill_length_mm)), 
+         rank_depth=dense_rank((bill_depth_mm)))
+#ranks from lowest to highest for bill length and depth
+penguins %>% 
+  cor_test(bill_length_mm, bill_depth_mm, method="spearman")
+#spearmans rank correlation, specify with method 
+#shows that pearsons and spearmans are almost identical 
+length_depth_scatterplot <- ggplot(penguins, aes(x= bill_length_mm, 
+                                                 y= bill_depth_mm)) +
+  geom_point()
+
+length_depth_scatterplot
+#length and depth scatterplot for bills, define axis, geom point
+library(patchwork) # package calls should be placed at the TOP of your script
+
+bill_depth_marginal <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=bill_depth_mm), fill="darkgrey")+
+  theme_void()+
+  coord_flip() # this graph needs to be rotated
+
+bill_length_marginal <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=bill_length_mm), fill="darkgrey")+
+  theme_void()
+
+layout <- "
+AA#
+BBC
+BBC"
+# layout is easiest to organise using a text distribution, where ABC equal the three plots in order, and the grid is how much space they take up. We could easily make the main plot bigger and marginals smaller with
+
+# layout <- "
+# AAA#
+# BBBC
+# BBBC"
+# BBBC
+
+bill_length_marginal+length_depth_scatterplot+bill_depth_marginal+ # order of plots is important
+  plot_layout(design=layout) # uses the layout argument defined above to arrange the size and position of plots
+#produes the length and depth scatterplot with density graph along the edges
+
